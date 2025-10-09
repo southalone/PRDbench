@@ -1,0 +1,117 @@
+[
+  {
+    "metric": "0.1.1 Environment and Documentation: Provide clear documentation (README.md)",
+    "description": "1. **Assert**: Check whether the `README.md` file exists in the project root directory.\n2. **Assert**: If the file exists, read its contents and verify that it contains at least three distinct sections: project introduction, environment setup instructions (how to install dependencies), and program start command.",
+    "expected_output": "2 points: `README.md` exists and completely includes all three sections: project introduction, environment setup, and start command. 1 point: `README.md` exists but includes only 1-2 of the above key sections. 0 points: `README.md` file does not exist."
+  },
+  {
+    "metric": "0.1.2 Environment and Documentation: Provide a clear dependencies file (requirements.txt)",
+    "description": null,
+    "expected_output": "2 points: `requirements.txt` exists and all dependencies can be installed successfully. 1 point: `requirements.txt` exists but errors occur during installation. 0 points: `requirements.txt` file does not exist."
+  },
+  {
+    "metric": "0.2.1 Program Operability: The program can successfully start and display the main menu",
+    "description": "1. **Act**: Execute the program according to the start command in `README.md` (e.g., `python src/main.py`).\n2. **Assert**: Observe the program output; verify that it successfully starts and displays a main menu interface with multiple options that can be interacted with.",
+    "expected_output": "2 points: Program successfully starts and displays a clear, interactive main menu. 1 point: Program starts but does not display a clear main menu or has non-fatal errors. 0 points: Program fails to start, crashes, or throws fatal errors."
+  },
+  {
+    "metric": "0.3.1 Unit Tests: Executable unit tests are provided",
+    "description": "1. **Arrange**: Check if there are test files (such as `test_*.py`) in the `tests/` directory.\n2. **Act**: Execute the test command (such as `pytest` or `python -m unittest discover tests`).\n3. **Assert**: Observe the test results; verify whether the testing framework runs and all discovered test cases show as \"PASSED\".",
+    "expected_output": "2 points: There are test files in the `tests/` directory and all tests pass. 1 point: Test files exist, but one or more test files fail (FAILED). 0 points: `tests/` directory is empty or no test files."
+  },
+  {
+    "metric": "2.1.1a New Project - Process Start",
+    "description": "1. **Pre-check (User Path):** On the main menu, is there a clear option for 'New Project' or similar functionality?\n2. **Act:** On the main menu, select 'New Project' through interaction.\n3. **Assert:** Observe whether the program responds and starts guiding the user to enter the first project parameter (such as 'Please enter city').",
+    "expected_output": "2 points: Pre-check passed, and able to smoothly enter parameter input flow with a clear prompt for the first input. 1 point: Pre-check passed, but prompts after entering flow are unclear or errors exist. 0 points: Pre-check failed, or after selection the program is unresponsive or crashes."
+  },
+  {
+    "metric": "2.1.1b Save Project",
+    "description": "1. **Pre-check (User Path):** After finishing parameter input or on the main menu, is there a clear option for 'Save Project'?\n2. **Arrange:** Complete parameter input for a new project.\n3. **Act:** Select the 'Save Project' functionality.\n4. **Assert:** Observe whether the program responds and saves the project information.",
+    "expected_output": "2 points: Pre-check passed, and able to successfully create a valid project file. 1 point: Pre-check passed, but the created file is empty or has format errors. 0 points: Pre-check failed, or save functionality causes the program to crash."
+  },
+  {
+    "metric": "2.1.1c Load Project",
+    "description": "1. **Pre-check (User Path):** On the main menu, is there a clear option for 'Load Project'?\n2. **Act:** Select the 'Load Project' function and follow prompts to choose an existing project.\n3. **Assert:** Observe if the program indicates successful loading and verify that data has been correctly read into memory through subsequent operations (e.g., viewing parameters).",
+    "expected_output": "2 points: Pre-check passed, able to successfully load the project file with accurate data. 1 point: Pre-check passed, but data is partially lost or incorrect after loading. 0 points: Pre-check failed or load function causes the program to crash."
+  },
+  {
+    "metric": "2.1.2a Basic Parameter Input - Location and Type",
+    "description": "1. **Act:** During the load project process, continue input until reaching the section for basic information.\n2. **Assert:** Confirm the program prompts the user, one after another, to input these five parameters: 'City', 'Region', 'Business Area Type', 'Longitude', 'Latitude'.",
+    "expected_output": "2 points: All 5 parameter input prompts are covered. 1 point: 3-4 parameter prompts are covered. 0 points: Fewer than 3 parameter prompts are covered, or process is interrupted."
+  },
+  {
+    "metric": "2.1.2b Basic Parameter Input - Category Structure",
+    "description": "1. **Act:** During the load project process, continue input until reaching the category structure section.\n2. **Assert:** Confirm the program prompts the user to enter the names and sales percentages for 3 categories.",
+    "expected_output": "2 points: Supports input for at least 3 categories and their percentages. 1 point: Supports input for fewer than 3 categories, or interaction is unclear. 0 points: No category structure input functionality."
+  },
+  {
+    "metric": "2.1.2c Basic Parameter Input - Cost Structure",
+    "description": "1. **Act:** During the load project process, continue input until reaching the cost parameter section.\n2. **Assert:** Confirm the program prompts the user, one after another, to enter these 4 core cost parameters: 'Average Order Value', 'Food Cost Ratio', 'Packaging Cost Ratio', 'Platform Commission Rate'.",
+    "expected_output": "2 points: All 4 core cost input prompts are covered. 1 point: 2-3 core cost input prompts are covered. 0 points: Fewer than 2 core cost input prompts are covered."
+  },
+  {
+    "metric": "2.1.3a Parameter Range Validation",
+    "description": "1. **Arrange:** Prepare an invalid input such as a negative number `-1000`.\n2. **Act:** During new project flow, edit cost parameters and enter the prepared invalid value.\n3. **Assert:** Observe whether the program can catch the invalid input and give a clear error prompt, asking the user to re-enter.",
+    "expected_output": "2 points: Able to catch invalid input and give clear, friendly error prompt, requiring re-entry. 1 point: Accepts invalid input without error, or error message is unclear. 0 points: Program crashes due to invalid input."
+  },
+  {
+    "metric": "2.1.3b Reference Industry Benchmark Values for Key Parameters",
+    "description": "1. **Act:** During the new project flow, when entering key parameters like 'Labor Cost' or 'Category Percentage'.\n2. **Assert:** Observe whether the input prompt messages contain relevant industry benchmark values for reference (such as 'Industry Reference: 25%-35%').",
+    "expected_output": "2 points: Provides benchmark value references for at least 2 key parameters. 1 point: Provides benchmark value reference for only 1 key parameter. 0 points: No benchmark values provided."
+  },
+  {
+    "metric": "2.1.4a Provide CSV Template",
+    "description": "1. **Act:** Run `ls -l src/data/` command.\n2. **Assert:** Confirm that `template.csv` file exists in the directory, and use `read_file` to check that its column headers match the required input items in the PRD (such as City, Region, Longitude and Latitude, various costs, etc.).",
+    "expected_output": "2 points: Template file exists and column headers cover at least 80% of the core input items from the PRD. 1 point: File exists but many header fields are missing (coverage below 80%). 0 points: Template file not found."
+  },
+  {
+    "metric": "2.1.4b CSV Batch Import",
+    "description": "1. **Pre-check (User Path):** On the main menu, is there a clear option for 'Import CSV'?\n2. **Arrange:** Copy `src/data/template.csv` as `import_test.csv` and fill in one complete, reasonable example row.\n3. **Act:** Select the 'Import CSV' function and enter the path for `import_test.csv` as prompted.\n4. **Assert:** Verify whether the program prompts successful import and confirm the data is correctly loaded by checking parameters or running analysis.",
+    "expected_output": "2 points: Pre-check passed, CSV successfully imported, and all data correctly parsed. 1 point: Pre-check passed, but some data parsing errors or loss. 0 points: Pre-check failed, or import function causes program to crash."
+  },
+  {
+    "metric": "2.2.1 Subsidy Parameter Adjustment and Impact",
+    "description": "1. **Pre-check (User Path):** After loading the project, is there a clear menu option for 'Adjust Parameters' or 'Strategy Simulation'?\n2. **Arrange:** Load a project, run analysis, and record initial 'Order Value' and 'Average Daily Orders'.\n3. **Act:** Enter the parameter adjustment menu and increase the 'Subsidy Rate' by 5%. Rerun the analysis.\n4. **Assert:** Compare the new 'Order Value' and 'Average Daily Orders' with the initial values, verifying that logical changes occurred (subsidy increases, orders rise, order value may decrease).",
+    "expected_output": "2 points: Pre-check passed; after adjustment, both order value and average daily orders change as expected logically. 1 point: Pre-check passed, but only one indicator changes, or changes are illogical. 0 points: Pre-check failed, or no change in core indicators after adjustment."
+  },
+  {
+    "metric": "2.2.2 Category Impact Factor Adjustment and Impact",
+    "description": "1. **Pre-check (User Path):** Is there an option to adjust 'Category Impact Factor' in the 'Adjust Parameters' menu?\n2. **Arrange:** Load project, run analysis, and record initial 'Average Daily Orders'.\n3. **Act:** Enter parameter adjustment menu and increase one category's impact factor by 10%. Rerun the analysis.\n4. **Assert:** Compare the new 'Average Daily Orders' with the initial value to verify logical increase.",
+    "expected_output": "2 points: Pre-check passed, overall orders change logically after adjustment. 1 point: Pre-check passed, but orders do not change or change illogically. 0 points: Pre-check failed, function not found."
+  },
+  {
+    "metric": "2.3.1 Tiered Cost Settings",
+    "description": "1. **Pre-check (User Path):** During new project or project edit parameter input flow, is there a menu option or guidance prompt to set 'Tiered Cost'?\n2. **Act:** Enter the function and attempt to define a cost tier for 'Food Procurement' (e.g., unit price drops by 5% when procurement exceeds 100 units).\n3. **Assert:** Confirm the system accepts this tiered parameter input.",
+    "expected_output": "2 points: Pre-check passed, and there is a clear, interactive interface to set at least one tiered cost. 1 point: Pre-check passed, but interaction is unclear or hard to use. 0 points: Pre-check failed, feature not found in UI."
+  },
+  {
+    "metric": "2.3.2 Break-even Analysis Chart Generation",
+    "description": "1. **Arrange:** Load a project with data.\n2. **Act:** Run the core analysis command.\n3. **Assert:** Use `ls -l` to check the `evaluation/` or `reports/` directory, confirm that an image file named `break_even_chart.png` or similar is created and can be opened normally.",
+    "expected_output": "2 points: Chart file successfully created in the specified directory and can be opened normally. 1 point: File created, but is empty or corrupted. 0 points: No chart file created at all."
+  },
+  {
+    "metric": "2.3.3 Key Decision Recommendations Generation",
+    "description": "1. **Arrange:** Load a project with data.\n2. **Act:** Run the core 'Analysis' or 'Forecast' command.\n3. **Assert:** Check the final output result for a clear 'Decision Recommendations' or 'Optimization Direction' section containing 3-5 recommendations.",
+    "expected_output": "2 points: Clearly provides 3 or more data-related, actionable recommendations in Chinese. 1 point: Provides 1-2 recommendations, or content is unrelated to the data. 0 points: No recommendations provided at all."
+  },
+  {
+    "metric": "2.4.1 Core Index Calculation and Display - 5 Core Metrics",
+    "description": "1. **Arrange:** Load a project with data.\n2. **Act:** Run the core 'Analysis' or 'Forecast' command.\n3. **Assert:** Observe the final CLI output result and check if it contains the following 5 metrics and their values: 'Average Daily Orders', 'Order Value', 'Gross Profit Margin', 'Net Profit', 'Investment Payback Period'.",
+    "expected_output": "2 points: All 5 core metrics and values are fully output. 1 point: 3-4 core metrics are output. 0 points: Fewer than 3 core metrics are output, or analysis process throws errors."
+  },
+  {
+    "metric": "2.4.2 Dynamic Break-even and Sensitive Factor Sorting",
+    "description": "1. **Arrange:** Load a project with data.\n2. **Act:** Run the core 'Analysis' or 'Forecast' command.\n3. **Assert:** Check the final output (CLI or markdown report) and look for a 'Sensitivity Analysis' section with a list of at least 3 key factors affecting profit (such as rent, labor cost, etc.) sorted by impact size.",
+    "expected_output": "2 points: Outputs a sorted list of at least 3 sensitive factors. 1 point: Outputs the sensitive factors list but has fewer than 3 or is unsorted. 0 points: No output from this analysis."
+  },
+  {
+    "metric": "2.4.3a Markdown Report Export - File Generation",
+    "description": "1. **Pre-check (User Path):** After displaying analysis results, is there a clear option to 'Export Markdown Report'?\n2. **Arrange:** Load the project and finish analysis.\n3. **Act:** Select the command to 'Export Markdown Report'.\n4. **Assert:** Use `ls -l` to check the `reports/` directory and confirm that a markdown file was created and the file size is not zero.",
+    "expected_output": "2 points: Pre-check passed, and a non-empty markdown report file is successfully created in the specified directory. 1 point: Pre-check passed, but the created file is empty or damaged. 0 points: Pre-check failed, or no markdown file created."
+  },
+  {
+    "metric": "2.4.3b Markdown Report Export - Content Validation",
+    "description": "1. **Arrange:** Generate a markdown report.\n2. **Act:** Use a file reading tool to open the generated markdown file.\n3. **Assert:** Check the markdown content and confirm it contains all 5 core metrics previously seen in CLI and includes the break-even analysis chart.",
+    "expected_output": "2 points: Markdown report fully contains all 5 core metrics and the break-even analysis chart. 1 point: Markdown report contains the core metrics but is missing the chart, or vice versa. 0 points: Markdown report content is inconsistent with analysis results or cannot be opened."
+  }
+]

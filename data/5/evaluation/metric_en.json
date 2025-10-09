@@ -1,0 +1,102 @@
+[
+  {
+    "metric": "0.1.1 Environment and Documentation: Provide a clear README.md documentation",
+    "description": "1. **Assert:** Check if a `README.md` file exists in the project root directory.\n2. **Assert:** If the file exists, read its content and verify it contains at least three clear sections: project introduction, instructions for environment setup (how to install dependencies), and program start commands.",
+    "expected_output": "2 points: `README.md` exists and includes all three sections: project introduction, environment setup, and start command. 1 point: `README.md` exists but includes only 1-2 of these key sections. 0 points: No `README.md` file found."
+  },
+  {
+    "metric": "0.1.2 Environment and Documentation: Provide a clear dependencies file (requirements.txt)",
+    "description": "1. **Arrange:** Check if a `requirements.txt` file exists in the project root directory.\n2. **Act:** If the file exists, execute the shell command `pip install -r requirements.txt`.\n3. **Assert:** Observe the command output and verify that all dependencies are installed without any errors.",
+    "expected_output": "2 points: `requirements.txt` exists and all dependencies are installed successfully. 1 point: `requirements.txt` exists, but errors occur during installation. 0 points: No `requirements.txt` file found."
+  },
+  {
+    "metric": "0.2.1 Program Runability: Program can successfully start and display the main menu",
+    "description": "1. **Act:** Start the program according to the command in `README.md` (e.g. `python main.py`).\n2. **Assert:** Observe the program output and verify if the program starts successfully and displays an interactive main menu with multiple options.",
+    "expected_output": "2 points: Program starts successfully and displays a clear, interactive main menu. 1 point: Program starts, but the main menu is unclear or there are non-fatal errors. 0 points: Program fails to start and crashes or throws fatal errors."
+  },
+  {
+    "metric": "2.1.1 Template Creation - Basic Information Input",
+    "description": "1. **Pre-check (user path):** In the main menu, select '1. Create/Edit Requirement Template' to see if you can enter the template creation process.\n2. **Arrange:** Prepare product name \"Test Product\" and target user \"Young User\".\n3. **Act:** Enter product name and target user as prompted during template creation.\n4. **Assert:** Does the program correctly receive and save this information?",
+    "expected_output": "2 points: Pre-check passes, and basic information is correctly received and saved. 1 point: Pre-check passes, but prompts are unclear or saving is incorrect. 0 points: Pre-check fails, or basic information is not correctly received and saved."
+  },
+  {
+    "metric": "2.1.2 Template Creation - Style Keywords Input",
+    "description": "1. **Pre-check (user path):** During template creation, is there a step to input style keywords?\n2. **Arrange:** Prepare style keywords \"Minimalism, Modern\".\n3. **Act:** Enter style keywords as prompted.\n4. **Assert:** Does the program correctly parse and save these keywords?",
+    "expected_output": "2 points: Pre-check passes, and multiple style keywords are correctly parsed and saved. 1 point: Pre-check passes, but parsing or saving is incorrect. 0 points: Pre-check fails, or style keywords input is not handled correctly."
+  },
+  {
+    "metric": "2.1.3 Template Creation - Color Emotion Preference Selection",
+    "description": "1. **Pre-check (user path):** During template creation, is there a step to select color emotion preference?\n2. **Arrange:** Prepare to select \"Cool Tone - Professional\" (Option 1).\n3. **Act:** Select color emotion preference as prompted.\n4. **Assert:** Does the program correctly save the selected color emotion preference?",
+    "expected_output": "2 points: Pre-check passes and choice of color emotion preference is saved correctly. 1 point: Pre-check passes but saving is incorrect. 0 point: Pre-check fails, or color emotion preference selection is not processed correctly."
+  },
+  {
+    "metric": "2.1.4 Template Saving - Naming and Overwrite Confirmation",
+    "description": "1. **Pre-check (user path):** After template creation, is there a step to save the template?\n2. **Arrange:** Prepare template name \"test_template\".\n3. **Act:** Enter the template name, and choose whether to overwrite if template already exists.\n4. **Assert:** Does the program save the template correctly and create the corresponding file in the file system?",
+    "expected_output": "2 points: Pre-check passes, template is saved correctly and file created in the specified path. 1 point: Pre-check passes, but saving process has issues. 0 points: Pre-check fails, or template is not saved correctly."
+  },
+  {
+    "metric": "2.1.5 Template Validation - Required Fields Check",
+    "description": "1. **Arrange:** Create a template missing required fields (e.g. do not enter product name).\n2. **Act:** Attempt to save this template.\n3. **Assert:** Does the program refuse to save and prompt that required fields cannot be empty?",
+    "expected_output": "2 points: All missing required fields are correctly identified and clear prompts are provided. 1 point: Some missing required fields are identified but prompts are incomplete. 0 points: Cannot identify missing required fields or validation mechanism is invalid."
+  },
+  {
+    "metric": "2.1.6 Template File Format Validation",
+    "description": "1. **Arrange:** Create and save a template.\n2. **Act:** Open the saved template file using a text editor.\n3. **Assert:** Verify the file is a valid JSON format and contains all the input fields.",
+    "expected_output": "2 points: The template file is a valid JSON format and includes all input information. 1 point: The file is JSON format but some information is missing. 0 points: The file is not JSON format or cannot be opened."
+  },
+  {
+    "metric": "2.2.1 Image Path Validation",
+    "description": "1. **Pre-check (user path):** In the PRD generation process, is there a step to input image path?\n2. **Arrange:** Prepare an invalid image path that does not exist.\n3. **Act:** Enter this path.\n4. **Assert:** Can the program correctly identify and reject the invalid path?",
+    "expected_output": "2 points: Pre-check passes, valid paths are accepted, invalid paths are rejected. 1 point: Pre-check passes, but validation mechanism has issues. 0 points: Pre-check fails, or image path validation does not work properly."
+  },
+  {
+    "metric": "2.2.2 Image Format Validation",
+    "description": "1. **Pre-check (user path):** In the PRD generation process, does the program validate image formats?\n2. **Arrange:** Prepare a TXT file.\n3. **Act:** Try to use this file to generate PRD.\n4. **Assert:** Does the program reject the TXT file?",
+    "expected_output": "2 points: Pre-check passes, image formats are properly validated and non-conforming files are rejected. 1 point: Pre-check passes, but validation mechanism is not perfect. 0 points: Pre-check fails, or image format validation does not work properly."
+  },
+  {
+    "metric": "2.2.3 Image Preprocessing - Metadata Cleanup",
+    "description": "1. **Arrange:** Prepare an image with EXIF information.\n2. **Act:** Use this image to generate PRD.\n3. **Assert:** Check if EXIF information is removed from the processed image.",
+    "expected_output": "2 points: EXIF information of the image is correctly removed. 1 point: Image processed but EXIF information is not completely removed. 0 points: Cannot remove EXIF information or processing fails."
+  },
+  {
+    "metric": "2.3.1 Main Color Extraction Accuracy",
+    "description": "1. **Arrange:** Prepare an image with a clear main color (such as a pure red image).\n2. **Act:** Use this image to generate a PRD.\n3. **Assert:** Check if the main color information in the PRD document accurately reflects the image's dominant color.",
+    "expected_output": "2 points: Main color (HEX format) and proportion are extracted correctly and displayed. 1 point: Main color is extracted but accuracy or format has problems. 0 points: Unable to extract main color or result is completely wrong."
+  },
+  {
+    "metric": "2.3.2 Texture Feature Recognition Accuracy",
+    "description": "1. **Arrange:** Prepare two images with distinct texture differences (one smooth, one rough).\n2. **Act:** Use these two images respectively to generate PRDs.\n3. **Assert:** Check if the texture feature labels in the PRD document match the actual texture of the images.",
+    "expected_output": "2 points: Texture features (fine/rough) are accurately recognized and labeled. 1 point: Texture features are recognized but accuracy has problems. 0 points: Unable to recognize texture features or result is completely wrong."
+  },
+  {
+    "metric": "2.3.3 Style Description Generation",
+    "description": "1. **Pre-check (user path):** During PRD generation, is there a step to input API key?\n2. **Arrange:** Prepare a valid OpenAI API key (or use 'skip' to bypass).\n3. **Act:** Enter API key (or 'skip') and complete PRD generation.\n4. **Assert:** Check if style description (or explanation of skipping) is included in the PRD document.",
+    "expected_output": "2 points: Pre-check passes, API is successfully called to generate style description or skipping is handled correctly. 1 point: Pre-check passes but API call or skip handling has issues. 0 points: Pre-check fails, or style description is not generated."
+  },
+  {
+    "metric": "2.4.1 PRD Document Structure Completeness",
+    "description": "1. **Arrange:** Generate a PRD document.\n2. **Act:** Use a text editor to open the generated document.\n3. **Assert:** Verify the document contains the following sections: Product Overview, Image Resource Specification, Core Feature Description, Development Schedule Recommendations.",
+    "expected_output": "2 points: Document structure is complete, contains all required sections, and is in Markdown format. 1 point: Document structure is basically complete but has missing sections. 0 points: Document structure is incomplete or format is incorrect."
+  },
+  {
+    "metric": "2.4.2 Document Output Path and Prompt",
+    "description": "1. **Pre-check (user path):** In the PRD generation process, is there a step to specify the document name?\n2. **Arrange:** Prepare the document name \"test_prd\".\n3. **Act:** Enter the document name and complete PRD generation.\n4. **Assert:** Check if the document is saved in the src/output directory, and verify if the program displays a 'Document Generation Complete' prompt.",
+    "expected_output": "2 points: Pre-check passes, document is saved in the correct path and generation completion prompt is displayed. 1 point: Pre-check passes, but saving path or prompt has issues. 0 points: Pre-check fails, or document is not saved in the specified path."
+  },
+  {
+    "metric": "2.5.1a User Input Validity Check - Illegal Menu Selection Input",
+    "description": "1. **Arrange:** Prepare negative numbers as menu option.\n2. **Act:** Enter negative numbers in main menu.\n3. **Assert:** Observe whether the program correctly identifies and rejects invalid number input.",
+    "expected_output": "2 points: All types of invalid input are correctly identified and rejected. 1 point: Some invalid input is identified but validation mechanism is not perfect. 0 points: Lacks input validation or validation mechanism is invalid."
+  },
+  {
+    "metric": "2.5.1b User Input Validity Check - API Key Format Validation",
+    "description": "1. **Arrange:** Prepare incorrectly formatted API key (e.g. contains special characters or is too short).\n2. **Act:** Enter illegal format API key during PRD generation.\n3. **Assert:** Observe whether the program correctly identifies and rejects invalid API key format input.",
+    "expected_output": "2 points: All types of invalid input are correctly identified and rejected. 1 point: Some invalid input is identified but validation mechanism is not perfect. 0 points: Lacks input validation or validation mechanism is invalid."
+  },
+  {
+    "metric": "2.5.2 Error Handling and User Prompts",
+    "description": "1. **Arrange:** Prepare some input that will cause errors (such as a non-existent template name).\n2. **Act:** Enter this content at the corresponding step.\n3. **Assert:** Observe whether the program displays error prompts in Chinese and allows re-entry.",
+    "expected_output": "2 points: All errors have Chinese prompts and support re-entry. 1 point: Some errors are prompted but user interaction is not friendly enough. 0 points: Poor error handling or program crashes."
+  }
+]

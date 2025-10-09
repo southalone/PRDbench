@@ -1,0 +1,464 @@
+[
+  {
+    "metric": "2.1.1 Basic REPL Startup Functionality: Correctly launch an interactive environment via the command line",
+    "description": "1. **Arrange:** Prepare a terminal or command line window.\n2. **Act:** Execute the command `python -m src.repl` in the command line.\n3. **Assert:** Check if the REPL environment starts successfully and displays the prompt `>`.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python -m src.repl",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "REPL environment starts successfully and displays the prompt `>`"
+  },
+  {
+    "metric": "2.1.2 REPL Read-Only Mode: Support launching in read-only mode via parameter",
+    "description": "1. **Arrange:** Prepare a terminal or command line window.\n2. **Act:** Execute the command `python -m src.repl --read` in the command line.\n3. **Assert:** Check if the read-only mode starts successfully, and after entering an expression, it displays the parsing result instead of the execution result.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python -m src.repl --read",
+        "test_input": "42"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "REPL starts in read-only mode and displays the expression parsing result"
+  },
+  {
+    "metric": "2.1.3 REPL Exit Functionality: Support exiting the program via Ctrl+C",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Press the Ctrl+C combination keys.\n3. **Assert:** Check if the program exits normally without error messages.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python -m src.repl",
+        "test_input": "Ctrl+C"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program exits normally without error messages"
+  },
+  {
+    "metric": "2.2.1a Lexical Analysis Numeric Support: Integer Recognition",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter integer expressions `42` and `-7` sequentially.\n3. **Assert:** Verify if the interpreter can correctly recognize and return these integer values.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lexer.py::test_integer_lexing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.2.1b Lexical Analysis Numeric Support: Float Recognition",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter float expressions `3.14` and `-0.5` sequentially.\n3. **Assert:** Verify if the interpreter can correctly recognize and return these float values.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lexer.py::test_float_lexing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.2.2a Lexical Analysis Identifier Support: Common Variable Name Recognition",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter common identifiers like `x`, `var1`.\n3. **Assert:** Observe if the interpreter can correctly recognize these identifiers (it may indicate undefined, but it should recognize them as identifiers).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lexer.py::test_identifier_lexing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.2.2b Lexical Analysis Identifier Support: Underscore-prefixed Identifiers",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter identifiers prefixed with an underscore such as `_y`, `_var2`.\n3. **Assert:** Observe if the interpreter can correctly recognize these underscore-prefixed identifiers.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lexer.py::test_underscore_identifier_lexing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.2.3 Lexical Analysis Error Handling: Provide Detailed Syntax Error Hints",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter illegal characters like `@#$` or unclosed brackets like `(1+2`.\n3. **Assert:** Observe if error messages that include error location and specific reason are provided.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lexer.py::test_lexer_error_handling",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.1a Syntax Analysis Basic Expressions: Numeric Literals",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter numeric literals like `42` and `3.14`.\n3. **Assert:** Verify if the interpreter can correctly parse and return these numerical values.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_number_parsing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.1b Syntax Analysis Basic Expressions: Name Expressions",
+    "description": "1. **Arrange:** Start the REPL environment and define variables (e.g., through Lambda expressions or built-in functions).\n2. **Act:** Enter the defined variable names.\n3. **Assert:** Verify if the interpreter can correctly parse the name expressions and return the corresponding values.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_name_parsing",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.2a Syntax Analysis Call Expressions: Basic Function Calls",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter basic function calls like `add(1, 2)`.\n3. **Assert:** Verify if the interpreter can correctly parse and execute the function call.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_basic_function_call",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.2b Syntax Analysis Call Expressions: Nested Function Calls",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter nested function calls like `mul(add(1, 2), 3)`.\n3. **Assert:** Verify if the interpreter can correctly parse and execute the nested function calls.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_nested_function_call",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.3a Syntax Analysis Lambda Expressions: No-argument Lambda",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter no-argument Lambda expressions like `lambda: 42`.\n3. **Assert:** Verify if the interpreter can correctly parse the Lambda expression.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_no_arg_lambda",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.3.3b Syntax Analysis Lambda Expressions: Argumented Lambda",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter argumented Lambda expressions like `lambda x: add(x, 1)`.\n3. **Assert:** Verify if the interpreter can correctly parse the Lambda expression.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_parser.py::test_arg_lambda",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.1a Expression Evaluation Basic Operations: Addition and Subtraction",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter expressions `add(1, 2)` and `sub(10, 5)`.\n3. **Assert:** Verify if the results are 3 and 5, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_add_sub",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.1b Expression Evaluation Basic Operations: Multiplication and Division",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter expressions `mul(3, 4)` and `truediv(10, 2)`.\n3. **Assert:** Verify if the results are 12 and 5, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_mul_div",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.2a Expression Evaluation Complex Operations: Nested Function Calls",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter nested expressions like `add(mul(2, 3), truediv(8, 4))`.\n3. **Assert:** Verify if the result is 8 (i.e., 6+2).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_nested_calls",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.2b Expression Evaluation Complex Operations: Multi-parameter Function Calls",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter multi-parameter function calls like `max(1, 2, 3, 4, 5)`.\n3. **Assert:** Verify if the result is 5.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_multi_arg_calls",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.3a Expression Evaluation Error Handling: Type Error Handling",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter expressions with type errors like `add(1, lambda: 42)`.\n3. **Assert:** Verify if clear error messages indicating type mismatch are provided.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_type_error_handling",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.4.3b Expression Evaluation Error Handling: Undefined Variable Handling",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Enter expressions referencing undefined variables like `x` or `add(x, 1)`.\n3. **Assert:** Verify if clear error messages indicating undefined variables are provided.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_evaluator.py::test_undefined_var_handling",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.5.1a Built-in Function Basic Arithmetic: Addition, Subtraction, Multiplication, and Division",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test `add(5, 3)`, `sub(5, 3)`, `mul(5, 3)`, and `truediv(6, 3)` in sequence.\n3. **Assert:** Verify if the results are 8, 2, 15, and 2, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_builtins.py::test_basic_arithmetic",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.5.1b Built-in Function Basic Arithmetic: Floor Division, Modulo, and Power",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test `floordiv(7, 2)`, `mod(7, 3)`, and `pow(2, 3)` in sequence.\n3. **Assert:** Verify if the results are 3, 1, and 8, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_builtins.py::test_advanced_arithmetic",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.5.2a Built-in Function Advanced Arithmetic: Absolute Value and Extremes",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test `abs(-5)`, `max(1, 5, 3)`, and `min(1, 5, 3)` in sequence.\n3. **Assert:** Verify if the results are 5, 5, and 1, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_builtins.py::test_abs_min_max",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.5.2b Built-in Function Advanced Arithmetic: Type Conversion",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test `int(3.14)` and `float(42)` in sequence.\n3. **Assert:** Verify if the results are 3 and 42.0, respectively.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_builtins.py::test_type_conversion",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.1a Lambda Expression Basic Definition: No-argument Lambda",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Define and invoke a no-argument Lambda: `(lambda: 42)()`.\n3. **Assert:** Verify if the return result is 42.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_no_arg_lambda",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.1b Lambda Expression Basic Definition: Single-argument Lambda",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Define and invoke a single-argument Lambda: `(lambda x: add(x, 1))(5)`.\n3. **Assert:** Verify if the return result is 6.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_single_arg_lambda",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.2 Lambda Expression Multi-argument: Supports Multi-argument Lambda Definitions",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Define and invoke a multi-argument Lambda: `(lambda x, y: add(x, y))(3, 4)`.\n3. **Assert:** Verify if the return result is 7.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_multi_arg_lambda",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.3 Lambda Expression Closure Property: Supports Capturing External Environment Variables",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Define a nested Lambda using external variables: `(lambda x: (lambda y: add(x, y)))(5)(3)`.\n3. **Assert:** Verify if the return result is 8, proving that the inner Lambda correctly captures the parameter x of the outer Lambda.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_lambda_closure",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.4a Lambda Expression Higher-order Function: Function as an Argument",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test function as an argument: `(lambda f, x: f(x))(lambda y: add(y, 1), 5)`.\n3. **Assert:** Verify if the return result is 6.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_function_as_arg",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "2.6.4b Lambda Expression Higher-order Function: Function as a Return Value",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Test function as a return value: `(lambda x: lambda y: add(x, y))(5)(3)`.\n3. **Assert:** Verify if the return result is 8.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_lambda.py::test_function_as_return",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "3.1 Friendly Error Messages: Provide Error Prompts",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Intentionally enter various incorrect expressions, such as unclosed brackets, undefined variables, type errors, etc.\n3. **Assert:** Verify if the error messages are in Chinese and have clear guidance.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_error_handling.py::test_error_messages",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "3.2 Formatted Output: Format and Display Results and Error Messages",
+    "description": "1. **Arrange:** Start the REPL environment.\n2. **Act:** Execute various correct expressions and error operations, observing the output format.\n3. **Assert:** Verify if the output is formatted consistently, uniformly, and is easy to read.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_output_formatting.py::test_output_formatting",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed"
+  },
+  {
+    "metric": "3.3 Debug Mode: Support Viewing the Python Representation of Expressions",
+    "description": "1. **Arrange:** Start the REPL in read-only mode: `python -m src.repl --read`.\n2. **Act:** Enter complex expressions like `lambda x: add(mul(x, 2), 3)`.\n3. **Assert:** Verify if the Python internal representation of the expression is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python -m src.repl --read",
+        "test_input": "lambda x: add(mul(x, 2), 3)"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Read-only mode displays the Python internal representation of lambda x: add(mul(x, 2), 3)"
+  }
+]

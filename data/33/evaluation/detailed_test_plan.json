@@ -1,0 +1,499 @@
+[
+  {
+    "metric": "1.1 Program Startup and Main Menu Display",
+    "description": "1. **Act:** Run the program startup command in the command line (e.g., `python src/main.py` or `python -m federated_learning.main`).\n2. **Assert:** Observe whether the program starts successfully and displays the main menu with 6 function options: [1] Offline Federated Learning [2] Online Federated Learning [3] Parameter Sweep Experiment [4] View Training Logs [5] Model Evaluation [6] Exit.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "main_menu_display.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts successfully and displays the main menu with 6 function options: [1] Offline Federated Learning [2] Online Federated Learning [3] Parameter Sweep Experiment [4] View Training Logs [5] Model Evaluation [6] Exit"
+  },
+  {
+    "metric": "1.2 Menu Input Validation - Invalid Input Handling",
+    "description": "1. **Arrange:** Program displays the main menu.\n2. **Act:** Enter invalid numeric options (such as 7, 8, 0, -1) and non-numeric characters (such as the letter a, special character @, or blank input).\n3. **Assert:** Observe whether Chinese error messages are displayed and the program continues to wait for valid input without crashing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "invalid_input_combined.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Chinese error messages are displayed, and the program continues to wait for valid input without crashing"
+  },
+  {
+    "metric": "2.1a Offline Federated Learning - Menu Reachability",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[1] Offline Federated Learning\" option in the main menu?\n2. **Act:** Enter the number 1.\n3. **Assert:** Observe whether you successfully enter the offline federated learning function interface and see parameter configuration options.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_menu_access.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the offline federated learning function interface and see parameter configuration options"
+  },
+  {
+    "metric": "2.1b Offline Federated Learning - Client Number Configuration",
+    "description": "1. **Prerequisite (User Path):** After entering the offline federated learning interface, is there a client number configuration option?\n2. **Arrange:** Prepare to test different client numbers: 5, 10, 15, 20.\n3. **Act:** Try to set these 4 client number values in sequence.\n4. **Assert:** Observe whether all can be successfully set and accepted by the system.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_client_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accepts client number settings of 5, 10, 15, and 20"
+  },
+  {
+    "metric": "2.1c Offline Federated Learning - Training Round Configuration",
+    "description": "1. **Prerequisite (User Path):** Is there a training rounds setting option in offline federated learning parameter configuration?\n2. **Arrange:** Prepare to test training rounds: 5, 10, 20.\n3. **Act:** Try to set these training round values.\n4. **Assert:** Observe whether the system accepts these reasonable training round values.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_rounds_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accepts training round settings of 5, 10, and 20"
+  },
+  {
+    "metric": "2.1d Offline Federated Learning - Local Training Epoch Configuration",
+    "description": "1. **Prerequisite (User Path):** Is there a local training epochs setting option in offline federated learning parameter configuration?\n2. **Arrange:** Prepare to test local training epochs: 1, 5, 10.\n3. **Act:** Try to set these local training epoch values.\n4. **Assert:** Observe whether the system accepts these values.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_epochs_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accepts local training epoch settings of 1, 5, and 10"
+  },
+  {
+    "metric": "2.1e Offline Federated Learning - Learning Rate Configuration",
+    "description": "1. **Prerequisite (User Path):** Is there a learning rate setting option in offline federated learning parameter configuration?\n2. **Arrange:** Prepare to test learning rates: 0.01, 0.1, 0.001.\n3. **Act:** Try to set these learning rate values.\n4. **Assert:** Observe whether the system accepts these reasonable learning rates.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_lr_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accepts learning rate settings of 0.01, 0.1, and 0.001"
+  },
+  {
+    "metric": "2.2a Offline Federated Learning - All Clients Participation Mode",
+    "description": "1. **Prerequisite (User Path):** Is there a training mode selection in offline federated learning configuration?\n2. **Act:** Select all clients participation mode (20 clients).\n3. **Assert:** Observe whether the configuration interface clearly shows options like \"All Clients Participation\" or \"20 clients\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_all_clients.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The configuration interface clearly shows the option for all clients participation or 20 clients"
+  },
+  {
+    "metric": "2.2b Offline Federated Learning - Partial Clients Participation Mode",
+    "description": "1. **Prerequisite (User Path):** Is there an option for partial clients participation in training mode selection?\n2. **Arrange:** Prepare to test partial client numbers: 5, 10, 15.\n3. **Act:** Try to select these 3 partial client participation modes.\n4. **Assert:** Observe whether all can be successfully selected.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_partial_clients.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Supports selection of partial participation modes with 5, 10, or 15 clients"
+  },
+  {
+    "metric": "2.3a Offline Federated Learning - Training Round Progress Display",
+    "description": "1. **Arrange:** Configure a short training task (e.g., 2 rounds, 5 clients).\n2. **Act:** Start offline federated learning training.\n3. **Assert:** Observe whether information like \"Round 1/2\", \"Round 2/2\" is displayed for round progress.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_round_progress.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays round progress information like Round 1/2 and Round 2/2"
+  },
+  {
+    "metric": "2.3b Offline Federated Learning - Client Training Progress Display",
+    "description": "1. **Arrange:** Configure a training task with multiple clients.\n2. **Act:** Start training and observe progress display.\n3. **Assert:** Observe whether client training status information like \"Client 3/10 training\" is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_client_progress.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays client training status information like Client 3/10 training"
+  },
+  {
+    "metric": "2.4 Offline Federated Learning - Ctrl+C Interrupt Support",
+    "description": "1. **Arrange:** Start a longer offline federated learning training task.\n2. **Act:** Press the Ctrl+C combination during training.\n3. **Assert:** Observe whether the program gracefully terminates the training, displays interrupt information, and returns to the main menu or exits normally.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_interrupt_handling.py::test_ctrl_c_interrupt",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program gracefully terminates training, displays interrupt information, and returns to the main menu or exits normally"
+  },
+  {
+    "metric": "2.5a Offline Federated Learning - Success Status Return",
+    "description": "1. **Arrange:** Configure a simple training task (e.g., 1 round, 2 clients).\n2. **Act:** Complete the entire training process.\n3. **Assert:** Observe whether a clear success status message (such as \"Training completed\" or \"Training completed successfully\") is displayed after training ends.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_success_status.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Clear training success status messages are displayed, such as Training completed or Training completed successfully"
+  },
+  {
+    "metric": "2.5b Offline Federated Learning - Failure Reason Output",
+    "description": "1. **Arrange:** Create a training failure scenario by deleting data files or modifying configuration.\n2. **Act:** Attempt to start training.\n3. **Assert:** Observe whether specific failure reasons are output (such as \"Data loading failed\", \"Model save error\", \"Out of memory\", etc.).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_error_handling.py::test_training_failure_messages",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Specific failure reasons are output, such as data loading failed, model save error, out of memory, etc."
+  },
+  {
+    "metric": "2.6a Offline Federated Learning - Automatic Log File Generation",
+    "description": "1. **Arrange:** Complete an offline federated learning training.\n2. **Act:** Check the working directory or designated log directory.\n3. **Assert:** Observe whether a training log file is automatically generated.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "offline_fl_log_generation.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_training_log.log"
+    ],
+    "expected_output": "Training log files are automatically generated"
+  },
+  {
+    "metric": "2.6b Offline Federated Learning - Log Content Integrity",
+    "description": "1. **Arrange:** Obtain the training log file generated in the previous step.\n2. **Act:** Open and view the log file contents.\n3. **Assert:** Verify that the log contains three key pieces of information for each training round: test loss, accuracy, and best model save status.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_log_content.py::test_log_completeness",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The log contains three key pieces of information for each training round: test loss, accuracy, and best model save status"
+  },
+  {
+    "metric": "3.1a Online Federated Learning - Menu Reachability",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[2] Online Federated Learning\" option in the main menu?\n2. **Act:** Enter the number 2.\n3. **Assert:** Observe whether you successfully enter the online federated learning function interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "online_fl_menu_access.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the online federated learning function interface"
+  },
+  {
+    "metric": "3.1b Online Federated Learning - Network Port Configuration",
+    "description": "1. **Prerequisite (User Path):** After entering the online federated learning interface, is there a port configuration option?\n2. **Arrange:** Prepare to test port numbers: 8080, 9000, 5000.\n3. **Act:** Try to set receive port and send port.\n4. **Assert:** Observe whether these port numbers can be successfully configured.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "online_fl_port_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Receive and send ports 8080, 9000, and 5000 can be successfully configured"
+  },
+  {
+    "metric": "3.1c Online Federated Learning - Client Number Configuration",
+    "description": "1. **Prerequisite (User Path):** In the online federated learning configuration, is there a client number setting?\n2. **Arrange:** Prepare to test client numbers: 2, 5, 10.\n3. **Act:** Try to set these client number values.\n4. **Assert:** Observe whether the system accepts these values.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "online_fl_client_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accepts client number settings of 2, 5, and 10"
+  },
+  {
+    "metric": "3.2a Online Federated Learning - Client Connection Count Display",
+    "description": "1. **Arrange:** Start the online federated learning server.\n2. **Act:** Observe the server interface display.\n3. **Assert:** Verify whether information like \"Client 3 connected\" is displayed for the number of connected clients.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_online_fl.py::test_client_connection_display",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays client connection information such as Client 3 connected"
+  },
+  {
+    "metric": "3.2b Online Federated Learning - Client Ready Status Display",
+    "description": "1. **Arrange:** While the server is waiting for client connections.\n2. **Act:** Observe the status display.\n3. **Assert:** Verify whether information like \"5/10 clients ready\" is shown for client readiness status.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_online_fl.py::test_client_ready_status",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays client readiness status information such as 5/10 clients ready"
+  },
+  {
+    "metric": "4.1a Parameter Sweep Experiment - Menu Reachability",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[3] Parameter Sweep Experiment\" option in the main menu?\n2. **Act:** Enter the number 3.\n3. **Assert:** Observe whether you successfully enter the parameter sweep experiment function interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "param_sweep_menu_access.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the parameter sweep experiment function interface"
+  },
+  {
+    "metric": "4.1b Parameter Sweep Experiment - One-Click Run Function",
+    "description": "1. **Prerequisite (User Path):** In the parameter sweep experiment interface, is there an option for one-click execution or batch execution?\n2. **Act:** Select the one-click run function.\n3. **Assert:** Observe whether experiments with multiple parameter combinations start automatically.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "param_sweep_one_click.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Experiments with multiple parameter combinations start automatically"
+  },
+  {
+    "metric": "4.2a Parameter Sweep Experiment - Independent Log File Generation",
+    "description": "1. **Arrange:** Complete the execution of the parameter sweep experiment.\n2. **Act:** Check the experiment result directory.\n3. **Assert:** Verify whether independent log files are generated for each parameter combination.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "param_sweep_log_files.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_result_5_10_5.log",
+      "evaluation/expected_result_10_10_10.log"
+    ],
+    "expected_output": "Independent log files are generated for each parameter combination"
+  },
+  {
+    "metric": "4.2b Parameter Sweep Experiment - Log File Naming Convention",
+    "description": "1. **Arrange:** Get the list of log files generated from the previous step.\n2. **Act:** Check the file naming format.\n3. **Assert:** Verify whether file names follow the format like \"result_10_10_10.log\" (including parameter info).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_file_naming.py::test_log_naming_convention",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "File names follow the result_10_10_10.log format and include parameter information"
+  },
+  {
+    "metric": "4.3 Parameter Sweep Experiment - Status Query Function",
+    "description": "1. **Prerequisite (User Path):** Is there an experiment status query option in parameter sweep experiment function?\n2. **Act:** Select the status query function.\n3. **Assert:** Observe whether the lists of running and completed experiments are displayed and the two statuses are clearly distinguished.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "param_sweep_status_query.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays lists of running and completed experiments, with clear distinction between the two statuses"
+  },
+  {
+    "metric": "5.1a View Training Logs - Menu Reachability",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[4] View Training Logs\" option in the main menu?\n2. **Act:** Enter the number 4.\n3. **Assert:** Observe whether you successfully enter the view training logs function interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "view_logs_menu_access.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the view training logs function interface"
+  },
+  {
+    "metric": "5.1b View Training Logs - Historical Log View",
+    "description": "1. **Prerequisite (User Path):** In the view training logs interface, is there an option to view historical logs?\n2. **Arrange:** Make sure there are historical training logs in the system.\n3. **Act:** Select to view historical logs.\n4. **Assert:** Observe whether the historical training log list can be displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "view_logs_history.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Historical training log list is displayed"
+  },
+  {
+    "metric": "5.1c View Training Logs - Filtering Function",
+    "description": "1. **Prerequisite (User Path):** Is there an option to filter by time or parameter combination in the log view interface?\n2. **Arrange:** Prepare historical logs with different times and parameters.\n3. **Act:** Try to use the filtering function.\n4. **Assert:** Observe whether the filter results are accurate.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "view_logs_filter.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Supports filtering by time and parameter combination, and filter results are accurate"
+  },
+  {
+    "metric": "5.2a Model Evaluation - Menu Reachability",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[5] Model Evaluation\" option in the main menu?\n2. **Act:** Enter the number 5.\n3. **Assert:** Observe whether you successfully enter the model evaluation function interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "model_eval_menu_access.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the model evaluation function interface"
+  },
+  {
+    "metric": "5.2b Model Evaluation - Performance Metric Display",
+    "description": "1. **Prerequisite (User Path):** In the model evaluation interface, is there a model performance evaluation option?\n2. **Arrange:** Ensure there is a trained model file.\n3. **Act:** Select the model evaluation function.\n4. **Assert:** Observe whether two key performance metrics, accuracy and loss, are displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "model_eval_metrics.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays the two key performance metrics: accuracy and loss"
+  },
+  {
+    "metric": "6.1a Result File Saving - Save Option Provided",
+    "description": "1. **Prerequisite (User Path):** After completing any training or evaluation function, is a result save option provided?\n2. **Act:** Find and select the result saving function.\n3. **Assert:** Observe whether there is an option to save results as TXT files.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "result_save_option.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Option provided to save results as TXT files"
+  },
+  {
+    "metric": "6.1b Result File Saving - File Content Integrity",
+    "description": "1. **Arrange:** Use the save function from the previous step to save a result file.\n2. **Act:** Open the saved TXT file.\n3. **Assert:** Verify whether the file contains three key pieces of information: training parameters, performance metrics, and model information.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "result_save_content.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_result_file.txt"
+    ],
+    "expected_output": "The saved file contains training parameters, performance metrics, and model information"
+  },
+  {
+    "metric": "6.2 Text-Based Table Display Function",
+    "description": "1. **Prerequisite (User Path):** When viewing training results, is a text-based table display option provided?\n2. **Act:** Select the text-based table display function.\n3. **Assert:** Observe whether the table format is clear and easy to read, data is neatly arranged, and columns are aligned correctly.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "text_table_display.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Table format is clear and easy to read, data is neatly arranged, and columns are correctly aligned"
+  },
+  {
+    "metric": "7.1 Program Normal Exit Function",
+    "description": "1. **Prerequisite (User Path):** Is there a clear \"[6] Exit\" option in the main menu?\n2. **Act:** Enter the number 6 to select exit.\n3. **Assert:** Observe whether the program exits normally, returns to the command line prompt, with no error messages and no zombie processes.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "program_exit.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program exits normally, returns to the command line prompt, with no error messages and no zombie processes"
+  }
+]

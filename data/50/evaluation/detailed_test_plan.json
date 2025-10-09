@@ -1,0 +1,233 @@
+[
+  {
+    "metric": "1.1.1 Basic Environment Setup: The project contains a requirements.txt file",
+    "description": "1. **Act:** Run the dir command in the project root directory.\n2. **Assert:** Check if requirements.txt file exists in the command output.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "dir src",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "requirements.txt file is present in the command output"
+  },
+  {
+    "metric": "1.2.1 System Startup, Main Menu Display and Exit Mechanism",
+    "description": "1. **Act:** Run python main.py in the shell.\n2. **Assert:** Check if the program starts successfully, and after clearing the screen, clearly displays a main menu with a title and 5 visual options (A-E) plus quit command.\n3. **Act:** Enter 'quit' at the menu prompt and press Enter.\n4. **Assert:** Check whether the program terminates normally and returns to the command prompt without any error messages printed during the process.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/quit_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays the title '【NetEase Cloud Music Data Analysis System】' and a menu with 5 options A-E, then outputs 'Exited!'"
+  },
+  {
+    "metric": "2.1.1a Menu Function - Song Popularity Analysis (A)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option 'A' corresponding to \"Generate top 10 song occurrence images\"?\n2. **Arrange:** Ensure the music_image/ directory exists and is empty, or is prepared to overwrite files.\n3. **Act:** After starting the program, input 'A' at the menu prompt and press Enter.\n4. **Assert:** Check whether the console prints a progress bar and confirmation message about the chart saving path according to PRD requirements, and verify whether the corresponding image file was successfully generated in the directory via the dir music_image command.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/option_a_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays a progress bar and confirmation message, file src/music_image/top_10_song.png was successfully created"
+  },
+  {
+    "metric": "2.1.1b Menu Function - User Contribution Analysis (B)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option 'B' corresponding to \"Generate top 10 playlist contributor images\"?\n2. **Arrange:** Ensure the music_image/ directory exists.\n3. **Act:** After starting the program, input 'B' at the menu prompt and press Enter.\n4. **Assert:** Check whether the console prints a progress bar and confirmation about the chart saving path as required by PRD, and verify via dir music_image whether the corresponding image file was successfully generated in the directory.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/option_b_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays a progress bar and confirmation message, file src/music_image/top_10_song_up.png was successfully created"
+  },
+  {
+    "metric": "2.1.1c Menu Function - Western Pop Playlist Play Count Analysis (C)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option 'C' corresponding to \"Generate top 10 Western playlist play count images\"?\n2. **Arrange:** Ensure the music_image/ directory exists.\n3. **Act:** After starting the program, input 'C' at the menu prompt and press Enter.\n4. **Assert:** Check if the console prints a progress bar and confirmation about chart save path as required by PRD, and verify via dir music_image whether the corresponding image file was successfully generated in the directory.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/option_c_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays a progress bar and confirmation message, file src/music_image/top_10_ea_song_playlists.png was successfully created"
+  },
+  {
+    "metric": "2.1.1d Menu Function - Western Pop Playlist Comment Count Analysis (D)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option 'D' corresponding to \"Generate top 10 Western playlist comment count images\"?\n2. **Arrange:** Ensure the music_image/ directory exists.\n3. **Act:** After starting the program, input 'D' at the menu prompt and press Enter.\n4. **Assert:** Check if the console prints a progress bar and confirmation about chart save path according to PRD requirements, and verify via dir music_image whether the corresponding image file was successfully generated in the directory.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/option_d_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays a progress bar and confirmation message, file src/music_image/top_10_of_ea_song_comment.png was successfully created"
+  },
+  {
+    "metric": "2.1.1e Menu Function - Play Count Distribution Analysis (E)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option 'E' corresponding to \"Generate image showing play count distribution\"?\n2. **Arrange:** Ensure the music_image/ directory exists.\n3. **Act:** After starting the program, input 'E' at the menu prompt and press Enter.\n4. **Assert:** Check if the console prints a progress bar and confirmation about chart save path according to PRD requirements, and verify via dir music_image whether the corresponding image file was successfully generated in the directory.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/option_e_input.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Console displays a progress bar and confirmation message, file src/music_image/top_10_ea_song_playlists_distribution.png was successfully created"
+  },
+  {
+    "metric": "3.1.1 Data Collection and Export - Playlist Data",
+    "description": "1. **Arrange:** Ensure the music_data/ directory exists.\n2. **Act:** Run the spider command to crawl playlist list and details data.\n3. **Assert:** After execution, check if music_list.csv and music_detail.csv files were generated in the music_data directory and both files are not empty.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src/robot_work",
+        "test_input": null
+      },
+      {
+        "test_command": "scrapy crawl music_list_spider",
+        "test_input": null
+      },
+      {
+        "test_command": "cd ../..",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Spider finished execution, music_list.csv and music_detail.csv files were generated in the music_data directory"
+  },
+  {
+    "metric": "3.1.2 Existence of Model Files",
+    "description": "1. **Act:** Run the dir command in the project root directory.\n2. **Assert:** Check if play_count_prediction_model_detail.pkl file exists in the command output.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "dir src/models",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Directory listing contains play_count_prediction_model_detail.pkl file"
+  },
+  {
+    "metric": "3.2.1 Data Cleaning and Preparation Function",
+    "description": "1. **Arrange:** Ensure raw data files music_list.csv and music_detail.csv exist.\n2. **Act:** Run the data cleaning script.\n3. **Assert:** Check whether the console prints a success message, and if cleaned data files were generated.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/data_preparation.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/music_data/music_list.csv",
+      "src/music_data/music_detail.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Data cleaning completed, results saved to 'cleaned_music_list.csv' and 'cleaned_music_detail.csv'"
+  },
+  {
+    "metric": "3.2.2 Popularity Score Calculation Function",
+    "description": "1. **Arrange:** Ensure cleaned data file cleaned_music_detail.csv exists.\n2. **Act:** Run the popularity score calculation script.\n3. **Assert:** Check whether the console prints a success message, and if the popularity ranking file was generated.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/popularity_score.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/music_data/cleaned_music_detail.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Popularity score calculation completed, results saved to 'popularity_ranking_detail.csv'"
+  },
+  {
+    "metric": "3.2.3 Machine Learning Model Training Function",
+    "description": "1. **Arrange:** Ensure cleaned data file cleaned_music_detail.csv exists.\n2. **Act:** Run the model training script.\n3. **Assert:** Check if the console outputs model evaluation metrics, and whether a model file was generated.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/model_training.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/music_data/cleaned_music_detail.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Console output contains values for Mean Squared Error and R-squared Score"
+  },
+  {
+    "metric": "3.3.1 Clustering Analysis Function",
+    "description": "1. **Arrange:** Ensure raw data file music_detail.csv exists with enough samples.\n2. **Act:** Run the clustering analysis script.\n3. **Assert:** Check if the program successfully executes clustering analysis and generates the clustering result file.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/clustering_model.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/music_data/cleaned_music_detail.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Console outputs clustering model training completion message or a prompt about insufficient data samples"
+  },
+  {
+    "metric": "3.3.2 User Preference Analysis Function",
+    "description": "1. **Arrange:** Ensure cleaned data file cleaned_music_detail.csv exists.\n2. **Act:** Run the user preference analysis script.\n3. **Assert:** Check if the program successfully generates data distribution charts.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/user_preference_analysis.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/music_data/cleaned_music_detail.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Console outputs 'User preference analysis chart saved to src/music_image/user_preference_analysis.png'"
+  },
+  {
+    "metric": "3.3.3 Machine Learning Prediction Function",
+    "description": "1. **Arrange:** Ensure the play_count_prediction_model_detail.pkl model file exists.\n2. **Act:** Run the machine learning prediction command (may be integrated in main.py or a separate script).\n3. **Assert:** Check if the console prints the prediction results for all 20 sets of test data, and all predicted values are non-negative.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/data_analyze_scripts/predict_play_counts.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/models/play_count_prediction_model_detail.pkl"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Console outputs 20 lines of prediction results, each in the format 'Predicted play count for sample data X: XXXXX'"
+  }
+]

@@ -1,0 +1,508 @@
+[
+  {
+    "metric": "2.1.1 Game Lobby Module: Main Menu display and integrity",
+    "description": "1. **Act:** Run the main program.\n2. **Assert:** After launching, observe whether the command line immediately shows a clear main menu, and the menu must fully include these five options: \"Start New Match\", \"Continue Match\", \"View Historical Data\", \"Data Analysis Center\", and \"Exit System\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Main menu is displayed completely, including the five options: \"Start New Match\", \"Continue Match\", \"View Historical Data\", \"Data Analysis Center\", and \"Exit System\".",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2a Game Lobby Module: Menu Input Validation – Reject Invalid Input",
+    "description": "1. **Act:** a) Run the main program. b) Try entering each of the following: a number out of the option range (such as '9'), a non-numeric character (such as 'a'), and a special symbol (such as '$').\n2. **Assert:** After each invalid input, observe whether the system rejects the operation and stably returns to the main menu interface waiting for the next input.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "9\na\n$\n6",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "For invalid inputs '9', 'a', '$', an error message is shown and the user is returned to the main menu.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "9\na\n$\n6"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2b Game Lobby Module: Menu Input Validation – Chinese Error Prompt",
+    "description": "1. **Act:** a) Run the main program. b) Enter an invalid option, such as 'a'.\n2. **Assert:** Check whether the error message returned by the system is clear and in proper Chinese with no garbled characters.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "a\n6",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Includes an error prompt in Chinese, such as \"Invalid input, please enter a number\".",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "a\n6"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3 System Configuration Module: Function Accessibility",
+    "description": "1. **Act:** Run the main program, check the main menu or other top-level system menus.\n2. **Assert:** There should be a clear and independent entry point (such as a menu item \"System Configuration\" or \"Settings\") to access the three functions: \"Player Info Management\", \"Chessboard Display Style Switch\", and \"Clear Data\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "5\n4\n6",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "After entering the system configuration menu, options for \"Player Info Management\", \"Chessboard Display Style Switch\", and \"Clear Data\" are displayed.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "5\n4\n6"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4a System Configuration Module: Create Player Profile",
+    "description": "1. **Act:** a) Run the program and navigate to the \"System Configuration\" menu to select the \"Clear Data\" feature. b) Go to the \"Player Info Management\" interface, select to create a new player, and enter the ID \"Player_Create_Test\". c) After creation, select the \"View All Players\" feature.\n2. **Assert:** a) Check whether the system indicates successful creation. b) In the \"View All Players\" list, you can see the name \"Player_Create_Test\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.1.4a_create_player.in",
+    "input_files": [
+      "evaluation/2.1.4a_create_player.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "System indicates success, and 'Player_Create_Test' appears in the player list.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.1.4a_create_player.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4b System Configuration Module: Delete Player Profile",
+    "description": "1. **Act:** a) Run the program, first use the \"Player Info Management\" function to create a new player with ID \"Player_ToDelete\". b) Enter the \"Player Info Management\" interface again, select the delete player feature, and specify to delete \"Player_ToDelete\". c) After deletion, select the \"View All Players\" feature again.\n2. **Assert:** a) Check whether the system indicates successful deletion. b) In the \"View All Players\" list, the record for player \"Player_ToDelete\" is removed.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.1.4b_delete_player.in",
+    "input_files": [
+      "evaluation/2.1.4b_delete_player.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "System indicates successful deletion, and 'Player_ToDelete' can no longer be found in the player list.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.1.4b_delete_player.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.5 System Configuration Module: Maximum Number of Player Profiles",
+    "description": "1. **Act:** a) Run the program, navigate to the \"System Configuration\" menu, select the \"Clear Data\" feature. b) Use the \"Player Info Management\" function to continuously create 10 new players. c) Try to create the 11th player through the player creation feature.\n2. **Assert:** Check whether the system clearly indicates \"limit reached\" or similar information, and refuses to add.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_player_count_limit",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming that the 11th player cannot be added.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_player_count_limit",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.6 System Configuration Module: Chessboard Display Style Switch",
+    "description": "1. **Act:** a) Run the program, navigate to the \"Chessboard Display Style Switch\" feature, and select \"Compact\" mode. b) Start a new game. c) Exit the match, then go to style switch again and select \"Expanded\" mode. d) Start another new game.\n2. **Assert:** a) The chessboard displayed when starting the second step should use the compact style. b) The chessboard in the fourth step uses the expanded style. The switch should not require restarting the program.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.1.6_switch_style.in",
+    "input_files": [
+      "evaluation/2.1.6_switch_style.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "First game displays compact chessboard, second game displays expanded chessboard.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.1.6_switch_style.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1 Gomoku Module: Start Match & Board Initialization",
+    "description": "1. **Act:** Run the program, select \"Start New Match\" from main menu, then choose \"Gomoku\".\n2. **Assert:** System successfully enters the match interface and renders a 15x15 initial chessboard, all cells marked with '+' and no moves played yet.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "1\n1\n1\n2",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully renders a 15x15 chessboard with '+' as the initial symbol.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "1\n1\n1\n2"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2a Gomoku Module: Move Validity – Accept Legal Coordinates",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) When it is black's ('●') turn, enter a legal coordinate within the board, such as \"H8\".\n2. **Assert:** The board correctly shows '●' at H8, and the game indicates it is white's turn.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.2.2a_legal_move.in",
+    "input_files": [
+      "evaluation/2.2.2a_legal_move.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "'●' is shown at H8, and it is white's turn.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.2.2a_legal_move.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2b Gomoku Module: Move Validity – Reject Out-of-Bounds Coordinates",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) Enter an out-of-bounds coordinate, such as \"P16\" or \"A16\".\n2. **Assert:** System rejects the move, gives an error prompt, and asks the current player to re-enter.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.2.2b_illegal_move.in",
+    "input_files": [
+      "evaluation/2.2.2b_illegal_move.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "System gives an illegal move prompt for both 'P16' and 'A16'.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.2.2b_illegal_move.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2c Gomoku Module: Move Validity – Reject Duplicate Moves",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) The first player moves at H8. c) The next player tries to move at H8 again.\n2. **Assert:** System rejects the move, gives an error prompt, and asks the current player to re-enter.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_gomoku_duplicate_move",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming that duplicate moves on the same spot are not allowed.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_gomoku_duplicate_move",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.3 Gomoku Module: Winning Condition Determination",
+    "description": "1. **Act:** For horizontal, vertical, diagonal, and anti-diagonal directions, do the following: a) Start a new match. b) Through moves, construct a \"one move away from victory\" situation (for horizontal, e.g., black moves at A1,B1,C1,D1, white at A2,B2,C2,D2). c) Play the decisive move (e.g., move at E1).\n2. **Assert:** After a five-in-a-row is formed, the system should instantly judge the result, announce the winner, and end the match. All four directions must pass.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_gomoku_win_conditions",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming all four five-in-a-row win scenarios are correctly detected.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_gomoku_win_conditions",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.4a Gomoku Module: Match Operation – Undo Move",
+    "description": "1. **Act:** a) Start a new match. b) First player moves at H8. c) Second player moves at H9. d) When the first player’s turn, enter the \"undo\" command. e) After successful undo, immediately enter the \"undo\" command again.\n2. **Assert:** a) After the first undo, the board should be restored to before the second player’s move (H9 is empty). b) System indicates \"cannot undo consecutively\" or similar, and rejects the second undo.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.2.4a_regret_move.in",
+    "input_files": [
+      "evaluation/2.2.4a_regret_move.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "First undo is successful and the board is restored. Second undo is rejected with a prompt such as \"cannot undo consecutively\".",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.2.4a_regret_move.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.4b Gomoku Module: Match Operation – Surrender",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) During any player's turn, enter the \"surrender\" command.\n2. **Assert:** The match immediately ends and the other side is correctly announced as the winner.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.2.4b_surrender.in",
+    "input_files": [
+      "evaluation/2.2.4b_surrender.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Match ends and the opponent is announced as the winner.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.2.4b_surrender.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1 Chinese Chess Module: Initial Board and Piece Layout",
+    "description": "1. **Act:** Run the program, select \"Start New Match\" from the main menu, then choose \"Chinese Chess\".\n2. **Assert:** The board is 9x10, contains the \"Chu River Han Border\" marking, and all 32 pieces are in their correct initial positions using the correct character symbols.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "1\n2\n1\n2",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully renders a 9x10 Chinese Chess board, with Chu River Han Border and all pieces correctly placed.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "1\n2\n1\n2"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2a Chinese Chess Module: Core Move – Horse",
+    "description": "1. **Act:** a) Start a new Chinese Chess match. b) Move the \"horse\" via a clear \"日\" (L-shaped) path. c) Place a piece at the horse's turning point (hindering the move), and try to move the horse past that spot again.\n2. **Assert:** a) First move is successful. b) Second move is judged as illegal and is prohibited by the system.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_horse_move",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, both the horse's \"L shape\" move and the hindering leg rule are correctly applied.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_horse_move",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2b Chinese Chess Module: Core Move – Elephant",
+    "description": "1. **Act:** a) Start a new Chinese Chess match. b) Move the \"elephant\" across an unobstructed \"田\" square. c) Place a piece in the center of the \"田\" square (blocking the move), and try to move the elephant past that spot again.\n2. **Assert:** a) First move is successful. b) Second move is judged as illegal and is prohibited by the system.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_elephant_move",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, both the elephant's \"square\" move and the blocking rule are correctly applied.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_elephant_move",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2c Chinese Chess Module: Core Move – Cannon",
+    "description": "1. **Act:** a) Start a new Chinese Chess match. b) Move the \"cannon\" to an empty spot along a path with no pieces. c) Place a piece between the cannon and an opponent's piece (acting as the cannon platform), then move the cannon to capture the opponent's piece.\n2. **Assert:** a) First move is successful. b) Second move captures successfully.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_cannon_move",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, both the cannon's move and \"cannon across the mountain\" rule are correctly handled.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_cannon_move",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.3 Chinese Chess Module: Special Rule – Generals Facing",
+    "description": "1. **Act:** a) Start a new match. b) Through moves, set up a situation where the \"general\" and \"marshal\" are on the same straight line with just one piece in between. c) Try moving that last blocking piece.\n2. **Assert:** The system judges such move as illegal and prohibits it.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_generals_facing",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, system can correctly prevent moves that would cause generals directly facing.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_xiangqi_generals_facing",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1a Match Data Recording Module: Record Generation",
+    "description": "1. **Act:** a) Run the program, go to \"System Configuration\" menu and select \"Clear Data\". b) Start a new match, set match ID to \"TestGame01\", complete the match and finish normally. c) Return to the main menu and select \"View Historical Data\".\n2. **Assert:** In the history data list, you can see the match record with ID \"TestGame01\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.4.1a_record_generation.in",
+    "input_files": [
+      "evaluation/2.4.1a_record_generation.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "After match ends, the corresponding record is shown in the \"View Historical Data\" menu.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.4.1a_record_generation.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1b Match Data Recording Module: Record Integrity",
+    "description": "1. **Act:** a) Run the program, go to \"System Configuration\" menu and select \"Clear Data\", and finish a match. b) Return to the main menu and select \"View Historical Data\".\n2. **Assert:** In the history data list, the latest match record shows exact match of key information such as game type, players, and results with the just completed match.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.4.1b_record_completeness.in",
+    "input_files": [
+      "evaluation/2.4.1b_record_completeness.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Core data shown in history record is accurate and matches the match.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.4.1b_record_completeness.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.2 Match Data Recording Module: Data Recovery After Abnormal Exit",
+    "description": "1. **Act:** a) Run the program, start a new game and play 6 moves. b) Force-close the program. c) Restart and select \"Continue Match\" on the main menu.\n2. **Assert:** Observe whether the recovered game resumes from step 5 (or nearby, since every 5 steps are cached).",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "python src/main.py\n5\n3\nyes\n\n1\n1\nPlayerA\n\n1\nPlayerB\n\n3\n4\n1\n1\n1\n2\nH8\nA1\nH7\nA2\nH6\nA3\n^C\npython src/main.py\nevaluation/2.4.2_recovery.in",
+    "input_files": [
+      "evaluation/2.4.2_recovery.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "After re-entering the game, the state is restored to step 5.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "python src/main.py\n5\n3\nyes\n\n1\n1\nPlayerA\n\n1\nPlayerB\n\n3\n4\n1\n1\n1\n2\nH8\nA1\nH7\nA2\nH6\nA3\n^C\npython src/main.py\nevaluation/2.4.2_recovery.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.1 Data Analysis Center: Function Accessibility and Main Interface",
+    "description": "1. **Act:** Run the program, select \"Data Analysis Center\" in the main menu.\n2. **Assert:** Successfully enter a new menu, and the menu clearly lists at least three analysis features plus a data export option as defined in the PRD.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "4\n5\n6",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully enter the Data Analysis Center, displaying all analysis options.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "4\n5\n6"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.2 Data Analysis Center: 7-Day Match Frequency Ranking",
+    "description": "1. **Act:** a) Run the program, use the \"Clear Data\" feature. b) Create players PlayerA, PlayerB, PlayerC. c) Play 3 matches with PlayerA, 2 with PlayerB, and 1 with PlayerC, ensuring all match dates are within the past 7 days. d) Navigate to \"Data Analysis Center\" and perform the \"7-Day Match Frequency Ranking\" feature.\n2. **Assert:** Output result should be a list ranked strictly as PlayerA > PlayerB > PlayerC.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming player ranking is correctly sorted by match frequency.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.5.3a Data Analysis Center: Win Rate Statistics (Basic)",
+    "description": "1. **Act:** a) Run the program, use \"Clear Data\". b) Create PlayerA. c) Use PlayerA for two Gomoku matches (one win, one loss) and one Chinese Chess match (one win). d) Navigate to \"Win Rate Statistics\" in Data Analysis Center and calculate total win rate for PlayerA.\n2. **Assert:** PlayerA's total win rate is displayed as (2/3)*100% ≈ 66.7%.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming the total win rate for PlayerA is calculated correctly.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.5.3b Data Analysis Center: Win Rate Statistics (Filtered)",
+    "description": "1. **Act:** a) Run the program, use \"Clear Data\". b) Create PlayerA. c) Use PlayerA for two Gomoku matches (one win, one loss) and one Chinese Chess match (one win). d) Navigate to \"Win Rate Statistics\" in Data Analysis Center and view PlayerA's win rate filtered by \"Gomoku\" and \"Chinese Chess\".\n2. **Assert:** After filtering, Gomoku win rate is 50%, Chinese Chess win rate is 100%.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming win rates filtered by game type are calculated correctly.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_analytics_functions",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.5.4 Data Analysis Center: Opening Move Heatmap Visualization",
+    "description": "1. **Act:** a) Run the program, use \"Clear Data\". b) Play at least three Gomoku matches and ensure the first move is at \"H8\" in each. c) Go to Data Analysis Center and generate the Gomoku \"Opening Move Heatmap\".\n2. **Assert:** In the output ASCII heatmap, the hottest (or highest value) point is clearly marked at H8.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_all_features.py::test_heatmap_generation",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, confirming that opening move heatmap data is correctly counted.",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_all_features.py::test_heatmap_generation",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.5.5a Data Analysis Center: Data Export (File Generation)",
+    "description": "1. **Act:** a) Run the program, complete at least one match to generate data. b) Navigate to any analysis function and successfully generate results. c) Select \"Export Data\" feature and specify filename as `export.csv`.\n2. **Assert:** Check if `export.csv` file is generated successfully in the working directory.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.5.5a_export_file_generation.in",
+    "input_files": [
+      "evaluation/2.5.5a_export_file_generation.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "`export.csv` file is successfully generated in the working directory.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.5.5a_export_file_generation.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.5b Data Analysis Center: Data Export (Header and Content)",
+    "description": "1. **Act:** a) Run the program, complete at least one match to generate data. b) Navigate to any analysis function and successfully generate results. c) Select \"Export Data\" function and successfully generate `export.csv`. d) Open the `export.csv` file.\n2. **Assert:** Check whether the first line of the file is a clear, meaningful field header and whether the file contents match the analysis results displayed on screen.",
+    "type": "file_comparison",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/2.5.5a_export_file_generation.in",
+    "input_files": [
+      "evaluation/2.5.5a_export_file_generation.in"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_export.csv"
+    ],
+    "expected_output": "Content of the generated export.csv matches evaluation/expected_export.csv.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/2.5.5a_export_file_generation.in"
+      }
+    ]
+  }
+]

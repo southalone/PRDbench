@@ -1,0 +1,152 @@
+[
+  {
+    "metric": "2.1.1 Game Lobby Module: Main Menu Display and Completeness",
+    "description": "1. **Act:** Run the main program.\n2. **Assert:** After startup, check whether the command line immediately displays a clear main menu, and the menu must completely include the five options: “Start New Game”, “Continue Game”, “View History Data”, “Data Analysis Center”, “Exit System”.",
+    "expected_output": "2 points: The program clearly shows the main menu after startup, and completely includes all 5 options defined in PRD. 1 point: Menu is displayed but options are incomplete (contains 3-4 PRD defined options), or the format is messy/garbled. 0 points: Program crashes or becomes unresponsive after startup, or the menu displays fewer than 3 options."
+  },
+  {
+    "metric": "2.1.2a Game Lobby Module: Menu Input Validation - Reject Invalid Inputs",
+    "description": "1. **Act:** a) Run the main program. b) Try entering: a number outside the option range (such as '9'), a non-numeric character (such as 'a'), and a special symbol (such as '$').\n2. **Assert:** After each invalid input, check if the system rejects execution and stably returns to the main menu interface to wait for the next input.",
+    "expected_output": "2 points: Correctly intercepts all types of invalid input above, and reliably returns to the menu selection state. 1 point: Can intercept common invalid inputs like numbers and letters, but does not properly handle edge cases like special symbols (such as error but does not return to menu). 0 points: Any invalid input causes program crash, unknown state, or is wrongly accepted."
+  },
+  {
+    "metric": "2.1.2b Game Lobby Module: Menu Input Validation - Chinese Error Prompt",
+    "description": "1. **Act:** a) Run the main program. b) Enter an invalid option, such as 'a'.\n2. **Assert:** Check whether the error message returned by the system is clear, without garbled characters, and in Chinese.",
+    "expected_output": "2 points: Gives a clear and easy-to-understand error message in Chinese. 1 point: Provides an error message, but it's in English, non-Chinese encoding (garbled), or the message is vague. 0 points: No error message at all."
+  },
+  {
+    "metric": "2.1.3 System Configuration Module: Feature Access",
+    "description": "1. **Act:** Run the main program and check the main menu or other top-level menus in the system.\n2. **Assert:** See if there is a clear and independent entry (such as menu item “System Configuration” or “Settings”) that can access the three functions: “Player Information Management”, “Board Display Style Switch”, and “Clear Data”.",
+    "expected_output": "2 points: There is a clear and independent 'System Configuration' or similar menu entry, and all 3 configuration features can be accessed from this entry. 1 point: Configuration features are accessible but not unified, scattered across different menus. 0 points: None of the configuration features can be found through any menu interaction."
+  },
+  {
+    "metric": "2.1.4a System Configuration Module: Create Player Profile",
+    "description": "1. **Act:** a) Run the program, navigate to 'System Configuration' menu, select 'Clear Data'. b) Go to the 'Player Information Management' interface, select to create a new player, and enter ID 'Player_Create_Test'. c) After creation, select 'View All Players'.\n2. **Assert:** a) Check if the system prompts successful creation. b) In the list under 'View All Players', 'Player_Create_Test' can be seen.",
+    "expected_output": "2 points: Can smoothly create player profiles and see the new player in the program's player list. 1 point: There are bugs in the creation function, or the created player cannot be found in the list. 0 points: Cannot navigate to the feature interface or cannot create player profiles."
+  },
+  {
+    "metric": "2.1.4b System Configuration Module: Delete Player Profile",
+    "description": "1. **Act:** a) Run the program, use 'Player Information Management' to create a new player with ID 'Player_ToDelete'. b) Enter 'Player Information Management' again, choose to delete player and specify to delete 'Player_ToDelete'. c) After deletion, select 'View All Players' again.\n2. **Assert:** a) Check if the system prompts successful deletion. b) In the list under 'View All Players', the record of 'Player_ToDelete' has been removed.",
+    "expected_output": "2 points: Can successfully delete preset player profile, and that player disappears from the program's player list. 1 point: Can delete, but the player list does not update correctly. 0 points: Cannot navigate to the feature interface or the delete function itself fails."
+  },
+  {
+    "metric": "2.1.5 System Configuration Module: Player Profile Quantity Limit",
+    "description": "1. **Act:** a) Run the program, navigate to 'System Configuration' menu, select 'Clear Data'. b) Use 'Player Information Management' to create 10 new players in a loop. c) Try to create the 11th player through the player creation function again.\n2. **Assert:** Check if the system clearly prompts “Maximum limit reached” or similar information and rejects creation.",
+    "expected_output": "2 points: The system strictly enforces the 10-player limit and gives a clear rejection prompt. 1 point: Allows more than 10 players to be created. 0 points: Error or crash occurred during creation attempt."
+  },
+  {
+    "metric": "2.1.6 System Configuration Module: Board Display Style Switch",
+    "description": "1. **Act:** a) Run the program, navigate to 'Board Display Style Switch' and select 'Compact' mode. b) Start a new game. c) Exit the match, then go to the style switch feature again and select 'Expanded' mode. d) Start a new game again.\n2. **Assert:** a) The game board in step 2 is in compact style. b) The game board in step 4 is in expanded style. Switching does not require restarting the entire program.",
+    "expected_output": "2 points: All styles defined in PRD can be successfully switched and immediately take effect in the game. 1 point: Only some styles can be switched, or switching requires restarting the program to take effect. 0 points: Cannot navigate to the feature interface or switching is ineffective."
+  },
+  {
+    "metric": "2.2.1 Gomoku Battle Module: Start Match and Board Initialization",
+    "description": "1. **Act:** Run the program, select “Start New Game” from the main menu, then select “Gomoku”.\n2. **Assert:** The system successfully enters the battle interface and correctly renders an initial 15x15 board with all open positions marked as '+'.",
+    "expected_output": "2 points: Successfully enters battle and correctly renders a 15x15 board with initial symbol '+'. 1 point: Board size does not match, or initial symbol is incorrect. 0 points: Program crashes or no response after Gomoku is selected."
+  },
+  {
+    "metric": "2.2.2a Gomoku Battle Module: Move Legality - Accept Valid Coordinates",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) When it's black's ('●') turn, input a valid coordinate inside the board, such as 'H8'.\n2. **Assert:** The board correctly shows '●' at H8, and the game prompts it is now white's turn.",
+    "expected_output": "2 points: Correctly accepts coordinates, updates the board, and game state flows correctly. 1 point: Board display is incorrect after move or game state did not flow properly. 0 points: Cannot place a move at a valid position."
+  },
+  {
+    "metric": "2.2.2b Gomoku Battle Module: Move Legality - Reject Out-of-Bound Coordinates",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) Enter an out-of-bound coordinate, such as “P16” or “A16”.\n2. **Assert:** The system rejects the move, gives an error message, and requires the current player to re-enter.",
+    "expected_output": "2 points: Accurately identifies and rejects all out-of-bound coordinate inputs. 1 point: Poor handling for some edge cases. 0 points: Accepts out-of-bound illegal coordinates or program crashes."
+  },
+  {
+    "metric": "2.2.2c Gomoku Battle Module: Move Legality - Reject Duplicate Moves",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) First player places a move at 'H8'. c) When it’s second player’s turn, try to place a move again at 'H8'.\n2. **Assert:** The system rejects the move, gives an error message, and requires the current player to re-enter.",
+    "expected_output": "2 points: Accurately identifies and rejects duplicate moves on existing pieces. 1 point: No clear prompt, only asks to re-enter. 0 points: Duplicate move is accepted (overwrites original), or program crashes."
+  },
+  {
+    "metric": "2.2.3 Gomoku Battle Module: Five-in-a-Row Endgame Determination",
+    "description": "1. **Act:** For the four directions: horizontal, vertical, diagonal, and anti-diagonal, perform the following: a) Start a new game. b) Interactively play moves to create a “one move away from winning” layout (e.g., for horizontal test, black places at A1, B1, C1, D1, white at A2, B2, C2, D2). c) Place the winning move (e.g., at E1).\n2. **Assert:** After the final move forms five-in-a-row, the system can immediately judge the winner, announce victory, and end the match. All four direction tests must pass.",
+    "expected_output": "2 points: All four directions (horizontal/vertical/diagonal/anti-diagonal) of five-in-a-row can be accurately and instantly detected. 1 point: Can detect at least one but not all four directions. 0 points: Game continues after any direction of five-in-a-row forms."
+  },
+  {
+    "metric": "2.2.4a Gomoku Battle Module: Battle Operations - Undo Move",
+    "description": "1. **Act:** a) Start a new game. b) First player places at H8. c) Second player places at H9. d) When it's the first player’s turn, input 'undo' command. e) After a successful undo, immediately input 'undo' again.\n2. **Assert:** a) After undoing the first time, the board reverts to the state before the second player’s move (H9 is empty). b) System prompts “Cannot undo consecutively” or similar information and denies the second undo.",
+    "expected_output": "2 points: Undo function works properly and strictly observes 'only last move' and 'cannot undo consecutively'. 1 point: Undo can be unlimited, or can be done consecutively. 0 points: Undo function is unusable or causes program crash."
+  },
+  {
+    "metric": "2.2.4b Gomoku Battle Module: Battle Operations - Surrender",
+    "description": "1. **Act:** a) Start a new Gomoku match. b) In any side’s turn, input “surrender” command.\n2. **Assert:** The match ends immediately and correctly announces the other side as the winner.",
+    "expected_output": "2 points: Surrender function can be triggered normally, and victory is correctly decided. 1 point: Game state is abnormal or result is incorrect after surrender. 0 points: Surrender function is unusable."
+  },
+  {
+    "metric": "2.3.1 Chinese Chess Battle Module: Board and Piece Initial Layout",
+    "description": "1. **Act:** Run the program, select 'Start New Game' from the main menu, then select 'Chinese Chess'.\n2. **Assert:** The board is 9x10, includes “Chu River and Han Border” label, and all 32 pieces are in correct initial positions using correct character identifiers.",
+    "expected_output": "2 points: Board size, Chu River/Han Border, all 32 piece positions and identifiers are completely correct. 1 point: Board size and Chu River/Han Border are correct, but 1-5 piece positions/identifiers are wrong. 0 points: Board size is wrong, or more than 5 piece positions are wrong."
+  },
+  {
+    "metric": "2.3.2a Chinese Chess Battle Module: Key Moves - Horse",
+    "description": "1. **Act:** a) Start a new Chinese Chess game. b) Move the horse in a clear unrestricted 'L' shape. c) Put a piece at the horse's corner (block horse’s leg), try moving horse over that spot again.\n2. **Assert:** a) First move succeeds. b) Second move is judged as illegal and denied by the system.",
+    "expected_output": "2 points: Both the horse's 'L' move and 'blocked horse's leg' rule are correctly implemented. 1 point: Basic move works but the block horse’s leg rule is incorrect or missing. 0 points: Horse's basic move is wrong."
+  },
+  {
+    "metric": "2.3.2b Chinese Chess Battle Module: Key Moves - Elephant",
+    "description": "1. **Act:** a) Start a new Chinese Chess game. b) Move the elephant in an unrestricted 'square'. c) Put a piece at the center of the elephant’s 'square' ('blocked elephant’s eye'), try moving elephant over that spot again.\n2. **Assert:** a) First move succeeds. b) Second move is judged as illegal and denied by the system.",
+    "expected_output": "2 points: Both the elephant's 'square' move and 'blocked eye' rule are implemented correctly. 1 point: Basic move works but blocked eye rule is incorrect or missing. 0 points: Elephant's basic move is wrong."
+  },
+  {
+    "metric": "2.3.2c Chinese Chess Battle Module: Key Moves - Cannon",
+    "description": "1. **Act:** a) Start a new Chinese Chess game. b) Move cannon to an empty position along an unobstructed path. c) Place a piece between cannon and opponent’s piece (cannon rack), then move cannon to try capturing opponent’s piece.\n2. **Assert:** a) First move succeeds. b) Second capture succeeds.",
+    "expected_output": "2 points: Cannon’s straight movement and 'cannon jump capture' are both correctly implemented. 1 point: Movement works but capture rule is incorrect. 0 points: Cannon movement rule is wrong."
+  },
+  {
+    "metric": "2.3.3 Chinese Chess Battle Module: Special Rule - King/General Not Face-to-Face",
+    "description": "1. **Act:** a) Start a new game. b) Create a scenario where King and General are in the same straight line with only one blocking piece between. c) Try moving away the last blocking piece.\n2. **Assert:** System judges this move as illegal and denies it.",
+    "expected_output": "2 points: System can accurately identify and block any move that would make King/General face-to-face. 1 point: In some cases (such as after capture) cannot identify correctly. 0 points: King/General not face-to-face rule is not implemented at all."
+  },
+  {
+    "metric": "2.4.1a Match Data Record Module: Record Generation",
+    "description": "1. **Act:** a) Run the program, navigate to 'System Configuration' menu, select 'Clear Data'. b) Start a new game, set match ID as 'TestGame01', complete the match and finish normally. c) Go back to main menu, select 'View History Data'.\n2. **Assert:** In the history data list, you can see the match record with ID 'TestGame01'.",
+    "expected_output": "2 points: Can be found in program’s history after match ends. 0 points: No record found or cannot be checked in the program after match ends."
+  },
+  {
+    "metric": "2.4.1b Match Data Record Module: Record Completeness",
+    "description": "1. **Act:** a) Run the program, navigate to 'System Configuration' menu, select 'Clear Data', complete one match. b) Go back to main menu, select 'View History Data'.\n2. **Assert:** In the history data list, the newest match record’s game type, players, result, and other core info matches the just finished game.",
+    "expected_output": "2 points: Core data shown in history is accurate and correct. 1 point: Record created but core data is incorrect. 0 points: Record not created."
+  },
+  {
+    "metric": "2.4.2 Match Data Record Module: Data Recovery on Abnormal Exit",
+    "description": "1. **Act:** a) Run the program, start a new match and play 6 moves. b) Force close the program. c) Restart, choose 'Continue Game' from main menu.\n2. **Assert:** Check if the restored game resumes from the 5th move (or nearby, since data caches every 5 moves).",
+    "expected_output": "2 points: System can successfully recover to the last cached game state before abnormal exit. 1 point: Can recover but the restored state is not accurate. 0 points: Cannot recover the match."
+  },
+  {
+    "metric": "2.5.1 Data Analysis Center: Feature Access and Main Screen",
+    "description": "1. **Act:** Run the program, choose 'Data Analysis Center' from the main menu.\n2. **Assert:** Successfully enter a new menu, which clearly lists at least 3 analysis functions and data export as defined in PRD.",
+    "expected_output": "2 points: Can smoothly enter Data Analysis Center and clearly list all 4 functions. 1 point: Can enter but menu is messy or features incomplete. 0 points: Cannot enter, or blank/error screen after entering."
+  },
+  {
+    "metric": "2.5.2 Data Analysis Center: 7-Day Match Frequency Ranking",
+    "description": "1. **Act:** a) Run the program, use its own 'Clear Data' feature. b) Create players: PlayerA, PlayerB, PlayerC. c) Play 3 matches with PlayerA, 2 matches with PlayerB, 1 match with PlayerC, ensure the matches are within last 7 days. d) Go to Data Analysis Center, execute '7-Day Match Frequency Ranking'.\n2. **Assert:** Output should show a list, with ranking strictly PlayerA > PlayerB > PlayerC.",
+    "expected_output": "2 points: Can correctly calculate and display player ranking list by match frequency in descending order as per preset data. 1 point: Ranking shown but calculation is inaccurate or sorting wrong. 0 points: Feature cannot run or errors on execution."
+  },
+  {
+    "metric": "2.5.3a Data Analysis Center: Win Rate Statistics (Basic)",
+    "description": "1. **Act:** a) Run the program, use 'Clear Data'. b) Create PlayerA. c) Use PlayerA to play two Gomoku matches (1 win, 1 loss) and one Chinese Chess match (1 win). d) Go to Data Analysis Center's 'Win Rate Statistics', run overall win rate for PlayerA.\n2. **Assert:** PlayerA’s total win rate shows as (2/3)*100% ≈ 66.7%.",
+    "expected_output": "2 points: Accurately calculates and displays total win rate. 1 point: Total win rate calculation is inaccurate. 0 points: Cannot calculate or display win rate."
+  },
+  {
+    "metric": "2.5.3b Data Analysis Center: Win Rate Statistics (Filtering)",
+    "description": "1. **Act:** a) Run the program, use 'Clear Data'. b) Create PlayerA. c) Use PlayerA to play two Gomoku matches (1 win, 1 loss) and one Chinese Chess match (1 win). d) Go to Data Analysis Center's 'Win Rate Statistics', filter to view PlayerA’s win rate in Gomoku and Chinese Chess respectively.\n2. **Assert:** After filtering: Gomoku win rate shows as 50% and Chinese Chess win rate shows as 100%.",
+    "expected_output": "2 points: Can correctly filter and calculate win rate by game type. 1 point: Filter function is wrong, or filtered result incorrect. 0 points: Filter function is invalid."
+  },
+  {
+    "metric": "2.5.4 Data Analysis Center: Opening Heatmap Visualization",
+    "description": "1. **Act:** a) Run the program, use 'Clear Data'. b) Play at least 3 Gomoku matches and ensure first move is always at 'H8'. c) Go to Data Analysis Center, choose to generate Gomoku opening heatmap.\n2. **Assert:** Check the output ASCII heatmap and confirm the hottest (or highest value) point is clearly marked at H8.",
+    "expected_output": "2 points: Successfully generates a clear ASCII heatmap, and hotspot matches expected data. 1 point: Chart is messy, hard to read, or data is wrong. 0 points: Cannot generate heatmap or errors on execution."
+  },
+  {
+    "metric": "2.5.5a Data Analysis Center: Data Export (File Generation)",
+    "description": "1. **Act:** a) Run the program, complete at least one match to generate data. b) Go to any analysis function and successfully generate result. c) Select 'Export Data', specify file name 'export.csv'.\n2. **Assert:** Check if 'export.csv' file is successfully generated in the working directory.",
+    "expected_output": "2 points: Can successfully export CSV file. 1 point: Export fails with error and no file is generated. 0 points: Export function is unusable or file is empty/corrupted."
+  },
+  {
+    "metric": "2.5.5b Data Analysis Center: Data Export (Headers and Content)",
+    "description": "1. **Act:** a) Run the program, complete at least one match to generate data. b) Go to any analysis function and successfully generate result. c) Select 'Export Data' and generate 'export.csv'. d) Open 'export.csv'.\n2. **Assert:** Check if the first line contains clear and meaningful field headers, and file content matches displayed analysis result.",
+    "expected_output": "2 points: File contains clear and accurate headers and content matches. 1 point: Content format error, does not match result, or headers missing. 0 points: File content is seriously wrong or empty."
+  }
+]

@@ -1,0 +1,80 @@
+2025-09-04 14:48:49 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 14:48:49 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 14:48:49 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 14:48:51 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.3411, Train Acc: 0.8833, Val Loss: 0.2560, Val Acc: 0.9000
+2025-09-04 14:48:51 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.2412, Train Acc: 0.8917, Val Loss: 0.2307, Val Acc: 0.9000
+2025-09-04 14:48:51 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第26轮停止训练
+2025-09-04 14:48:51 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 14:48:51 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.57s | 指标: final_accuracy=0.8792, best_val_loss=0.2161
+2025-09-04 14:48:51 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.57s | 最终验证准确率: 0.9000
+2025-09-04 14:48:51 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 14:49:19 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 14:49:19 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 14:49:19 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 14:49:20 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.2872, Train Acc: 0.9000, Val Loss: 0.2760, Val Acc: 0.8833
+2025-09-04 14:49:20 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.1781, Train Acc: 0.9375, Val Loss: 0.2628, Val Acc: 0.8833
+2025-09-04 14:49:20 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第22轮停止训练
+2025-09-04 14:49:20 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 14:49:20 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.67s | 指标: final_accuracy=0.9417, best_val_loss=0.2501
+2025-09-04 14:49:20 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.67s | 最终验证准确率: 0.8667
+2025-09-04 14:49:20 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 14:51:05 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 14:51:05 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 14:51:05 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 14:51:06 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.2872, Train Acc: 0.9000, Val Loss: 0.2760, Val Acc: 0.8833
+2025-09-04 14:51:07 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.1781, Train Acc: 0.9375, Val Loss: 0.2628, Val Acc: 0.8833
+2025-09-04 14:51:07 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第22轮停止训练
+2025-09-04 14:51:07 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 14:51:07 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.56s | 指标: final_accuracy=0.9417, best_val_loss=0.2501
+2025-09-04 14:51:07 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.56s | 最终验证准确率: 0.8667
+2025-09-04 14:51:07 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 14:51:39 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 14:51:39 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 14:51:39 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 14:51:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.3411, Train Acc: 0.8833, Val Loss: 0.2560, Val Acc: 0.9000
+2025-09-04 14:51:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.2412, Train Acc: 0.8917, Val Loss: 0.2307, Val Acc: 0.9000
+2025-09-04 14:51:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第26轮停止训练
+2025-09-04 14:51:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 14:51:40 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.50s | 指标: final_accuracy=0.8792, best_val_loss=0.2161
+2025-09-04 14:51:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.50s | 最终验证准确率: 0.9000
+2025-09-04 14:51:40 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 15:04:27 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 15:04:27 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 15:04:27 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 15:04:29 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.3411, Train Acc: 0.8833, Val Loss: 0.2560, Val Acc: 0.9000
+2025-09-04 15:04:29 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.2412, Train Acc: 0.8917, Val Loss: 0.2307, Val Acc: 0.9000
+2025-09-04 15:04:29 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第26轮停止训练
+2025-09-04 15:04:29 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 15:04:29 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.90s | 指标: final_accuracy=0.8792, best_val_loss=0.2161
+2025-09-04 15:04:29 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.90s | 最终验证准确率: 0.9000
+2025-09-04 15:04:29 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 15:04:36 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 15:04:36 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 15:04:36 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 15:04:37 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.2872, Train Acc: 0.9000, Val Loss: 0.2760, Val Acc: 0.8833
+2025-09-04 15:04:37 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.1781, Train Acc: 0.9375, Val Loss: 0.2628, Val Acc: 0.8833
+2025-09-04 15:04:37 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第22轮停止训练
+2025-09-04 15:04:37 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 15:04:37 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.61s | 指标: final_accuracy=0.9417, best_val_loss=0.2501
+2025-09-04 15:04:37 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.61s | 最终验证准确率: 0.8667
+2025-09-04 15:04:37 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 15:24:38 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 15:24:38 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 15:24:38 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 15:24:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.3411, Train Acc: 0.8833, Val Loss: 0.2560, Val Acc: 0.9000
+2025-09-04 15:24:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.2412, Train Acc: 0.8917, Val Loss: 0.2307, Val Acc: 0.9000
+2025-09-04 15:24:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第26轮停止训练
+2025-09-04 15:24:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 15:24:40 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.70s | 指标: final_accuracy=0.8792, best_val_loss=0.2161
+2025-09-04 15:24:40 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.70s | 最终验证准确率: 0.9000
+2025-09-04 15:24:40 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成
+2025-09-04 15:25:12 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法初始化完成，共2个算法: ['logistic_regression', 'neural_network']
+2025-09-04 15:25:12 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 执行操作: 训练算法: neural_network | 参数: train_samples=300, features=4
+2025-09-04 15:25:12 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 执行操作: 开始训练神经网络 | 参数: train_samples=300, features=4
+2025-09-04 15:25:13 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [10/100] - Train Loss: 0.2872, Train Acc: 0.9000, Val Loss: 0.2760, Val Acc: 0.8833
+2025-09-04 15:25:13 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - Epoch [20/100] - Train Loss: 0.1781, Train Acc: 0.9375, Val Loss: 0.2628, Val Acc: 0.8833
+2025-09-04 15:25:13 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 早停触发，第22轮停止训练
+2025-09-04 15:25:13 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 已创建sklearn兼容权重接口，共4层权重
+2025-09-04 15:25:13 - credit_assessment.algorithm_neural network - INFO - 算法执行完成 | 算法: Neural Network | 耗时: 1.41s | 指标: final_accuracy=0.9417, best_val_loss=0.2501
+2025-09-04 15:25:13 - credit_assessment.algorithms.neural_network.NeuralNetworkAnalyzer - INFO - 神经网络训练完成 | 训练时间: 1.41s | 最终验证准确率: 0.8667
+2025-09-04 15:25:13 - credit_assessment.algorithms.algorithm_manager.AlgorithmManager - INFO - 算法 neural_network 训练完成

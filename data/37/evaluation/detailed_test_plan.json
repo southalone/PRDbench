@@ -1,0 +1,312 @@
+[
+  {
+    "metric": "2.1.1 Basic Startup and Main Menu",
+    "description": "1. **Act:** Execute the program's startup command in the shell (such as `python -m lottery_system.main`).\\n2. **Assert:** Check that the program starts successfully and displays a main menu with three clear, actionable options: \"List Management\", \"Prize Configuration\", and \"Start Lottery\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python -m lottery_system.main",
+        "test_input": "0"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts successfully and displays a clear main menu with: '1. List Management', '2. Prize Configuration', '3. Start Lottery', '0. Exit System', and then exits normally."
+  },
+  {
+    "metric": "2.1.2 Built-in List Loading",
+    "description": "1. **Pre-check (User Path):** Is there a clear option for \"List Management\" in the main menu? After entering, is there an option for \"Load Default List\"?\\n2. **Act:** Select \"Load Default List\". Then choose \"View Current List\".\\n3. **Assert:** Check that the program clearly reports \"Load Successful\", and when viewing, it displays a list containing multiple records (each record includes name and department).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_default_list_loading",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying that ListManager can successfully load the default list and returns a list containing multiple user objects, each with correct name and department information."
+  },
+  {
+    "metric": "2.1.3 Custom List Upload",
+    "description": "1. **Pre-check (User Path):** Is there an option for \"Upload Custom List\" in the \"List Management\" menu?\\n2. **Arrange:** Create a file called `test_users.txt` with content `\"Zhang San,Technology\"\\n\"Li Si,Product\"`.\\n3. **Act:** Select \"Upload Custom List\" and provide the file path for `test_users.txt`. After uploading, select \"View Current List\".\\n4. **Assert:** Verify the list contains two complete records: \"Zhang San (Technology)\" and \"Li Si (Product)\".",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_custom_list_loading_success",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying ListManager can successfully load the custom list file, correctly parse user info, and return a User object list with correct names and departments."
+  },
+  {
+    "metric": "2.1.4a List Validation - Duplicate Names",
+    "description": "1. **Pre-check (User Path):** Is there an option for \"Upload Custom List\" in the \"List Management\" menu?\\n2. **Arrange:** Create `duplicate_test.txt` with content `\"Wang Wu,Marketing\"\\n\"Wang Wu,Marketing\"`.\\n3. **Act:** Upload this file.\\n4. **Assert:** Check whether the system clearly gives a prompt containing the \"duplicate name\" keyword and lists the duplicate name \"Wang Wu\".",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_duplicate_name_validation",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying that ListManager.validate_users() can correctly detect duplicate names and return valid and duplicate user lists."
+  },
+  {
+    "metric": "2.1.4b List Validation - Format Errors",
+    "description": "1. **Pre-check (User Path):** Is there an option for \"Upload Custom List\" in the \"List Management\" menu?\\n2. **Arrange:** Create `format_error_test.txt` with content `\"Zhao Liu-Admin\"` (incorrect separator).\\n3. **Act:** Upload the file.\\n4. **Assert:** Check whether the system clearly gives a prompt containing \"format error\" and identifies the error line.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_format_error_validation",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying that ListManager._load_from_path() can correctly detect format errors and return error info including line number and reason."
+  },
+  {
+    "metric": "2.1.4c List Validation - Manual Handling",
+    "description": "1. **Pre-check (User Path):** When the uploaded list contains invalid data (duplicate names or format errors) and triggers a prompt, does the interface provide two clear options: \"Exclude invalid data and continue\" and \"Terminate upload\"?\\n2. **Arrange:** Use either `duplicate_test.txt` or `format_error_test.txt`.\\n3. **Act:** After error prompt on upload, first try \"Exclude invalid data and continue\", then re-upload and choose \"Terminate upload\".\\n4. **Assert:** Assert that after choosing \"Exclude\" valid data is imported successfully; after choosing \"Terminate\", upload ends and the list is not modified.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_invalid_data_handling",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program provides both exclusion and termination options; exclusion option imports valid data successfully; termination option ends the upload process."
+  },
+  {
+    "metric": "2.1.5 View Group Info",
+    "description": "1. **Pre-check (User Path):** Is there an option for \"View Group Info\" in the \"List Management\" menu?\\n2. **Arrange:** Use `test_users.txt` (containing 1 Technology and 1 Product person) to complete list loading.\\n3. **Act:** Select \"View Group Info\".\\n4. **Assert:** Check whether the output accurately lists \"Technology: 1 person\" and \"Product: 1 person\".",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestListManager::test_group_info_display",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying that ListManager.get_group_info() can correctly count the number of people per department and return a dictionary containing department names and numbers."
+  },
+  {
+    "metric": "2.2.1 Prize Management - View Default Prizes",
+    "description": "1. **Pre-check (User Path):** Is there a \"Prize Configuration\" option in the main menu? After entering, is there an option to \"View All Prizes\"?\\n2. **Act:** Select \"View All Prizes\".\\n3. **Assert:** Verify that you can see at least 3 default prizes mentioned in the PRD (such as \"Third Prize - Movie Ticket\").",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestPrizeManager::test_default_prizes_loading",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying that PrizeManager.load_default_prizes() can successfully load default prizes, with at least 3 prizes and correct names."
+  },
+  {
+    "metric": "2.2.2 Prize Management - Custom Addition",
+    "description": "1. **Pre-check (User Path):** Is there an option to \"Add Prize\" in the \"Prize Configuration\" menu?\\n2. **Arrange:** Prepare prize info: Name \"Grand Prize - iPhone 17\", Quantity \"1\", Associated Draw Person \"Li Bin\".\\n3. **Act:** Select \"Add Prize\" and enter the prepared info upon prompt. After adding, select \"View All Prizes\" again.\\n4. **Assert:** Verify that \"Grand Prize - iPhone 17\" now appears in the list with correct quantity and associated draw person info.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestPrizeManager::test_custom_prize_addition",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying PrizeManager.add_prize() can correctly add custom prizes, saving name, quantity, and associated draw person info."
+  },
+  {
+    "metric": "2.2.3 Group Avoidance Rule Configuration",
+    "description": "1. **Pre-check (User Path):** When configuring prizes (adding or editing), is there an option to set \"Avoid Groups\"?\\n2. **Arrange:** Prepare to configure \"Third Prize\" to avoid \"Technology\" and \"Product\" groups.\\n3. **Act:** Enter prize configuration and add these two avoidance groups for \"Third Prize\".\\n4. **Assert:** After configuration, view prize details and verify both \"Technology\" and \"Product\" are successfully related as avoidance groups.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python -m lottery_system.main",
+        "test_input": "evaluation/test_avoid_groups_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "1. Program startup should show main menu containing: '1. List Management', '2. Prize Configuration', '3. Start Lottery', '0. Exit System'\\n2. After selecting Prize Configuration, should display: '1. View All Prizes', '2. Add Custom Prize', '3. Adjust Draw Order', '0. Return to Main Menu'\\n3. During prize addition, should sequentially prompt for: prize name, quantity, avoidance groups, associated draw person\\n4. After success, should display 'Prize added successfully!'\\n5. When viewing prize list, should show newly added prize and its avoidance groups, format like: '[Prize Name] - Quantity: 1, Avoidance Groups: Technology, Product'\\n6. The entire process should have no errors and menus navigate normally"
+  },
+  {
+    "metric": "2.2.4 Prize Sorting Function",
+    "description": "1. **Pre-check (User Path):** Is there an option to \"Adjust Prize Order\" in the \"Prize Configuration\" menu?\\n2. **Arrange:** Add three prizes A, B, C. Default draw order should be A, B, C.\\n3. **Act:** Select \"Adjust Prize Order\" and use serial numbers to move C to the first position.\\n4. **Assert:** Verify prize list order is now C, A, B. Start the lottery process and assert that the first round draws prize C.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestPrizeManager::test_prize_reordering",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying PrizeManager.reorder_prizes() can correctly rearrange the prize list in the specified order."
+  },
+  {
+    "metric": "2.3.1 Multi-round Lottery Execution",
+    "description": "1. **Pre-check (User Path):** Is there an option for \"Start Lottery\" in the main menu?\\n2. **Arrange:** Configure draw order with several prizes (such as first, second, and third prizes).\\n3. **Act:** Select \"Start Lottery\".\\n4. **Assert:** Check whether the lottery process strictly follows the configured order and whether each round clearly displays the current prize name, quantity, and rule descriptions (such as avoidance groups).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python -m lottery_system.main",
+        "test_input": "1\n1\n0\n3\ny\n\n\n\nn\n0"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program starts, shows main menu, loads default list, then starts lottery, drawing prizes in preset order, displaying prize names, quantities, etc. each round."
+  },
+  {
+    "metric": "2.3.2 Manual Control - Pause and Resume",
+    "description": "1. **Arrange:** Start a lottery round.\\n2. **Act:** During the lottery animation or countdown, enter the \"pause\" command. Wait a few seconds, then enter the \"resume\" command.\\n3. **Assert:** Upon entering \"pause\", the lottery should immediately stop; upon entering \"resume\", it should continue from where stopped.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestLotteryManager::test_pause_resume_control",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program supports pause and resume during the lottery; entering pause stops the process, entering resume continues it."
+  },
+  {
+    "metric": "2.3.3 Manual Control - Terminate",
+    "description": "1. **Arrange:** Start a prize that needs to select multiple winners (e.g., 3), and 1 winner has already been drawn.\\n2. **Act:** While drawing the second winner, enter the \"terminate\" command.\\n3. **Assert:** Check whether the lottery immediately ends the current round and correctly enters the next round or summary screen. Also verify the first winner's result was saved correctly.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestLotteryManager::test_terminate_control",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program supports termination during the lottery, ending the current round and correctly saving any drawn results."
+  },
+  {
+    "metric": "2.4.1 Basic Filtering - No Duplicate Winners",
+    "description": "1. **Arrange:** Set a list with only two people (A and B) and two prizes (Prize X with 1, Prize Y with 1).\\n2. **Act:** Start the lottery, first draw Prize X, then Prize Y.\\n3. **Assert:** If A wins Prize X, the winner for Prize Y must be B. The final winner list has no duplicate people.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python -m lottery_system.main",
+        "test_input": "evaluation/test_no_duplicate_winners.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_two_users.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "1. Program starts and displays main menu\\n2. Go to List Management and load custom list with Zhang San and Li Si\\n3. Go to Prize Configuration and successfully add two prizes: 'Prize X' (1), 'Prize Y' (1)\\n4. When starting lottery, prompt for confirmation: 'About to start lottery, continue?'\\n5. First round shows: 'Drawing: Prize X (1)', then winner, e.g. 'Congratulations Zhang San (Technology) won Prize X!'\\n6. Second round shows: 'Drawing: Prize Y (1)', then other winner, e.g. 'Congratulations Li Si (Product) won Prize Y!'\\n7. Final result summary shows two different winners, no duplicates\\n8. Ensure that the winner of Prize X (e.g. Zhang San) will not win Prize Y (Prize Y must be won by Li Si)"
+  },
+  {
+    "metric": "2.4.2 Basic Filtering - Group Avoidance",
+    "description": "1. **Arrange:** Set a list with Technology member A and Product member B. Set the prize \"Product Exclusive Prize\" with avoidance group \"Technology\".\\n2. **Act:** Start drawing \"Product Exclusive Prize\".\\n3. **Assert:** The winner must be Product's B.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestLotteryManager::test_group_avoidance_filtering",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying LotteryManager._get_eligible_pool() can correctly apply group avoidance rule and filter out avoidance group members."
+  },
+  {
+    "metric": "2.4.3 Special Rule - Li Bin",
+    "description": "1. **Arrange:** Continue previous configuration (prize avoids \"Technology\"), but set the prize's associated draw person to \"Li Bin\".\\n2. **Act:** Start lottery.\\n3. **Assert:** The draw pool should contain both Technology's A and Product's B, either can win (group avoidance rule is ignored).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestLotteryManager::test_libin_special_rule",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying Li Bin's special rule: when the prize's associated draw person is Li Bin, group avoidance rule is ignored and all users can join the lottery."
+  },
+  {
+    "metric": "2.4.4 Fallback Mechanism - Chengru Group Guarantee",
+    "description": "1. **Arrange:** Strictly set up the scenario: put Chengru group member X in the list and a large number of other group members. Prize A (drawn by Chen Qixian) and Prize B (drawn by Jin Duo) both avoid \"Chengru group\". Prize C (drawn by Ma Jiaqi) also avoids \"Chengru group\".\\n2. **Act:** Draw prizes A and B in turn, making sure neither is won by Chengru group member. Then draw prize C.\\n3. **Assert:** Even though prize C also avoids Chengru group, its winner must be Chengru group's X.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_chenru_group_guarantee.py::test_chenru_group_guarantee_mechanism",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying the fallback mechanism works correctly: if Ma Jiaqi draws and Chengru group members haven't won in the first two rounds, even if the prize is set to avoid Chengru group, the draw pool is forced to only include Chengru group members, ensuring the group guarantee mechanism works. Test should show '1 passed' or similar success message."
+  },
+  {
+    "metric": "2.5.1a Real-time Result Display",
+    "description": "1. **Arrange:** Configure a prize that needs 3 winners.\\n2. **Act:** Start that lottery round.\\n3. **Assert:** Check that the process dynamically displays progress like \"Drawing number X\". Each time a winner is drawn, immediately display the result in the format \"Congratulations [Name] ([Department]) won [Prize Name]\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python -m lottery_system.main",
+        "test_input": "1\n1\n0\n2\n2\nTest Prize-3 people\n3\n\n\n0\n3\ny\n\n\n\nn\n0"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program displays real-time lottery progress 'Drawing number X', and immediately shows results in the format 'Congratulations [Name] ([Department]) won [Prize Name]' for each winner."
+  },
+  {
+    "metric": "2.5.1b Final Result Aggregation Display",
+    "description": "1. **Arrange:** Complete a full lottery process with multiple prizes (first, second, third prizes).\\n2. **Act:** View the final winner list interface.\\n3. **Assert:** Verify the final list is strictly aggregated and displayed by \"prize level from high to low\" and \"winning time order within the same prize\", and contains name, department, and prize name.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestResultManager::test_result_aggregation_display",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying ResultManager.get_winners_by_prize() can correctly group and sort winners by prize and show final results."
+  },
+  {
+    "metric": "2.5.2a Result Export Function",
+    "description": "1. **Pre-check (User Path):** After the lottery ends, is there an option to \"Export Results\"?\\n2. **Act:** Execute \"Export Results\" command.\\n3. **Assert:** Check whether a file named `awards_result_YYYYMMDD.txt` (YYYYMMDD is the current date) is successfully generated in the current working directory (src).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestResultManager::test_csv_export_functionality",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying ResultManager.export_to_csv() can successfully export the CSV file, returning success status and correct message."
+  },
+  {
+    "metric": "2.5.2b Result Export Format",
+    "description": "1. **Arrange:** Successfully export an `awards_result.txt` file.\\n2. **Act:** Open the file.\\n3. **Assert:** Check the file content is strictly CSV format with four fields per line: `Name,Department,Prize Name,Winning Time`, and the contents match the lottery results.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_comprehensive_lottery_system.py::TestResultManager::test_csv_export_format",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes, verifying the exported CSV file format is correct, including header with 4 fields and correct data format."
+  }
+]

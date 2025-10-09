@@ -1,0 +1,676 @@
+[
+  {
+    "metric": "0.1 Program Startup and Main Menu",
+    "description": "1. **Execute (Act):** Execute the program's startup command in the shell (e.g., `python main.py`).\n2. **Assert:** Observe if the program starts successfully and displays a clear main menu with at least 3 actionable options (e.g., \"Data Import\", \"Algorithm Analysis\", \"Model Evaluation\").",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_startup_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts successfully, displaying a clear main menu with at least 3 actionable options, clearly visible with no garbled characters."
+  },
+  {
+    "metric": "2.1.1 Data Import - CSV Format Support",
+    "description": "1. **Pre-check (User Path):** Is there a clear option for \"Data Import\" or a similar function in the main menu?\n2. **Prepare (Arrange):** Prepare a CSV file compliant with the UCI credit dataset format (containing at least 100 rows).\n3. **Execute (Act):** Select the data import function, then select the CSV format, and specify the prepared file path.\n4. **Assert:** Observe whether the program clearly reports \"Import Successful\" and displays the number of rows imported correctly.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd evaluation; python test_data_import_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "CSV data import test passed, the program clearly reports data import success and correctly displays the number of rows imported, confirming full support for the CSV format."
+  },
+  {
+    "metric": "2.1.1b Data Import - Excel Format Support",
+    "description": "1. **Pre-check (User Path):** Is there an \"Excel\" or \"xlsx\" option in the data import format selection interface?\n2. **Prepare (Arrange):** Prepare a valid Excel format data file.\n3. **Execute (Act):** Select the \"Excel\" format and input the file path as prompted.\n4. **Assert:** Observe whether the program clearly reports \"Import Successful\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_data_import_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_excel.xlsx"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Excel format import test passed, entered the data management menu, selected the Excel (.xlsx) format data file, the program clearly reports 'Import Successful' and displays the number of rows imported, confirming full support for the Excel format."
+  },
+  {
+    "metric": "2.1.2a Data Validation - Missing Value Detection",
+    "description": "1. **Prepare (Arrange):** Prepare a test CSV file containing missing values (with at least 2 out of 5 fields having missing values).\n2. **Execute (Act):** Import the test file.\n3. **Assert:** Verify if the program automatically detects and clearly indicates the location and number of missing values.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_missing_values_detection.py -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_missing.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Missing value detection test passed, the program automatically detects and clearly indicates the location and number of missing values, providing detailed field missing statistics."
+  },
+  {
+    "metric": "2.1.2b Data Validation - Anomaly Detection",
+    "description": "1. **Prepare (Arrange):** Prepare a test file containing anomalous data (e.g., negative or over 150 values in the age field).\n2. **Execute (Act):** Import the test file.\n3. **Assert:** Verify whether the program detects and indicates problems with anomalous data.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_anomaly_detection.py -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_anomaly.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Anomalous data detection test passed, the program detects and indicates problems with anomalous data, providing clear indications of the anomalies."
+  },
+  {
+    "metric": "2.1.2c Data Validation - Type Mismatch Prompt",
+    "description": "1. **Prepare (Arrange):** Prepare a test file containing type mismatch data (e.g., text in a numeric field).\n2. **Execute (Act):** Import the test file.\n3. **Assert:** Verify whether the program indicates type mismatch issues.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_type_validation.py -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_type_error.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Type validation test passed, the program indicates type mismatch issues, identifies all type mismatch data, and provides clear prompts."
+  },
+  {
+    "metric": "2.2.1a Data Preprocessing - Missing Values Filling Method Selection",
+    "description": "1. **Pre-check (User Path):** After data import, is there a clear \"Data Preprocessing\" option?\n2. **Execute (Act):** Enter the data preprocessing interface and select the missing value processing function.\n3. **Assert:** Observe whether at least 3 filling methods are provided for selection (mean, median, mode).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_missing_value_methods.py -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Missing value filling method selection test passed, at least 3 filling methods (mean, median, mode) are provided for selection."
+  },
+  {
+    "metric": "2.2.1b Data Preprocessing - Execution of Missing Values Treatment",
+    "description": "1. **Prepare (Arrange):** Choose a filling method (e.g., mean filling).\n2. **Execute (Act):** Execute the missing value treatment.\n3. **Assert:** Verify whether the processed data correctly fills the missing values and displays a processing result summary.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_missing_value_execution.py -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_missing.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Execution of missing value treatment test passed, verifying that the processed data correctly fills the missing values and displays a processing result summary."
+  },
+  {
+    "metric": "2.2.2a Field Processing - Numeric Field Recognition",
+    "description": "1. **Execute (Act):** View the field type recognition results after data import.\n2. **Assert:** Verify whether the program correctly recognizes all numeric fields (e.g., age, income).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_numeric_field_recognition.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Numeric field recognition test passed, program correctly recognizes all numeric fields (e.g., age, income), ensuring accurate field type recognition."
+  },
+  {
+    "metric": "2.2.2b Field Processing - Categorical Field Recognition",
+    "description": "1. **Execute (Act):** View the field type recognition results after data import.\n2. **Assert:** Verify whether the program correctly recognizes all categorical fields (e.g., gender, occupation).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_categorical_field_recognition.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Categorical field recognition test passed, program correctly recognizes all categorical fields (e.g., gender, occupation), ensuring accurate field type recognition."
+  },
+  {
+    "metric": "2.2.3a Data Encoding - One-Hot Encoding",
+    "description": "1. **Pre-check (User Path):** Is there an option for encoding method selection in the field processing interface?\n2. **Execute (Act):** Select one-hot encoding for processing categorical fields.\n3. **Assert:** Verify whether the one-hot encoding result is successfully generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_onehot_encoding.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the successful generation of one-hot encoding results, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.2.3b Data Encoding - Label Encoding",
+    "description": "1. **Pre-check (User Path):** Is there a \"Label Encoding\" option in the encoding method selection?\n2. **Execute (Act):** Select label encoding for processing categorical fields.\n3. **Assert:** Verify whether the label encoding result is successfully generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_label_encoding.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the successful generation of label encoding results, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.2.4 Feature Selection - Correlation Coefficient Calculation",
+    "description": "1. **Pre-check (User Path):** Is there a \"Feature Selection\" option in the data preprocessing interface?\n2. **Execute (Act):** Select the feature selection function and execute Pearson correlation coefficient calculation.\n3. **Assert:** Verify whether the correlation coefficient matrix between features and selection suggestions are displayed.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_correlation_analysis.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the display of the correlation coefficient matrix and selection suggestions between features, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.3.1 Algorithm Choice - Logistic Regression",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"Algorithm Analysis\" or \"Model Analysis\" option in the main menu?\n2. **Prepare (Arrange):** Ensure data preprocessing steps are completed.\n3. **Execute (Act):** Enter the algorithm selection interface, view and select the Logistic Regression option.\n4. **Assert:** Verify whether the algorithm can successfully be selected and enter the configuration interface.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_algorithm_availability.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Algorithm selection works properly, able to successfully select the algorithm and enter the configuration interface."
+  },
+  {
+    "metric": "2.3.2 Algorithm Choice - Neural Networks",
+    "description": "1. **Pre-check (User Path):** Is there a \"Neural Network\" or \"MLP\" option in the algorithm selection interface?\n2. **Execute (Act):** Select the neural network algorithm option.\n3. **Assert:** Verify whether the algorithm can successfully be selected and enter the configuration interface.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_algorithm_availability.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Algorithm selection works properly, able to successfully select the algorithm and enter the configuration interface."
+  },
+  {
+    "metric": "2.3.3a Algorithm Execution - Logistic Regression Analysis Log",
+    "description": "1. **Execute (Act):** Select the Logistic Regression algorithm and execute the analysis.\n2. **Assert:** Observe whether a detailed analysis log is output, including at least 3 key information (execution time, parameter settings, convergence status).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_algorithm_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Logistic Regression analysis log test passed, outputting a detailed analysis log including at least 3 key information (execution time, parameter settings, convergence status)."
+  },
+  {
+    "metric": "2.3.3b Algorithm Execution - Neural Network Analysis Log",
+    "description": "1. **Execute (Act):** Select the neural network algorithm and execute the analysis.\n2. **Assert:** Observe whether a detailed analysis log is output, including at least 3 key information (network structure, execution time, key parameters).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_neural_network_analysis.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Neural network analysis log test passed, outputting a detailed analysis log including at least 3 key information (network structure, execution time, key parameters)."
+  },
+  {
+    "metric": "2.3.4 Algorithm Performance Comparison Functionality",
+    "description": "1. **Pre-check (User Path):** After executing both Logistic Regression and Neural Network algorithms, is there a \"Performance Comparison\" or \"Algorithm Comparison\" option?\n2. **Execute (Act):** Select the performance comparison functionality.\n3. **Assert:** Verify whether a performance comparison table of the two algorithms is displayed, including at least 4 indicators (accuracy, precision, recall, F1 score).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_algorithm_comparison.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Algorithm performance comparison test passed, displaying a performance comparison table of the two algorithms, including at least 4 indicators (accuracy, precision, recall, F1 score)."
+  },
+  {
+    "metric": "2.4.1a Score Prediction - Single Data Scoring",
+    "description": "1. **Pre-check (User Path):** After algorithm analysis, is there a \"Score Prediction\" or \"Credit Evaluation\" option?\n2. **Prepare (Arrange):** Prepare a complete customer credit data.\n3. **Execute (Act):** Select the single data scoring function and input customer data.\n4. **Assert:** Verify whether the score result and credit rating are output.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_scoring_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Score prediction functionality works properly, outputting score result and credit rating."
+  },
+  {
+    "metric": "2.4.1b Score Prediction - Batch Data Scoring",
+    "description": "1. **Pre-check (User Path):** In the prediction function, is there a \"Batch Scoring\" option?\n2. **Prepare (Arrange):** Prepare a test set with more than 10 customer data entries.\n3. **Execute (Act):** Select the batch scoring function and specify the test set file.\n4. **Assert:** Verify whether all data are successfully scored, and output includes complete results with customer ID, scoring probability, algorithm category.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_scoring_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_batch.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Batch data scoring test passed, successfully scoring all data entries, outputting complete results including customer ID, scoring probability, algorithm category."
+  },
+  {
+    "metric": "2.5.1a ROC Curve - Image Generation",
+    "description": "1. **Pre-check (User Path):** After algorithm analysis, is there a \"Model Evaluation\" or \"Result Visualization\" option?\n2. **Execute (Act):** Select the model evaluation function and view ROC curve generation.\n3. **Assert:** Verify whether a clear ROC curve diagram is automatically generated and saved as a PNG file.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_roc_curve_generation_simple.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_data_for_roc.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_roc_curve.png"
+    ],
+    "expected_output": "ROC curve PNG file successfully generated and saved, containing a clear curve image, AUC value annotation, and grid lines, meeting the expected image quality."
+  },
+  {
+    "metric": "2.5.1b ROC Curve - AUC Value Calculation",
+    "description": "1. **Execute (Act):** After generating the ROC curve, view the AUC value display.\n2. **Assert:** Verify whether an accurate AUC value (with at least 3 decimal places) is displayed concurrently.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_auc_calculation.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "AUC value calculation test passed, displaying an accurate AUC value (with at least 3 decimal places), verifying that the calculation precision meets the requirements."
+  },
+  {
+    "metric": "2.5.2a K-S Curve - Image Generation",
+    "description": "1. **Execute (Act):** View the K-S curve generation function in the model evaluation interface.\n2. **Assert:** Verify whether the K-S curve graph is generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_ks_curve_generation.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the generation of the K-S curve graph, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.5.2b K-S Curve - Maximum KS Distance Marking",
+    "description": "1. **Execute (Act):** View the generated K-S curve.\n2. **Assert:** Verify whether the maximum KS distance is clearly marked with its value and location on the curve graph.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_ks_max_distance.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.5.2b K-S Curve - Maximum KS Distance Marking, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.5.3a LIFT Chart - Image Generation",
+    "description": "1. **Execute (Act):** View the LIFT chart generation function in the model evaluation interface.\n2. **Assert:** Verify whether the LIFT chart is generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_lift_chart_generation.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the generation of the LIFT chart, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.5.3b LIFT Chart - Layered Increase Display",
+    "description": "1. **Execute (Act):** View the generated LIFT chart.\n2. **Assert:** Verify whether different layers' increase values are clearly displayed on the chart.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_lift_layered_display.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.5.3b LIFT Chart - Layered Increase Display, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.5.4a Basic Metrics - Precision, Recall, F1 Calculation",
+    "description": "1. **Execute (Act):** View the evaluation metrics after algorithm execution.\n2. **Assert:** Verify whether precision, recall, and F1 scores are calculated and displayed concurrently.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_basic_metrics.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying that precision, recall, and F1 scores are calculated and displayed concurrently, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.5.4b Basic Metrics - Confusion Matrix",
+    "description": "1. **Execute (Act):** View the evaluation metrics after algorithm execution.\n2. **Assert:** Verify whether the confusion matrix is generated and displayed.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_confusion_matrix.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the generation and display of the confusion matrix, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.6.1a Report Generation - HTML Format Output",
+    "description": "1. **Pre-check (User Path):** After model evaluation, is there a \"Generate Report\" or \"Export Report\" option?\n2. **Execute (Act):** Select the report generation function and choose HTML format.\n3. **Assert:** Verify whether an HTML formatted evaluation report file is successfully generated.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_html_report_generation_simple.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_csv.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_html_report.html"
+    ],
+    "expected_output": "HTML formatted evaluation report file successfully generated, containing complete evaluation results and statistical chart information."
+  },
+  {
+    "metric": "2.6.1b Report Content - Statistical Chart Inclusion",
+    "description": "1. **Execute (Act):** Open the generated HTML report file.\n2. **Assert:** Verify whether the report includes at least 4 types of statistical charts (ROC curve, K-S curve, LIFT chart, confusion matrix).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_report_charts_inclusion.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.6.1b Report Content - Statistical Chart Inclusion, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.6.2 Model Effect Summary",
+    "description": "1. **Execute (Act):** View the summary section of the generated evaluation report.\n2. **Assert:** Verify whether it includes a summary of the model's effect, clearly indicating the algorithm with the highest accuracy and recommendations.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_model_effect_summary.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying that the report includes a summary of the model's effect, clearly indicating the algorithm with the highest accuracy and recommendations, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.7.1a Feature Explanation - Logistic Regression Coefficient Output",
+    "description": "1. **Execute (Act):** Complete the analysis using the Logistic Regression algorithm.\n2. **Assert:** Verify whether the coefficients of each feature and the direction of positive or negative impact are output.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_logistic_coefficients.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying that the coefficients and the direction of impact for each feature are output, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.7.1b Feature Explanation - Top-N Importance Visualization",
+    "description": "1. **Execute (Act):** View the feature importance visualization in the Logistic Regression results.\n2. **Assert:** Verify whether a visualization chart of the Top-N (at least the top 5) feature importances is generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_feature_importance_visualization.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the generation of a visualization chart of the Top-N (at least the top 5) feature importances, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.7.2a Neural Network Explanation - Weight Output",
+    "description": "1. **Execute (Act):** Complete the analysis using the neural network algorithm.\n2. **Assert:** Verify whether representative network weight information is output.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_neural_network_weights.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying output of representative network weight information, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.7.2b Neural Network Explanation - Feature Contribution Visualization",
+    "description": "1. **Execute (Act):** View the feature contribution visualization in the neural network analysis results.\n2. **Assert:** Verify whether a visualization chart of feature contribution is generated.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_neural_feature_contribution.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying the generation of a visualization chart of feature contribution, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.8.1 Data Export - CSV Format",
+    "description": "1. **Pre-check (User Path):** After data processing, is there an \"Export Data\" or \"Save Results\" option?\n2. **Execute (Act):** Select the export function, then choose the CSV format and specify the output path.\n3. **Assert:** Use a file viewing command to verify whether the CSV format file is successfully generated at the specified path.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_csv_export_simple.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_data_for_csv_export.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_csv_export.csv"
+    ],
+    "expected_output": "CSV format data export file successfully generated, containing all expected data fields and content."
+  },
+  {
+    "metric": "2.8.2 Data Export - Excel Format",
+    "description": "1. **Pre-check (User Path):** Is there an \"Excel\" or \"xlsx\" option in the export format selection?\n2. **Execute (Act):** Choose the Excel format, specify the output path, and execute the export.\n3. **Assert:** Use a file viewing command to verify whether the Excel format file is successfully generated at the specified path.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python tests/test_excel_export_simple.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_data_for_csv_export.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_excel_export.xlsx"
+    ],
+    "expected_output": "Excel format data export file successfully generated, containing all expected data fields and content."
+  },
+  {
+    "metric": "2.9.1a API Interface - Interface Availability",
+    "description": "1. **Pre-check (User Path):** Does the system provide API interface functionality or Web service options?\n2. **Prepare (Arrange):** Start the API service.\n3. **Execute (Act):** Attempt to access the API interface health check endpoint.\n4. **Assert:** Verify whether the API service responds normally.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_api_and_logging_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.9.1a API Interface - Interface Availability, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.9.1b API Interface - Prediction Functionality",
+    "description": "1. **Prepare (Arrange):** Prepare JSON data containing customer information.\n2. **Execute (Act):** Send a prediction request via the API interface.\n3. **Assert:** Verify whether the API returns a correct JSON response containing the credit score and rating.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_api_and_logging_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.9.1b API Interface - Prediction Functionality, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.10.1a Logging - Operation Logs",
+    "description": "1. **Execute (Act):** Sequentially execute at least 3 critical operations such as data import and algorithm analysis.\n2. **Assert:** Check the log files to verify whether all key operations have been automatically logged.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_api_and_logging_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, verifying automatic logging of all key operation logs, ensuring the functionality works properly."
+  },
+  {
+    "metric": "2.10.1b Logging - Timestamp and Parameters",
+    "description": "1. **Execute (Act):** View the contents of the generated log file.\n2. **Assert:** Verify whether each log entry contains timestamp, operation type, and key parameters.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python evaluation/test_api_and_logging_functionality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.10.1b Logging - Timestamp and Parameters, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "2.10.2 Error Handling - Friendly Exception Prompts",
+    "description": "1. **Prepare (Arrange):** Intentionally prepare an invalid data file (e.g., CSV with format errors).\n2. **Execute (Act):** Attempt to import the invalid file.\n3. **Assert:** Verify whether the program provides friendly error prompt information instead of directly displaying the raw exception stack.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/test_2102_shell.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/invalid_data.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Successfully executed the functionality related to 2.10.2 Error Handling - Friendly Exception Prompts, displaying corresponding operation results and status information."
+  },
+  {
+    "metric": "3.1a Code Structure - Layered Architecture",
+    "description": "1. **Execute (Act):** Check the source code directory structure.\n2. **Assert:** Verify whether there is a clear separation of directories and files according to functional tier/service tier/CLI tier.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python -m pytest tests/test_code_structure.py::TestCodeStructure::test_layered_architecture -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "pytest test passed, verifying that the code is clearly separated into directories and files according to functional tier/service tier/CLI tier, including layered directories like data, algorithms, evaluation, utils, cli."
+  },
+  {
+    "metric": "3.1b Code Quality - PEP8 Compliance",
+    "description": "1. **Execute (Act):** Check the source code using a code checking tool like flake8.\n2. **Assert:** Verify whether the code complies with PEP8 standards without format errors.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "cd evaluation && python -m pytest tests/test_code_quality.py::TestCodeQuality::test_pep8_compliance -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "pytest test passed, verifying that the code complies with PEP8 standards with the number of format errors within an acceptable range (<=5 issues for 1 point, 0 issues for 2 points)."
+  },
+  {
+    "metric": "3.2 Performance Requirement - Processing Speed",
+    "description": "1. **Prepare (Arrange):** Prepare a standard test data set with 1000 records.\n2. **Execute (Act):** Execute the complete data import, preprocessing, algorithm analysis, evaluation, and report generation process.\n3. **Assert:** Use a timer to verify whether the entire process is completed within 30 seconds.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/scripts/test_performance.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_performance.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Performance test passed, complete analysis process with 1000 data entries done within 30 seconds, verifying that processing speed meets the requirement."
+  }
+]

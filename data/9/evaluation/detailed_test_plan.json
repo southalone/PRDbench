@@ -1,0 +1,483 @@
+[
+  {
+    "metric": "0.1 Program Launch and Main Menu Display",
+    "description": "1. **Execute (Act):** Run `python src/main.py` on the command line.\n2. **Assert:** Check if the program successfully launches and displays a full interface with the title \"Intelligent Business Travel Planning System\" and at least 6 main menu options (Create New Journey, Load Saved Journey, Use Travel Template, View Current Journey, System Settings, Exit System).",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_0.1.in",
+    "input_files": null,
+    "expected_output": "Program successfully launches and displays the main menu",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_0.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "0.2 Unit Test: Executable Unit Tests Provided",
+    "description": "1. **Prepare:** Check if test files exist in the `tests/` directory (e.g., `test_*.py`).\n2. **Execute:** Run the test command (e.g., `pytest` or `python -m unittest discover tests`).\n3. **Assert:** Observe the test outcomes to verify if the test framework can run and if all discovered test cases are marked as \"Passed\".",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_file_export.py",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "All unit tests passed",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_file_export.py",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "1.1 Create New Journey Function",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"Create New Journey\" option in the main menu?\n2. **Arrange:** Prepare the journey name \"Test Journey\".\n3. **Execute (Act):** Select \"1\" and enter the prepared journey name.\n4. **Assert:** Observe whether the system displays a successful creation prompt and automatically redirects to the journey planning menu.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_1.1.in",
+    "input_files": null,
+    "expected_output": "Successfully created journey and redirected to planning menu",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_1.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1a City Input - Valid City Recognition",
+    "description": "1. **Pre-check (User Path):** Check if there is an \"Add Trip Segment\" option in the journey planning menu?\n2. **Arrange:** Prepare a list of valid city names: \"Beijing\", \"Shanghai\", \"Guangzhou\".\n3. **Execute (Act):** Select Add Trip Segment and sequentially enter the prepared city names as departure and arrival cities.\n4. **Assert:** Observe whether the system can correctly recognize and accept all 3 valid city names.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.1a.in",
+    "input_files": null,
+    "expected_output": "Correctly recognize valid city names",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1b City Input - Invalid City Verification",
+    "description": "1. **Arrange:** Prepare a list of invalid city names: \"Nonexistent City\", \"XXXX\", \"123\".\n2. **Execute (Act):** In the city input phase, sequentially enter the prepared invalid city names.\n3. **Assert:** Observe whether the system provides explicit error prompts for all 3 invalid inputs and requests re-entry.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.1b.in",
+    "input_files": null,
+    "expected_output": "Provide error prompts for invalid city names",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2a Stay Time Setting - Integer Hour Support",
+    "description": "1. **Arrange:** Prepare integer stay durations: \"24\", \"48\", \"72\".\n2. **Execute (Act):** During the process of adding a trip segment, enter the prepared stay duration values sequentially.\n3. **Assert:** Observe whether the system can correctly receive and process all 3 integer hour values.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.2a.in",
+    "input_files": null,
+    "expected_output": "Correctly process integer hour inputs",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2b Stay Time Setting - Decimal Hour Support",
+    "description": "1. **Arrange:** Prepare decimal stay durations: \"2.5\", \"4.5\", \"0.5\".\n2. **Execute (Act):** In the stay time input phase, enter the prepared decimal values sequentially.\n3. **Assert:** Observe whether the system can correctly receive and process all 3 decimal hour values.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.2b.in",
+    "input_files": null,
+    "expected_output": "Correctly process decimal hour inputs",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3a Time Window Constraints - Menu Access",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"2. Set Time Constraints\" option in the trip planning menu?\n2. **Arrange:** Ensure at least one trip segment is added.\n3. **Execute (Act):** Select \"2\" to enter the time constraint settings.\n4. **Assert:** Observe whether you can successfully enter the time constraint setting interface and display the existing trip segment list.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.3a.in",
+    "input_files": null,
+    "expected_output": "Successfully entered time constraint setting interface",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.3a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3b Time Window Constraints - Constraint Setting Function",
+    "description": "1. **Arrange:** Prepare time constraints: Earliest Arrival \"2024-12-01 09:00\", Latest Arrival \"2024-12-01 18:00\".\n2. **Execute (Act):** Set the prepared time constraints for the added trip segments.\n3. **Assert:** Observe whether the system can successfully save the constraints and show a success prompt.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.3b.in",
+    "input_files": null,
+    "expected_output": "Time constraint set successfully",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.3b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4a Trip Template - Save Function",
+    "description": "1. **Pre-check (User Path):** Check if there is an entry for saving a trip as a template in the system?\n2. **Arrange:** Create a complete trip with 2 segments.\n3. **Execute (Act):** Find and use the template save function to save the current trip as a template.\n4. **Assert:** Observe whether a template save success prompt is displayed.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.4a.in",
+    "input_files": null,
+    "expected_output": "Successfully saved trip template",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.4a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4b Trip Template - Load Function",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"3. Use Trip Template\" option in the main menu?\n2. **Arrange:** Ensure at least one trip template is saved.\n3. **Execute (Act):** Select \"3\", choose from the template list, and load the saved template.\n4. **Assert:** Observe whether the template content can be successfully loaded and redirected to the trip planning menu.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.1.4b.in",
+    "input_files": null,
+    "expected_output": "Successfully loaded trip template",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.4b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1a Transport Data - High-Speed Rail Display",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"3. Plan Route\" option in the trip planning menu?\n2. **Arrange:** Add a trip segment from Beijing to Shanghai.\n3. **Execute (Act):** Select \"3\" to plan a route.\n4. **Assert:** Observe whether the high-speed rail option is displayed, including at least 4 pieces of information such as train number, departure time, arrival time, and price.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.1a.in",
+    "input_files": null,
+    "expected_output": "Display high-speed rail options and full information",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1b Transport Data - Flight Display",
+    "description": "1. **Arrange:** Use the trip segment from Beijing to Shanghai.\n2. **Execute (Act):** Check transport options in route planning.\n3. **Assert:** Observe whether flight options are displayed, including at least 4 pieces of information such as flight number, departure time, arrival time, and price.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.1b.in",
+    "input_files": null,
+    "expected_output": "Display flight options and full information",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2a Optimization Goal - Time Optimal Solution",
+    "description": "1. **Arrange:** Prepare a trip segment with multiple transport options.\n2. **Execute (Act):** Select the \"Time Optimal\" optimization goal in route planning.\n3. **Assert:** Observe whether the generated plan prioritizes choosing the route combination with the shortest total duration.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.2a.in",
+    "input_files": null,
+    "expected_output": "Provide time optimal solution",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2b Optimization Goal - Cost Optimal Solution",
+    "description": "1. **Arrange:** Use the same multi-option trip segment.\n2. **Execute (Act):** Select the \"Cost Optimal\" optimization goal in route planning.\n3. **Assert:** Observe whether the generated plan prioritizes choosing the route combination with the lowest total cost.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.2b.in",
+    "input_files": null,
+    "expected_output": "Provide cost optimal solution",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2c Optimization Goal - Balanced Solution",
+    "description": "1. **Arrange:** Use the same multi-option trip segment.\n2. **Execute (Act):** Select the \"Balanced Solution\" optimization goal in route planning.\n3. **Assert:** Observe whether the generated plan achieves a balance between time and cost, with observable differences from the previous two methods.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.2c.in",
+    "input_files": null,
+    "expected_output": "Provide balanced solution",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.2c.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.3 Transfer Limit Settings",
+    "description": "1. **Pre-check (User Path):** Check if there is a transfer setting option during route planning?\n2. **Arrange:** Prepare a long-distance trip segment requiring multiple transfers.\n3. **Execute (Act):** Set the maximum transfer limit to 1 time, then plan the route.\n4. **Assert:** Observe whether all generated route plans adhere to the one-transfer limit.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.2.3.in",
+    "input_files": null,
+    "expected_output": "Adhere to transfer limit",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.3.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1 Journey Conflict Detection Function",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"Conflict Detection\" option in the journey planning menu?\n2. **Arrange:** Create a trip with a time conflict (e.g., insufficient 60-minute connection time).\n3. **Execute (Act):** Select \"4\" to run conflict detection.\n4. **Assert:** Observe whether the system can identify and report a time conflict, providing the location and description of the conflict.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.1.in",
+    "input_files": null,
+    "expected_output": "Detect and report time conflict",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2a Hard Conflict Recognition - High-Speed Rail to Flight",
+    "description": "1. **Arrange:** Create a journey transitioning from high-speed rail to flight with a transfer time of 60 minutes (less than the 90-minute standard).\n2. **Execute (Act):** Run conflict detection.\n3. **Assert:** Observe whether the system recognizes this as a hard conflict and clearly identifies the conflict type.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.2a.in",
+    "input_files": null,
+    "expected_output": "Recognize hard conflict from high-speed rail to flight",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2b Hard Conflict Recognition - Flight to High-Speed Rail",
+    "description": "1. **Arrange:** Create a journey transitioning from flight to high-speed rail with a transfer time of 60 minutes.\n2. **Execute (Act):** Run conflict detection.\n3. **Assert:** Observe whether the system recognizes this as a hard conflict.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.2b.in",
+    "input_files": null,
+    "expected_output": "Recognize hard conflict from flight to high-speed rail",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.3 Soft Conflict Recognition - Insufficient Rest Time",
+    "description": "1. **Arrange:** Create a continuous journey schedule with a rest time of 2 hours between trips (less than the 4-hour standard).\n2. **Execute (Act):** Run conflict detection.\n3. **Assert:** Observe whether the system recognizes this as a soft conflict and clearly identifies the conflict type.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.3.in",
+    "input_files": null,
+    "expected_output": "Recognize soft conflict due to insufficient rest time",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.3.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.4a Conflict Resolution - Time Adjustment Suggestions",
+    "description": "1. **Arrange:** Use the journey with detected conflicts.\n2. **Execute (Act):** View conflict detection results.\n3. **Assert:** Observe whether the system provides specific time adjustment suggestions (e.g., change train/flight).",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.4a.in",
+    "input_files": null,
+    "expected_output": "Provide time adjustment suggestions",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.4a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.4b Conflict Resolution - Trip Splitting Suggestions",
+    "description": "1. **Arrange:** Use the conflict journey that needs splitting.\n2. **Execute (Act):** View conflict detection results.\n3. **Assert:** Observe whether the system provides trip splitting suggestions (e.g., add a mid-trip accommodation).",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.3.4b.in",
+    "input_files": null,
+    "expected_output": "Provide trip splitting suggestions",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.4b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1a Decision Analysis - Multi-attribute Evaluation",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"Decision Analysis\" option in the journey planning menu?\n2. **Arrange:** Create a trip with multiple route options.\n3. **Execute (Act):** Select \"5\" to conduct decision analysis.\n4. **Assert:** Observe whether it displays evaluation results, including at least 3 dimensions like time efficiency, economic cost, comfort, reliability, and transfer convenience.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.4.1a.in",
+    "input_files": null,
+    "expected_output": "Display multi-attribute evaluation results",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1b Decision Analysis - Quantitative Scoring",
+    "description": "1. **Arrange:** Use the existing multi-solution trip.\n2. **Execute (Act):** View decision analysis results.\n3. **Assert:** Observe whether each evaluation dimension provides quantitative scores or percentage values.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.4.1b.in",
+    "input_files": null,
+    "expected_output": "Provide quantitative scores",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.2 Scheme Priority Ranking",
+    "description": "1. **Arrange:** Ensure there are more than 3 route options.\n2. **Execute (Act):** View the scheme ranking in decision analysis.\n3. **Assert:** Observe whether the system clearly ranks all options according to comprehensive scores.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.4.2.in",
+    "input_files": null,
+    "expected_output": "Provide scheme priority ranking",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.2.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.1 Export Function - Markdown Format",
+    "description": "1. **Pre-check (User Path):** Check if there is an \"Export Journey\" option in the trip planning menu?\n2. **Arrange:** Create a complete trip with full routes.\n3. **Execute (Act):** Select \"7\", then choose to export in Markdown format.\n4. **Assert:** Observe whether it successfully generates a .md file including the journey timeline and transport details.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.5.1.in",
+    "input_files": null,
+    "expected_output": "Successfully exported Markdown file",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.5.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.6.1 Input Validation - Menu Selection",
+    "description": "1. **Arrange:** Prepare invalid menu selections: \"9\", \"a\", \"@\" (assuming the menu has only options 1-6).\n2. **Execute (Act):** Enter the prepared invalid selections in the main menu.\n3. **Assert:** Observe whether the system provides error prompts for all 3 invalid selections and re-displays the menu.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.6.1.in",
+    "input_files": null,
+    "expected_output": "Validate menu selection errors",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.6.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.6.2a Date Format - Standard Format Support",
+    "description": "1. **Arrange:** Prepare standard date formats: \"2024-12-01\", \"2024-12-01 14:30\".\n2. **Execute (Act):** Enter the prepared date formats in the time constraint setting.\n3. **Assert:** Observe whether the system can correctly parse and accept both standard formats.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.6.2a.in",
+    "input_files": null,
+    "expected_output": "Support standard date format",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.6.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.6.2b Date Format - Relative Date Support",
+    "description": "1. **Arrange:** Prepare relative dates: \"tomorrow\", \"the day after tomorrow\".\n2. **Execute (Act):** Enter the prepared relative dates during the date input phase.\n3. **Assert:** Observe whether the system can correctly parse and convert both relative dates to specific dates.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_2.6.2b.in",
+    "input_files": null,
+    "expected_output": "Support relative date format",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.6.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "3.1.1 Journey Save - Save Function",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"Save Journey\" option in the journey planning menu?\n2. **Arrange:** Create a complete journey with 2 segments, prepare the filename \"Test Save\".\n3. **Execute (Act):** Select \"6\", enter the prepared filename to save the journey.\n4. **Assert:** Observe whether a save success prompt is displayed.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_3.1.1.in",
+    "input_files": null,
+    "expected_output": "Journey saved successfully",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.1.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "3.1.2 Journey Save - Load Verification",
+    "description": "1. **Pre-check (User Path):** Check if there is a \"Load Saved Journey\" option in the main menu?\n2. **Arrange:** Use the saved journey file.\n3. **Execute (Act):** Select \"2\", choose from the list and load the saved journey.\n4. **Assert:** Observe whether the loaded journey content matches exactly with the saved version.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs/inputs_for_test_3.1.2.in",
+    "input_files": null,
+    "expected_output": "Journey loaded successfully",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.1.2.in"
+      }
+    ]
+  }
+]

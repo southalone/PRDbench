@@ -1,0 +1,294 @@
+[
+  {
+    "metric": "0.1 Program Startup and Main Menu",
+    "description": "1. **Act:** Execute the program startup command (such as `python src/main.py`) in the shell. 2. **Assert:** Observe whether the program starts successfully and displays a clear main menu. The menu items should clearly include core entry points such as \"Job Competency Question Bank\", \"Mock Interview\", \"Career Development Planning\", etc.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_0.1.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_0.1.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can run normally and enter the main menu"
+  },
+  {
+    "metric": "1.1a Question Bank Generation - Feature Entry",
+    "description": "1. **Pre-check (User Path):** Is there a clear option in the main menu for \"Generate Question Bank\" or similar functionality? 2. **Act:** Select this option. 3. **Assert:** Observe whether the program enters the configuration interface for question bank generation and prompts the user for the next steps (such as selecting question type, quantity, etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_1.1a.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_1.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can enter the corresponding menu"
+  },
+  {
+    "metric": "1.1b Question Bank Generation - Custom Question Types and Quantity",
+    "description": "1. **Arrange:** Set generation requirements: 2 single-choice, 3 multiple-choice, 1 true/false, 1 situational analysis question. 2. **Act:** Enter the above requirements in the question bank generation interface according to the prompts. 3. **Assert:** Check the generated question bank and confirm whether the four types of questions and quantities exactly match the input.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_1.1b.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_1.1b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can display corresponding questions"
+  },
+  {
+    "metric": "1.1c Question Bank Generation - Custom Difficulty",
+    "description": "1. **Arrange:** Set requirement: generate 10 \"Advanced\" difficulty questions. 2. **Act:** In the question bank generation interface, select difficulty as \"Advanced\" and generate questions. 3. **Assert:** Check all generated questions and confirm that their difficulty tags are all \"Advanced\". Repeat validation for \"Beginner\" and \"Intermediate\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_1.1c.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_1.1c.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can display corresponding questions"
+  },
+  {
+    "metric": "1.2 Question Bank Generation - Ability Dimension Coverage",
+    "description": "1. **Arrange:** Set requirement: generate a large question bank containing 60 questions. 2. **Act:** Execute generation. 3. **Assert:** Check all generated questions and count their \"ability dimension labels\". Confirm that all six major career ability dimensions (professional knowledge, problem solving, teamwork, communication, learning ability, professionalism) appear.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_question_generation.py::test_all_dimensions_covered",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "1.3a Question Bank Generation - Content Completeness (Answers and Tags)",
+    "description": "1. **Arrange:** Generate a question bank of any size. 2. **Act:** Check the question bank data. 3. **Assert:** Randomly select 5 questions and check whether each question contains both the \"standard answer\" and the \"ability dimension label\" fields.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_question_generation.py::test_question_content_completeness",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "1.3b Question Bank Generation - Content Completeness (STAR Analysis)",
+    "description": "1. **Arrange:** Generate a question bank containing at least one \"situational analysis\" question. 2. **Act:** Check the data of the situational analysis question. 3. **Assert:** Confirm that the question contains a detailed \"analysis\" field and its content conforms to the basic structure of the STAR method (including descriptions of Situation, Task, Action, Result).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_question_generation.py::test_star_analysis_present",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "1.4a Question Bank Export - Feature Implementation",
+    "description": "1. **Pre-check (User Path):** After generating the question bank, is there a clear button/command on the interface for \"export to Excel\" or similar function? 2. **Arrange:** Successfully generate a question bank. 3. **Act:** Execute the export operation. 4. **Assert:** Check the designated output directory to confirm whether an Excel file in .xlsx format has been successfully generated.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_1.4a.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_1.4a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The question bank can be exported successfully"
+  },
+  {
+    "metric": "1.4b Question Bank Export - Data Integrity",
+    "description": "1. **Arrange:** Successfully export a question bank Excel file. 2. **Act:** Read the Excel file. 3. **Assert:** Check the table header (first row) of the file and confirm that it contains all the fields required by the PRD: question, options, answer, analysis, ability dimension.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_1.4a.in",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_1.4a.in"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_question_bank.xlsx"
+    ],
+    "expected_output": "The output file is similar to the target file"
+  },
+  {
+    "metric": "2.1 Mock Interview - Mode Selection",
+    "description": "1. **Pre-check (User Path):** Is there a clear entry for \"Mock Interview\" in the main menu? 2. **Act:** Enter the mock interview function. 3. **Assert:** Observe the interface and confirm that \"Structured Interview\" and \"Random Interview\" modes are clearly provided for user selection.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can enter the corresponding menu"
+  },
+  {
+    "metric": "2.2 Mock Interview - Answer Input, Timer Function, and Auto-scoring",
+    "description": "1. **Arrange:** Start any mock interview. 2. **Act:** Answer at least two questions and complete the entire interview. 3. **Assert:** Confirm that a timer is displayed on the interface while answering each question; after the interview ends, the report will show the total time. Upon submission, the system should give a rating based on a 1-5 score and move to the next question or finish the process.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.2.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_2.2.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can display timer, comprehensive report and simulated score"
+  },
+  {
+    "metric": "2.3a Comprehensive Report - Radar Chart",
+    "description": "1. **Arrange:** Complete a mock interview. 2. **Act:** View the generated comprehensive evaluation report. 3. **Assert:** The report should contain a competency radar chart showing the user's scores in each ability dimension.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_interview_logic.py::test_radar_chart_generation",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "2.3b Comprehensive Report - Suggestions for Improvement",
+    "description": "1. **Arrange:** Complete a mock interview. 2. **Act:** View the generated comprehensive evaluation report. 3. **Assert:** The report should contain specific suggestions for improving the user's performance.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_interview_logic.py::test_report_contains_suggestions",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "3.1 Career Planning - Career Anchor Assessment",
+    "description": "1. **Pre-check (User Path):** Is there a clear entry for \"Career Development Planning\" in the main menu? 2. **Act:** Enter this function and complete the 12-question career anchor theory assessment questionnaire. 3. **Assert:** After completing the questionnaire, the system can provide a clear career anchor type result (such as technical type, management type, etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_3.1.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_3.1.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can display career development planning information"
+  },
+  {
+    "metric": "3.2a Development Suggestions - Core Competencies",
+    "description": "1. **Arrange:** Complete the mock interview and career anchor assessment. 2. **Act:** Generate personalized development path suggestions. 3. **Assert:** Check the suggestions and confirm that they include \"three core competencies to prioritize for improvement.\"",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_career_plan_logic.py::test_development_plan_core_skills",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "3.2b Development Suggestions - Learning Resources",
+    "description": "1. **Arrange:** Complete the mock interview and career anchor assessment. 2. **Act:** Generate personalized development path suggestions. 3. **Assert:** Check the suggestions and confirm that they include \"recommended types of learning resources and ways to access them.\"",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_career_plan_logic.py::test_development_plan_resources",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "3.2c Development Suggestions - Phased Goals",
+    "description": "1. **Arrange:** Complete the mock interview and career anchor assessment. 2. **Act:** Generate personalized development path suggestions. 3. **Assert:** Check the suggestions and confirm that they include \"phased goal setting (short-term/mid-term/long-term).\"",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_career_plan_logic.py::test_development_plan_goals",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passed."
+  },
+  {
+    "metric": "3.3a Plan Export - Feature Implementation",
+    "description": "1. **Pre-check (User Path):** After generating a development plan, is there a clear button/command on the interface for \"Export as Markdown\" or similar functionality? 2. **Arrange:** Successfully generate a development plan. 3. **Act:** Execute the export operation. 4. **Assert:** Check the designated output directory and confirm whether a Markdown file in .md format is successfully generated.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_3.3a.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_3.3a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The development plan can be exported successfully"
+  },
+  {
+    "metric": "3.3b Plan Export - Data Integrity",
+    "description": "1. **Arrange:** Successfully export a development plan Markdown file. 2. **Act:** Read the Markdown file. 3. **Assert:** Check the file content and confirm that it contains two core sections: \"action plan timetable\" and \"competency improvement milestones.\"",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_3.3a.in",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs_for_test_3.3a.in"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_career_plan.md"
+    ],
+    "expected_output": "The output file is similar to the target file"
+  }
+]

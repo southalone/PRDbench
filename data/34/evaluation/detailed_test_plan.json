@@ -1,0 +1,568 @@
+[
+  {
+    "metric": "1.1 Program Executability: The system can start normally and enter the main menu interface.",
+    "description": "1. Act: Execute the program start command (like python src/main_console.py) in the shell.\\n2. Assert: Observe whether the program successfully starts and displays a clear main menu with functional options.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_console.py",
+        "test_input": "evaluation/test_inputs/test_startup.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program successfully starts and displays a main menu with the following options: 1. Add Member Information 2. Query Member Information by Relative 3. Query Basic Member Information 4. Statistics of Member Information 5. Display in Tree Form 6. Exit System"
+  },
+  {
+    "metric": "2.1.1.1 Member Information Entry: Date Format Verification - Birth/Death date must match the YYYYMMDD format.",
+    "description": "1. Arrange: Prepare a member information where the birth date or death date is filled in an illegal format (such as '1990-01-01' or '900101').\\n2. Act: Select the add new member function and attempt to submit the prepared information.\\n3. Assert: Observe whether the system prompts a date format error (such as \"Date format should be YYYYMMDD\") and prevents submission.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_010.in",
+        "test_input": "evaluation/test_inputs/test_010.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays an error message: 'Date format should be YYYYMMDD', and prevents data submission"
+  },
+  {
+    "metric": "2.1.1.2 Member Information Entry: Value Range Verification - Height must be between 50-300 cm.",
+    "description": "1. Arrange: Prepare a member information where height is filled with an illegal value (such as 40 or 350).\\n2. Act: Select the add new member function and attempt to submit the prepared information.\\n3. Assert: Observe whether the system prompts a height range error (such as \"Height should be between 50-300 cm\") and prevents submission.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_011.in",
+        "test_input": "evaluation/test_inputs/test_011.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays an error message: 'Height should be between 50-300 cm', and prevents data submission"
+  },
+  {
+    "metric": "2.1.1.3 Member Information Entry: Education Enumeration Verification - Must match predefined education values.",
+    "description": "1. Arrange: Prepare a member information where the education level is filled with an illegal value (such as 'Postdoctoral').\\n2. Act: Select the add new member function and attempt to submit the prepared information.\\n3. Assert: Observe whether the system prompts an education value error (such as \"Education must be one of Primary/Middle/High School/Bachelor/Masters/Doctorate\") and prevents submission.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_012.in",
+        "test_input": "evaluation/test_inputs/test_012.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays an error message: 'Education must be one of Primary/Middle/High School/Bachelor/Masters/Doctorate', and prevents data submission"
+  },
+  {
+    "metric": "2.1.1.4 Member Information Entry: Relationship Logic Verification - Specified relatives must exist in the system.",
+    "description": "1. Arrange: Prepare a member information specifying a relative's name who does not exist in the system.\\n2. Act: Select the add new member function and attempt to submit the prepared information.\\n3. Assert: Observe whether the system prompts that the relative does not exist (such as \"The specified relative XXX does not exist in the system\") and prevents submission.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_013.in",
+        "test_input": "evaluation/test_inputs/test_013.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays an error message: 'The specified relative XXX does not exist in the system', and prevents data submission"
+  },
+  {
+    "metric": "2.1.2.1 Member Information Storage: CSV File Creation and Data Writing.",
+    "description": "1. Arrange: Ensure there is no data.csv file in the project directory.\\n2. Act: Run the program for the first time and enter a member's information.\\n3. Assert: Check whether a data.csv file is generated in the project directory and contains the newly entered member information.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_014.in",
+        "test_input": "evaluation/test_inputs/test_014.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_014.csv"
+    ],
+    "expected_output": "The data.csv file was successfully created, and the file content includes the newly entered member information"
+  },
+  {
+    "metric": "2.1.2.2 Member Information Storage: Incremental Storage Mode - New member information is appended.",
+    "description": "1. Arrange: Ensure there is already a data.csv file in the project directory containing at least one member.\\n2. Act: Enter another new member.\\n3. Assert: Check whether the data.csv file appended the new member information while retaining the original data.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_015.in",
+        "test_input": "evaluation/test_inputs/test_015.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_015.csv"
+    ],
+    "expected_output": "The data.csv file successfully appended the new member information while retaining the original data"
+  },
+  {
+    "metric": "2.2.1.1 Tree Structure Construction: Member Class Definition and Root Node Setup.",
+    "description": "1. Arrange: Enter at least one member.\\n2. Act: Check the generated family tree structure.\\n3. Assert: Confirm that the Member object contains idx, kids, spouse attributes, and the first member is set as the root node (relation type -1).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_016.py::test_function",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The Member object contains idx, kids, spouse attributes, and the first member is set as the root node (relation type -1)"
+  },
+  {
+    "metric": "2.2.1.2 Tree Structure Construction: Spousal Relation Two-way Establishment and Child Sharing.",
+    "description": "1. Arrange: Enter a married couple and their children.\\n2. Act: Check the generated family tree structure.\\n3. Assert: Confirm whether the spouse attributes of both parties correctly point to each other and whether their kids' lists are consistent and contain children.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_017.py::test_function",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The spouse attributes of both parties correctly point to each other, and their kids' lists are consistent and include child indices"
+  },
+  {
+    "metric": "2.2.1.3 Tree Structure Construction: Parent-child Relationship Establishment and Index Lookup.",
+    "description": "1. Arrange: Enter a parent-child relationship.\\n2. Act: Check the generated family tree structure and attempt to find a member by name.\\n3. Assert: Confirm whether the parent's kids list contains the child's index and whether the system can properly locate the member's position in the family list by name.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_018.py::test_function",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The parent's kids list contains the child's index, and the system can properly locate the member's position in the family list by name"
+  },
+  {
+    "metric": "2.2.2.1a Relationship Query: Parent Search Algorithm and Generation Control - 1st Generation Parent Query",
+    "description": "1. Arrange: Build a family structure containing at least a parent-child relationship.\\n2. Act: Choose the relationship query function, then select \"Parent Query\", specifying the target member and the generation to query as 1.\\n3. Assert: Check whether the returned result correctly includes the target member's parent information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_019.in",
+        "test_input": "evaluation/test_inputs/test_019.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns the target member's parent information"
+  },
+  {
+    "metric": "2.2.2.1b Relationship Query: Parent Search Algorithm and Generation Control - 2nd Generation Parent Query (Grandparents)",
+    "description": "1. Arrange: Build a family structure containing at least a three-generation relationship of grandparents, parents, and children.\\n2. Act: Choose the relationship query function, then select \"Parent Query\", specifying the target member and the generation to query as 2.\\n3. Assert: Check whether the returned result correctly includes the target member's grandparent information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\multi_generation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/multi_generation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_020.in",
+        "test_input": "evaluation/test_inputs/test_020.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns the target member's grandparent information"
+  },
+  {
+    "metric": "2.2.2.2 Relationship Query: Parent Search Algorithm and Gender Filtering.",
+    "description": "1. Arrange: Build a family structure with both male and female parents.\\n2. Act: Choose the relationship query function, then select \"Parent Query\", specify the target member, query generation as 1, and add gender filtering conditions (such as querying only males).\\n3. Assert: Check whether the returned results only contain parent members that meet the criteria.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_021.in",
+        "test_input": "evaluation/test_inputs/test_021.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system only returns parent members that meet the gender filtering criteria"
+  },
+  {
+    "metric": "2.2.2.3a Relationship Query: Descendants Search Algorithm and Across-generation Query - 1st Generation Descendant Query",
+    "description": "1. Arrange: Build a family structure containing a parent-child relationship.\\n2. Act: Choose the relationship query function, then select \"Descendant Query\", specifying the target member and the generation to query as 1.\\n3. Assert: Check whether the returned result correctly includes the target member's child information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_022.in",
+        "test_input": "evaluation/test_inputs/test_022.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns the target member's child information"
+  },
+  {
+    "metric": "2.2.2.3b Relationship Query: Descendants Search Algorithm and Across-generation Query - 2nd Generation Descendant Query (Grandchildren)",
+    "description": "1. Arrange: Build a family structure containing a three-generation relationship including grandparents, parents, and children.\\n2. Act: Choose the relationship query function, then select \"Descendant Query\", specifying the target member and the generation to query as 2.\\n3. Assert: Check whether the returned result correctly includes the target member's grandchildren information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\four_generation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/four_generation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_023.in",
+        "test_input": "evaluation/test_inputs/test_023.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns the target member's grandchildren information"
+  },
+  {
+    "metric": "2.2.2.4 Relationship Query: Descendants Search Algorithm and Gender Filtering.",
+    "description": "1. Arrange: Build a family structure with multiple children (both male and female).\\n2. Act: Choose the relationship query function, then select \"Descendant Query\", specify the target member, query generation as 1, and add gender filtering conditions (such as querying only females).\\n3. Assert: Check whether the returned results only contain descendants that meet the criteria.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_024.in",
+        "test_input": "evaluation/test_inputs/test_024.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system only returns descendant members that meet the gender filtering criteria"
+  },
+  {
+    "metric": "2.2.2.5 Relationship Query: Spouse Query Algorithm and Exception Handling.",
+    "description": "1. Arrange: Prepare a married member and an unmarried member.\\n2. Act: Perform spouse query on the married member and on the unmarried member.\\n3. Assert: Check whether the spouse query of the married member returns spouse information; whether the query of the unmarried member returns a \"No spouse found\" or similar prompt.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\relation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/relation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_025.in",
+        "test_input": "evaluation/test_inputs/test_025.in"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_025b.in",
+        "test_input": "evaluation/test_inputs/test_025b.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The married member query returns spouse information; unmarried member query returns 'No spouse found, query failed' prompt"
+  },
+  {
+    "metric": "2.3.1.1a Multidimensional Query: Exact Name Matching Query",
+    "description": "1. Arrange: Ensure there is a member named \"Zhang San\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Name\", and enter \"Zhang San\".\\n3. Assert: Check whether the returned result correctly includes the information of \"Zhang San\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_026.in",
+        "test_input": "evaluation/test_inputs/test_026.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns complete information of the member named 'Zhang San'"
+  },
+  {
+    "metric": "2.3.1.1b Multidimensional Query: Fuzzy Place of Birth Matching Query",
+    "description": "1. Arrange: Ensure there is a member with the birthplace \"Chaoyang District, Beijing\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Birthplace\", and enter \"Beijing\".\\n3. Assert: Check whether the returned result correctly includes the information of the member from \"Chaoyang District, Beijing\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_027.in",
+        "test_input": "evaluation/test_inputs/test_027.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns all information of members whose birthplace contains 'Beijing'"
+  },
+  {
+    "metric": "2.3.1.1c Multidimensional Query: Exact Birth Date Matching Query",
+    "description": "1. Arrange: Ensure there is a member with the birth date \"19901212\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Birth Date\", and enter \"19901212\".\\n3. Assert: Check whether the returned result correctly includes the information of that member.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_028.in",
+        "test_input": "evaluation/test_inputs/test_028.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns complete information of the member with the birth date '19901212'"
+  },
+  {
+    "metric": "2.3.1.1d Multidimensional Query: Education Level Matching Query",
+    "description": "1. Arrange: Ensure there is a member with the education level \"Bachelor\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Education\", and choose \"Bachelor\".\\n3. Assert: Check whether the returned result correctly includes the information of that member.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_031.in",
+        "test_input": "evaluation/test_inputs/test_031.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns all members with the education level 'Bachelor'"
+  },
+  {
+    "metric": "2.3.1.1e Multidimensional Query: Key Word Query for Occupation",
+    "description": "1. Arrange: Ensure there is a member with the occupation \"Software Engineer\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Occupation\", and enter \"Software\".\\n3. Assert: Check whether the returned result correctly includes the information of the \"Software Engineer\" member.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_032.in",
+        "test_input": "evaluation/test_inputs/test_032.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns all members with occupations containing the keyword 'Software'"
+  },
+  {
+    "metric": "2.3.1.1f Multidimensional Query: Highest Position Matching Query",
+    "description": "1. Arrange: Ensure there is a member with the highest position \"Department Manager\" in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Highest Position\", and enter \"Department Manager\".\\n3. Assert: Check whether the returned result correctly includes the information of that member.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_033.in",
+        "test_input": "evaluation/test_inputs/test_033.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly returns all members with the highest position of 'Department Manager'"
+  },
+  {
+    "metric": "2.3.1.1g Multidimensional Query: Gender Classification Query",
+    "description": "1. Arrange: Ensure there are male and female members in the system.\\n2. Act: Choose the information retrieval function, then select \"Query by Gender\", and choose \"Male\".\\n3. Assert: Check whether the returned result only includes the information of male members.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\basic_search_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_034.in",
+        "test_input": "evaluation/test_inputs/test_034.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system only returns all members with the gender 'Male'"
+  },
+  {
+    "metric": "2.3.1.2 Multidimensional Query: Handling of No Matching Results.",
+    "description": "1. Arrange: Prepare a query condition that does not exist in the system.\\n2. Act: Perform the query using this condition.\\n3. Assert: Check whether the system returns a -1 code or corresponding prompt information (such as \"No matching results found\").",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_036.in",
+        "test_input": "evaluation/test_inputs/test_036.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system returns the prompt 'The member you are searching for does not exist'"
+  },
+  {
+    "metric": "2.5.1.1 Basic Statistics: Average Height Calculation and Data Filtering.",
+    "description": "1. Arrange: Ensure there are multiple members in the system, including valid and invalid height data.\\n2. Act: Choose the statistical analysis function, then select \"Height Statistics\".\\n3. Assert: Check whether the returned average height is correct and whether invalid data (like zero values) is filtered out.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\statistics_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_047.in",
+        "test_input": "evaluation/test_inputs/test_047.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly calculates and displays the average height in the format: 'Average height: XXX.X cm', and filters out invalid data"
+  },
+  {
+    "metric": "2.5.1.2 Basic Statistics: Education Level Conversion and Statistics.",
+    "description": "1. Arrange: Ensure there are multiple members in the system with different educational backgrounds.\\n2. Act: Choose the statistical analysis function, then select \"Education Statistics\".\\n3. Assert: Check whether the returned average education level, highest education level, and lowest education level are correct, and whether they are based on numerical level conversion.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\statistics_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_048.in",
+        "test_input": "evaluation/test_inputs/test_048.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly displays education statistics, including average education, highest education, and lowest education information"
+  },
+  {
+    "metric": "2.5.2.1 Population Statistics: Gender Ratio Statistics and Simplification.",
+    "description": "1. Arrange: Ensure there are male and female members in the system.\\n2. Act: Choose the statistical analysis function, then select \"Gender Ratio Statistics\".\\n3. Assert: Check whether the returned male-to-female ratio is correct and whether it is simplified (such as simplifying 6:4 to 3:2).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\statistics_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/basic_search_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_049.in",
+        "test_input": "evaluation/test_inputs/test_049.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly displays gender ratio statistics in the format: 'Male to Female Ratio: X:Y', and it is simplified"
+  },
+  {
+    "metric": "2.6.1.1 Tree Display: Text Tree Structure and Hierarchical Indentation.",
+    "description": "1. Arrange: Ensure there are multiple generations of family members in the system.\\n2. Act: Choose the genealogy display function.\\n3. Assert: Check whether the output is a correct text tree structure and whether each generation is appropriately indented (such as 2 spaces).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "copy evaluation\\test_data\\multi_generation_test_data.csv data.csv",
+        "test_input": "evaluation/test_data/multi_generation_test_data.csv"
+      },
+      {
+        "test_command": "python src/main_automated.py evaluation/test_inputs/test_052.in",
+        "test_input": "evaluation/test_inputs/test_052.in"
+      },
+      {
+        "test_command": "del data.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system outputs a correct text tree structure, with appropriate indentations for each generation (2 spaces), clear hierarchical relationships, and members displayed in the '--Name' format, with spouse names following immediately"
+  }
+]

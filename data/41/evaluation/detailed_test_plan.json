@@ -1,0 +1,190 @@
+[
+  {
+    "metric": "0.1 Program Launch and Main Menu Display",
+    "description": "1. **Act:** Execute the program launch command in the command line (such as `python main.py` or `python -m src.main`).\n2. **Assert:** Observe whether the program starts successfully and displays the main menu with the following 6 options: [1] Enter sequence file path [2] Select algorithm [3] Performance comparison [4] Analyze performance metrics [5] View history [6] Exit.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/main_menu_test.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program launches successfully and displays the main menu with 6 options: [1] Enter sequence file path [2] Select algorithm [3] Performance comparison [4] Analyze performance metrics [5] View history [6] Exit"
+  },
+  {
+    "metric": "0.2 Menu Option Input Validation",
+    "description": "1. **Arrange:** Prepare invalid input test cases: number 0, number 7, letters abc, special characters @#$.\n2. **Act:** Sequentially input these invalid options in the main menu.\n3. **Assert:** Observe whether a Chinese error message is displayed after each invalid input, such as \"Error: Please enter a number between 1 and 6.\"",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/invalid_input_test.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays a Chinese error message for invalid input (0, 7, abc, @#$): Error: Please enter a number between 1 and 6"
+  },
+  {
+    "metric": "1.1 Sequence File Path Entry Function",
+    "description": "1. **Pre-check (User Path):** Is there option 1 \"Enter sequence file path\" in the main menu?\n2. **Arrange:** Prepare a valid sequence file path and an invalid path (non-existent file).\n3. **Act:** Select menu option 1 and enter both the valid and invalid file paths.\n4. **Assert:** Observe whether the system confirms the valid path and displays an error message for the invalid path.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/file_path_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Valid path is confirmed, invalid path prompts an error message"
+  },
+  {
+    "metric": "2.1a Algorithm Selection Interface - Displaying Algorithm Options",
+    "description": "1. **Pre-check (User Path):** Is there option 2 \"Select algorithm\" in the main menu?\n2. **Act:** Select menu option 2 to enter the algorithm selection interface.\n3. **Assert:** Observe whether the 3 core algorithm options are displayed: Dynamic Programming, A* Search, Genetic Algorithm.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/algorithm_selection_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Displays 3 core algorithm options: Dynamic Programming, A* Search, Genetic Algorithm"
+  },
+  {
+    "metric": "2.1b Algorithm Selection Interface - Parameter Configuration Function",
+    "description": "1. **Pre-check (User Path):** After selecting any algorithm in the algorithm selection interface, is a parameter configuration option provided?\n2. **Act:** Select an algorithm and try to configure its parameters.\n3. **Assert:** Observe whether algorithm-related parameters can be set.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/parameter_config_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Provides parameter configuration option, algorithm parameters can be set"
+  },
+  {
+    "metric": "2.2 Algorithm Description and Usage Examples",
+    "description": "1. **Pre-check (User Path):** Is there an option to view algorithm description in the algorithm selection interface?\n2. **Act:** View the documentation for each algorithm.\n3. **Assert:** Observe whether each algorithm provides: documentation, usage examples, and expected result displays.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/algorithm_help_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Each algorithm provides complete documentation, usage example, and expected result display"
+  },
+  {
+    "metric": "2.3 Algorithm Execution Progress Messages",
+    "description": "1. **Arrange:** Select an algorithm and configure parameters, get ready for execution.\n2. **Act:** Start the algorithm execution process.\n3. **Assert:** Observe whether algorithm execution status messages are displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/progress_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Displays static execution messages, e.g.: Executing dynamic programming algorithm..."
+  },
+  {
+    "metric": "2.4 History Saving and Reuse",
+    "description": "1. **Pre-check (User Path):** Is there option 5 \"View history\" in the main menu?\n2. **Act:** Select menu option 5 to view history records.\n3. **Assert:** Observe whether the history record list can be displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/history_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/valid_sequence.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Able to display history record list"
+  },
+  {
+    "metric": "3.1a Core Algorithm Implementation - Dynamic Programming",
+    "description": "1. **Arrange:** Prepare valid sequence data for dynamic programming algorithm testing.\n2. **Act:** Select and execute the dynamic programming algorithm.\n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_dp_algorithm.py::test_dp_execution -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/test_sequences.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Dynamic programming algorithm executes normally and results are reasonable"
+  },
+  {
+    "metric": "3.1b Core Algorithm Implementation - A* Search Algorithm",
+    "description": "1. **Arrange:** Prepare valid sequence data for A* search algorithm testing.\n2. **Act:** Select and execute the A* search algorithm.\n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_astar_algorithm.py::test_astar_execution -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/test_sequences.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "A* search algorithm executes normally and results are reasonable"
+  },
+  {
+    "metric": "3.1c Core Algorithm Implementation - Genetic Algorithm",
+    "description": "1. **Arrange:** Prepare valid sequence data for genetic algorithm testing.\n2. **Act:** Select and execute the genetic algorithm.\n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_ga_algorithm.py::test_ga_execution -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/test_sequences.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Genetic algorithm executes normally and results are reasonable"
+  },
+  {
+    "metric": "3.2 Optimization Technique Integration",
+    "description": "1. **Act:** Check whether there are optimized versions of the algorithm files.\n2. **Assert:** Observe whether optimization technique related files exist.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_optimization.py::test_optimization_techniques -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/test_sequences.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Optimized version files exist"
+  }
+]

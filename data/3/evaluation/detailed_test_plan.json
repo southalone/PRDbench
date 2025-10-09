@@ -1,0 +1,401 @@
+[
+  {
+    "metric": "0.1 System Startup and Main Menu Display",
+    "description": "Execute the startup command. Observe whether the command line starts without error and displays a main menu with five clearly distinguishable top-level options: \"Data Management,\" \"Cost Calculation,\" \"Combo Generation,\" \"Combo Evaluation,\" and \"Exit\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_0.1.in",
+    "input_files": [
+      "evaluation/inputs_for_test_0.1.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program starts normally and displays the main menu",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_0.1.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.5.2 Menu Navigation and Exit Logic",
+    "description": "1. Pre-check (User Path): Confirm that all can be accessed from the main menu: \"Data Management,\" \"Cost Calculation,\" \"Combo Generation,\" \"Combo Evaluation.\" 2. Preparation: Enter the submenu of \"Data Management,\" \"Cost Calculation,\" \"Combo Generation,\" and \"Combo Evaluation\" respectively. 3. Execution: Enter 'q' and press enter in each submenu interface. 4. Assertion: Verify that after each operation, the program accurately returns to the main menu rather than exiting the program or becoming unresponsive.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.5.2.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.5.2.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Able to access each submenu and return to the main menu",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.5.2.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1a Ingredient CSV Data Import Success",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Import Ingredient CSV\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Create a file named `ingredients.csv` containing 5 rows of data that fully comply with the PRD standards. 3. Execution: Navigate to the \"Import Ingredient CSV\" feature and follow the prompts to enter the path of `ingredients.csv`. 4. Assertion: Verify whether the command line outputs a clear prompt of \"Successfully imported 5 ingredient data entries.\"",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.1.1a.csv",
+      "evaluation/inputs_for_test_2.1.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Prompts successful import of the specified number of ingredient data",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1b Validation on Ingredient CSV Data Import Failure",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Import Ingredient CSV\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Create a `bad_ingredients.csv` file where the \"purchase unit price\" column in the second row contains non-numeric text (e.g., \"abc\"). 3. Execution: Attempt to import `bad_ingredients.csv`. 4. Assertion: Verify whether the program fails to import and displays a Chinese error message containing keywords such as \"line 2,\" \"unit price,\" or \"format error.\"",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.1b.in",
+    "input_files": [
+      "evaluation/bad_ingredients.csv",
+      "evaluation/inputs_for_test_2.1.1b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Indicates import failure due to format error on a specific line of data",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.1b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2a Manual Ingredient Entry - Success Path",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Manual Ingredient Entry\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Prepare a set of complete and valid ingredient data (e.g., I100, Potato, Vegetable, kg, 5, 10). 3. Execution: Enter the \"Manual Ingredient Entry\" feature and follow the prompts to enter all the valid data prepared. 4. Assertion: Verify whether all the data can be successfully entered and receive a prompt of \"Ingredient entry successful\" in the last step.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.2a.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.2a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Prompts successful ingredient entry",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.2a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2b Manual Ingredient Entry - Input Validation",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Manual Ingredient Entry\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Enter the \"Manual Ingredient Entry\" feature. 3. Execution: When prompted to enter \"Processing Loss Rate (%),\" input an invalid value, such as \"50\". 4. Assertion: Verify whether the system displays a Chinese error message (containing keywords like \"between 0-30\") and allows the user to re-enter the field.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.2b.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.2b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Indicates invalid input value and prompts for re-entry",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.2b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3a Ingredient Data Query - By Name",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Query Ingredient\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Ensure that there is an ingredient named \"Wuchang Rice\" in the database. 3. Execution: Enter the \"Query Ingredient\" feature, choose to query by name, and enter \"Wuchang Rice.\" 4. Assertion: Verify whether the query result correctly displays all information of \"Wuchang Rice,\" such as unit price, loss rate, and stock quantity.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.3a.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.3a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The query result correctly displays the complete information of the specified ingredient",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.3a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3b Ingredient Data Query - By Category",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Query Ingredient\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Ensure that there are at least 2 kinds of ingredients in the database categorized as \"Staple Food.\" 3. Execution: Enter the \"Query Ingredient\" feature, choose to query by category, and enter \"Staple Food.\" 4. Assertion: Verify whether the query result displays the information of all ingredients categorized as \"Staple Food\" in a list form.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.3b.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.3b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The query result displays all ingredients of the specified category in a list form",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.3b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4 Add Extra Cost Item",
+    "description": "1. Pre-check (User Path): After selecting \"Data Management\" from the main menu, confirm that there is a clearly distinguishable \"Manage Extra Costs\" or similar option in the menu. 2. Preparation: Enter this feature and choose \"Add\". 3. Execution: Follow the prompts to enter the name and amount of the new cost item. 4. Assertion: Verify whether the system displays a \"Added successfully\" prompt. Also, verify whether this new cost item can be selected in the \"Combo Cost Calculation\" process.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.4.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.1.4.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Prompts extra cost item added successfully",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.1.4.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1 Single Ingredient Cost Calculation",
+    "description": "1. Pre-check (User Path): After selecting \"Cost Calculation\" from the main menu, confirm that there is a clearly distinguishable \"Create New Combo\" option in the menu. If inaccessible, this item scores 0 points. 2. Preparation: Assume the price of \"Wuchang Rice\" is 10 yuan/kg and the loss rate is 10%. 3. Execution: Enter \"Create New Combo,\" add the ingredient \"Wuchang Rice,\" and input \"0.15\" for the amount. 4. Assertion: Verify whether the system calculates the cost for this entry as 10 * 0.15 * (1 + 10/100) = 1.65 yuan.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_cost_calculator.py::test_calculate_ingredient_cost",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passes",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_cost_calculator.py::test_calculate_ingredient_cost",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2a Total Cost Calculation - Cost Summary",
+    "description": "1. Pre-check (User Path): Confirm that the \"Create New Combo\" feature is available. 2. Preparation: In one combo, two ingredients have already been added with calculated costs of 1.65 yuan and 5.25 yuan, respectively. The packaging box cost is fixed at 1.5 yuan. 3. Execution: Complete the ingredient addition and enter the cost summary step. 4. Assertion: Verify whether the total cost displayed by the system sums up to 1.65 + 5.25 + 1.5 = 8.40 yuan.",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_cost_calculator.py::test_calculate_combo_cost",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test passes",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_cost_calculator.py::test_calculate_combo_cost",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2b Total Cost Calculation - Dynamic Adjustment",
+    "description": "1. Pre-check (User Path): Confirm that the \"Create New Combo\" function is functional and total cost can be calculated. 2. Preparation: In a combo with a total cost of 8.40 yuan, disposable tableware costs 0.8 yuan. 3. Execution: Choose \"y\" for the extra cost item disposable tableware, and \"n\" for others. 4. Assertion: Verify whether the final total cost updates to 8.40 + 0.8 = 9.20 yuan.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.2.2b.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.4.3.csv",
+      "evaluation/inputs_for_test_2.2.2b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correct total cost calculation",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.2.2b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.3 Cost Details Report Formatting",
+    "description": "1. Pre-check (User Path): Confirm that combo cost can be successfully calculated. 2. Preparation: Complete a combo cost calculation with at least 2 types of ingredients. 3. Execution: View the final output cost details report. 4. Assertion: Verify whether the report is a table with clear borders and headers (such as ingredients, amount, cost) with all data columns vertically aligned.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.2.2b.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.4.3.csv",
+      "evaluation/inputs_for_test__2.2.2b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Outputs a well-formatted cost details report",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.2.2b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1a Intelligent Combo Generation - Parameter Entry",
+    "description": "1. Pre-check (User Path): After selecting \"Combo Generation\" from the main menu, confirm that the feature can be accessed. If inaccessible, this item scores 0 points. 2. Preparation: Prepare a set of valid generation parameters (e.g., Single meal, 0.9 discount, 30% profit margin, high stock priority). 3. Execution: Enter the \"Combo Generation\" module and input all valid parameters sequentially. 4. Assertion: Verify whether all parameters can be successfully input and proceed to the subsequent combo generation stage, rather than encountering errors or becoming stuck.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Parameters are successfully inputted and combo generation begins",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1b Intelligent Combo Generation - Parameter Validation",
+    "description": "1. Pre-check (User Path): After selecting \"Combo Generation\" from the main menu, confirm that the feature can be accessed. If inaccessible, this item scores 0 points. 2. Preparation: Enter the \"Combo Generation\" module. 3. Execution: When prompted to enter the \"Discount Strength,\" input an invalid value \"1.1\". 4. Assertion: Verify whether the system displays a Chinese error prompt containing keywords like \"between 0.1-1.0\" and prompts the user to re-enter.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1b.in",
+    "input_files": [
+      "evaluation/inputs_for_test_2.3.1b.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Indicates invalid input value and prompts for re-entry",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1b.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2 Core Combination Logic and Nutrition Constraints",
+    "description": "1. Pre-check (User Path): Confirm that the \"Combo Generation\" feature can be accessed and parameters inputted. 2. Preparation: Ensure that the ingredient database contains sufficient supplies of staple foods, proteins, and vegetables. Request generation of a \"Single Meal.\" 3. Execution: Observe the 3-5 candidate combos generated. 4. Assertion: Check the generated candidate combos, verifying whether each group strictly contains at least: 1 type of staple food (≥0.1kg), 1 type of protein (≥0.08kg), and 1 type of vegetable (≥0.1kg).",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_combo_generator.py::test_combo_generation_nutrition_constraints",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Unit test passes",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_combo_generator.py::test_combo_generation_nutrition_constraints",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.3a Suggested Price - Basic Calculation",
+    "description": "1. Pre-check (User Path): Confirm that the combo can be successfully generated. 2. Preparation: Generate a combo and note its total cost. Set the profit margin to 30%. 3. Execution: View the suggested price of the combo. 4. Assertion: Verify whether the system's calculated basic price equals Cost * (1 + 0.3). A deviation of 0.01 is allowed.",
+    "type": "shell_interaction",
+    "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Suggested price correctly calculated based on cost and profit margin",
+    "testcases": [
+      {
+        "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.3b Suggested Price - Constraints and Rounding",
+    "description": "1. Pre-check (User Path): Confirm that the combo can be successfully generated and the basic price can be calculated. 2. Preparation: A single meal with a calculated basic price and a minimum price constraint of 28 yuan. 3. Execution: View the final displayed suggested price. 4. Assertion: Verify whether the final price satisfies the minimum price constraint (≥28) and is rounded properly.",
+    "type": "shell_interaction",
+    "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Suggested price is properly constrained and rounded",
+    "testcases": [
+      {
+        "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1a Combo Evaluation - Profit Margin Calculation",
+    "description": "1. Pre-check (User Path): Confirm that the candidate combo list can be successfully generated and displayed. 2. Preparation: Select a candidate combo, note its total cost C, selling price S, and discount D (e.g., 0.9). 3. Execution: View the profit margin displayed by the system. 4. Assertion: Verify whether the displayed profit margin equals (S*D - C) / C in calculation result (shown as a percentage, allowing a 0.1% error).",
+    "type": "shell_interaction",
+    "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correct profit margin calculation",
+    "testcases": [
+      {
+        "test_command": "cp evaluation/ingredients_for_test_2.3.2.csv src/data/ingredients.csv && python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1b Combo Evaluation - Nutrition Score Calculation",
+    "description": "1. Pre-check (User Path): Confirm that the candidate combo list can be successfully generated and displayed. 2. Preparation: Select a candidate combo that contains 4 different ingredients. 3. Execution: View the nutrition score displayed by the system. 4. Assertion: Verify whether its nutrition score equals 5 + (4 - 3) = 6 points.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correct nutrition score calculation",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.2a Result Output - Profit Margin Sorting",
+    "description": "1. Pre-check (User Path): Confirm that the candidate combo list can be successfully generated and displayed. 2. Preparation: Generate at least 3 candidate combos. 3. Execution: View the generated candidate combo list. 4. Assertion: Verify whether the list is strictly arranged in descending order of \"profit margin\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.3.1a.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Results sorted by profit margin from high to low",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.2b Result Output - Tabular Display",
+    "description": "1. Pre-check (User Path): Confirm that the candidate combo list can be successfully generated and displayed. 2. Preparation: Generate candidate combos. 3. Execution: View the generated candidate combo list. 4. Assertion: Verify whether the entire list is displayed in a tabular form with borders and headers that include key data columns like combo ID, cost, price, profit margin, nutrition score, etc., and data alignment.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.3.2.csv",
+      "evaluation/inputs_for_test_2.4.1.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Results displayed in a well-formatted table",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.3.1a.in",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.3 Combo Save Function",
+    "description": "1. Pre-check (User Path): Confirm that the candidate combo list can be successfully generated and displayed. 2. Preparation: In the generated candidate combos list, there exists a combo with ID '1'. 3. Execution: Follow the prompt to input the combo ID '1' for saving. 4. Assertion: Verify whether the program gives a clear success prompt of saving, including an automatically generated combo name (like \"Individual Nutrition Combo 1\").",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py < evaluation/inputs_for_test_2.4.3.in",
+    "input_files": [
+      "evaluation/ingredients_for_test_2.4.3.csv",
+      "evaluation/inputs_for_test_2.4.3.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Combo saved successfully with a displayed combo name",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/inputs_for_test_2.4.3.in",
+        "test_input": null
+      }
+    ]
+  }
+]

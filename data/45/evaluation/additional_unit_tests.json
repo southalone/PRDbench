@@ -1,0 +1,72 @@
+[
+  {
+    "metric": "UT.1 节点初始化单元测试",
+    "description": "测试Node类的基本初始化功能，包括节点ID设置、前驱后继指针初始化、finger表创建等",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_chord_basic.py::test_node_initialization -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "节点初始化测试通过，验证节点ID、前驱后继指针、finger表等属性正确设置"
+  },
+  {
+    "metric": "UT.2 网络初始化单元测试",
+    "description": "测试Network类的基本初始化功能，包括参数设置、首节点创建等",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_chord_basic.py::test_network_initialization -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "网络初始化测试通过，验证m参数、环大小、首节点等属性正确设置"
+  },
+  {
+    "metric": "UT.3 哈希函数单元测试",
+    "description": "测试哈希函数的一致性和有效性",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_chord_basic.py::test_hash_function -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "哈希函数测试通过，验证相同输入产生相同输出，输出在有效范围内"
+  },
+  {
+    "metric": "UT.4 数据插入单元测试",
+    "description": "测试数据插入功能的正确性",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_data_operations.py::test_data_insertion -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "数据插入测试通过，验证数据能正确插入并可被查找到"
+  },
+  {
+    "metric": "UT.5 数据查找单元测试",
+    "description": "测试数据查找功能的正确性",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_data_operations.py::test_data_lookup -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "数据查找测试通过，验证能找到存在的数据，正确处理不存在的数据"
+  }
+]

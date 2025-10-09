@@ -1,0 +1,396 @@
+[
+  {
+    "metric": "0.1 Program Startup and Main Menu",
+    "description": "1. **Execute (Act):** Run the command to start the program in the shell (e.g., `python main.py`).\n2. **Assert:** Check whether the program launches successfully and displays a clear main menu with at least 3 actionable options (such as \"Company Information Entry\", \"Financing Diagnostic Analysis\", \"Report Viewing\").",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py --help",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program should successfully start and display the main help information, including the system name 'Intelligent Diagnostics and Optimization Recommendations System for SME Financing' and at least 4 core function options: company (Company Information Management), diagnosis (Financing Diagnostic Analysis), report (Report Management), user (User Management), proving that the program launches successfully and the main menu is complete."
+  },
+  {
+    "metric": "2.1.1a Basic Company Information Entry - Basic Field Collection",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"Company Information Entry\" or similar function option in the main menu?\n2. **Execute (Act):** Directly verify company basic field configurations and options.\n3. **Assert:** Validate whether the system is configured with the 4 basic fields: Company Name, Establishment Date, Registered Capital, Company Type, and their option lists.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_basic_fields_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify that the system has a complete basic field collection functionality, including discovering a selection list with multiple company type options, confirming the format requirements for company names and establishment dates, verifying registered capital numeric input functionality, and ultimately confirming that the basic field collection features are complete and effective."
+  },
+  {
+    "metric": "2.1.1b Basic Company Information Entry - Business Field Collection",
+    "description": "1. **Pre-check (User Path):** In the company information entry process, is there continued prompting for business-related information?\n2. **Execute (Act):** Directly verify business field configurations and options.\n3. **Assert:** Validate whether the system is configured with the 4 business fields: Main Business, Industry, Total Employees, Annual Revenue, and their option lists.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_business_fields_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the system's complete business field collection functionality, including confirming a rich selection list of industry types, verifying main business text input functionality, confirming the numeric input functionality for total employees and annual revenue, and ultimately confirming that the business field collection features are complete and effective."
+  },
+  {
+    "metric": "2.1.2a Data Type Verification - Numeric Field Verification",
+    "description": "1. **Arrange:** Prepare invalid numeric inputs (e.g., negative registered capital, negative total employees).\n2. **Execute (Act):** Directly call the company data validation function with company data containing invalid numbers.\n3. **Assert:** Verify whether the function correctly detects and returns corresponding error information to ensure the numeric field validation logic is correct.",
+    "type": "unit_test",
+    "testcases": {
+      "test_command": "cd evaluation && python -m pytest tests/test_company_validation.py::TestCompanyValidation -v",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test should pass, verifying that the company data validation function can correctly detect invalid numeric inputs (negative numbers, out-of-range ratios, etc.), and return corresponding error messages, including negative registered capital, negative employee count, out-of-range debt ratio, out-of-range score fields, among various validation scenarios, proving that the numeric field validation logic is correct."
+  },
+  {
+    "metric": "2.1.2b Data Type Verification - Date Field Verification",
+    "description": "1. **Arrange:** Prepare invalid date inputs (e.g., establishment date \"2025-13-32\", \"abc\").\n2. **Execute (Act):** Intentionally enter these invalid data into date fields in company information entry.\n3. **Assert:** Observe whether the program can detect date format errors and prompt re-entry.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_date_validation.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should be able to detect various invalid date formats, including non-existent dates, alphabetic characters, erroneous formats, and display corresponding error prompt messages, requiring re-entry in the correct YYYY-MM-DD format, proving the date field validation functionality works effectively."
+  },
+  {
+    "metric": "2.1.3 Progress Feedback Display",
+    "description": "1. **Execute (Act):** During company information entry, fill out various information step by step.\n2. **Assert:** Observe whether the system displays filling progress in real-time (e.g., \"3/8 completed\" or \"Progress: 37.5%\").",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_progress_feedback.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "During the company information entry process, the system should display progress information in real-time, finding all 8 progress indicators ('Progress: 1/8' to 'Progress: 8/8'), displaying percentage and descriptive text at each step, ultimately outputting 'Test Passed: Progress Feedback Display Function is Normal', proving the effectiveness of the progress feedback functionality. If there is a duplicate company name, the system will automatically overwrite existing information without interrupting the test process."
+  },
+  {
+    "metric": "2.1.4a Innovation Capability Information Collection - Patents and Intellectual Property",
+    "description": "1. **Pre-check (User Path):** Does the company information entry include innovation capability-related information collection?\n2. **Execute (Act):** Directly verify innovation capability field configurations.\n3. **Assert:** Validate whether the system is configured with the two intellectual property indicators: number of patents and number of copyrights.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_innovation_fields_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the complete patent and intellectual property collection functionality in the system, including confirming the input field configuration for the number of patents and copyrights, validating the collection mechanism for intellectual property-related information, and ultimately confirming that the patent and intellectual property collection functions are complete and effective."
+  },
+  {
+    "metric": "2.1.4b Innovation Capability Information Collection - R&D Investment Indicators",
+    "description": "1. **Pre-check (User Path):** During innovation capability collection, are there continued prompts for R&D-related information?\n2. **Execute (Act):** Directly verify R&D investment field configurations.\n3. **Assert:** Validate whether the system is configured with the three R&D indicators: R&D investment amount, proportion of R&D staff, and innovation achievement description.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_rd_fields_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the system's complete R&D investment indicator collection functionality, including confirming numeric input for R&D investment amounts, verifying the range control for the proportion of R&D staff (between 0-1), checking text input for innovation achievement descriptions, and verifying the automatic calculation of R&D to revenue ratio, ultimately confirming that the R&D investment indicator collection function is complete and effective."
+  },
+  {
+    "metric": "2.1.5a Management Standardization Evaluation - Internal Control Evaluation",
+    "description": "1. **Pre-check (User Path):** Does the company information entry include the management standardization evaluation?\n2. **Execute (Act):** Directly verify management standardization evaluation field configuration.\n3. **Assert:** Validate whether the system is configured with five-level scale evaluation fields for internal control system construction and financial standardization.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_internal_control_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the complete internal control evaluation functionality in the system, including confirming the 1-5 scale setup for internal control system construction evaluation, verifying scale configuration for financial standardization evaluation, and ultimately confirming that the internal control evaluation function is complete and effective."
+  },
+  {
+    "metric": "2.1.5b Management Standardization Evaluation - Compliance Training Evaluation",
+    "description": "1. **Pre-check (User Path):** During management standardization evaluation, are there continued prompts for compliance-related evaluation?\n2. **Execute (Act):** Directly verify compliance training evaluation field configuration.\n3. **Assert:** Validate whether the system is configured with five-level scale evaluation fields for compliance training and employment compliance.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_compliance_training_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the complete compliance training evaluation functionality in the system, including confirming the 1-5 scale setup for compliance training evaluation, verifying scale configuration for employment compliance evaluation, and ultimately confirming that the compliance training evaluation function is complete and effective."
+  },
+  {
+    "metric": "2.1.6 Data Local Storage",
+    "description": "1. **Arrange:** Complete a full company information entry, including all necessary fields.\n2. **Execute (Act):** Directly verify the existence and integrity of the database file.\n3. **Assert:** Check whether a structured data file (SQLite database file) is generated locally and verify the complete structure of the database.",
+    "type": "file_comparison",
+    "testcases": {
+      "test_command": "python evaluation/test_data_storage.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": [
+      "src/data/sme_financing.db"
+    ],
+    "expected_output": "The test script should pass the database storage verification, outputting '[PASS] Database File Existence Test Passed' and '[PASS] Database Structure Integrity Test Passed', confirming that the SQLite database file exists and contains a complete table structure, proving that company information is completely saved to the local structured database."
+  },
+  {
+    "metric": "2.2.1 Funding Gap Assessment Analysis",
+    "description": "1. **Pre-check (User Path):** Is there a \"Financing Diagnosis\", \"Intelligent Analysis\", or similar analysis function option in the main menu?\n2. **Arrange:** Prepare a test company containing financial data.\n3. **Execute (Act):** Directly call the funding gap assessment calculation function.\n4. **Assert:** Verify whether the system automatically calculates and displays funding gap assessment results based on the company's financial data.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_funding_gap_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify that the system can automatically calculate the funding gap assessment score based on company financial data, display the score results and related analysis information, confirming that the funding gap assessment analysis function operates normally and provides effective assessment results."
+  },
+  {
+    "metric": "2.2.2 Debt Capacity Analysis",
+    "description": "1. **Arrange:** Ensure financial indicator data such as the asset-liability ratio and cash flow is included in the company information.\n2. **Execute (Act):** Directly call the debt capacity analysis function.\n3. **Assert:** Verify whether the system evaluates debt capacity based on at least 2 financial indicators such as the asset-liability ratio and cash flow, and provides corresponding credit status analysis results.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_debt_capacity_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify that the system can evaluate debt capacity based on multiple financial indicators such as the asset-liability ratio, display the assessment score and analysis results, confirming that the debt capacity analysis function operates effectively and provides accurate credit status analysis."
+  },
+  {
+    "metric": "2.2.3 Innovation Capability Score Calculation",
+    "description": "1. **Arrange:** Prepare test company data containing different levels of innovation capability (number of patents, R&D investment ratio, R&D staff ratio, etc.).\n2. **Execute (Act):** Directly call the innovation capability score calculation function, passing in the test company data.\n3. **Assert:** Verify whether the function correctly calculates the score based on innovation indicators such as the number of patents and the R&D investment ratio to ensure the scoring logic is accurate.",
+    "type": "unit_test",
+    "testcases": {
+      "test_command": "cd evaluation && python -m pytest tests/test_diagnosis_calculation.py::TestDiagnosisCalculation -v",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test should pass, verifying that the innovation capability score calculation function can automatically calculate scores based on several innovation indicators such as the number of patents, R&D investment ratio, and R&D staff ratio, including excellent conditions (high patents, high R&D investment), poor conditions (no patents, low R&D investment), and boundary value testing, proving that the innovation capability score calculation logic is correct."
+  },
+  {
+    "metric": "2.2.4a Financing Channel Recommendation - Channel Matching",
+    "description": "1. **Execute (Act):** Directly call the financing channel recommendation function.\n2. **Assert:** Verify whether the system recommends at least 3 different financing channels (such as bank credit, venture capital, government subsidies, guarantee agencies, etc.) based on company industry, region, scale, etc.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_financing_channels_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify that the system can recommend multiple types of financing channels based on characteristics such as company industry and scale, including bank credit, venture capital, government subsidies, etc., and that each channel displays applicability evaluation and key assessment requirements, ultimately confirming that the financing channel recommendation function operates effectively."
+  },
+  {
+    "metric": "2.2.4b Financing Channel Recommendation - Availability Scoring",
+    "description": "1. **Execute (Act):** Directly verify the scoring mechanism in financing channel recommendations.\n2. **Assert:** Verify whether each recommended financing channel displays availability scores and marks key audit requirements or barriers.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_financing_channels_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the scoring mechanism of the financing channel recommendation system, confirming that each recommended financing channel can display availability scores and mark corresponding key audit requirements or potential barriers, proving the completeness and effectiveness of the channel recommendation scoring mechanism."
+  },
+  {
+    "metric": "2.2.5 Improvement Suggestions Generation",
+    "description": "1. **Execute (Act):** Directly call the improvement suggestions generation function.\n2. **Assert:** Verify whether the system generates a specific improvement suggestion list for the three dimensions: R&D input, intellectual property, and management compliance.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_improvement_suggestions_only.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify the system's ability to generate a specific improvement suggestion list targeting multiple dimensions such as R&D input, intellectual property, and management compliance, providing actionable improvement directions and recommended measures, ultimately confirming that the improvement suggestions generation function operates effectively."
+  },
+  {
+    "metric": "2.3.1a Structured Report Generation - Report Structure",
+    "description": "1. **Pre-check (User Path):** After completing the financing diagnosis, is there an option to \"Generate Report\" or \"View Report\"?\n2. **Execute (Act):** Select the report generation function.\n3. **Assert:** Verify whether the system automatically generates a structured report containing two core parts: company profile and financing scores.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py report generate --name Innovation Technology Company",
+      "test_input": "evaluation/test_input/report_generate_test.in"
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should automatically generate a structured report containing the two core parts of company profile (basic company information, financial status) and financing scores (scores for each dimension), with a clear and readable report format, proving that the structured report generation function is normal."
+  },
+  {
+    "metric": "2.3.1b Structured Report Generation - Analysis Suggestions",
+    "description": "1. **Pre-check (User Path):** Does the generated report contain analysis and suggestion-related content?\n2. **Execute (Act):** View the subsequent sections of the report.\n3. **Assert:** Verify whether the report contains the content of the two parts: basic analysis and simple suggestions.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py report generate --name Innovation Technology Company",
+      "test_input": "evaluation/test_input/report_generate_test.in"
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The generated report should contain the complete content of the two parts: basic analysis (interpretation of diagnostic results, score explanations) and simple suggestions (financing suggestions, improvement suggestions), proving the effectiveness of the analysis and suggestion generation function."
+  },
+  {
+    "metric": "2.3.2 Report File Saving",
+    "description": "1. **Pre-check (User Path):** After report generation, is there an option for \"Save Report\" or similar file-saving options?\n2. **Execute (Act):** Select the save report function and specify the save path.\n3. **Assert:** Verify whether a local text file is successfully generated at the specified path, and check whether the file content is complete, and the format is standardized and easy to read.",
+    "type": "file_comparison",
+    "testcases": {
+      "test_command": "python evaluation/simple_report_test.py",
+      "test_input": "evaluation/test_input/report_generation_test.in"
+    },
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_report_sample.txt"
+    ],
+    "expected_output": "The test script should successfully execute the complete process of company information entry and diagnostic report generation, generating a text file named in the format 'Financing Diagnostic Report_Test Technology Company_Timestamp.txt' in the src/reports/ directory. The generated report file should contain the six core parts: complete company profile, financing scores, basic analysis, financing suggestions, improvement suggestions, and chart analysis. The file size should be greater than 0, and its content structure should be basically consistent with expected_report_sample.txt, ultimately outputting 'Test Passed: Report File Saving Function is Normal', proving that the report file saving function is normal."
+  },
+  {
+    "metric": "2.3.3a Matplotlib Chart Generation - Basic Statistical Charts",
+    "description": "1. **Arrange:** Ensure the company information contains sufficient numeric data (such as assets, liabilities, revenue, etc.).\n2. **Execute (Act):** During the report generation process, observe the chart generation part.\n3. **Assert:** Verify whether the system uses matplotlib to generate an asset-liability bar chart, saving it to a specified path. Check whether the generated chart file exists and displays correctly.",
+    "type": "file_comparison",
+    "testcases": {
+      "test_command": "python evaluation/test_chart_generation.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": [
+      "reports/charts/*.png"
+    ],
+    "expected_output": "The test script should verify that the system can use matplotlib to generate multiple basic statistical charts, including financial status charts in PNG format, confirming that the generated chart file exists with a reasonable file size, proving that the matplotlib basic statistical chart generation function operates properly."
+  },
+  {
+    "metric": "2.3.3b Matplotlib Chart Generation - Radar Chart for Scoring",
+    "description": "1. **Arrange:** Ensure the financing diagnosis is completed, containing score data for each dimension.\n2. **Execute (Act):** During the report generation process, observe the radar chart generation part.\n3. **Assert:** Verify whether the system uses matplotlib to generate a radar chart for scoring, showing scoring conditions for each dimension, and saving it to a specified path.",
+    "type": "file_comparison",
+    "testcases": {
+      "test_command": "python evaluation/test_chart_generation.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": [
+      "reports/charts/*radar*.png"
+    ],
+    "expected_output": "The test script should verify that the system is capable of using matplotlib to generate a radar chart for scoring, generating a file named radar_chart_*.png in the reports/charts/ directory. The chart should clearly display the scoring conditions for each dimension (Funding Gap, Debt Capacity, Innovation Capability, Management Standardization), with a reasonable file size, proving that the matplotlib radar chart generation function operates normally."
+  },
+  {
+    "metric": "2.3.4a Inference Description Query - Inference Logic Display",
+    "description": "1. **Pre-check (User Path):** Does the report viewing interface have options for \"Inference Explanation\", \"Detailed Explanation\", or similar queries?\n2. **Execute (Act):** Select the inference logic function for a specific conclusion (such as innovation capability score).\n3. **Assert:** Verify whether the system displays the data basis and reasoning process explanation for that conclusion.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py diagnosis explain innovation capability",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should display a detailed explanation for the 'innovation capability' keyword, containing the data basis and reasoning process explanation for that conclusion, such as examining indicators like the number of patents, R&D input, and talent structure, proving that the inference logic display function is effective."
+  },
+  {
+    "metric": "2.3.4b Inference Description Query - Keyword Navigation",
+    "description": "1. **Pre-check (User Path):** Is there an entry for keyword search or navigation function in the inference description interface?\n2. **Arrange:** Prepare a relevant keyword (e.g., \"innovation limitations\", \"funding gap\").\n3. **Execute (Act):** Use the prepared keyword for navigation query.\n4. **Assert:** Verify whether the system can quickly locate relevant analysis and strategy paragraphs through keywords.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py report search funding gap",
+      "test_input": "evaluation/test_input/report_search_test.in"
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should use the 'funding gap' keyword to search within the report, quickly locate the relevant analysis and strategy paragraphs, display matching report files and specific content, proving that the keyword navigation function is effective."
+  },
+  {
+    "metric": "2.3.5a Historical Report Management - Report Archiving",
+    "description": "1. **Arrange:** Generate 2-3 diagnostic reports from different times (you can modify company information and re-diagnose to do this).\n2. **Pre-check (User Path):** In the main menu or report-related menu, is there a \"Historical Report\" or \"Report Management\" option?\n3. **Execute (Act):** Choose the historical report management function.\n4. **Assert:** Verify whether the system automatically archives multiple reports by timestamp and provides a clear list of historical reports.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/prepare_comparison_data.py && cd src && python main.py report list",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should display a list of historical reports, automatically archiving multiple reports by timestamp, containing report file names, generation times, and so forth, providing a clear report management interface, proving that the report archiving function operates normally."
+  },
+  {
+    "metric": "2.3.5b Historical Report Management - Report Comparison",
+    "description": "1. **Pre-check (User Path):** Is there a \"Report Comparison\" or similar comparison option in historical report management?\n2. **Arrange:** Ensure that there are at least 2 historical reports from different periods.\n3. **Execute (Act):** Choose to compare 2 reports from different periods.\n4. **Assert:** Verify whether the system displays dynamic change comparison information for the company's financing capacity. Dependency: depends on 2.3.5a historical report archiving function.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_2_3_5b_final.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should display comparison information for the diagnosis results from different periods, including changes in scores for each dimension and dynamic trend analysis, proving that the report comparison function is effective."
+  },
+  {
+    "metric": "2.3.6 Policy Data Query",
+    "description": "1. **Pre-check (User Path):** In the main menu or relevant function menu, is there an option for \"Policy Query\", \"Policy Information\", or similar?\n2. **Execute (Act):** Directly verify the policy database file and content.\n3. **Assert:** Verify whether the system provides query results for at least 3 policies related to SMEs based on the preset policy database.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_data_storage.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test script should verify policy data files to prove that the policy data query function has fundamental data support, including at least 3 pieces of policy information relevant to SMEs."
+  },
+  {
+    "metric": "2.4.1 User Authentication",
+    "description": "1. **Arrange:** Prepare various types of password test data (ordinary password, special character password, empty password, long password, etc.).\n2. **Execute (Act):** Directly call password hashing and verification related functions in user services.\n3. **Assert:** Verify the correctness, consistency, and security of password hashing functions, ensuring that the same password generates the same hash and different passwords generate different hashes.",
+    "type": "unit_test",
+    "testcases": {
+      "test_command": "cd evaluation && python -m pytest tests/test_user_service.py::TestUserService -v",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test should pass, verifying the core function of user authentication - the correctness of the password hashing algorithm, including password hash consistency (same passwords generate the same hash), divergence (different passwords generate different hashes), handling special characters, Chinese character processing, long password processing, and various other scenarios, proving that the core security mechanism functions correctly in user authentication."
+  },
+  {
+    "metric": "2.4.2 Operation Log Recording",
+    "description": "1. **Arrange:** Plan to conduct a series of key operations (company information entry, financing diagnostic analysis, report generation).\n2. **Execute (Act):** Directly verify the existence and integrity of the system log file.\n3. **Assert:** Verify whether the system records log information for these key operations, and check whether a log file containing information such as operation time and operation type is generated.",
+    "type": "file_comparison",
+    "testcases": {
+      "test_command": "python evaluation/test_data_storage.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": [
+      "src/logs/system.log"
+    ],
+    "expected_output": "The test script should verify the system log file, output '[PASS] System Log File Test Passed' and '[OK] System Log File Contains x Record Lines', confirming that there is a system.log log file in the src/logs/ directory, with a file size greater than 0, containing operation records, proving that the operation log recording function operates normally."
+  },
+  {
+    "metric": "3.1 Exception Handling and Fault Tolerance",
+    "description": "1. **Arrange:** Prepare various exception input test data (null values, overlong strings such as 1000 characters, special characters like @#$%, etc.).\n2. **Execute (Act):** Use these exception inputs in various system input sections (company information entry, numeric input, etc.) for testing.\n3. **Assert:** Verify whether the system can handle exception inputs appropriately, providing friendly error prompts without program crashes.",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "python evaluation/test_exception_handling_final.py",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system should handle various exception inputs (null values, overlong strings, special characters, etc.) appropriately, providing friendly error prompts without program crashes, proving that the exception handling and fault tolerance functions are effective."
+  },
+  {
+    "metric": "3.2 Chinese Environment Support",
+    "description": "1. **Arrange:** Prepare various Chinese test data (Chinese strings, mixed Chinese and English, special symbols, etc.).\n2. **Execute (Act):** Directly call the text processing functions in the input assistant tools, passing in Chinese test data.\n3. **Assert:** Verify whether the system's core tool functions can correctly handle Chinese characters, including text truncation, currency formatting, percentage formatting, and other functions, ensuring compatibility with the Chinese environment.",
+    "type": "unit_test",
+    "testcases": {
+      "test_command": "cd evaluation && python -m pytest tests/test_input_helpers.py::TestInputHelper -v",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The test should pass, verifying that the core functions of the input assistant tools can correctly process Chinese characters, including Chinese text truncation, mixed Chinese and English processing, currency formatting (supporting Chinese units), percentage formatting, and various other scenarios, proving that the system has comprehensive support for the Chinese environment."
+  },
+  {
+    "metric": "3.3 Debug Mode Support",
+    "description": "1. **Execute (Act):** Start the program using `--debug` or `-d` parameter (e.g., `python main.py --debug`).\n2. **Assert:** Verify whether the program starts in debug mode and outputs detailed process information and data tracing paths (showing more internal processing information than normal mode).",
+    "type": "shell_interaction",
+    "testcases": {
+      "test_command": "cd src && python main.py --debug --help",
+      "test_input": null
+    },
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program should start in debug mode, outputting detailed process information and data tracing paths, showing more internal processing information than normal mode and generating a debug.log debug log file, proving that the debug mode support function operates normally."
+  }
+]

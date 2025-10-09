@@ -1,0 +1,157 @@
+[
+  {
+    "metric": "0.1 Program Start and Main Menu Display",
+    "description": "1. **Act:** Execute the program start command in the command line (such as `python main.py` or `python -m src.main`).\n2. **Assert:** Observe if the program starts successfully and displays the main menu containing the following 6 options: [1] Enter sequence file path [2] Select algorithm [3] Performance comparison [4] Analyze performance metrics [5] View history [6] Exit.",
+    "expected_output": "2 points: The program starts successfully, the main menu displays all 6 options with correct numbering and clear formatting. 1 point: The program starts; the main menu displays but the number of options is less than 6 or has formatting issues. 0 points: The program cannot start or the main menu cannot be displayed."
+  },
+  {
+    "metric": "0.2 Menu Option Input Validation",
+    "description": "1. **Arrange:** Prepare invalid input test cases: number 0, number 7, letters abc, special characters @#$. \n2. **Act:** Enter these invalid options in the main menu one by one. \n3. **Assert:** Observe whether a Chinese error prompt is displayed each time for invalid input, such as \"Error: Please enter a number between 1 and 6\".",
+    "expected_output": "2 points: Accurate Chinese error prompts are given for all 4 types of invalid input. 1 point: Able to detect 3 types of invalid input and give a Chinese prompt. 0 points: Detects less than 3 types of invalid input or no Chinese prompt."
+  },
+  {
+    "metric": "1.1 Input Function for Sequence File Path",
+    "description": "1. **Pre-check (User path):** Is there option 1 in the main menu for \"Enter sequence file path\"? \n2. **Arrange:** Prepare a valid sequence file path and an invalid path (file does not exist). \n3. **Act:** Select menu option 1, enter valid and invalid file paths respectively. \n4. **Assert:** Observe whether the system confirms receipt of the valid path and gives error prompt for the invalid path.",
+    "expected_output": "2 points: Pre-check passes, correctly handles valid paths (confirmation) and invalid paths (error prompt). 1 point: Pre-check passes, but path validation logic is incomplete (handles only one case). 0 points: Pre-check fails or function is unavailable."
+  },
+  {
+    "metric": "2.1a Algorithm Selection Interface - Display Algorithm Options",
+    "description": "1. **Pre-check (User path):** Is there option 2 in the main menu for \"Select algorithm\"? \n2. **Act:** Select menu option 2 to enter the algorithm selection interface. \n3. **Assert:** Observe whether 3 core algorithm options are displayed: Dynamic Programming, A* Search, Genetic Algorithm.",
+    "expected_output": "2 points: Pre-check passes, all 3 core algorithm options are displayed with accurate names. 1 point: Pre-check passes, 2 algorithm options are displayed. 0 points: Pre-check fails or fewer than 2 algorithm options are displayed."
+  },
+  {
+    "metric": "2.1b Algorithm Selection Interface - Parameter Configuration Function",
+    "description": "1. **Pre-check (User path):** In the algorithm selection interface, is parameter configuration option provided after selecting any algorithm? \n2. **Act:** Select an algorithm and try to configure parameters. \n3. **Assert:** Observe whether the algorithm-related parameters (such as sequence length, complexity, etc.) can be set.",
+    "expected_output": "2 points: Pre-check passes, complete parameter configuration functionality is supported. 1 point: Pre-check passes, supports partial parameter configuration. 0 points: Pre-check fails or no parameter configuration functionality."
+  },
+  {
+    "metric": "2.2 Algorithm Description and Usage Samples",
+    "description": "1. **Pre-check (User path):** In the algorithm selection interface, is there an option to view algorithm description? \n2. **Act:** View the description document of each algorithm. \n3. **Assert:** Observe whether each algorithm provides: description document, usage sample, expected output display.",
+    "expected_output": "2 points: Pre-check passes, all 3 algorithms have complete descriptions, samples, and expected outputs. 1 point: Pre-check passes, 2 algorithms have complete information. 0 points: Pre-check fails or fewer than 2 algorithms have complete information."
+  },
+  {
+    "metric": "2.3 Algorithm Execution Progress Prompt",
+    "description": "1. **Arrange:** Select an algorithm and configure parameters, prepare to execute. \n2. **Act:** Start algorithm execution process. \n3. **Assert:** Observe whether a dynamic progress prompt is displayed, in a format like \"Executing Dynamic Programming Algorithm: 45%\", including algorithm name and percentage.",
+    "expected_output": "2 points: Clear dynamic progress prompt displayed, including algorithm name and percentage progress. 1 point: Progress prompt exists but lacks algorithm name or percentage information. 0 points: No progress prompt or incorrect prompt information."
+  },
+  {
+    "metric": "2.4 Algorithm Execution Interruption Support",
+    "description": "1. **Act:** Start an algorithm execution process, press Ctrl+C during execution. \n2. **Assert:** Observe whether the program can respond to the interrupt signal normally and return gracefully to the main menu, instead of crashing directly.",
+    "expected_output": "2 points: Responds normally to Ctrl+C interrupt and gracefully returns to main menu. 1 point: Interrupts execution but not gracefully handled (e.g. displays error message). 0 points: Cannot respond to interrupt or program crashes."
+  },
+  {
+    "metric": "2.5 Algorithm Execution Status Feedback",
+    "description": "1. **Arrange:** Prepare successful execution scenario (valid parameters) and failure scenario (invalid parameters or erroneous data). \n2. **Act:** Test successful and failed algorithm execution scenarios respectively. \n3. **Assert:** Observe whether a success state is shown when successful, and specific reason is output on failure (parameter error, insufficient memory, data format error, etc.).",
+    "expected_output": "2 points: Clear success status when successful, and specific failure reason when failed. 1 point: State feedback exists but information is not detailed or accurate enough. 0 points: No state feedback or information is completely wrong."
+  },
+  {
+    "metric": "2.6 History Record Save and Reuse",
+    "description": "1. **Pre-check (User path):** Is there option 5 in the main menu for \"View history\"? \n2. **Arrange:** Execute at least 3 different algorithm configurations. \n3. **Act:** Select menu option 5 to view history and try to reuse historical configuration by number. \n4. **Assert:** Observe whether execution records are saved and number re-use is supported.",
+    "expected_output": "2 points: Pre-check passes, can save history and support number re-use. 1 point: Pre-check passes, can save records but reuse function is incomplete. 0 points: Pre-check fails or no history record function."
+  },
+  {
+    "metric": "3.1 Performance Comparison Entry Feature",
+    "description": "1. **Pre-check (User path):** Is there option 3 in the main menu for \"Performance comparison\"? \n2. **Act:** Select menu option 3. \n3. **Assert:** Observe whether the performance comparison interface can be entered and relevant comparison options are displayed.",
+    "expected_output": "2 points: Pre-check passes, can enter performance comparison interface and display complete comparison options. 1 point: Pre-check passes, interface entered but options incomplete. 0 points: Pre-check fails or cannot enter performance comparison function."
+  },
+  {
+    "metric": "3.2 Algorithm Category Comparison",
+    "description": "1. **Pre-check (User path):** In the performance comparison interface, is there an option for algorithm category comparison? \n2. **Act:** View algorithm category options. \n3. **Assert:** Observe whether 3 categories of algorithm comparison are provided: Exact algorithms (Dynamic Programming, A* Search), Heuristic algorithms (Genetic Algorithm), Optimized versions (Integrated LBE, HashBin, Numba).",
+    "expected_output": "2 points: Pre-check passes, complete 3 categories of algorithm comparison options are provided. 1 point: Pre-check passes, 2 categories provided. 0 points: Pre-check fails or fewer than 2 categories provided."
+  },
+  {
+    "metric": "3.3 Custom Test Parameters",
+    "description": "1. **Pre-check (User path):** Is there an option for custom test parameters in the performance comparison function? \n2. **Act:** Try setting test parameters. \n3. **Assert:** Observe whether at least 2 test parameters can be set, e.g. input sequence length, complexity, etc.",
+    "expected_output": "2 points: Pre-check passes, supports custom settings for 3 or more test parameters. 1 point: Pre-check passes, supports 2 test parameters. 0 points: Pre-check fails or supports less than 2 parameters."
+  },
+  {
+    "metric": "3.4a Comparison Results - Basic Metric Display",
+    "description": "1. **Act:** Execute the performance comparison function. \n2. **Assert:** Observe whether the comparison result contains: Algorithm name, Execution time, Memory usage, these 3 basic metrics.",
+    "expected_output": "2 points: Comparison result contains all 3 basic metrics and data format is correct. 1 point: Contains 2 basic metrics. 0 points: Contains less than 2 basic metrics."
+  },
+  {
+    "metric": "3.4b Comparison Results - Advanced Metric Display",
+    "description": "1. **Act:** Execute the performance comparison function. \n2. **Assert:** Observe whether the comparison result contains: Alignment cost, Optimization effect, these 2 advanced metrics.",
+    "expected_output": "2 points: Comparison result contains both advanced metrics with accurate data. 1 point: Contains 1 advanced metric. 0 points: No advanced metrics."
+  },
+  {
+    "metric": "3.5 Comparison Condition Combination",
+    "description": "1. **Pre-check (User path):** In performance comparison, is there an option to add comparison conditions? \n2. **Arrange:** Prepare test sequence types (DNA, protein) and number of sequences and other dimensions. \n3. **Act:** Try adding multiple dimension conditions and setting AND/OR logic relationships. \n4. **Assert:** Observe whether multi-dimensional condition combinations and logical relationship settings are supported correctly.",
+    "expected_output": "2 points: Pre-check passes, supports 3 or more dimension combinations and logical relationship function is complete. 1 point: Pre-check passes, supports 2 dimensions or logical relationship function is incomplete. 0 points: Pre-check fails or supports fewer than 2 dimensions."
+  },
+  {
+    "metric": "3.6 Comparison Result Sorting",
+    "description": "1. **Pre-check (User path):** Is there a sorting option in the comparison results interface? \n2. **Act:** Test ascending/descending sorting by execution time and alignment cost respectively. \n3. **Assert:** Observe whether the sorting function works normally and result order is correct.",
+    "expected_output": "2 points: Pre-check passes, supports ascending/descending sorting for 2 metrics and function works normally. 1 point: Pre-check passes, supports sorting for 1 metric or function partially normal. 0 points: Pre-check fails or sorting function is abnormal."
+  },
+  {
+    "metric": "3.7 Comparison Result Pagination",
+    "description": "1. **Arrange:** Generate more than 10 comparison result data entries. \n2. **Act:** View comparison results, try using page up/down toggle functionality. \n3. **Assert:** Observe whether pagination display is automatic (10 per page) and page up/down toggle is supported.",
+    "expected_output": "2 points: Pagination function is complete, 10 per page and supports page up/down. 1 point: Pagination exists but page count incorrect or toggle function incomplete. 0 points: No pagination."
+  },
+  {
+    "metric": "4.1 Performance Metrics Analysis Entry",
+    "description": "1. **Pre-check (User path):** Is there option 4 in the main menu for \"Analyze performance metrics\"? \n2. **Act:** Select menu option 4. \n3. **Assert:** Observe whether the performance metrics analysis interface can be entered.",
+    "expected_output": "2 points: Pre-check passes, can enter the performance metrics analysis interface normally. 1 point: Pre-check passes, can enter but has display problems. 0 points: Pre-check fails or cannot enter function."
+  },
+  {
+    "metric": "4.2 Performance Metric Selection",
+    "description": "1. **Pre-check (User path):** In the performance metrics analysis interface, is there an option for selecting metrics? \n2. **Act:** View selectable performance metrics. \n3. **Assert:** Observe whether execution time, memory usage, and alignment cost, these 3 numerical metrics, can be selected.",
+    "expected_output": "2 points: Pre-check passes, all 3 numerical metric options are provided. 1 point: Pre-check passes, 2 metric options provided. 0 points: Pre-check fails or fewer than 2 metric options provided."
+  },
+  {
+    "metric": "4.3 Auto Extraction of Analysis Dimensions",
+    "description": "1. **Pre-check (User path):** In performance metrics analysis, is there a function to select analysis dimensions? \n2. **Act:** View system auto-extracted dimension options. \n3. **Assert:** Observe whether algorithm type, optimization techniques, sequence type and other non-numerical fields can be automatically identified, and users are allowed to check 1-3 dimensions.",
+    "expected_output": "2 points: Pre-check passes, can automatically extract 3 or more analysis dimensions and supports combinations of 1-3 dimensions. 1 point: Pre-check passes, can extract 2 dimensions or selection function incomplete. 0 points: Pre-check fails or less than 2 dimensions extracted."
+  },
+  {
+    "metric": "4.4 Variance Decomposition Analysis",
+    "description": "1. **Act:** Select performance metrics and analysis dimensions then execute performance analysis. \n2. **Assert:** Observe whether the variance explained ratio for each dimension is output, format like \"Algorithm type: 58%, Optimization technique: 25%, Interaction effect: 12%\".",
+    "expected_output": "2 points: Can correctly calculate and display explained variance for each dimension, format standardized. 1 point: Variance analysis exists but result format not standardized or values inaccurate. 0 points: No variance decomposition function."
+  },
+  {
+    "metric": "4.5 In-Depth Analysis Function",
+    "description": "1. **Arrange:** Ensure a dimension's impact is greater than 30%. \n2. **Act:** Execute performance analysis. \n3. **Assert:** Observe whether the system automatically performs in-depth analysis on high-impact dimensions, outputs mean and standard deviation of metrics for each subcategory.",
+    "expected_output": "2 points: Automatically identifies high-impact dimensions (>30%) and performs in-depth analysis, outputs complete statistics. 1 point: In-depth analysis exists but trigger condition inaccurate or information incomplete. 0 points: No in-depth analysis function."
+  },
+  {
+    "metric": "5.1 Text-based Table Display Option",
+    "description": "1. **Pre-check (User path):** When displaying results, is there an option for table display format? \n2. **Act:** Choose the text-based table display option. \n3. **Assert:** Observe whether the table display effect is good and data is neatly arranged.",
+    "expected_output": "2 points: Pre-check passes, provides text table option and display effect is good. 1 point: Pre-check passes, table option provided but display effect is average. 0 points: Pre-check fails or no text table option."
+  },
+  {
+    "metric": "5.2 Result Save Function",
+    "description": "1. **Pre-check (User path):** In any result display interface, is there an option for save function? \n2. **Arrange:** Prepare a valid save path. \n3. **Act:** Use the save function, specify the save path and save as a TXT file. \n4. **Assert:** Observe whether the file can be successfully saved to the specified path.",
+    "expected_output": "2 points: Pre-check passes, can specify path normally and successfully save TXT file. 1 point: Pre-check passes, can save but path specification is incomplete. 0 points: Pre-check fails or save function abnormal."
+  },
+  {
+    "metric": "5.3a Saved File - Configuration Information Completeness",
+    "description": "1. **Act:** Save a complete analysis result file. \n2. **Assert:** Open the saved TXT file, check whether it contains algorithm configuration and test condition, these 2 types of basic information.",
+    "expected_output": "2 points: Saved file contains both types of basic configuration information and format is clear. 1 point: Contains 1 type or format not clear. 0 points: Basic configuration information is seriously missing."
+  },
+  {
+    "metric": "5.3b Saved File - Analysis Data Completeness",
+    "description": "1. **Act:** Save a complete analysis result file. \n2. **Assert:** Open the saved TXT file, check whether it contains analysis dimensions, performance data, and text-based table, these 3 types of analysis information.",
+    "expected_output": "2 points: Saved file contains all 3 types of analysis information and format is clear. 1 point: Contains 2 types or format not clear. 0 points: Analysis information is seriously missing."
+  },
+  {
+    "metric": "6.1a Core Algorithm Implementation - Dynamic Programming Algorithm",
+    "description": "1. **Arrange:** Prepare valid sequence data for Dynamic Programming algorithm test. \n2. **Act:** Select and execute Dynamic Programming algorithm. \n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "expected_output": "2 points: Dynamic Programming algorithm executes normally and results are reasonable. 1 point: Algorithm executes but results have problems. 0 points: Algorithm cannot execute or results are completely wrong."
+  },
+  {
+    "metric": "6.1b Core Algorithm Implementation - A* Search Algorithm",
+    "description": "1. **Arrange:** Prepare valid sequence data for A* Search algorithm test. \n2. **Act:** Select and execute A* Search algorithm. \n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "expected_output": "2 points: A* Search algorithm executes normally and results are reasonable. 1 point: Algorithm executes but results have problems. 0 points: Algorithm cannot execute or results are completely wrong."
+  },
+  {
+    "metric": "6.1c Core Algorithm Implementation - Genetic Algorithm",
+    "description": "1. **Arrange:** Prepare valid sequence data for Genetic Algorithm test. \n2. **Act:** Select and execute Genetic Algorithm. \n3. **Assert:** Observe whether the algorithm runs normally and produces reasonable alignment results.",
+    "expected_output": "2 points: Genetic Algorithm executes normally and results are reasonable. 1 point: Algorithm executes but results have problems. 0 points: Algorithm cannot execute or results are completely wrong."
+  },
+  {
+    "metric": "6.2 Optimization Technique Integration",
+    "description": "1. **Pre-check (User path):** When selecting algorithms, is there an option for optimization techniques? \n2. **Act:** Test enabling LBE, HashBin, Numba optimization options. \n3. **Assert:** Observe whether 3 optimization techniques are supported and performance improvement can be observed.",
+    "expected_output": "2 points: Pre-check passes, all 3 optimization techniques are supported and performance improvement can be observed. 1 point: Pre-check passes, 2 optimization techniques are supported. 0 points: Pre-check fails or fewer than 2 optimization techniques supported."
+  }
+]

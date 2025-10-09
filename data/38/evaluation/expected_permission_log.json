@@ -1,0 +1,17 @@
+{
+    "admin_operations": [
+        "模型训练监督",
+        "日志导出", 
+        "冷启动流程质检"
+    ],
+    "user_operations": [
+        "查看推荐",
+        "数据导入",
+        "基础分析"
+    ],
+    "access_test_results": {
+        "admin_exclusive_count": 3,
+        "user_accessible_count": 3,
+        "permission_control_working": true
+    }
+}

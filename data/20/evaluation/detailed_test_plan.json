@@ -1,0 +1,351 @@
+[
+  {
+    "metric": "1.1 Program Startup and Main Menu Display",
+    "description": "1. **Act:** Execute `python main.py` in the command line to start the program. \n2. **Assert:** Observe whether the program starts successfully and displays a clear menu with at least 5 main functional options (such as certificate management, user management, CRL management, system configuration, exit program).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_1.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program started successfully, displaying a clear main menu"
+  },
+  {
+    "metric": "2.1.1a CA Key Pair Generation - 5120-bit RSA Key Generation",
+    "description": "1. **Precheck (User Path):** Confirm accessibility to the CA key pair generation feature. \n2. **Act:** Perform the CA key pair generation operation. \n3. **Assert:** Verify the generated RSA key length is 5120 bits, and check whether the generated public and private key files exist and have the correct format.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_ca_private_key.pem",
+      "evaluation/expected_outputs/expected_ca_certificate.pem"
+    ],
+    "expected_output": "Key pair successfully generated and files similar to the target files"
+  },
+  {
+    "metric": "2.1.1b CA Key Pair Generation - PEM Format Storage",
+    "description": "1. **Arrange:** Ensure the CA key pair is generated. \n2. **Act:** Check the generated CA public and private key files. \n3. **Assert:** Verify the key files are stored in standard PEM format, with correct identifiers at the beginning and end (such as -----BEGIN RSA PRIVATE KEY-----).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_ca_pem_format.py::test_ca_pem_format",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "CA key files fully comply with the PEM format standard, containing correct identifiers"
+  },
+  {
+    "metric": "2.1.2a User Certificate Request - Menu Access Path",
+    "description": "1. **Precheck (User Path):** Is there a clear 'User Certificate Request' or 'Apply for Digital Certificate' option in the main menu? \n2. **Act:** Select the corresponding menu option to access the user certificate request feature. \n3. **Assert:** Observe if you can enter the user certificate request interactive interface successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.2a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully accessed the user certificate request interface"
+  },
+  {
+    "metric": "2.1.2b User Certificate Request - Digital Certificate Generation",
+    "description": "1. **Arrange:** Ensure user information is correctly entered and the CA key pair exists. \n2. **Act:** Complete the user certificate request process. \n3. **Assert:** Verify if a digital certificate file containing user identity information is generated successfully, and the certificate format is correct and includes validity information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.2b.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "User digital certificate generated successfully"
+  },
+  {
+    "metric": "2.2.1a Identity Authentication Verification - Menu Access Path",
+    "description": "1. **Precheck (User Path):** Is there a clear 'Identity Authentication' or 'Certificate Verification' option in the main menu? \n2. **Act:** Select the corresponding menu option to access the identity authentication feature. \n3. **Assert:** Observe if you can enter the identity authentication interactive interface successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully accessed the user certificate authentication interactive interface"
+  },
+  {
+    "metric": "2.2.1b Identity Authentication Verification - Certificate Existence Validation",
+    "description": "1. **Precheck (User Path):** Confirm accessibility to the identity authentication feature. \n2. **Arrange:** Prepare a valid user certificate file and a nonexistent certificate file name. \n3. **Act:** Validate both the existing and non-existing certificates. \n4. **Assert:** Verify the system can accurately identify whether certificate files exist and provide corresponding prompts.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.2.1b.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accurately detects certificate file existence and provides correct feedback for both existing and non-existing cases"
+  },
+  {
+    "metric": "2.2.1c Identity Authentication Verification - Certificate Validity Verification",
+    "description": "1. **Arrange:** Prepare a certificate within the validity period and an expired certificate (if possible). \n2. **Act:** Validate certificates with different validity statuses. \n3. **Assert:** Verify the system can correctly check certificate validity and provide warnings for expired certificates.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_cert_validity.py::test_certificate_validity",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system accurately checks certificate validity and provides correct judgments for valid and expired certificates"
+  },
+  {
+    "metric": "2.3.1a Certificate Revocation Management - Menu Access Path",
+    "description": "1. **Precheck (User Path):** Is there a clear 'Certificate Revocation' or 'Revoke Certificate' option in the main menu? \n2. **Act:** Select the corresponding menu option to access the certificate revocation feature. \n3. **Assert:** Observe if you can enter the certificate revocation interactive interface successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully accessed the certificate revocation interactive interface"
+  },
+  {
+    "metric": "2.3.1b Certificate Revocation Management - Revocation Request Processing",
+    "description": "1. **Precheck (User Path):** Confirm accessibility to the certificate revocation feature. \n2. **Arrange:** Prepare a valid user certificate and revocation reason. \n3. **Act:** Submit the certificate revocation request and input the revocation reason. \n4. **Assert:** Verify the system can correctly accept the revocation request and record the revocation reason and timestamp.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.3.1b.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully revoked the certificate"
+  },
+  {
+    "metric": "2.4.1a File Encryption Feature - Menu Access Path",
+    "description": "1. **Precheck (User Path):** Is there a clear 'File Encryption' option in the main menu? \n2. **Act:** Select the corresponding menu option to access the file encryption feature. \n3. **Assert:** Observe if you can enter the file encryption interactive interface successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully accessed the file encryption interactive interface"
+  },
+  {
+    "metric": "2.4.1b File Encryption Feature - File Path Verification",
+    "description": "1. **Precheck (User Path):** Confirm accessibility to the file encryption feature. \n2. **Arrange:** Prepare an existing file path and a nonexistent file path. \n3. **Act:** Input the existing and nonexistent file paths separately. \n4. **Assert:** Verify the system can correctly validate the validity of the file path, providing error messages for invalid paths.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.1b.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs/test_file.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The system accurately validates file path validity, providing correct feedback for both valid and invalid paths"
+  },
+  {
+    "metric": "2.4.1c File Encryption Feature - RSA Encryption and Storage",
+    "description": "1. **Arrange:** Prepare a small file (such as a text file) and a valid user public key. \n2. **Act:** Use the user public key to perform RSA encryption on the file. \n3. **Assert:** Verify the encryption process completes normally, generating an encrypted file. Also, verify if the encrypted file is stored correctly and its integrity is maintained.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.4.1c.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs/test_file.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_encrypted_file.enc"
+    ],
+    "expected_output": "Successfully encrypted and generated a valid encrypted file. The encrypted file is stored correctly"
+  },
+  {
+    "metric": "2.5.1a File Decryption Feature - Menu Access Path",
+    "description": "1. **Precheck (User Path):** Is there a clear 'File Decryption' option in the main menu? \n2. **Act:** Select the corresponding menu option to access the file decryption feature. \n3. **Assert:** Observe if you can enter the file decryption interactive interface successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.5.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully accessed the file decryption interactive interface"
+  },
+  {
+    "metric": "2.5.1b File Decryption Feature - RSA Decryption Processing",
+    "description": "1. **Arrange:** Prepare an encrypted file and the corresponding user private key. \n2. **Act:** Use the user private key to perform RSA decryption on the encrypted file. \n3. **Assert:** Verify that the decryption process completes normally, restoring the original file content.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.5.1b.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs/test_encrypted_file.enc"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Successfully decrypted the file, completely restoring the original file content"
+  },
+  {
+    "metric": "2.5.1c File Decryption Feature - Private Key Retrieval and Verification",
+    "description": "1. **Arrange:** Prepare the user private key file path. \n2. **Act:** System reads and verifies the user private key file. \n3. **Assert:** Verify that the system correctly reads the private key file, and checks the format and integrity of the private key.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_private_key_validation.py::test_private_key_validation",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system correctly reads and verifies the private key file, ensuring the private key format is correct and complete"
+  },
+  {
+    "metric": "2.6.1a Security Protection - Replay Attack Protection",
+    "description": "1. **Arrange:** Prepare identical operation request data. \n2. **Act:** Send the same operation request repeatedly within a short time. \n3. **Assert:** Verify that the system can detect and reject replay attacks, preventing repeat operations through timestamp validation mechanisms.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_security_protection.py::test_replay_attack_protection",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system effectively detects and rejects replay attacks, with a complete timestamp validation mechanism"
+  },
+  {
+    "metric": "2.6.1b Security Protection - Birthday Attack Protection",
+    "description": "1. **Act:** Check the key length and randomness generated by the system. \n2. **Assert:** Verify that the system uses a 5120-bit RSA key, the key space is large enough to effectively defend against birthday attacks.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_security_protection.py::test_birthday_attack_protection",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Using 4096-bit RSA key, with sufficient key space to effectively defend against birthday attacks"
+  },
+  {
+    "metric": "2.6.1c Security Protection - Dictionary Attack Protection",
+    "description": "1. **Act:** Check the system's requirements and verification mechanism for key complexity. \n2. **Assert:** Verify that the system can enforce sufficiently complex keys, with dictionary attack detection capabilities.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_security_protection.py::test_dictionary_attack_protection",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system enforces complex keys, with comprehensive dictionary attack detection and protection mechanisms"
+  },
+  {
+    "metric": "2.7.1a System Monitoring and Logging - Operation Log Recording",
+    "description": "1. **Act:** Perform various system operations (certificate application, verification, revocation, etc.). \n2. **Assert:** Verify that the system can comprehensively record user operation behaviors, logs include timestamps, operation types, operation results, and other key information.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.7.1a.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_system_events.log"
+    ],
+    "expected_output": "The system comprehensively records all key operations, log information is detailed and format is standardized"
+  },
+  {
+    "metric": "3.1 Technical Implementation - Python Version Compatibility",
+    "description": "1. **Act:** Check the system's Python version requirements and package dependency configuration. \n2. **Assert:** Verify that the system supports Python version 3.6+ and the package dependencies are correctly and completely configured.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_python_compatibility.py::test_python_version_compatibility",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system fully supports Python 3.6+, with complete and compatible package dependency configuration"
+  },
+  {
+    "metric": "3.2 Technical Implementation - Encryption Library Usage",
+    "description": "1. **Act:** Check the encryption libraries used by the system (such as rsa, cryptography, etc.). \n2. **Assert:** Verify that the system correctly uses standard encryption libraries to implement RSA encryption, hash algorithms, etc.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_crypto_library.py::test_crypto_library_usage",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Correct usage of standard encryption libraries, with complete and secure encryption functionality"
+  },
+  {
+    "metric": "4.1 Data Storage - File Structure Organization",
+    "description": "1. **Act:** Check the file storage structure of the system. \n2. **Assert:** Verify that the system organizes file structures according to specifications, including necessary directories such as data, logs, config, and stores files in a reasonable classification.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_file_structure.py::test_file_structure_organization",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The file structure fully complies with the specifications, with reasonable directory organization and clear file classification"
+  },
+  {
+    "metric": "4.2 Data Storage - File Format Standards",
+    "description": "1. **Act:** Check the file formats of generated keys, certificates, etc. \n2. **Assert:** Verify that all files comply with the corresponding standard formats (PEM format, X.509 standards, etc.).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_file_format.py::test_file_format_standards",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "All files fully comply with the corresponding standard formats, with standardized format and good compatibility"
+  }
+]

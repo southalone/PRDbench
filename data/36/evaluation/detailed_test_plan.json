@@ -1,0 +1,682 @@
+[
+  {
+    "metric": "0.1 Program startup and Main Menu display",
+    "description": "1. **Act:** Execute program startup command in the command line.\n2. **Assert:** Observe whether the program successfully starts and displays a complete menu with 8 options: [1] Enter novel file path [2] Entity recognition extraction [3] Frequency statistical analysis [4] Semantic similarity analysis [5] Relationship inference analysis [6] View history [7] Save analysis results [8] Exit.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/menu_test.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program successfully starts and displays a complete menu with 8 options."
+  },
+  {
+    "metric": "1.1 File path entry - Menu access",
+    "description": "1. **Pre-check (User Path):** Is option 1 \"Enter novel file path\" present in the main menu?\n2. **Act:** Select menu option 1.\n3. **Assert:** Observe whether the program enters the file path input interface, prompting the user to input the file path.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/file_path_menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/file_path_menu_test.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program enters the file path input interface, prompting the user to input the file path."
+  },
+  {
+    "metric": "1.2 File path validity check",
+    "description": "1. **Arrange:** Prepare an existing txt file path and a non-existing file path.\n2. **Act:** In the file path input interface, first input the non-existent file path and then input the existent file path.\n3. **Assert:** Observe whether the program gives a clear error message in Chinese for invalid paths and normally accepts valid paths.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/file_path_validation_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/file_path_validation_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Gives clear error messages in Chinese for invalid paths and normally accepts valid paths, displaying encoding detection results."
+  },
+  {
+    "metric": "1.3 Automatic file encoding detection",
+    "description": "1. **Arrange:** Prepare test files with the same content but different encodings: GBK and UTF-8.\n2. **Act:** Enter files with both encodings separately.\n3. **Assert:** Observe whether the program correctly displays Chinese content for files with both encodings without any garbled text.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/encoding_test_utf8.in"
+      },
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/encoding_test_gbk.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/encoding_test_utf8.in",
+      "evaluation/input_files/encoding_test_gbk.in",
+      "evaluation/input_files/test_novel_utf8.txt",
+      "evaluation/input_files/test_novel_gbk.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program correctly processes GBK and UTF-8 encoded files, displaying correct encoding detection information without any garbled text."
+  },
+  {
+    "metric": "2.1 Entity recognition extraction - Menu access",
+    "description": "1. **Pre-check (User Path):** Is option 2 \"Entity recognition extraction\" present in the main menu?\n2. **Act:** Select menu option 2.\n3. **Assert:** Observe whether the program enters the entity recognition interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/entity_extraction_menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/entity_extraction_menu_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program enters the entity recognition interface, displaying processing progress and recognition result summary."
+  },
+  {
+    "metric": "2.2a Entity recognition - Person name recognition",
+    "description": "1. **Act:** Perform entity recognition on text containing obvious personal names.\n2. **Assert:** Check whether the output includes person name entities and whether they are labeled as (nr) type.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_person_name_recognition -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/person_name_test.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correctly recognizes person name entities and labels them as nr type, including frequency and context information."
+  },
+  {
+    "metric": "2.2b Entity recognition - Geographic name recognition",
+    "description": "1. **Act:** Perform entity recognition on text containing geographic names.\n2. **Assert:** Check whether the output includes geographic name entities and whether they are labeled as (ns) type.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_location_recognition -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/location_test.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correctly recognizes geographic name entities and labels them as ns type, including frequency and context information."
+  },
+  {
+    "metric": "2.2c Entity recognition - Temporal expression recognition",
+    "description": "1. **Act:** Perform entity recognition on text containing temporal expressions.\n2. **Assert:** Check whether the output includes temporal expression entities and whether they are labeled as (t) type.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_time_recognition -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/time_test.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correctly recognizes temporal expression entities and labels them as t type, including frequency and context information."
+  },
+  {
+    "metric": "2.2d Entity recognition - Professional title recognition",
+    "description": "1. **Act:** Perform entity recognition on text containing professional titles.\n2. **Assert:** Check whether the output includes professional title entities and whether they are labeled as (nn) type.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_profession_recognition -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/profession_test.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correctly recognizes professional title entities and labels them as nn type, including frequency and context information."
+  },
+  {
+    "metric": "2.3 Entity extraction progress display",
+    "description": "1. **Act:** Execute the entity recognition function.\n2. **Assert:** Observe whether dynamic progress prompts like \"Processing novel X: Y%\" are displayed during the process.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/progress_display_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/progress_display_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Displays dynamic progress prompts like \"Processing novel X: Y%\"."
+  },
+  {
+    "metric": "2.4 Entity extraction interrupt support",
+    "description": "1. **Act:** Press Ctrl+C during entity recognition processing.\n2. **Assert:** Observe whether the program can safely interrupt processing and return to the main menu without crashing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "timeout 5s python src/main.py",
+        "test_input": "evaluation/input_files/interrupt_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/interrupt_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program can safely respond to interrupt signals and return to the main menu without crashing."
+  },
+  {
+    "metric": "2.5 Entity extraction status feedback",
+    "description": "1. **Arrange:** Prepare files with incorrect formats or corrupted files.\n2. **Act:** Perform entity recognition on erroneous files.\n3. **Assert:** Observe whether the program gives specific failure reasons (e.g., file encoding errors, tokenization failures, insufficient memory, etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/error_handling_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/error_handling_test.in",
+      "evaluation/input_files/corrupted_file.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Provides specific failure reasons (e.g., file encoding errors, tokenization failures, insufficient memory, etc.)."
+  },
+  {
+    "metric": "2.6 History record saving and reuse",
+    "description": "1. **Pre-check (User Path):** Is option 6 \"View history\" present in the main menu?\n2. **Arrange:** Execute entity recognition multiple times (at least 3 times).\n3. **Act:** Select menu option 6 to view history, then attempt to reuse a history record via its number.\n4. **Assert:** Observe whether the history record list is displayed and can be successfully reused via its number.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/history_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/history_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Displays history record list and can successfully reuse via its number."
+  },
+  {
+    "metric": "2.7a Entity output format - Entity name and type",
+    "description": "1. **Act:** View the output of entity recognition.\n2. **Assert:** Check whether each entity includes entity name and type tag information.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_entity_output_format -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Each entity includes clear name and type tags."
+  },
+  {
+    "metric": "2.7b Entity output format - Frequency",
+    "description": "1. **Act:** View the output of entity recognition.\n2. **Assert:** Check whether each entity includes frequency information.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_entity_output_format -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Each entity includes accurate frequency information."
+  },
+  {
+    "metric": "2.7c Entity output format - Context information",
+    "description": "1. **Act:** View the output of entity recognition.\n2. **Assert:** Check whether each entity includes context information (8 characters before and after).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_entity_recognition.py::TestEntityRecognition::test_entity_output_format -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Each entity includes context information."
+  },
+  {
+    "metric": "3.1 Frequency statistical analysis - Menu access",
+    "description": "1. **Pre-check (User Path):** Is option 3 \"Frequency statistical analysis\" present in the main menu?\n2. **Act:** Select menu option 3.\n3. **Assert:** Observe whether program enters the frequency statistical analysis interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/frequency_menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/frequency_menu_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program enters the frequency statistical analysis interface."
+  },
+  {
+    "metric": "3.2 Frequency statistics and leaderboard generation",
+    "description": "1. **Act:** Perform statistical operations in the frequency statistical analysis function.\n2. **Assert:** Observe whether frequency statistics of each entity type can be performed separately for novels and generate clear frequency leaderboards.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/frequency_analysis_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/frequency_analysis_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Correctly counts frequency and generates clear leaderboards, shows by entity type classification."
+  },
+  {
+    "metric": "3.3a Entity type filter - Person filter",
+    "description": "1. **Act:** Choose the person filter option in the frequency statistical function.\n2. **Assert:** Observe whether the filter results contain only person-type entities.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/person_filter_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/person_filter_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Filter results only contain person-type entities."
+  },
+  {
+    "metric": "3.3b Entity type filter - Location filter",
+    "description": "1. **Act:** Choose the location filter option in the frequency statistical function.\n2. **Assert:** Observe whether the filter results contain only location-type entities.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/location_filter_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/location_filter_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Filter results contain only location-type entities."
+  },
+  {
+    "metric": "3.3c Entity type filter - Time filter",
+    "description": "1. **Act:** Choose the time filter option in the frequency statistical function.\n2. **Assert:** Observe whether the filter results contain only time-type entities.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/time_filter_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/time_filter_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Filter results contain only time-type entities."
+  },
+  {
+    "metric": "3.3d Entity type filter - Profession filter",
+    "description": "1. **Act:** Choose the profession filter option in the frequency statistical function.\n2. **Assert:** Observe whether the filter results contain only profession-type entities.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/profession_filter_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/profession_filter_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Filter results contain only profession-type entities."
+  },
+  {
+    "metric": "3.4 Frequency range filter",
+    "description": "1. **Arrange:** Prepare different minimum frequency thresholds (e.g., 5, 10, 20).\n2. **Act:** Enter different minimum frequency thresholds in frequency statistics.\n3. **Assert:** Observe whether all entity frequencies in the filter results are greater than or equal to the set threshold.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/frequency_threshold_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/frequency_threshold_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "All entity frequencies in the filter results are greater than or equal to the set threshold."
+  },
+  {
+    "metric": "3.5 Combined filter conditions",
+    "description": "1. **Act:** Set entity type filter and frequency threshold filter conditions at the same time.\n2. **Assert:** Observe whether the filter results meet both conditions and check whether \"and/or\" logical relationship selection is supported.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/combined_filter_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/combined_filter_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Filter results simultaneously meet entity type and frequency threshold conditions."
+  },
+  {
+    "metric": "3.6 Sorting feature",
+    "description": "1. **Act:** Test sorting in statistic results by frequency ascending, descending order, and other fields.\n2. **Assert:** Observe whether the sort results are correct, whether the data order matches the selected sort method.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/sorting_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/sorting_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Sort results are correct, and data order matches the selected sorting method (by frequency descending)."
+  },
+  {
+    "metric": "3.7 Pagination display",
+    "description": "1. **Act:** View statistic results display mode, test page switching function.\n2. **Assert:** Observe whether results are paginated with 10 entries per page, and next/previous page switching works correctly.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/pagination_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/pagination_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Results are paginated with 10 entries per page, page switching feature works correctly."
+  },
+  {
+    "metric": "4.1 Semantic similarity analysis - Menu access",
+    "description": "1. **Pre-check (User Path):** Is option 4 \"Semantic similarity analysis\" present in the main menu?\n2. **Act:** Select menu option 4.\n3. **Assert:** Observe whether the program enters the semantic similarity analysis interface, displaying Word2Vec model training information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/similarity_menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/similarity_menu_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program enters the semantic similarity analysis interface, displaying Word2Vec model training information."
+  },
+  {
+    "metric": "4.2 Character entity selection",
+    "description": "1. **Act:** Try selecting a character entity as the analysis target in the semantic similarity analysis interface.\n2. **Assert:** Observe whether the program provides a list of character entities for selection and only allows selecting person-type entities.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/character_selection_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/character_selection_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program provides a list of character entities for selection and only displays person-type entities."
+  },
+  {
+    "metric": "4.3a Word2Vec model - Algorithm usage",
+    "description": "1. **Act:** Execute semantic similarity analysis.\n2. **Assert:** Confirm through program output or logs whether the Word2Vec algorithm was used for word vector training.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_word2vec.py::TestWord2Vec::test_word2vec_algorithm_usage -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Confirms Word2Vec algorithm usage for word vector training or uses a simulated Word2Vec model."
+  },
+  {
+    "metric": "4.3b Word2Vec model - Parameter configuration",
+    "description": "1. **Act:** Execute semantic similarity analysis.\n2. **Assert:** Check whether model parameters meet requirements: vector dimension 300, window size 5, minimum word frequency 20, working threads 8.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_word2vec.py::TestWord2Vec::test_model_parameters -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Model parameters meet requirements: vector dimension 300, window size 5, minimum word frequency 20, working threads 8."
+  },
+  {
+    "metric": "4.4 Similarity calculation and ranking",
+    "description": "1. **Act:** Complete semantic similarity analysis.\n2. **Assert:** Observe whether the output shows the top 10 ranked entities and their specific similarity values.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/similarity_ranking_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/similarity_ranking_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Outputs the top 10 ranked entities and their specific similarity values."
+  },
+  {
+    "metric": "4.5 Deep analysis of high-similarity entities",
+    "description": "1. **Act:** Complete semantic similarity analysis.\n2. **Assert:** Check whether entities with similarity >0.7 have additional contextual features and relationship network analysis outputs.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/deep_analysis_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/deep_analysis_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Provides detailed contextual features and relationship network analysis for entities with similarity >0.7."
+  },
+  {
+    "metric": "5.1 Relationship inference analysis - Menu access",
+    "description": "1. **Pre-check (User Path):** Is option 5 \"Relationship inference analysis\" present in the main menu?\n2. **Act:** Select menu option 5.\n3. **Assert:** Observe whether the program enters the relationship inference analysis interface.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/relationship_menu_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/relationship_menu_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program enters the relationship inference analysis interface."
+  },
+  {
+    "metric": "5.2 Analogy reasoning query format parsing",
+    "description": "1. **Arrange:** Prepare queries following the format \"The relationship between A and B is similar to the relationship between C and whom\".\n2. **Act:** Enter the prepared query in the relationship inference interface.\n3. **Assert:** Observe whether the program can correctly parse the query format and begin processing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/analogy_query_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/analogy_query_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Program can correctly parse analogy reasoning query format and provide results."
+  },
+  {
+    "metric": "5.3 Vector space analogy reasoning algorithm",
+    "description": "1. **Act:** Execute relationship inference function.\n2. **Assert:** Confirm through program output or logs whether the D=C+B-A vector space analogy reasoning algorithm was used and check the rationality of the computation results.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_relationship_reasoning.py::TestRelationshipReasoning::test_vector_analogy_algorithm -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Confirms the use of D=C+B-A vector space analogy reasoning algorithm and results are rational."
+  },
+  {
+    "metric": "5.4 Relationship pattern recognition",
+    "description": "1. **Act:** Complete relationship inference analysis.\n2. **Assert:** Check whether reasoning results include relationship type tags (e.g., \"Master-disciple relationship\", \"Couple relationship\", \"Hostile relationship\", etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/relationship_pattern_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/relationship_pattern_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Inference results include accurate relationship type tags."
+  },
+  {
+    "metric": "5.5 Relationship pattern statistical analysis",
+    "description": "1. **Act:** Complete relationship inference analysis.\n2. **Assert:** Observe whether relationship pattern statistical analysis is provided, including frequency and distribution of various relationship types.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/relationship_statistics_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/relationship_statistics_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Provides complete relationship pattern statistics and distribution analysis."
+  },
+  {
+    "metric": "6.1 Input validity check",
+    "description": "1. **Arrange:** Prepare various invalid inputs (letters, out-of-range numbers, special characters, etc.).\n2. **Act:** Enter invalid options in various function interfaces.\n3. **Assert:** Observe whether the program gives clear error messages in Chinese for all invalid inputs.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/input_validation_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/input_validation_test.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Gives clear error messages in Chinese for all invalid inputs."
+  },
+  {
+    "metric": "6.2 Tabular display options",
+    "description": "1. **Act:** Check whether options for tabular presentation are provided when generating analysis results.\n2. **Assert:** Observe whether tabular options are provided and verify that the display effect after choosing tabular format is clear and visually appealing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/table_display_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/table_display_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Providing tabular options and the table format is clear and visually appealing."
+  },
+  {
+    "metric": "6.3 Result saving feature",
+    "description": "1. **Act:** After completing various analysis functions, test whether results can be saved as a TXT file.\n2. **Assert:** Observe whether the save functionality is supported and check whether the saved file content is complete, including extracted entities, statistical results, similarity matrix, relationship inference results, etc.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/save_results_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/save_results_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": [
+      "test_results.txt"
+    ],
+    "expected_output": "Able to save all types of analysis results and file content is complete."
+  },
+  {
+    "metric": "6.4 Custom save path",
+    "description": "1. **Act:** Test whether save path can be customized when saving results.\n2. **Assert:** Observe whether path selection functionality is provided and verify whether the files are saved to the designated location.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/input_files/custom_save_path_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/input_files/custom_save_path_test.in",
+      "evaluation/input_files/test_novel.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Support for custom save path and functionality is normal, files are saved to the designated location."
+  }
+]

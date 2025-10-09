@@ -1,0 +1,11 @@
+1
+help
+summary
+segments
+show 10
+filter segment 重要价值客户
+show 5
+reset
+show 5
+export 完整测试报告.csv
+quit

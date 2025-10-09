@@ -1,0 +1,308 @@
+[
+  {
+    "metric": "4.1 System Startup and Basic Status Query",
+    "description": "1. **Act:** Start the system service.\n2. **Act:** Query host status information.\n3. **Assert:** Check whether the response is successful and verify that the returned information includes all 4 key fields: operating mode (`mode`), processing capacity (`processing_capacity`), scheduling algorithm (`scheduling_algorithm`), and standby status (`status`).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_1.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The expected JSON response from /machine/info includes the fields 'status', 'power', 'scheduling', and 'standby'."
+  },
+  {
+    "metric": "2.2.5a Submachine Add Function",
+    "description": "1. **Arrange:** Prepare a unique submachine identity, including necessary identification fields (such as ID card number and room number).\n2. **Act:** Send a request to add a submachine, submitting the prepared identity information.\n3. **Assert:** Verify that the response indicates successful creation and contains a message indicating success.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_2.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Expected is an empty HTTP 200 response."
+  },
+  {
+    "metric": "2.2.5b Submachine Status Query Function",
+    "description": "1. **Arrange:** Ensure that a submachine has been successfully added.\n2. **Act:** Query the status of the submachine by its identifier.\n3. **Assert:** Verify that the response is successful and that the returned information includes the complete initial status of the submachine (such as identification info, target temperature, current temperature, wind speed, etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_3.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Expected JSON response contains submachine status info (id, card_id, target_temp, cur_temp, speed, energy, amount)."
+  },
+  {
+    "metric": "2.1.1 Host Mode Switching & Submachine Status Reset",
+    "description": "1. **Arrange:** Ensure there is at least one submachine in the system and its temperature is above 25.\n2. **Act:** Set host mode to cooling and then query submachine status.\n3. **Assert:** Verify if submachine target temperature meets the requirements.\n4. **Act:** Set host mode to heating and query submachine status again.\n5. **Assert:** Verify if submachine target temperature resets to heating mode default (28℃).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_4.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "When host is set to cooling, submachine target temperature should be 22. When host is set to heating, submachine target temperature should be 28."
+  },
+  {
+    "metric": "2.2.2 Submachine Temperature Adjustment",
+    "description": "1. **Arrange:** Ensure host is in cooling mode and at least one submachine exists.\n2. **Act:** Send a request to adjust submachine temperature, lowering the target by one degree.\n3. **Assert:** Query the submachine status and verify that its target temperature has been updated to the requested value.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_5.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Submachine target temperature is reduced by one degree."
+  },
+  {
+    "metric": "2.3.3 Intelligent Decision - Auto Stop Wind on Target Temperature",
+    "description": "1. **Arrange:** Create a submachine status with temperature already at target value.\n2. **Act:** Test the intelligent decision logic.\n3. **Assert:** Verify that when the temperature reaches the target, wind speed automatically becomes 0.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_intelligent_decision_fixed.py::TestIntelligentDecision::test_temperature_reached_auto_stop -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test verifies auto-stop wind logic when temperature reaches the target."
+  },
+  {
+    "metric": "2.3.4a Intelligent Decision - Mode-Adapted Stop Wind (Cooling)",
+    "description": "1. **Arrange:** Set cooling mode; submachine current temperature is below target.\n2. **Act:** Test intelligent decision logic in cooling mode.\n3. **Assert:** Verify that wind speed automatically goes to 0 when current temperature is below target in cooling mode.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_intelligent_decision_fixed.py::TestIntelligentDecision::test_cooling_mode_temperature_adaptation -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test verifies temperature-adaptive stop wind logic in cooling mode."
+  },
+  {
+    "metric": "2.3.4b Intelligent Decision - Mode-Adapted Stop Wind (Heating)",
+    "description": "1. **Arrange:** Set heating mode; submachine current temperature is above target.\n2. **Act:** Test intelligent decision logic in heating mode.\n3. **Assert:** Verify that wind speed automatically goes to 0 when current temperature is above target in heating mode.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_intelligent_decision.py::TestIntelligentDecision::test_heating_mode_temperature_adaptation -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test verifies temperature-adaptive stop wind logic in heating mode."
+  },
+  {
+    "metric": "2.5.2 Cost Real-Time Calculation Accuracy",
+    "description": "1. **Arrange:** Create a test submachine and set different wind speed levels.\n2. **Act:** Simulate the cost calculation logic, verify energy consumption and cost calculation at different wind speeds.\n3. **Assert:** Verify the accuracy of the cost calculation formula: low speed 0.8/60*5, medium speed 1.0/60*5, high speed 1.3/60*5 (calculated per second), allowing an error of ±5%.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_cost_calculation.py::TestCostCalculation::test_cost_calculation_one_minute -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit test verifies that 1 minute of medium wind speed should result in about 5.0 yuan, allowing ±5% error."
+  },
+  {
+    "metric": "2.6.5a Report Generation - Basic Function & Time Range",
+    "description": "1. **Arrange:** Prepare valid start and end time parameters.\n2. **Act:** Request a report for the specified time range.\n3. **Assert:** Verify that the response is successful and that the returned report includes query time range information matching the request parameters.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_11.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_report_2_6_5a.json"
+    ],
+    "expected_output": "The generated report should contain the specified start and end dates (2025-08-19 to 2025-08-19) in the 'query time range' section, and include at least one submachine record."
+  },
+  {
+    "metric": "2.6.5b Report Generation - Submachine Statistics Accuracy",
+    "description": "1. **Arrange:** Within a specified time period, perform 2 power-on and 2 power-off actions for a particular submachine.\n2. **Act:** Request a report that covers this time period.\n3. **Assert:** In the submachine statistics section of the report, locate the record for the submachine and verify that its power-on/off count is 2, and the total cost matches the accumulated cost in the submachine status.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_12.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_report_2_6_5b.json"
+    ],
+    "expected_output": "The report for submachine 'test_card_002' should show 'Count' as 2 (two power-off events) and display the correct 'Cost' for the operations."
+  },
+  {
+    "metric": "2.6.5c Report Generation - Content Integrity",
+    "description": "1. **Arrange:** Ensure the system has operation records.\n2. **Act:** Request a report.\n3. **Assert:** Check the report structure to see if it contains all 4 required major sections: query time range, submachine statistics, cost statistics, and detailed records.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_13.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_report_2_6_5c.json"
+    ],
+    "expected_output": "The report should be a JSON array of submachine reports. Each submachine report should contain 'ID', 'Count', 'Record' (detailed operation array), and 'Cost'."
+  },
+  {
+    "metric": "3.1a Data Persistence - Submachine Status",
+    "description": "1. **Arrange:** Operate a submachine to generate a non-zero accumulated cost and record the value.\n2. **Act:** Manually restart the system service (see persistence_test_instructions.md).\n3. **Assert:** After the service restart, query the submachine status and verify that the accumulated cost matches the value recorded before the restart.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/app.py",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_14_1.in",
+        "test_input": null
+      },
+      {
+        "test_command": "pkill -f python src/app.py",
+        "test_input": ""
+      },
+      {
+        "test_command": "python src/app.py",
+        "test_input": ""
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_14_2.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Submachine 'amount' should be the same as the originally recorded amount."
+  },
+  {
+    "metric": "3.1b Data Persistence - Operation Logs",
+    "description": "1. **Arrange:** Perform a clear operation (e.g., temperature adjustment) on a submachine and note the operation time.\n2. **Act:** Manually restart the system service (see persistence_test_instructions.md).\n3. **Assert:** After the restart, request a report including the operation time and verify that the detailed records still contain the log entry of the operation before the restart.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/run.py < evaluation/test_case_15_1.in",
+        "test_input": null
+      },
+      {
+        "test_command": "pkill -f python src/app.py",
+        "test_input": ""
+      },
+      {
+        "test_command": "python src/app.py",
+        "test_input": ""
+      },
+      {
+        "test_command": "python src/run.py < evaluation/test_case_15_2.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The report should include the log entry for the temperature adjustment made before the restart."
+  },
+  {
+    "metric": "2.1.2 Scheduling Algorithm Accuracy",
+    "description": "1. **Arrange:** Create multiple test requests with different wind speeds and times.\n2. **Act:** Test three scheduling algorithms separately: random scheduling, first-come-first-served, and wind speed priority.\n3. **Assert:** Verify that each scheduling algorithm selects and sorts requests according to the expected rules, and that power-on/off requests receive priority.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_scheduling_fixed.py::TestSchedulingAlgorithms::test_random_scheduling -v",
+        "test_input": null
+      },
+      {
+        "test_command": "pytest evaluation/tests/test_scheduling_fixed.py::TestSchedulingAlgorithms::test_speed_priority_scheduling -v",
+        "test_input": null
+      },
+      {
+        "test_command": "pytest evaluation/tests/test_scheduling_fixed.py::TestSchedulingAlgorithms::test_power_first_priority -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit tests verify the randomness of random scheduling, correct ordering for wind speed priority scheduling, and priority handling for power-on/off requests."
+  },
+  {
+    "metric": "2.4.1 Temperature Monitoring Calculation Accuracy",
+    "description": "1. **Arrange:** Set different initial temperature, target temperature, and wind speed conditions.\n2. **Act:** Test the temperature calculation model's logic for cooling and heating modes.\n3. **Assert:** Verify correct temperature change direction, accurate intelligent wind speed adjustment logic, and auto-stop wind when temperature reaches the target.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_temperature_monitor_fixed.py::TestTemperatureMonitor::test_temperature_calculation_heating -v",
+        "test_input": null
+      },
+      {
+        "test_command": "pytest evaluation/tests/test_temperature_monitor_fixed.py::TestTemperatureMonitor::test_temperature_calculation_cooling -v",
+        "test_input": null
+      },
+      {
+        "test_command": "pytest evaluation/tests/test_temperature_monitor_fixed.py::TestTemperatureMonitor::test_intelligent_speed_adjustment -v",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Unit tests verify the accuracy of the temperature calculation model and intelligent wind speed adjustment logic."
+  }
+]

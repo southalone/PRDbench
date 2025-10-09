@@ -1,0 +1,200 @@
+[
+  {
+    "metric": "1.1.1 Basic Availability - Command Line Help Information",
+    "description": "1. **Act:** Run `python src/main.py --help` in the shell.\n2. **Assert:** Observe whether the program runs successfully and outputs help information that is clear and well-formatted, with no garbled characters. The help information must include descriptions of the three core functions: `--analyze`, `--generate`, and `--evaluate`.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --help",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The command executes successfully and outputs clear, properly formatted help information, fully displaying the core functions."
+  },
+  {
+    "metric": "2.1.1a Password Strength Evaluation - Low Strength (Keyboard Pattern)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option for 'Password Strength Evaluation' or similar functionality?\n2. **Act:** Select this function and, when prompted for a password, enter `qwertyuiop`.\n3. **Assert:** Observe the output and confirm the final score is a distinctly low strength score (e.g., less than 40/100).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --evaluate qwertyuiop",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The returned final score is a clearly low strength score (less than 40/100)."
+  },
+  {
+    "metric": "2.1.1b Password Strength Evaluation - High Strength (Complex Combination)",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option for 'Password Strength Evaluation' or similar functionality?\n2. **Act:** Select this function and, when prompted for a password, enter `MyP@ssw0rd_!@#`.\n3. **Assert:** Observe the output and confirm the final score is a distinctly high strength score (e.g., greater than 70/100).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --evaluate MyP@ssw0rd_!@#",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The returned final score is a clearly high strength score (greater than 70/100)."
+  },
+  {
+    "metric": "2.2.1a Evaluation Interpretability - Length Score",
+    "description": "1. **Act:** Use the password evaluation function to assess any password (e.g., `12345`).\n2. **Assert:** Check the detailed output to confirm it clearly contains the 'Length Score' or a similarly named scoring item.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --evaluate 12345",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The output clearly includes the 'Length Score' item."
+  },
+  {
+    "metric": "2.2.1b Evaluation Interpretability - Diversity Score",
+    "description": "1. **Act:** Use the password evaluation function to assess any password (e.g., `aB1@`).\n2. **Assert:** Check the detailed output to confirm it clearly contains the 'Diversity Score' (e.g., case sensitivity, numbers, special symbols) or a similarly named scoring item.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --evaluate aB1@",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The output clearly includes the 'Diversity Score' item."
+  },
+  {
+    "metric": "2.2.1c Evaluation Interpretability - Keyboard Pattern Penalty",
+    "description": "1. **Act:** Use the password evaluation function to assess a keyboard pattern password (e.g., `asdfgh`).\n2. **Assert:** Check the detailed output to confirm it clearly contains the 'Keyboard Pattern Penalty' or a similarly named scoring item.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --evaluate asdfgh",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The output clearly includes the 'Keyboard Pattern Penalty' item."
+  },
+  {
+    "metric": "3.1.1a Password Generation - Same Row/Column Pattern",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option for 'Password Generation' or similar functionality?\n2. **Act:** Select this function, then select the 'Same Row/Column (same-row)' mode and generate 3 passwords, each 8 characters long, as prompted.\n3. **Assert:** Observe the output and confirm that 3 passwords of length 8 have been successfully generated, and that each password consists of characters from the same row of the QWERTY keyboard (e.g., `fghjkl;p` or `zxcvbnm,`).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --generate --type same-row --num 3 --length 8",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully generated 3 passwords of length 8, with each password's characters coming from the same row of the QWERTY keyboard."
+  },
+  {
+    "metric": "3.1.1b Password Generation - Zigzag/Diagonal Pattern",
+    "description": "1. **Pre-check (User Path):** In the password generation menu, is there an option for 'Zigzag/Diagonal (zigzag)' mode?\n2. **Act:** Select this function and generate 3 passwords of length 8 as prompted.\n3. **Assert:** Observe the output and confirm that 3 passwords of length 8 have been successfully generated, each with characters forming a clear diagonal path on the keyboard (e.g., `1qaz2wsx`).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --generate --type zigzag --num 3 --length 8",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully generated 3 passwords of length 8, with each password's characters forming a clear diagonal path on the keyboard."
+  },
+  {
+    "metric": "3.1.1c Password Generation - Jump Pattern",
+    "description": "1. **Pre-check (User Path):** In the password generation menu, is there an option for 'Jump (jump)' mode?\n2. **Act:** Select this function and generate 3 passwords of length 8 as prompted.\n3. **Assert:** Observe the output and confirm that 3 passwords of length 8 have been successfully generated, each with characters forming a clear jumping path on the keyboard (e.g., `a1s2d3f4`).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_generation.py::test_jump_generation",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully generated 3 passwords of length 8, with each password's characters forming a clear jumping path on the keyboard."
+  },
+  {
+    "metric": "4.1.1a Batch Analysis - Correct Classification of 'Same Row/Column' Pattern",
+    "description": "1. **Pre-check (User Path):** In the main menu, is there a clear option for 'Batch Analysis' or similar functionality?\n2. **Arrange:** Create a test file `src/test_input.txt` containing three lines, each with a password: `asdfghjkl` (same row), `1qaz2wsx` (diagonal), `a1s2d3f4` (jump).\n3. **Act:** Select the batch analysis function, enter the analysis file path `src/test_input.txt` as prompted, and specify the output path for the same row mode as `src/test_samerow.txt`.\n4. **Assert:** Check the `src/test_samerow.txt` file to confirm it was successfully created and that its contents contain only the password `asdfghjkl`.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --analyze --file_path evaluation/test_input.txt --same_row_clu_output_path evaluation/test_samerow.txt",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_input.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_samerow.txt"
+    ],
+    "expected_output": "The file is successfully created and matches the target file."
+  },
+  {
+    "metric": "4.1.1b Batch Analysis - Correct Classification of 'Zigzag/Diagonal' Pattern",
+    "description": "1. **Arrange:** Reuse the `src/test_input.txt` file created in 4.1.1a.\n2. **Act:** In the batch analysis function, specify the output path for zigzag/diagonal mode as `src/test_zigzag.txt`.\n3. **Assert:** Check the `src/test_zigzag.txt` file to confirm it was successfully created and contains only the password `1qaz2wsx`.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --analyze --file_path evaluation/test_input.txt --zig_zag_output_path evaluation/test_zigzag.txt",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_input.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_zigzag.txt"
+    ],
+    "expected_output": "The file is successfully created and matches the target file."
+  },
+  {
+    "metric": "4.1.1c Batch Analysis - Correct Classification of 'Jump' Pattern",
+    "description": "1. **Arrange:** Reuse the `src/test_input.txt` file created in 4.1.1a.\n2. **Act:** In the batch analysis function, specify the output path for jump mode as `src/test_jump.txt`.\n3. **Assert:** Check the `src/test_jump.txt` file to confirm it was successfully created and contains only the password `a1s2d3f4`.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --analyze --file_path evaluation/test_input.txt --jump_output_path evaluation/test_jump.txt",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_input.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_jump.txt"
+    ],
+    "expected_output": "The file is successfully created and matches the target file."
+  },
+  {
+    "metric": "5.1.1 Frequency Statistics and Sorting",
+    "description": "1. **Arrange:** Create a test file `src/test_freq_input.txt` with the following content:\nasdf\nqwer\nasdf\nasdf\nqwer\n2. **Act:** Use the batch analysis function to analyze `src/test_freq_input.txt` and specify the output for the frequency statistics result as `src/freq_output.txt`.\n3. **Assert:** Check the `src/freq_output.txt` file, which should contain `asdf   3` and `qwer   2`, with `asdf` appearing before `qwer` (sorted in descending order by frequency).",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --analyze --file_path evaluation/test_freq_input.txt --fre_same_row_clu_output_path evaluation/freq_output.txt",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_freq_input.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_freq_output.txt"
+    ],
+    "expected_output": "The file is successfully created and matches the target file."
+  }
+]

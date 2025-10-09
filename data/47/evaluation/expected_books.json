@@ -1,0 +1,13 @@
+[
+  {
+    "BookId": "ISBN001",
+    "BookName": "Python编程入门",
+    "Auth": "张三",
+    "Category": "计算机",
+    "Publisher": "人民出版社",
+    "PublishTime": "2023-01-01",
+    "NumStorage": 10,
+    "NumCanBorrow": 8,
+    "NumBookinged": 0
+  }
+]

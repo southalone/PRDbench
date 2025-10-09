@@ -1,0 +1,324 @@
+[
+  {
+    "metric": "1.1 Program Startup and Main Interface",
+    "description": "1. **Act:** Execute the program startup command in the command line (such as `python src/main.py` or `python lottery_system.py`).\n2. **Assert:** Observe whether the program starts successfully and displays a clear main menu or help information containing at least 3 function options (such as \"Import List\", \"Configure Lottery\", \"Start Lottery\").",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/startup_test.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts successfully and displays a colorful main menu with 9 function options, including Import List, View Statistics, Configure Lottery, Start Lottery, etc."
+  },
+  {
+    "metric": "2.1.1a List Import - CSV Format Support",
+    "description": "1. **User Path Pre-check:** On the main interface, is there a clear option like \"Import List\", \"Load Employee Data\", or similar?\n2. **Arrange:** Prepare a standard CSV file containing four fields: Name, Employee ID, Participation Score (integer), Length of Employment (months), with at least 5 employee records.\n3. **Act:** Select the list import function and specify the path to the prepared CSV file.\n4. **Assert:** Observe whether the program reads the file successfully and displays a confirmation of successful import.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/csv_import_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_5.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program displays option 1 to import list, successfully imports the CSV file, and shows confirmation of successful import and employee statistics"
+  },
+  {
+    "metric": "2.1.1b List Import - Text Format Support",
+    "description": "1. **User Path Pre-check:** In the list import function, is selecting a text format file supported?\n2. **Arrange:** Prepare an employee list file in text format containing the same four fields.\n3. **Act:** Select the text format import option and specify the file path.\n4. **Assert:** Observe whether the program can successfully parse the text format file.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/txt_import_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_5.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program can successfully import text format files and show confirmation of successful import"
+  },
+  {
+    "metric": "2.1.2a Field Validation - Required Field Integrity Check",
+    "description": "1. **Arrange:** Prepare a CSV file missing required fields (such as missing the Employee ID column).\n2. **Act:** Attempt to import the file.\n3. **Assert:** Observe whether the program detects missing fields and displays a Chinese error message like \"Missing required field: Employee ID\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/missing_field_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_missing_field.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program detects missing fields and displays a Chinese error message such as 'Missing required field: Employee ID'"
+  },
+  {
+    "metric": "2.1.2b Field Validation - Data Format Error Check",
+    "description": "1. **Arrange:** Prepare a CSV file with data format errors (such as a Score field containing non-numeric content like \"abc\").\n2. **Act:** Attempt to import the file.\n3. **Assert:** Observe whether the program detects format errors and displays a Chinese error message like \"Score field must be an integer\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/invalid_format_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_invalid_format.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program detects format errors and displays a Chinese error message such as 'Score field must be an integer'"
+  },
+  {
+    "metric": "2.1.3 Statistics Display - Total Number of People, Department Proportion, Score Distribution",
+    "description": "1. **Arrange:** Import an employee list with different department IDs (such as 3 people starting with 01, 2 with 02), and score range from 50-200.\n2. **Act:** View statistics after importing.\n3. **Assert:** Verify whether the program correctly displays: (a) total count is 5, (b) correctly parses the first 2 digits of the Employee ID as department code and calculates each department's proportion (01 department 60%, 02 department 40%), (c) max, min, and average score statistics.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/department_stats_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_departments.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program correctly displays a total of 5 people, accurately parses department codes and proportions (01 department 60%, 02 department 40%), and correctly displays max, min, and average score statistics"
+  },
+  {
+    "metric": "2.1.4 List Preview - Length of Employment Sorting (Ascending/Descending)",
+    "description": "1. **User Path Pre-check:** In the list management function, is there an option like \"Preview List\" or \"View Employees\"?\n2. **Arrange:** Make sure an employee list with different lengths of employment is imported.\n3. **Act:** Select the preview function, sort by ascending employment length, then descend.\n4. **Assert:** Verify the program provides ascending/descending choices, sorts records correctly from shortest to longest and vice versa.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/preview_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program displays option 3 to preview list, provides ascending/descending selection, correctly sorts and displays records in both orders"
+  },
+  {
+    "metric": "2.1.5 Exact Employee ID Query Function",
+    "description": "1. **User Path Pre-check:** In the list management function, is there an option such as \"Query Employee\" or \"Employee ID Search\"?\n2. **Arrange:** Remember the employee ID of someone already imported.\n3. **Act:** Select the query function and input the ID.\n4. **Assert:** Verify the program returns complete info for that employee (name, ID, score, employment length).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/employee_query_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program displays option 4 to query employee, can accurately search by employee ID and return complete information"
+  },
+  {
+    "metric": "2.2.1 Prize Configuration - Add Prizes, Name Uniqueness, Count Validation",
+    "description": "1. **User Path Pre-check:** On the main interface, is there a clear option like \"Configure Prizes\", \"Set Lottery\", or similar?\n2. **Act:** Select prize configuration and test: (a) basic function of adding new prizes, (b) attempt to add duplicates, (c) input invalid (non-positive integer) counts.\n3. **Assert:** Verify: (a) input screen for prize name and count is provided, (b) duplicate names are detected and addition refused, (c) invalid counts are rejected and program requires positive integer.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/prize_config_comprehensive_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program provides a complete prize configuration screen, correctly checks for unique names and valid counts, and gives clear prompts"
+  },
+  {
+    "metric": "2.2.2 Weight Rules and Duplicate Win Configuration Function",
+    "description": "1. **User Path Pre-check:** In prize configuration, is there a selection screen for weight calculation rules and duplicate win configuration?\n2. **Act:** Test three weight options in turn (average weight, score weight, employment length weight) and duplicate win options (allow/not allow).\n3. **Assert:** Verify program offers a complete weight selection screen, containing three options with explanations, and duplicate win configuration.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/weight_and_duplicate_config_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program provides a complete weight selection screen (average, score, employment length weighting), duplicate win option, with explanations for each"
+  },
+  {
+    "metric": "2.2.3 Prize Count Limit Validation",
+    "description": "1. **Act:** Add 5 prizes.\n2. **Assert:** Verify after adding 5 prizes, the program no longer gives the option to add more, enforcing the prize count limit.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/prize_limit_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program correctly limits the number of prizes to 5, and does not allow adding more prizes after reaching the limit"
+  },
+  {
+    "metric": "2.2.4 Rule Summary - Prize List, Total Number of Prizes, Duplicate Win Risk Reminder",
+    "description": "1. **Arrange:** Configure multiple prizes, some allowing duplicate wins (e.g., First Prize 1, Second Prize 2, Third Prize 3, some allow duplication).\n2. **Act:** View rule summary.\n3. **Assert:** Check the summary: (a) lists all configured prize names and counts, (b) correctly displays total number of prizes as 6, (c) contains information reminding of duplicate win risk.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/summary_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The rule summary lists all prize names and counts, total number is 6, and contains duplicate win risk reminder"
+  },
+  {
+    "metric": "2.3.1 Lottery Execution, Results Display, and File Saving Comprehensive Function",
+    "description": "1. **User Path Pre-check:** After configuring prizes, are there clear options such as \"Start Lottery\", \"Execute Lottery\"? After the drawing, are there options like \"Save Results\", \"Export Report\"?\n2. **Arrange:** Configure 3 prizes with different priorities (First, Second, Third).\n3. **Act:** Select start lottery and execute the full process, observe the whole procedure and result display, then choose result saving.\n4. **Assert:** Verify program: (a) starts the lottery process, (b) strictly draws in First→Second→Third order, (c) shows dynamic progress and waiting prompts, (d) displays results grouped by prize, (e) each winner shown with serial number, name, employee ID, department, (f) TXT result file generated successfully.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/lottery_start_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_outputs/sample_result.txt"
+    ],
+    "expected_output": "The program successfully starts the lottery, strictly follows the order, shows dynamic progress, displays results by prize group, each winner shown with serial number, name, employee ID, department, and successfully generates TXT result file"
+  },
+  {
+    "metric": "2.3.2 Weighted Random Sampling Implementation",
+    "description": "1. **Arrange:** Configure prize with score weighting, with employees of obviously different scores (e.g., 200 and 50 points).\n2. **Act:** Execute the lottery 20 times, record win counts for high and low score employees.\n3. **Assert:** Check if high score employee has a clearly higher win frequency than low score employee (proportions should roughly match scores).",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_weighted_sampling.py::TestWeightedSampling::test_score_weighted_lottery -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_score_extreme.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "High score employees win much more often than low score employees, as expected for weighted random sampling"
+  },
+  {
+    "metric": "2.3.3 Automatic Duplicate Win Exclusion Mechanism",
+    "description": "1. **Arrange:** Configure several prizes not allowing duplicate wins, with total employees fewer than total prizes.\n2. **Act:** Execute full lottery process.\n3. **Assert:** Verify the final result has absolutely no duplicate wins.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_no_duplicate.py::TestNoDuplicate::test_no_duplicate_winners -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_5.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "No duplicate winners at all, exclusion mechanism works perfectly"
+  },
+  {
+    "metric": "2.3.4 Handling Mechanism for Insufficient Candidate Pool",
+    "description": "1. **Arrange:** Configure total prizes to exceed total employees (e.g., 10 people, 15 prizes).\n2. **Act:** Execute lottery process.\n3. **Assert:** Verify the program gives a prompt and correctly terminates the current prize draw when insufficient candidates.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/insufficient_pool_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_5.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program detects insufficient candidates, gives clear prompt, and correctly terminates the current prize draw"
+  },
+  {
+    "metric": "2.4.1 Fairness Report - Z-test and Chi-square Test Implementation",
+    "description": "1. **Arrange:** Complete a lottery using score weighting and employees from multiple departments.\n2. **Act:** View the automatically generated fairness report.\n3. **Assert:** Verify the report contains: (a) Z-test results comparing average score for winners of each prize and the overall group, including p-value, (b) Chi-square test results comparing department win rate with department size proportion, including χ² and p-value.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_fairness_report.py::TestFairnessReport::test_statistical_tests -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_departments.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Z-test and Chi-square test correctly implemented, p-value, χ² value, and statistical conclusions displayed"
+  },
+  {
+    "metric": "2.4.2 Automatic Randomness Marking Feature",
+    "description": "1. **Arrange:** Execute a lottery and ensure a fairness report is generated.\n2. **Act:** View the p-value in the report.\n3. **Assert:** Verify if Z-test or chi-square test p-value is greater than 0.05, the program marks \"Statistical result meets randomness requirements\" automatically.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_fairness_report.py::TestFairnessReport::test_randomness_marking -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "p-value logic implemented correctly and randomness marking added automatically"
+  },
+  {
+    "metric": "2.4.3a Result Saving - File Name Format Specification",
+    "description": "1. **Act:** After generating result file, check its name.\n2. **Assert:** Verify strict adherence to the format \"Lottery_result_YYYYMMDD_HHMMSS.txt\" (for example \"Lottery_result_20240315_143022.txt\").",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_file_operations.py::TestFileOperations::test_filename_format -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_5.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "File name strictly matches the specified format and contains correct date and time"
+  },
+  {
+    "metric": "2.4.3b Result Saving - File Content Completeness",
+    "description": "1. **Act:** Open the generated TXT result file.\n2. **Assert:** Verify the file contains both complete win results and fairness report sections.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python -m pytest evaluation/tests/test_file_operations.py::TestFileOperations::test_file_content_completeness -v",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data/employees_10.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_outputs/complete_report.txt"
+    ],
+    "expected_output": "File contains both the complete win result and fairness report sections"
+  }
+]

@@ -1,0 +1,117 @@
+[
+  {
+    "metric": "0.1 System Startup and Main Menu Presentation",
+    "description": "Execute the startup command. Observe if the command line starts without error and displays a main menu with five distinct top-level options: 'Data Management', 'Cost Calculation', 'Package Generation', 'Package Evaluation', 'Exit'.",
+    "expected_output": "2 points: Successfully starts the program and clearly displays all 5 main menu options. 1 point: Program starts but the main menu is missing 1-2 options or the options are garbled/unintelligible. 0 points: Program fails to start, crashes immediately after startup, or the main menu is missing more than 2 options."
+  },
+  {
+    "metric": "2.5.2 Menu Navigation and Exit Logic",
+    "description": "1. Pre-check (user path): Ensure 'Data Management', 'Cost Calculation', 'Package Generation', 'Package Evaluation' are accessible from the main menu. 2. Prepare: Enter the submenus 'Data Management', 'Cost Calculation', 'Package Generation', 'Package Evaluation'. 3. Execute: Enter 'q' and press enter in each submenu interface. 4. Assert: Verify if, after each operation, the program accurately returns to the main menu interface instead of exiting the program or becoming unresponsive.",
+    "expected_output": "2 points: Accurately returns to the main menu upon entering 'q' in all (4) submenus. 1 point: Returns to the main menu in 1-2 submenus with at least one submenu failing or causing exit of the program. 0 points: The 'q' return function is ineffective in all submenus."
+  },
+  {
+    "metric": "2.1.1a Successful Import of Ingredient CSV Data",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm the presence of a distinct 'Import Ingredient CSV' option. If inaccessible, this scores 0 points. 2. Prepare: Create a file named `ingredients.csv` containing 5 rows of data fully compliant with the PRD specifications. 3. Execute: Navigate to the 'Import Ingredient CSV' feature, enter the path of `ingredients.csv` as prompted. 4. Assert: Verify if the command line outputs a clear message 'Successfully imported 5 pieces of ingredient data'.",
+    "expected_output": "2 points: Successfully recognizes and completely imports all 5 data entries, providing a success message with the correct number. 1 point: Imports but with fewer than 5 entries or without a success message. 0 points: Pre-check fails, or fails to import a compliant CSV file, or import causes program crash."
+  },
+  {
+    "metric": "2.1.1b Verification of Ingredient CSV Import Failure",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm the presence of a distinct 'Import Ingredient CSV' option. If inaccessible, this scores 0 points. 2. Prepare: Create a file named `bad_ingredients.csv` with the second row having a non-numeric text in the 'Purchase Price' column (e.g., 'abc'). 3. Execute: Attempt to import `bad_ingredients.csv`. 4. Assert: Verify if the program fails to import, displaying a Chinese error message containing keywords like 'Row 2' and 'Price' or 'Format Error'.",
+    "expected_output": "2 points: Fails to import and precisely indicates the error at 'Row 3' and the specific reason ('Price format error'). 1 point: Indicates an error but does not contain both accurate row number and specific reason. 0 points: Pre-check fails, importing erroneous CSV format crashes the program, or no error message is displayed."
+  },
+  {
+    "metric": "2.1.2a Manual Entry of Ingredients - Successful Path",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm a distinct 'Manual Entry of Ingredients' option. If inaccessible, this scores 0 points. 2. Prepare: Prepare a set of complete and valid ingredient data (e.g., I100, Potato, Vegetable, kg, 5, 10). 3. Execute: Enter the 'Manual Entry of Ingredients' feature, follow prompts to input all prepared valid data. 4. Assert: Verify if all data is successfully input and a 'Ingredient entry successful' message is received at the final step.",
+    "expected_output": "2 points: Guides user through inputting all fields successfully, saving data and providing a success message at the end. 1 point: Completes entry and saves data but lacks a final success message. 0 points: Pre-check fails, errors occur during the entry of valid data and entry cannot be completed."
+  },
+  {
+    "metric": "2.1.2b Manual Entry of Ingredients - Input Validation",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm a distinct 'Manual Entry of Ingredients' option. If inaccessible, this scores 0 points. 2. Prepare: Enter the 'Manual Entry of Ingredients' feature. 3. Execute: When prompted to input 'Processing Loss Rate (%)', enter an invalid value like '50'. 4. Assert: Verify if the system displays a Chinese error message containing keywords like 'between 0-30', allowing the user to re-enter the field.",
+    "expected_output": "2 points: For invalid loss rate input, displays a clear Chinese error message and allows re-entry. 1 point: Provides an error message but unclear (like merely 'Input Error'), or does not allow re-entry after the message. 0 points: Pre-check fails or inputting invalid value crashes the program or directly accepts the invalid value without reaction."
+  },
+  {
+    "metric": "2.1.3a Ingredient Data Query - By Name",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm the presence of a distinct 'Query Ingredients' option. If inaccessible, this scores 0 points. 2. Prepare: Ensure the database contains the ingredient named 'Wuchang Rice'. 3. Execute: Enter 'Query Ingredients' feature, choose to query by name, and input 'Wuchang Rice'. 4. Assert: Verify if the query result correctly displays all information of 'Wuchang Rice', including price, loss rate, stock quantity, etc.",
+    "expected_output": "2 points: Precisely queries by name and displays complete information of that ingredient. 1 point: Results are queried but information displayed is incomplete (missing 1-2 fields). 0 points: Pre-check fails, cannot query for existing ingredients, or errors in the querying process."
+  },
+  {
+    "metric": "2.1.3b Ingredient Data Query - By Category",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm the presence of a distinct 'Query Ingredients' option. If inaccessible, this scores 0 points. 2. Prepare: Ensure the database contains at least 2 ingredients categorized as 'Staple Food'. 3. Execute: Enter 'Query Ingredients' feature, choose to query by category, and input 'Staple Food'. 4. Assert: Verify if the query results display all ingredient information categorized as 'Staple Food' as a list.",
+    "expected_output": "2 points: Can query and list all ingredients under that category. 1 point: Results are queried but only one ingredient is listed among them. 0 points: Pre-check fails, cannot query any results, or errors occur during the querying process."
+  },
+  {
+    "metric": "2.1.4 Adding Extra Cost Items",
+    "description": "1. Pre-check (user path): Select 'Data Management' in the main menu, confirm the presence of a distinct 'Manage Extra Costs' or similar option. 2. Prepare: Enter the feature and select 'Add'. 3. Execute: Follow prompts to input a new cost item name and amount. 4. Assert: Verify if the system displays an 'Addition Successful' message and the new cost item can be selected in the 'Package Cost Calculation' process.",
+    "expected_output": "2 points: Successfully guides user to input and save a new cost item, with a success message, and the new item is available during cost calculation. 1 point: Successfully saves but no message displayed or new item cannot be used in cost calculation. 0 points: Pre-check fails, errors occur during addition and cannot save."
+  },
+  {
+    "metric": "2.2.1 Single Ingredient Cost Calculation",
+    "description": "1. Pre-check (user path): Select 'Cost Calculation' in the main menu, confirm the presence of a distinct 'Create New Package' option. If inaccessible, this scores 0 points. 2. Prepare: Assume the ingredient 'Wuchang Rice' price is 10 RMB/kg, loss rate is 10%. 3. Execute: Enter 'Create New Package', add ingredient 'Wuchang Rice', input amount '0.15'. 4. Assert: Verify if the system calculates the item cost as 10 * 0.15 * (1 + 10/100) = 1.65 RMB.",
+    "expected_output": "2 points: Correctly creates package, supports decimal point amount input, precisely calculates single item cost including loss rate (with result rounded to two decimals). 1 point: Calculates cost but formula is incorrect (e.g., loss rate not included), does not support decimal point, or result precision is incorrect. 0 points: Pre-check fails, cannot add ingredient, or cannot calculate single item cost."
+  },
+  {
+    "metric": "2.2.2a Total Cost Calculation - Cost Summary",
+    "description": "1. Pre-check (user path): Confirm 'Create New Package' is usable. 2. Prepare: In a package with two added ingredients, respective calculated costs are 1.65 RMB and 5.25 RMB. Packaging box cost is fixed at 1.5 RMB. 3. Execute: Complete ingredient addition and go to cost summary step. 4. Assert: Verify if the system displays total cost summed as 1.65 + 5.25 + 1.5 = 8.40 RMB.",
+    "expected_output": "2 points: Correctly summarizes all ingredient costs and preset packaging box costs. 1 point: Inaccurate total cost calculation, such as missing packaging box cost inclusion. 0 points: Pre-check fails, cannot calculate total cost."
+  },
+  {
+    "metric": "2.2.2b Total Cost Calculation - Dynamic Adjustment",
+    "description": "1. Pre-check (user path): Confirm 'Create New Package' is usable and total cost can be calculated. 2.Prepare: In a package with a total cost of 8.40 RMB, the disposable tableware cost is 0.8 RMB. 3. Execute: When selecting extra cost items, select 'y' for disposable tableware, 'n' for others. 4.Assert: Verify if the final total cost updates to 8.40 + 0.8 = 9.20 RMB.",
+    "expected_output": "2 points: Can dynamically add extra cost items based on user choice and correctly updates total cost. 1 point: Can select but does not update total cost or updates incorrectly. 0 points: Pre-check fails, does not provide dynamic adjustment of extra cost feature."
+  },
+  {
+    "metric": "2.2.3 Cost Detail Report Formatting",
+    "description": "1. Pre-check (user path): Confirm package cost can be successfully calculated. 2. Prepare: Complete a package cost calculation including at least 2 types of ingredients. 3.Execute: View the final output of the cost detail report. 4. Assert: Verify if the report is a table with clear borders and headers (like ingredient, amount, cost), and all data columns are vertically aligned.",
+    "expected_output": "2 points: Output is a clear, well-aligned table with borders and headers. 1 point: Report output exists but not table formatted, or formatting is chaotic with unaligned data. 0 points: Pre-check fails, or no cost detail report output."
+  },
+  {
+    "metric": "2.3.1a Intelligent Package Generation - Parameter Input",
+    "description": "1. Pre-check (user path): Select 'Package Generation' in the main menu, confirm access to the feature. If inaccessible, this scores 0 points. 2.Prepare: Prepare a set of valid generation parameters (e.g., Single Meal, 0.9 Discount, 30% Profit Margin, High Inventory Priority). 3. Execute: Enter 'Package Generation' module, enter all valid parameters in sequence. 4.Assert: Verify if all parameters are successfully entered and proceed to the subsequent package generation phase instead of error or getting stuck.",
+    "expected_output": "2 points: Successfully receives all valid parameters defined in the PRD and smoothly proceeds to the next step. 1 point: Receives most parameters but unable to enter or results in errors with a certain valid parameter. 0 points: Pre-check fails, cannot enter any parameter."
+  },
+  {
+    "metric": "2.3.1b Intelligent Package Generation - Parameter Validation",
+    "description": "1. Pre-check (user path): Select 'Package Generation' in the main menu, confirm access to the feature. If inaccessible, this scores 0 points. 2.Prepare: Enter 'Package Generation' module. 3. Execute: When prompted to input 'Discount Rate', enter an invalid value '1.1'. 4.Assert: Verify if the system displays a Chinese error message containing 'between 0.1-1.0' and requires re-entry.",
+    "expected_output": "2 points: For invalid discount input, displays a clear Chinese error message and allows re-entry. 1 point: Error message exists but content is unclear, or does not allow re-entry after displaying message. 0 points: Pre-check fails, inputting invalid value crashes the program, or accepts invalid value without any response."
+  },
+  {
+    "metric": "2.3.2 Core Combination Logic and Nutritional Constraints",
+    "description": "1. Pre-check (user path): Confirm 'Package Generation' feature can be normally accessed and parameters are inputtable. 2.Prepare: Ensure the ingredient library contains ample ingredients of Staple Food, Protein, Vegetable categories. Request generation of a 'Single Meal'. 3. Execute: Observe the 3-5 candidate packages generated. 4.Assert: Check all generated candidate packages, verify if each group strictly contains: at least 1 Staple Food (≥0.1kg), at least 1 Protein (≥0.08kg), and at least 1 Vegetable (≥0.1kg).",
+    "expected_output": "2 points: All (100%) candidate packages strictly satisfy all nutritional categories and minimum quantity constraints. 1 point: Among generated packages, more than 50% but less than 100% satisfy all constraints. 0 points: Pre-check fails, or proportion of packages satisfying all constraints equals or is lower than 50%, or cannot generate packages."
+  },
+  {
+    "metric": "2.3.3a Suggested Price - Basic Calculation",
+    "description": "1. Pre-check (user path): Confirm package can be successfully generated. 2.Prepare: Generate a package, note its total cost is 20.5 RMB, set profit margin at 30%. 3.Execute: View the suggested selling price. 4. Assert: Verify if the system calculates the basic selling price as 20.5 * (1 + 0.3) ≈ 29.25 RMB, allowing an error of 0.01.",
+    "expected_output": "2 points: Suggesting price calculation fully complies with the formula 'cost/(1-profit margin)'. 1 point: Selling price calculation exists but deviation from formula result exceeds 0.01 RMB. 0 points: Pre-check fails, suggest selling price calculation completely erroneous, or not displayed."
+  },
+  {
+    "metric": "2.3.3b Suggested Price - Constraint and Rounding",
+    "description": "1. Pre-check (user path): Confirm package can be successfully generated and basic selling price is calculable. 2.Prepare: Package with basic calculated selling price has a minimum price constraint of 28 RMB. 3. Execute: View the finally displayed suggested selling price. 4.Assert: Verify if the final selling price satisfies the minimum price constraint (≥28) and is rounded.",
+    "expected_output": "2 points: Correctly processes rounding and meets the minimum price constraint. 1 point: Correctly processes only one logic (e.g., rounding correct but minimum price not considered, or vice versa). 0 points: Pre-check fails, neither logic is correctly processed."
+  },
+  {
+    "metric": "2.4.1a Package Evaluation - Profit Margin Calculation",
+    "description": "1. Pre-check (user path): Confirm candidate package list can be successfully generated and displayed. 2.Prepare: Choose a candidate package, record its Total Cost C, Selling Price S, Discount D (e.g., 0.9). 3. Execute: View the profit margin displayed by the system. 4. Assert: Verify if the system profit margin equals (S*D - C) / C calculation result (in percentage, allows 0.1% error).",
+    "expected_output": "2 points: Profit margin formula is entirely correct, displayed accurately across all candidate packages. 1 point: Profit margin calculation result exists but deviation from formula result exceeds 0.1%. 0 points: Pre-check fails, profit margin calculation completely erroneous, or not displayed."
+  },
+  {
+    "metric": "2.4.1b Package Evaluation - Nutritional Score Calculation",
+    "description": "1. Pre-check (user path): Confirm candidate package list can be successfully generated and displayed. 2. Prepare: Choose a candidate package containing 4 different ingredients. 3.Execute: View the nutritional score displayed by the system. 4. Assert: Verify if its nutritional score equals 5 + (4 - 3) = 6 points.",
+    "expected_output": "2 points: Nutritional score formula is entirely correct, displayed accurately across all candidate packages. 1 point: Nutritional score result exists but does not match formula calculation result. 0 points: Pre-check fails, nutritional score calculation completely erroneous, or not displayed."
+  },
+  {
+    "metric": "2.4.2a Result Output - Profit Margin Sorting",
+    "description": "1. Pre-check (user path): Confirm candidate package list can be successfully generated and displayed. 2. Prepare: Generate at least 3 candidate packages. 3.Execute: View the generated candidate package list. 4. Assert: Verify if the list is strictly arranged in descending order of 'Profit Margin'.",
+    "expected_output": "2 points: List is strictly sorted from highest to lowest by profit margin. 1 point: List exists but not sorted, or sorting rule incorrect. 0 points: Pre-check fails, or no result output."
+  },
+  {
+    "metric": "2.4.2b Result Output - Tabular Display",
+    "description": "1. Pre-check (user path): Confirm candidate package list can be successfully generated and displayed. 2. Prepare: Generate candidate package. 3.Execute: View the generated candidate package list. 4.Assert: Verify if the entire list is displayed in a table format with borders and headers, containing at least 5 key data columns like package number, cost, selling price, profit margin, nutritional score, and data aligned.",
+    "expected_output": "2 points: Displayed in clear table format, containing all 5 or more key data columns. 1 point: Displayed in table format but contains less than 5 key data columns (e.g., missing 2-3 columns). 0 points: Pre-check fails, output format as unstructured plain text, or missing more than 3 key columns."
+  },
+  {
+    "metric": "2.4.3 Package Save Function",
+    "description": "1. Pre-check (user path): Confirm candidate package list can be successfully generated and displayed. 2.Prepare: In the generated candidate package list, there is a package numbered '1'. 3. Execute: Follow prompts, input package number '1' to save. 4.Assert: Verify if the program provides a clear save success message including an auto-generated package name (e.g., 'Single Nutrition Package 1').",
+    "expected_output": "2 points: Successfully executes save operation, providing clear success message containing new package name. 1 point: Saves successfully but lacks message or message lacks new package name. 0 points: Pre-check fails, save function ineffective, or causes program error during saving."
+  }
+]

@@ -1,0 +1,332 @@
+[
+  {
+    "metric": "0.1.1 Environment and Documentation: Provide clear documentation (README.md)",
+    "description": "1. **Assert**: Check if the `README.md` file exists in the project root directory.\n2. **Assert**: If it exists, read its content and verify that it contains at least three clear sections: project introduction, environment setup instructions (how to install dependencies), and application startup commands.",
+    "type": "file_comparison",
+    "test_command": null,
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The README.md file exists. Its content is verified to contain at least three distinct sections: project introduction, environment setup instructions (how to install dependencies), and program startup commands.",
+    "testcases": [
+      {
+        "test_command": null,
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "0.2.1 Program Executability: The program can start successfully and display the main menu",
+    "description": "1. **Act**: Execute the program using the startup command from `README.md` (e.g., `python main.py`).\n2. **Assert**: Observe the program output to verify that it has started successfully and displays an interactive main menu interface with multiple options.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_0.2.1.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Main menu: Please select a module",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_0.2.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "0.3.1 Unit Testing: Executable unit tests are provided",
+    "description": "1. **Prepare**: Check if there are test files (such as `test_*.py`) under the `tests/` directory.\n2. **Act**: Run the test commands (e.g., `pytest` or `python -m unittest discover tests`).\n3. **Assert**: Observe the test results, verifying that the testing framework runs successfully and that all discovered test cases show as \"PASSED\".",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_unit_tests.py",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "All (1) unit tests passed",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_unit_tests.py",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "1.1.2 Module Navigation and Return: Able to smoothly navigate between modules",
+    "description": "1. **Pre-check (User Path)**: Does the main menu clearly show the entry for the \"Dish Data Management\" module?\n2. **Act**: On the main menu, select the option to enter the \"Dish Data Management\" module.\n3. **Assert**: Verify the program enters its corresponding submenu.\n4. **Act**: In the submenu, find and use the option to return to the main menu.\n5. **Assert**: Check that the program successfully returns to the main menu interface.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_1.1.2.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Relevant main menu entries",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_1.1.2.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1 Dish Creation (C): Add new dishes via interactive CLI",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Add Dish\" or similar option?\n2. **Prepare**: Navigate to the \"Add Dish\" feature.\n3. **Act**: Following program prompts, enter the dish name \"Test Dish A\", category \"Test Category\", price \"50\", and cooking time \"10\".\n4. **Assert**: Confirm the program clearly indicates \"Successfully added\" or similar message.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.1.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully added dish 'Test Dish A'",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2a Dish Retrieval (R): Search by Name",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Search Dish\" or similar option?\n2. **Prepare**: Make sure \"Test Dish A\" exists in the system.\n3. **Act**: Use the \"Search Dish\" function, select search by \"Name\", and enter \"Test Dish A\".\n4. **Assert**: Verify the returned result precisely contains \"Test Dish A\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.2a.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Record entry for Test Dish A",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2b Dish Retrieval (R): Search by Category",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Search Dish\" or similar option, and does it support searching by \"Category\"?\n2. **Prepare**: Ensure at least one dish exists with the category \"Test Category\".\n3. **Act**: Use the \"Search Dish\" function, choose search by \"Category\", and enter \"Test Category\".\n4. **Assert**: Confirm the results include all dishes belonging to \"Test Category\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.2b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Record entry for Test Category",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3 Dish Update (U): Update dish information",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Update Dish\" or similar option?\n2. **Prepare**: Ensure \"Test Dish A\" exists and its price is \"50\".\n3. **Act**: Navigate to the \"Update Dish\" feature, select \"Test Dish A\", and update its price to \"60\".\n4. **Assert**: Search again for \"Test Dish A\" and confirm its price has changed to \"60\".",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.3.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Record entry for Test Dish A",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.3.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4 Dish Deletion (D): Delete dish and confirm action",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Delete Dish\" or similar option?\n2. **Prepare**: Ensure \"Test Dish A\" exists.\n3. **Act**: Navigate to the \"Delete Dish\" feature, select \"Test Dish A\". When confirmation is needed, enter a positive answer (such as 'y' or 'yes').\n4. **Assert**: Try to search for \"Test Dish A\" again and confirm it can no longer be found.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.4.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "No data found.",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.4.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.5 Batch Import of Dishes: Import from CSV file",
+    "description": "1. **Pre-check (User Path)**: In the \"Dish Data Management\" menu, is there a clear \"Batch Import Dishes\" or similar option?\n2. **Prepare**: Create a file named `dishes_to_import.csv` containing 3 correctly formatted dish records.\n3. **Act**: Use the \"Batch Import Dishes\" feature and provide the file path above.\n4. **Assert**: Search for these 3 dishes one by one and ensure they have all been successfully imported into the system.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.1.5.in",
+    "input_files": [
+      "evaluation/test_data/dishes_to_import.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Record entry for Test Dish X",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.1.5.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1a Ingredient Cost Analysis: Calculate Dish Cost",
+    "description": "1. **Pre-check (User Path)**: In the main menu, is there an entry for \"Ingredient Analysis\" module, and within it, a \"Cost Structure Analysis\" feature?\n2. **Prepare**: Create `ingredients_A.csv` defining total ingredient cost for \"Test Dish A\" as 20 yuan. Upload or link this file.\n3. **Act**: Perform \"Cost Structure Analysis\" for \"Test Dish A\".\n4. **Assert**: Verify the output clearly shows \"ingredient cost\" is 20 or 20.0.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.2.1a.in",
+    "input_files": [
+      "evaluation/test_data/ingredients_A.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Details of cost composition",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.2.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1b Ingredient Cost Analysis: Calculate Gross Profit Margin",
+    "description": "1. **Pre-check (User Path)**: In the main menu, is there an entry for \"Ingredient Analysis\" module, and within it, a \"Cost Structure Analysis\" feature?\n2. **Prepare**: \"Test Dish A\" price is 60, cost is 20.\n3. **Act**: Perform \"Cost Structure Analysis\" for \"Test Dish A\".\n4. **Assert**: Confirm the output clearly shows \"Gross Profit Margin\" as 66.7% or 0.667 (allowing a deviation of +/-0.1 precision).",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.2.1b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Gross profit margin information",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.2.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2 Allergen Identification: Mark dishes containing allergens",
+    "description": "1. **Pre-check (User Path)**: Is there an \"Allergen Identification\" feature in the \"Ingredient Analysis\" module?\n2. **Prepare**: Create `ingredients_B.csv` to add \"peanut\" as an ingredient to a dish. Upload or link this file.\n3. **Act**: Run the \"Allergen Identification\" function.\n4. **Assert**: Verify the system correctly marks the dish as containing \"nuts\" or \"peanuts\" allergens.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.2.2.in",
+    "input_files": [
+      "evaluation/test_data/ingredients_B.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "List of dishes containing allergens",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.2.2.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1a Sales Trend Analysis: Monthly Statistics",
+    "description": "1. **Pre-check (User Path)**: Is there an entry for \"Sales Data Analysis\" module in the main menu, and within it, a \"Sales Trend Analysis\" feature?\n2. **Act**: After importing order data, execute \"Sales Trend Analysis\" and choose the \"Monthly\" dimension.\n3. **Assert**: Check the output correctly shows June sales as 100 and July sales as 150.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.3.1a.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Sales trend analysis (monthly) list",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.3.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1b Sales Trend Analysis: Weekly Statistics",
+    "description": "1. **Pre-check (User Path)**: In the \"Sales Trend Analysis\" feature, is there an option for weekly analysis?\n2. **Act**: Run \"Sales Trend Analysis\" and choose the \"Weekly\" dimension.\n3. **Assert**: Confirm output correctly displays sales numbers for each week.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.3.1b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Sales trend analysis (weekly) list",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.3.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1c Sales Trend Analysis: Daily Statistics",
+    "description": "1. **Pre-check (User Path)**: In the \"Sales Trend Analysis\" feature, is there an option for daily analysis?\n2. **Act**: Run \"Sales Trend Analysis\" and choose the \"Daily\" dimension.\n3. **Assert**: Confirm output correctly displays sales numbers for each day.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.3.1c.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Sales trend analysis (daily) list",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.3.1c.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1 Dish Similarity Matching: Group similar dishes",
+    "description": "1. **Pre-check (User Path)**: Is there an entry for \"Dish Similarity Matching\" module in the main menu?\n2. **Prepare**: Create `approximate_dishes.csv` containing \"Braised Beef\" and \"Braised Beef Noodles\". Upload the file.\n3. **Act**: Run the \"Dish Similarity Matching\" function.\n4. **Assert**: Check the match result to verify \"Braised Beef\" and \"Braised Beef Noodles\" are grouped together as similar.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.4.1.in",
+    "input_files": [
+      "evaluation/test_data/approximate_dishes.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Braised Beef",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.4.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.1 Result Visualization: Use text tables or ASCII charts",
+    "description": "1. **Act**: Execute the \"Sales Trend Analysis\" function.\n2. **Assert**: Observe its output and confirm results are formatted as row/column-aligned text tables, or bar/line charts made of ASCII characters, rather than unformatted plain text.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.5.1.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Sales trend analysis (daily) list",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.5.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.2 Progress Visualization: Show progress bar for large data import",
+    "description": "1. **Pre-check (User Path)**: Confirm \"Batch Import Dishes\" feature is available.\n2. **Prepare**: Create a `large_import.csv` file containing at least 500 rows of data.\n3. **Act**: Run batch import and observe the command line interface.\n4. **Assert**: Confirm that while reading and processing the file, the CLI displays a dynamically updating text progress bar from 0% to 100%.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.5.2.in",
+    "input_files": [
+      "evaluation/test_data/large_import.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Progress bar for batch import is shown",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.5.2.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.5.3 Error Handling: Invalid Input Handling",
+    "description": "1. **Act**: On the main menu, enter an obviously nonexistent option (such as `999` or `xyz`).\n2. **Assert**: Verify the program prints a clear error message like \"Invalid input, please try again\" and stays at the current menu, without crashing or becoming unresponsive.",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py",
+    "test_input": "evaluation/inputs_for_test_2.5.3.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Invalid input, please try again",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs_for_test_2.5.3.in"
+      }
+    ]
+  }
+]

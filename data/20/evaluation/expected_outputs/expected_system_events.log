@@ -1,0 +1,4 @@
+[2025-01-20 16:00:00] [INFO] Generated new key pair for user '测试用户8'
+[2025-01-20 16:00:01] [INFO] Issued new certificate for user '测试用户8' to data/certs/测试用户8.pem
+[2025-01-20 16:00:02] [INFO] Successfully authenticated user '测试用户8'
+[2025-01-20 16:00:03] [INFO] Revoked certificate with serial number 123456789. CRL updated.

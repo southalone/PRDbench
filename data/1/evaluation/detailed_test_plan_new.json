@@ -1,0 +1,197 @@
+[
+  {
+    "metric": "0.1.1 环境与文档：提供清晰的说明文档（README.md）",
+    "description": "1. **断言**：检查项目根目录下是否存在 `README.md` 文件.\n2. **断言**：若文件存在，读取其内容，验证是否包含至少三个明确的部分：项目介绍、环境配置说明（如何安装依赖）、程序启动指令。",
+    "type": "file_comparison",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "0.1.2 环境与文档：提供明确的依赖文件（requirements.txt）",
+    "description": "1. **准备**：检查项目根目录下是否存在 `requirements.txt` 文件.\n2. **执行**：若文件存在，执行 shell 命令 `pip install -r requirements.txt`.\n3. **断言**：观察命令执行结果，验证所有依赖是否均被成功安装，无任何错误信息。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "0.2.1 程序可运行性：程序能够成功启动并显示主菜单",
+    "description": "1. **执行**：根据 `README.md` 中的启动指令（例如 `python main.py`）执行程序.\n2. **断言**：观察程序输出，验证是否成功启动并展示了一个包含多个选项、可交互的主菜单界面。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "0.3.1 单元测试：提供了可执行的单元测试",
+    "description": "1. **准备**：检查 `tests/` 目录下是否存在测试文件（如 `test_*.py`）。\n2. **执行**：执行测试命令（如 `pytest` 或 `python -m unittest discover tests`）。\n3. **断言**：观察测试结果，验证测试框架是否能运行，并且所有已发现的测试用例是否都显示为“通过”（PASSED）。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "1.1.2 模块切换与返回：能够流畅地在模块间导航",
+    "description": "1. **前置校验（用户路径）**：主菜单是否清晰展示了“菜品数据管理”模块的入口？\n2. **执行**：在主菜单界面，输入选项进入“菜品数据管理”模块.\n3. **断言**：验证程序是否进入了对应的子菜单.\n4. **执行**：在子菜单中，找到并使用返回主菜单的选项.\n5. **断言**：验证程序是否成功退回到主菜单界面。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.1 菜品创建（C）：可通过交互式CLI添加新菜品",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“添加菜品”或类似选项？\n2. **准备**：导航至“添加菜品”功能.\n3. **执行**：根据程序提示，依次输入菜品名称“测试菜品A”、分类“测试分类”、售价“50”、烹饪时间“10”。\n4. **断言**：验证程序最后是否明确提示“添加成功”或类似信息。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.2a 菜品检索（R）：按名称检索",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“检索菜品”或类似选项？\n2. **准备**：确保“测试菜品A”已存在于系统中.\n3. **执行**：使用“检索菜品”功能，选择按“名称”检索，并输入“测试菜品A”。\n4. **断言**：验证返回结果中是否精确包含了“测试菜品A”。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.2b 菜品检索（R）：按分类检索",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“检索菜品”或类似选项，并支持按“分类”检索？\n2. **准备**：确保至少存在一个分类为“测试分类”的菜品.\n3. **执行**：使用“检索菜品”功能，选择按“分类”检索，并输入“测试分类”。\n4. **断言**：验证返回结果中是否包含了所有属于“测试分类”的菜品。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.3 菜品更新（U）：更新菜品信息",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“更新菜品”或类似选项？\n2. **准备**：确保“测试菜品A”存在，其售价为“50”。\n3. **执行**：导航至“更新菜品”功能，选择“测试菜品A”，将其售价更新为“60”。\n4. **断言**：再次检索“测试菜品A”，验证其售价是否已变为“60”。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.4 菜品删除（D）：删除菜品与操作确认",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“删除菜品”或类似选项？\n2. **准备**：确保“测试菜品A”存在.\n3. **执行**：导航至“删除菜品”功能，选择“测试菜品A”。当程序要求确认时，输入肯定的选项（如'y'或'yes'）。\n4. **断言**：再次检索“测试菜品A”，验证其是否已无法被找到。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.1.5 菜品批量导入：从CSV文件导入",
+    "description": "1. **前置校验（用户路径）**：在“菜品数据管理”菜单中，是否存在清晰的“批量导入菜品”或类似选项？\n2. **准备**：创建一个名为 `dishes_to_import.csv` 的文件，包含3个格式正确的菜品信息.\n3. **执行**：使用“批量导入菜品”功能，并提供上述文件的路径.\n4. **断言**：逐一检索这3个菜品，验证它们是否都已成功导入系统中。",
+    "type": "file_comparison",
+    "test_command": "1\n5\nn\nevaluation/test_data/dishes_to_import.csv\n7\n5",
+    "input_files": [
+      "evaluation/test_data/dishes_to_import.csv"
+    ],
+    "expected_output_files": [
+      "evaluation/test_data/expected_dishes_after_import.csv"
+    ],
+    "expected_output": "The file 'data/dishes.csv' should be updated to match the contents of 'evaluation/test_data/expected_dishes_after_import.csv', and the terminal should display a success message for the import."
+  },
+  {
+    "metric": "2.2.1a 原料成本分析：计算菜品成本",
+    "description": "1. **前置校验（用户路径）**：在主菜单中，是否存在“原料成分分析”模块入口，并在其下找到“成本结构分析”功能？\n2. **准备**：创建`ingredients_A.csv`，定义“测试菜品A”的原料成本总计为20元。上传或关联此文件.\n3. **执行**：对“测试菜品A”执行“成本结构分析”。\n4. **断言**：验证输出是否明确显示“原料成本”为20或20.0。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.2.1b 原料成本分析：计算毛利率",
+    "description": "1. **前置校验（用户路径）**：在主菜单中，是否存在“原料成分分析”模块入口，并在其下找到“成本结构分析”功能？\n2. **准备**：“测试菜品A”售价为60，成本为20.\n3. **执行**：对“测试菜品A”执行“成本结构分析”。\n4. **断言**：验证输出是否明确显示“毛利率”为66.7%或0.667（允许小数点后一位误差）。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.2.2 过敏原识别：标记含过敏原菜品",
+    "description": "1. **前置校验（用户路径）**：在“原料成分分析”模块中，是否存在“过敏原识别”功能？\n2. **准备**：创建一个`ingredients_B.csv`，为某个菜品加入“花生”作为原料。上传或关联此文件.\n3. **执行**：运行“过敏原识别”功能.\n4. **断言**：验证系统是否能正确标记出该菜品含有“坚果类”或“花生”过敏原。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.3.1a 销售趋势分析：按“月”统计",
+    "description": "1. **前置校验（用户路径）**：在主菜单中，是否存在“销售数据分析”模块入口，并在其下找到“销售趋势分析”功能？\n2. **准备**：创建`orders.csv`，包含横跨2个不同月份的销售数据，例如6月总销量100，7月总销量150.\n3. **执行**：导入订单数据后，执行“销售趋势分析”，选择按“月”维度.\n4. **断言**：验证输出是否正确展示了6月销量100，7月销量150。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.3.1b 销售趋势分析：按“周”统计",
+    "description": "1. **前置校验（用户路径）**：在“销售趋势分析”功能中，是否提供按“周”分析的选项？\n2. **准备**：创建`orders.csv`，包含横跨2个不同周的销售数据.\n3. **执行**：执行“销售趋势分析”，选择按“周”维度.\n4. **断言**：验证输出是否正确展示了每个周的销量。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.3.1c 销售趋势分析：按“日”统计",
+    "description": "1. **前置校验（用户路径）**：在“销售趋势分析”功能中，是否提供按“日”分析的选项？\n2. **准备**：创建`orders.csv`，包含横跨2个不同日的销售数据.\n3. **执行**：执行“销售趋势分析”，选择按“日”维度.\n4. **断言**：验证输出是否正确展示了每个日的销量。",
+    "type": "unit_test",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.4.1 菜品相似度匹配：相似菜品分组",
+    "description": "1. **前置校验（用户路径）**：在主菜单中，是否存在“菜品相似度匹配”模块入口？\n2. **准备**：创建`approximate_dishes.csv`，包含“红烧牛肉”和“红烧牛肉面”。上传该文件.\n3. **执行**：运行“菜品相似度匹配”功能.\n4. **断言**：查看匹配结果，验证“红烧牛肉”和“红烧牛肉面”是否被归于同一个相似组。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_similarity_analysis.py::test_analyze_similar_dishes_grouping",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passes successfully with 1 item passed."
+  },
+  {
+    "metric": "2.5.1 结果可视化：使用文本表格或ASCII图表",
+    "description": "1. **执行**：执行“销售趋势分析”功能.\n2. **断言**：观察其输出，验证结果是否被格式化为行列对齐的文本表格，或由ASCII字符组成的条形图/折线图，而不是无格式的纯文本。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  },
+  {
+    "metric": "2.5.2 进度可视化：大数据量导入时显示进度条",
+    "description": "1. **前置校验（用户路径）**：确认“批量导入菜品”功能可用.\n2. **准备**：创建一个包含至少500行数据的`large_import.csv`文件.\n3. **执行**：执行批量导入功能，并观察命令行界面.\n4. **断言**：验证在文件读取和处理期间，CLI是否显示一个从0%到100%动态更新的文本进度条。",
+    "type": "shell_interaction",
+    "test_command": "1\n5\nn\nevaluation/test_data/large_import.csv\n7\n5",
+    "input_files": [
+      "evaluation/test_data/large_import.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "终端应显示一个从0%到100%动态更新的文本进度条，并最后提示“成功从 'evaluation/test_data/large_import.csv' 导入菜品。”"
+  },
+  {
+    "metric": "2.5.3 错误处理：无效输入处理",
+    "description": "1. **执行**：在主菜单界面，输入一个明显不存在的选项（例如 `999` 或 `xyz`）。\n2. **断言**：验证程序是否打印出“无效输入，请重试”之类的清晰错误提示，并停留在当前菜单，而不是崩溃或无响应。",
+    "type": "shell_interaction",
+    "test_command": "",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": ""
+  }
+]

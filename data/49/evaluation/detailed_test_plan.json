@@ -1,0 +1,336 @@
+[
+  {
+    "metric": "1.1 System Startup and Feature Availability",
+    "description": "1. **Act:** Execute `python run.py` command in the shell. 2. **Assert:** Observe whether the program starts successfully and the main menu options for all core feature modules (MQTT, data management, machine learning, system monitoring, web interface) are displayed in the console output.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python run.py",
+        "test_input": "evaluation/inputs/system_startup.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program starts successfully and displays the complete feature menu correctly"
+  },
+  {
+    "metric": "1.2 Command Line Help Information Completeness",
+    "description": "1. **Act:** Execute `cd src && python main.py --help` command in the shell. 2. **Assert:** Check whether the output contains all major command modules (mqtt, data, ml, system, web, setup), with clear description information for each command.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py --help",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Help information is complete, including all major command modules and clear descriptions"
+  },
+  {
+    "metric": "2.1.1 MQTT Single Random Data Publish",
+    "description": "1. **Arrange:** Ensure the system configuration file exists and MQTT configuration is correct. 2. **Act:** Execute `cd src && python main.py mqtt publish --random` command in the shell. 3. **Assert:** Observe whether random temperature, humidity, and pressure data can be generated successfully and attempt to publish it to the MQTT broker.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py mqtt publish --random",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully generates valid random data and attempts publishing, with logs showing the complete publishing process"
+  },
+  {
+    "metric": "2.1.2 MQTT Batch Data Publish",
+    "description": "1. **Arrange:** Make sure the `src/samples/environmental_sample.csv` file exists and is properly formatted. 2. **Act:** Execute the batch publish command in the shell. 3. **Assert:** Check if data can be read from the CSV file and batch publish a specified number of records.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py mqtt publish --file samples/environmental_sample.csv --count 5",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Can successfully read the CSV file and batch publish the specified number of data records, displaying detailed publishing statistics"
+  },
+  {
+    "metric": "2.2.1 MQTT Data Subscription Functionality",
+    "description": "1. **Arrange:** Ensure MQTT configuration is correct. 2. **Act:** Execute the subscription command in the shell. 3. **Assert:** Observe whether subscription mode can be started, subscription status is displayed, and operation ends normally after the specified time.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py mqtt subscribe --duration 10 --save",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Subscription starts normally and displays clear subscription status, ends normally after the specified time"
+  },
+  {
+    "metric": "3.1.1 Environmental Data Analysis Function",
+    "description": "1. **Arrange:** Ensure environmental data files exist in the system. 2. **Act:** Execute the data analysis command in the shell. 3. **Assert:** Check whether existing data can be analyzed and a statistics table is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py data analyze",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Can analyze data successfully and display a complete statistics table with detailed metrics for each sensor"
+  },
+  {
+    "metric": "3.1.2 Data Cleaning and Preprocessing",
+    "description": "1. **Arrange:** Ensure there are data files needing cleaning in the system. 2. **Act:** Execute the data cleaning command in the shell. 3. **Assert:** Observe whether data can be cleaned and processed, and check the log output.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py data clean",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Can successfully perform data cleaning, with logs showing data statistics and processing details before and after cleaning"
+  },
+  {
+    "metric": "3.1.3 Multi-source Data Merge Operation",
+    "description": "1. **Arrange:** Ensure separated temperature, humidity, and pressure data files exist. 2. **Act:** Execute the data merge command in the shell. 3. **Assert:** Check whether multi-source data can be merged into a unified dataset.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py data merge",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Successfully merges multi-source data, displays merged data statistics and record count"
+  },
+  {
+    "metric": "4.1.1 Neural Network Model Training",
+    "description": "1. **Arrange:** Ensure the training data file exists and is properly formatted. 2. **Act:** Execute the model training command in the shell. 3. **Assert:** Observe whether a 5-layer neural network model can be trained successfully, and training progress and results are displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py ml train --data-file samples/environmental_sample.csv --epochs 10",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Model is trained successfully, with complete training progress, loss values, and final results displayed"
+  },
+  {
+    "metric": "4.1.2 Environmental Parameter Prediction Function",
+    "description": "1. **Arrange:** Ensure there is an existing trained model file. 2. **Act:** Execute the prediction command in the shell. 3. **Assert:** Check whether numerical prediction results and confidence information can be output.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py ml predict --temperature 25.0 --humidity 60.0 --pressure 1013.25",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Prediction is performed successfully, with clear predicted values and confidence information, and reasonable numbers"
+  },
+  {
+    "metric": "4.1.3 Model Performance Evaluation",
+    "description": "1. **Arrange:** Ensure there are existing trained models and test data. 2. **Act:** Execute the model evaluation command in the shell. 3. **Assert:** Check whether the model can be evaluated and evaluation metrics are displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py ml evaluate",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Can successfully evaluate the model and display a complete evaluation metrics table (RMSE, MAE, R², etc.)"
+  },
+  {
+    "metric": "5.1.1 System Resource Monitoring",
+    "description": "1. **Act:** Execute the system status query command in the shell. 2. **Assert:** Check whether CPU, memory, disk usage, and network status information can be displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py system status",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Can successfully show complete system status information, including resource usage table and network status"
+  },
+  {
+    "metric": "5.1.2 Real-time System Performance Monitoring",
+    "description": "1. **Act:** Execute the real-time monitoring command in the shell. 2. **Assert:** Observe whether real-time monitoring is performed, monitoring progress is displayed, and ends normally after the specified time.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py system monitor --duration 15",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Real-time monitoring can be started, displays monitoring progress and real-time data updates, ends normally after the specified time"
+  },
+  {
+    "metric": "6.1.1 Web Service Startup and Access",
+    "description": "1. **Act:** Execute the web service start command in the shell. 2. **Assert:** Check whether the web service starts successfully, displaying the correct access address and port information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && timeout 10s python main.py web --host 127.0.0.1 --port 8080 || echo 'Web service started'",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Web service starts successfully and displays the correct access address and port information"
+  },
+  {
+    "metric": "7.1.1 Interactive Configuration Wizard",
+    "description": "1. **Act:** Execute the configuration wizard command in the shell. 2. **Assert:** Observe whether the configuration wizard starts, displays clear configuration options and input prompts.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python main.py setup",
+        "test_input": "evaluation/inputs/setup_config.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs/setup_config.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Configuration wizard can be started, displays clear configuration options and input prompts, can correctly process user input"
+  },
+  {
+    "metric": "8.1.1 Standard Data Format Handling",
+    "description": "1. **Arrange:** Check whether the sample data file exists. 2. **Act:** Use commands to view the file format. 3. **Assert:** Confirm the file contains necessary fields, and data values are within PRD specified range.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "head -5 src/samples/environmental_sample.csv",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_data_format.csv"
+    ],
+    "expected_output": "Sample data format fully complies with PRD specification, contains all necessary fields, and data ranges are correct"
+  },
+  {
+    "metric": "8.1.2 Abnormal Data Detection and Handling",
+    "description": "1. **Arrange:** Prepare test files containing abnormal data. 2. **Act:** Run the data quality test. 3. **Assert:** Observe whether the system can detect abnormal data and log quality check information.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/tests/test_data_quality.py",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/test_data_with_anomalies.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Can effectively detect abnormal data, logs show detailed quality control information and handling results"
+  },
+  {
+    "metric": "9.1.1 Error Handling and User Prompts",
+    "description": "1. **Act:** Deliberately enter incorrect command parameters for testing. 2. **Assert:** Observe whether the system gives clear error prompts instead of directly crashing.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/tests/test_error_handling.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Error handling is complete, provides clear error prompts and solutions, system will not crash"
+  },
+  {
+    "metric": "9.1.2 System Log Recording",
+    "description": "1. **Act:** Execute various system operations. 2. **Assert:** Check whether the logs directory generates corresponding log files and whether log content contains timestamps and detailed information.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/tests/test_logging.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Logging is complete, contains detailed timestamps and operation information, format is standardized and easy to read"
+  },
+  {
+    "metric": "10.1.1 CLI User Interface Friendliness",
+    "description": "1. **Act:** Use the startup script to test the user interface. 2. **Assert:** Observe whether a friendly interactive interface is provided, with clear operation guidance and option instructions.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python run.py",
+        "test_input": "evaluation/inputs/user_interface_test.in"
+      }
+    ],
+    "input_files": [
+      "evaluation/inputs/user_interface_test.in"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Interface is friendly and attractive, provides clear operation guidance and option instructions, excellent user experience"
+  },
+  {
+    "metric": "10.1.2 Core Feature CLI Accessibility",
+    "description": "1. **Act:** Check help information and test each feature module. 2. **Assert:** Confirm all PRD required core features have corresponding CLI commands.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "python evaluation/tests/test_functionality_completeness.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "All core features have corresponding CLI commands and can be used normally, with complete feature coverage"
+  },
+  {
+    "metric": "11.1.1 Web Interface Data Visualization",
+    "description": "1. **Arrange:** Start the web service. 2. **Act:** Access the data management page of the web interface. 3. **Assert:** Check whether visualization charts of environmental data are displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python test_web.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Web interface displays data visualization charts correctly, charts are clear, attractive, and data is accurate"
+  },
+  {
+    "metric": "11.1.2 Web Interface Interactive Functionality",
+    "description": "1. **Arrange:** Start the web service first. 2. **Act:** Test the interactive functionality of the web interface. 3. **Assert:** Check whether it correctly responds to user actions and displays prediction results.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "cd src && python test_web.py",
+        "test_input": null
+      },
+      {
+        "test_command": "curl -X POST http://localhost:8080/api/ml/predict -H 'Content-Type: application/json' -d '{\"temperature\":25.0,\"humidity\":60.0,\"pressure\":1013.25}' || echo 'API test completed'",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Web interface interactive functions work correctly and can respond to user actions and display results"
+  }
+]

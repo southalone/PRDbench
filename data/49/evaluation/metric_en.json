@@ -1,0 +1,117 @@
+[
+  {
+    "metric": "1.1 System Startup and Function Availability",
+    "description": "1. **Act:** Execute the `python run.py` command in the shell. 2. **Assert:** Observe whether the program starts successfully, and check if the console output shows the main menu options including all core function modules (MQTT, Data Management, Machine Learning, System Monitoring, Web Interface).",
+    "expected_output": "2 points: The program starts successfully and correctly displays the complete function menu. 1 point: The program starts but there are warning messages or the menu is incomplete. 0 points: The program fails to start or crashes immediately after starting."
+  },
+  {
+    "metric": "1.2 Completeness of Command-Line Help Information",
+    "description": "1. **Act:** Execute `cd src && python main.py --help` in the shell. 2. **Assert:** Check if the output includes all major command modules (mqtt, data, ml, system, web, setup), and whether each command has a clear description.",
+    "expected_output": "2 points: Help information is complete, containing all major command modules and clear descriptions. 1 point: Help information is mostly complete but some descriptions are unclear. 0 points: Help information is missing or the format is chaotic."
+  },
+  {
+    "metric": "2.1.1 MQTT Single Random Data Publishing",
+    "description": "1. **Arrange:** Ensure the system configuration file exists and the MQTT configuration is correct. 2. **Act:** Execute `cd src && python main.py mqtt publish --random` in the shell. 3. **Assert:** Check whether random temperature, humidity, and pressure data (values within the PRD specified range) can be generated and published to the MQTT broker, and whether the log displays the publishing process.",
+    "expected_output": "2 points: Random data conforming to the specifications is successfully generated and attempted to be published; the log shows the complete publishing process. 1 point: Data is generated but there are warnings during publishing or small problems with the data format. 0 points: The command fails to execute or data generation fails."
+  },
+  {
+    "metric": "2.1.2 MQTT Batch Data Publishing",
+    "description": "1. **Arrange:** Ensure the `src/samples/environmental_sample.csv` file exists and is correctly formatted. 2. **Act:** Execute `cd src && python main.py mqtt publish --file samples/environmental_sample.csv --count 5` in the shell. 3. **Assert:** Check whether data can be read from the CSV file and batch publish the specified number of records, displaying the publishing progress and success statistics.",
+    "expected_output": "2 points: Successfully reads the CSV file and batch publishes the specified number of data records, displaying detailed publishing statistics. 1 point: Can read the file but there are some problems during publishing or incomplete statistics. 0 points: Cannot read the file or command execution fails."
+  },
+  {
+    "metric": "2.2.1 MQTT Data Subscription Functionality",
+    "description": "1. **Arrange:** Ensure the MQTT configuration is correct. 2. **Act:** Execute `cd src && python main.py mqtt subscribe --duration 10 --save` in the shell. 3. **Assert:** Check if subscription mode can be started, displaying subscription status and waiting time, and whether it ends normally after the specified duration.",
+    "expected_output": "2 points: Subscription starts normally, subscription status is clearly displayed, and ends normally after the specified time. 1 point: Subscription can start but there are warnings or the status display is unclear. 0 points: Cannot start subscription or crashes immediately."
+  },
+  {
+    "metric": "3.1.1 Environmental Data Analysis",
+    "description": "1. **Arrange:** Ensure environmental data files exist in the system. 2. **Act:** Execute `cd src && python main.py data analyze` in the shell. 3. **Assert:** Check if existing data can be analyzed and if a statistics table is displayed, including statistical indicators (mean, standard deviation, min/max, etc.) for temperature, humidity, and pressure.",
+    "expected_output": "2 points: Data analysis succeeds and displays a complete statistics table containing detailed statistical indicators for each sensor. 1 point: Analysis can be performed but the statistical information is incomplete or the format is problematic. 0 points: Unable to perform analysis or error occurs."
+  },
+  {
+    "metric": "3.1.2 Data Cleaning and Preprocessing",
+    "description": "1. **Arrange:** Ensure there is data file needing cleaning in the system. 2. **Act:** Execute `cd src && python main.py data clean` in the shell. 3. **Assert:** Observe if the data can be cleaned, and check if the log output shows the cleaning process and result statistics.",
+    "expected_output": "2 points: Data cleaning executed successfully, log displays statistics and processing details before and after cleaning. 1 point: Cleaning can be performed but there are warnings or incomplete statistics. 0 points: Unable to clean the data or error occurs immediately."
+  },
+  {
+    "metric": "3.1.3 Multi-source Data Merging Operation",
+    "description": "1. **Arrange:** Ensure separate temperature, humidity, and pressure data files exist. 2. **Act:** Execute `cd src && python main.py data merge` in the shell. 3. **Assert:** Check whether multi-source data can be merged into a unified dataset and whether merged data statistics are displayed.",
+    "expected_output": "2 points: Successfully merges data from multiple sources, displays statistics and record count of the merged data. 1 point: Merging can be performed but the result is incomplete or there is data loss. 0 points: Unable to merge or error occurs."
+  },
+  {
+    "metric": "4.1.1 Neural Network Model Training",
+    "description": "1. **Arrange:** Ensure that the training data file `samples/environmental_sample.csv` exists and is correctly formatted. 2. **Act:** Execute `cd src && python main.py ml train --data-file samples/environmental_sample.csv --epochs 10` in the shell. 3. **Assert:** Observe whether a 5-layer neural network model can be successfully trained, and if training progress, loss value changes, and final result are displayed.",
+    "expected_output": "2 points: Model is successfully trained, training progress, loss values, and final results are completely displayed, and model file is saved correctly. 1 point: Training starts but there are warnings or training ends prematurely. 0 points: Unable to start training or direct error occurs."
+  },
+  {
+    "metric": "4.1.2 Environmental Parameter Prediction Function",
+    "description": "1. **Arrange:** Ensure an already trained model file exists. 2. **Act:** Execute `cd src && python main.py ml predict --temperature 25.0 --humidity 60.0 --pressure 1013.25` in the shell. 3. **Assert:** Check whether numerical prediction results and confidence information can be output, and whether predicted values are reasonable.",
+    "expected_output": "2 points: Prediction is performed successfully, clear predicted values and confidence information are output, and values are reasonable. 1 point: Prediction can be performed but the result format is incomplete or confidence is missing. 0 points: Unable to predict or error occurs."
+  },
+  {
+    "metric": "4.1.3 Model Performance Evaluation",
+    "description": "1. **Arrange:** Ensure there is a trained model and test data available. 2. **Act:** Execute `cd src && python main.py ml evaluate` in the shell. 3. **Assert:** Check if the model can be evaluated and RMSE, MAE, R², and other evaluation metrics are displayed, and values are reasonable.",
+    "expected_output": "2 points: Model evaluated successfully, complete metrics table (RMSE, MAE, R², etc.) displayed, and values are reasonable. 1 point: Evaluation can be performed but metrics are incomplete or format is problematic. 0 points: Unable to perform evaluation or error occurs."
+  },
+  {
+    "metric": "5.1.1 System Resource Monitoring",
+    "description": "1. **Act:** Execute `cd src && python main.py system status` in the shell. 2. **Assert:** Check whether CPU, memory, disk usage, and network status are displayed as system information, and data reflects real-time system resource usage.",
+    "expected_output": "2 points: Successfully displays complete system status information, including resource usage tables and network status; data is real and valid. 1 point: System status is displayed but information is incomplete or data is inaccurate. 0 points: Unable to get system status or error occurs."
+  },
+  {
+    "metric": "5.1.2 Real-time System Performance Monitoring",
+    "description": "1. **Act:** Execute `cd src && python main.py system monitor --duration 15` in the shell. 2. **Assert:** Observe whether real-time monitoring is performed, displaying monitoring progress and real-time updated performance data, and ends normally after the specified duration.",
+    "expected_output": "2 points: Real-time monitoring starts, monitoring progress and real-time data updates are displayed, and the process ends normally after the specified time. 1 point: Monitoring can start but data updates are not timely or progress display has issues. 0 points: Unable to start monitoring or crashes immediately."
+  },
+  {
+    "metric": "6.1.1 Web Service Startup and Access",
+    "description": "1. **Act:** Execute `cd src && python main.py web --host 127.0.0.1 --port 8080` in the shell. 2. **Assert:** Check if the Web service starts successfully, with correct access address and port information displayed, and the service responds to HTTP requests normally.",
+    "expected_output": "2 points: Web service starts successfully, correct access address and port information displayed, and service runs normally. 1 point: Service can start but there are warnings or configuration problems, or access address information is incorrect. 0 points: Unable to start Web service or error occurs."
+  },
+  {
+    "metric": "7.1.1 Interactive Configuration Wizard",
+    "description": "1. **Act:** Execute `cd src && python main.py setup` in the shell. 2. **Assert:** Observe if the configuration wizard can start, displaying clear configuration options and input prompts, and whether it can accept user input and save configuration.",
+    "expected_output": "2 points: Configuration wizard starts, clear configuration options and input prompts are displayed, user inputs handled correctly. 1 point: Wizard can start but interface is not sufficiently user-friendly or input handling has issues. 0 points: Unable to start configuration wizard or error occurs."
+  },
+  {
+    "metric": "8.1.1 Standard Data Format Handling",
+    "description": "1. **Arrange:** Check if the `src/samples/environmental_sample.csv` file exists. 2. **Act:** Use the command `head -5 src/samples/environmental_sample.csv` to check the file format. 3. **Assert:** Confirm the file contains necessary fields like timestamp, temperature, humidity, pressure, and that data values fall within PRD specified ranges (Temperature -50~50°C, Humidity 0~100%, Pressure 800~1200hPa).",
+    "expected_output": "2 points: Sample data format fully conforms to PRD specification, includes all necessary fields and data ranges are correct. 1 point: Data format is basically correct but has small issues or some data is out of range. 0 points: Data format does not conform to specifications or lacks key fields."
+  },
+  {
+    "metric": "8.1.2 Anomaly Data Detection and Handling",
+    "description": "1. **Arrange:** Prepare test file containing abnormal data (temperature, humidity, pressure values out of range). 2. **Act:** Use abnormal data during data analysis process. 3. **Assert:** Observe if system detects abnormal data, and whether log output shows data quality check and anomaly handling information.",
+    "expected_output": "2 points: Effectively detects abnormal data, log displays detailed quality control information and handling results. 1 point: Basic data checking but detection is insufficient or log information is not detailed. 0 points: No data quality control mechanism or unable to handle abnormal data."
+  },
+  {
+    "metric": "9.1.1 Error Handling and User Prompt",
+    "description": "1. **Act:** Deliberately input incorrect command parameters, such as `cd src && python main.py invalid_command` and `cd src && python main.py ml predict --temperature abc`. 2. **Assert:** Observe whether the system provides clear error prompts instead of crashing directly; error messages should include usage suggestions.",
+    "expected_output": "2 points: Error handling is perfect, provides clear error prompts and solutions, and the system does not crash. 1 point: Basic error handling present but prompts are unclear or lack usage suggestions. 0 points: Crashes directly on error or no prompt shown."
+  },
+  {
+    "metric": "9.1.2 System Logging",
+    "description": "1. **Act:** Perform various system operations, such as data analysis and MQTT publishing. 2. **Assert:** Check whether corresponding log files are generated in the `logs/` directory, and if log contents contain timestamps, operation types, and detailed information; verify log format is standardized.",
+    "expected_output": "2 points: Logging is complete, includes detailed timestamps and operation info, format is standardized and readable. 1 point: Logs exist but information is incomplete or format is not standardized. 0 points: No logging function or log file is empty."
+  },
+  {
+    "metric": "10.1.1 CLI User Interface Friendliness",
+    "description": "1. **Act:** Use `python run.py` to start the script. 2. **Assert:** Observe if a user-friendly interactive interface is provided, with clear operation guidance, option descriptions, user prompts, and a reasonably beautiful layout.",
+    "expected_output": "2 points: Interface is friendly and aesthetically pleasing, provides clear operation guidance and option descriptions, excellent user experience. 1 point: Interface is basically usable but not very friendly or lacks some prompts. 0 points: Interface is confusing, hard to use, or lacks necessary user guidance."
+  },
+  {
+    "metric": "10.1.2 Core Function CLI Accessibility",
+    "description": "1. **Act:** Test each functional module via help information and actual usage. 2. **Assert:** Confirm all core functions required by PRD (MQTT communication, data management, machine learning, system monitoring, etc.) have corresponding CLI commands and can be executed normally.",
+    "expected_output": "2 points: All core functions have corresponding CLI commands and can be used normally; complete function coverage. 1 point: Most functions are available but some are missing or cannot be used normally. 0 points: Many core functions missing or most cannot be used."
+  },
+  {
+    "metric": "11.1.1 Web Interface Data Visualization",
+    "description": "1. **Arrange:** Launch the Web service. 2. **Act:** Visit the data management page of the Web interface. 3. **Assert:** Check whether visualization charts for environmental data can be displayed, including trend graphs and statistical information for temperature, humidity, and pressure.",
+    "expected_output": "2 points: Web interface displays data visualization charts correctly; charts are clear and beautiful, and data is accurate. 1 point: Charts can be displayed but have minor style or data issues. 0 points: Cannot display charts or chart data is incorrect."
+  },
+  {
+    "metric": "11.1.2 Web Interface Interactive Features",
+    "description": "1. **Arrange:** Launch the Web service and access the machine learning page. 2. **Act:** Input environmental parameters (temperature 25.0, humidity 60.0, pressure 1013.25) in the prediction form and click the predict button. 3. **Assert:** Check whether the system responds correctly to user actions and displays prediction results and confidence.",
+    "expected_output": "2 points: Web interface interactive features work normally, responds correctly to user actions and displays results. 1 point: Interactive function basically normal but response is delayed or results are incomplete. 0 points: Interactive function does not work or no response."
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "metric": "0.1 Program Startup and Main Menu Display",
+    "description": "1. **Act:** Run `python src/main.py` in the command line.\n2. **Assert:** Check whether the program starts successfully and displays a complete interface containing the \"Smart Business Travel Planning System\" title and at least 6 main menu options (Create New Trip, Load Saved Trip, Use Trip Template, View Current Trip, System Settings, Exit System).",
+    "expected_output": "2 points: Program starts successfully, displays full title and 6 main menu options, interface format is clear. 1 point: Program starts but interface is incomplete, missing 1-2 menu options or has formatting issues. 0 points: Program cannot start, crashes after starting, or fails to display main menu."
+  },
+  {
+    "metric": "0.2 Unit Testing: Executable Unit Tests Provided",
+    "description": "1. **Preparation:** Check whether there are test files (such as `test_*.py`) under the `tests/` directory.\n2. **Execute:** Run the test command (such as `pytest` or `python -m unittest discover tests`).\n3. **Assert:** Observe the test results and verify whether the test framework runs and all discovered test cases are shown as \"PASSED\".",
+    "expected_output": "2 points: There are test files under `tests/` and all tests pass. 1 point: Test files exist, but one or more test files fail (FAILED). 0 points: `tests/` directory is empty or no test files exist."
+  },
+  {
+    "metric": "1.1 Create New Trip Feature",
+    "description": "1. **Pre-check (User Path):** Is there a \"1. Create New Trip\" option in the main menu?\n2. **Arrange:** Prepare the trip name \"Test Trip\".\n3. **Act:** Select \"1\" and input the prepared trip name.\n4. **Assert:** Check whether the system displays a success message and automatically jumps to the trip planning menu.",
+    "expected_output": "2 points: Pre-check passes, trip can be created successfully with a clear success message and automatic transition to trip planning menu. 1 point: Pre-check passes, trip can be created but message is unclear or manual transition required. 0 points: Pre-check fails or cannot create trip."
+  },
+  {
+    "metric": "2.1.1a City Entry - Valid City Recognition",
+    "description": "1. **Pre-check (User Path):** Is there a \"1. Add Trip Segment\" option in the trip planning menu?\n2. **Arrange:** Prepare a list of valid city names: \"Beijing\", \"Shanghai\", \"Guangzhou\".\n3. **Act:** Select to add trip segments, and enter the prepared city names as departure and arrival cities one by one.\n4. **Assert:** Check whether the system correctly recognizes and accepts all three valid city names.",
+    "expected_output": "2 points: Pre-check passes, correctly recognizes and accepts all 3 valid city names. 1 point: Pre-check passes, recognizes 2 city names. 0 points: Pre-check fails or recognizes less than 2 city names."
+  },
+  {
+    "metric": "2.1.1b City Entry - Invalid City Verification",
+    "description": "1. **Arrange:** Prepare a list of invalid city names: \"Nonexistent City\", \"XXXX\", \"123\".\n2. **Act:** In the city entry process, enter the prepared invalid city names one by one.\n3. **Assert:** Check whether the system gives clear error messages for all 3 invalid inputs and requires re-entry.",
+    "expected_output": "2 points: Gives clear error messages and requires re-entry for all 3 invalid inputs. 1 point: Gives error messages for 2 invalid inputs. 0 points: Gives error messages for less than 2 invalid inputs or lacks validation mechanism."
+  },
+  {
+    "metric": "2.1.2a Stay Duration Setting - Integer Hour Support",
+    "description": "1. **Arrange:** Prepare integer stay durations: \"24\", \"48\", \"72\".\n2. **Act:** During the process of adding trip segments, input the prepared stay durations one by one.\n3. **Assert:** Check whether the system correctly accepts and processes all 3 integer hour values.",
+    "expected_output": "2 points: Correctly accepts and processes all 3 integer hour values. 1 point: Processes 2 integer hour values. 0 points: Processes less than 2 integer hour values or cannot process hour-level input."
+  },
+  {
+    "metric": "2.1.2b Stay Duration Setting - Decimal Hour Support",
+    "description": "1. **Arrange:** Prepare decimal stay durations: \"2.5\", \"4.5\", \"0.5\".\n2. **Act:** In the stay duration input stage, enter the prepared decimal values one by one.\n3. **Assert:** Check whether the system correctly accepts and processes all 3 decimal hour values.",
+    "expected_output": "2 points: Correctly accepts and processes all 3 decimal hour values. 1 point: Processes 2 decimal hour values. 0 points: Processes less than 2 decimal hour values or does not support decimal input."
+  },
+  {
+    "metric": "2.1.3a Time Window Constraint - Menu Access",
+    "description": "1. **Pre-check (User Path):** Is there a \"2. Set Time Constraint\" option in the trip planning menu?\n2. **Arrange:** Make sure at least 1 trip segment has been added.\n3. **Act:** Select \"2\" to enter time constraint settings.\n4. **Assert:** Check whether the time constraint settings interface is successfully accessed and the list of existing trip segments is displayed.",
+    "expected_output": "2 points: Pre-check passes, time constraint settings interface is successfully accessed and segment list is displayed. 1 point: Pre-check passes, interface is accessed but display is incomplete. 0 points: Pre-check fails or cannot access time constraint interface."
+  },
+  {
+    "metric": "2.1.3b Time Window Constraint - Constraint Setting Function",
+    "description": "1. **Arrange:** Prepare time constraints: Earliest arrival \"2024-12-01 09:00\", latest arrival \"2024-12-01 18:00\".\n2. **Act:** Set the prepared time constraints for the added trip segment.\n3. **Assert:** Check whether the system successfully saves the constraints and displays a success message.",
+    "expected_output": "2 points: Successfully sets and saves time constraints, clear success message displayed. 1 point: Constraints can be set but save state is unclear or message is vague. 0 points: Cannot set or save time constraints."
+  },
+  {
+    "metric": "2.1.4a Trip Template - Save Function",
+    "description": "1. **Pre-check (User Path):** Is there an entry point to save trip as template in the system?\n2. **Arrange:** Create a complete trip with 2 segments.\n3. **Act:** Find and use the template saving function to save the current trip as a template.\n4. **Assert:** Check whether a success message is displayed for saving the template.",
+    "expected_output": "2 points: Pre-check passes, trip can be successfully saved as a template and success message is shown. 1 point: Pre-check passes, can be saved but message is unclear. 0 points: Pre-check fails or cannot save template."
+  },
+  {
+    "metric": "2.1.4b Trip Template - Load Function",
+    "description": "1. **Pre-check (User Path):** Is there a \"3. Use Trip Template\" option in the main menu?\n2. **Arrange:** Ensure at least 1 trip template is saved.\n3. **Act:** Select \"3\", choose from the template list and load the saved template.\n4. **Assert:** Check whether the template is loaded successfully and jumps to the trip planning menu.",
+    "expected_output": "2 points: Pre-check passes, template is loaded successfully, and menu is switched. 1 point: Pre-check passes, template is loaded but content is incomplete or menu switch problem. 0 points: Pre-check fails or cannot load template."
+  },
+  {
+    "metric": "2.2.1a Transport Data - Display of High-Speed Rail Data",
+    "description": "1. **Pre-check (User Path):** Is there a \"3. Plan Route\" option in the trip planning menu?\n2. **Arrange:** Add a trip segment from Beijing to Shanghai.\n3. **Act:** Select \"3\" to plan a route.\n4. **Assert:** Check whether high-speed rail options are displayed, including train number, departure time, arrival time, price and at least 4 pieces of information.",
+    "expected_output": "2 points: Pre-check passes, high-speed rail option displayed with all 4 pieces of information (train number, departure time, arrival time, price). 1 point: Pre-check passes, high-speed rail option displayed but information incomplete, includes 2-3 pieces of information. 0 points: Pre-check fails or high-speed rail option not displayed, or less than 2 pieces of information."
+  },
+  {
+    "metric": "2.2.1b Transport Data - Display of Flight Data",
+    "description": "1. **Arrange:** Use the Beijing to Shanghai trip segment.\n2. **Act:** View transport options in route planning.\n3. **Assert:** Check whether flight options are displayed, including flight number, departure time, arrival time, price and at least 4 pieces of information.",
+    "expected_output": "2 points: Flight option displayed with all 4 pieces of information (flight number, departure time, arrival time, price). 1 point: Flight option displayed but information incomplete, includes 2-3 pieces of information. 0 points: Flight option not displayed or less than 2 pieces of information."
+  },
+  {
+    "metric": "2.2.2a Optimization Target - Time-Optimal Solution",
+    "description": "1. **Arrange:** Prepare a trip segment with multiple transport options.\n2. **Act:** Select \"Time Optimal\" optimization target in route planning.\n3. **Assert:** Check whether the generated plan prioritizes the route combination with shortest total travel time.",
+    "expected_output": "2 points: Provides time-optimal choice and generated plan obviously prioritizes time factor. 1 point: Provides time-optimal choice but optimization effect is not obvious. 0 points: Does not provide time-optimal choice option."
+  },
+  {
+    "metric": "2.2.2b Optimization Target - Cost-Optimal Solution",
+    "description": "1. **Arrange:** Use the same multi-option trip segment.\n2. **Act:** Select \"Cost Optimal\" optimization target in route planning.\n3. **Assert:** Check whether the generated plan prioritizes the route combination with lowest total cost.",
+    "expected_output": "2 points: Provides cost-optimal choice and generated plan obviously prioritizes cost factor. 1 point: Provides cost-optimal choice but optimization effect is not obvious. 0 points: Does not provide cost-optimal choice option."
+  },
+  {
+    "metric": "2.2.2c Optimization Target - Balanced Solution",
+    "description": "1. **Arrange:** Use the same multi-option trip segment.\n2. **Act:** Select \"Balanced Solution\" optimization target in route planning.\n3. **Assert:** Check whether the generated plan achieves a balance between time and cost, and is noticeably different from the previous two plans.",
+    "expected_output": "2 points: Provides balanced solution option and generated plan is obviously different from time-optimal and cost-optimal solutions. 1 point: Provides balanced solution option but difference from other plans is not obvious. 0 points: Does not provide balanced solution option."
+  },
+  {
+    "metric": "2.2.3 Transfer Count Limit Setting",
+    "description": "1. **Pre-check (User Path):** Is there an option to set transfer count during route planning?\n2. **Arrange:** Prepare a long trip segment requiring multiple transfers.\n3. **Act:** Set maximum transfer count to 1 and plan route.\n4. **Assert:** Check whether all generated route options respect the 1 transfer limit.",
+    "expected_output": "2 points: Pre-check passes, transfer limit can be set and all generated routes comply. 1 point: Pre-check passes, limit can be set but some routes exceed limit. 0 points: Pre-check fails or transfer count limit not supported."
+  },
+  {
+    "metric": "2.3.1 Trip Conflict Detection",
+    "description": "1. **Pre-check (User Path):** Is there a \"4. Detect Conflicts\" option in the trip planning menu?\n2. **Arrange:** Create a trip with time conflicts (e.g., insufficient 60-minute connection time).\n3. **Act:** Select \"4\" to run conflict detection.\n4. **Assert:** Check whether the system recognizes and reports time conflicts, providing conflict location and description.",
+    "expected_output": "2 points: Pre-check passes, accurately detects conflicts, provides clear description and location. 1 point: Pre-check passes, detects conflicts but description is unclear or location information is inaccurate. 0 points: Pre-check fails or cannot detect time conflicts."
+  },
+  {
+    "metric": "2.3.2a Hard Conflict Identification - High-Speed Rail to Flight",
+    "description": "1. **Arrange:** Create a trip segment transferring from high-speed rail to flight with 60-minute transfer time (less than standard 90 minutes).\n2. **Act:** Run conflict detection.\n3. **Assert:** Check whether the system identifies this as a hard conflict and clearly marks the conflict type.",
+    "expected_output": "2 points: Accurately identified as hard conflict, conflict type is clear, specific insufficient time information provided. 1 point: Conflict identified but hard conflict type not clearly distinguished or information incomplete. 0 points: Cannot identify this type of hard conflict."
+  },
+  {
+    "metric": "2.3.2b Hard Conflict Identification - Flight to High-Speed Rail",
+    "description": "1. **Arrange:** Create a trip segment transferring from flight to high-speed rail with 60-minute transfer time.\n2. **Act:** Run conflict detection.\n3. **Assert:** Check whether the system identifies this as a hard conflict.",
+    "expected_output": "2 points: Accurately identified as hard conflict and corresponding message provided. 1 point: Conflict identified but type indication is unclear. 0 points: Cannot identify this type of hard conflict."
+  },
+  {
+    "metric": "2.3.3 Soft Conflict Identification - Insufficient Rest Time",
+    "description": "1. **Arrange:** Create a trip schedule with consecutive segments and only 2 hours rest between (less than standard 4 hours).\n2. **Act:** Run conflict detection.\n3. **Assert:** Check whether the system identifies this as a soft conflict and clearly marks the conflict type.",
+    "expected_output": "2 points: Accurately identified as soft conflict, clear conflict type marked and specific information about insufficient rest time provided. 1 point: Conflict identified but soft conflict type not distinguished or information incomplete. 0 points: Cannot identify soft conflict."
+  },
+  {
+    "metric": "2.3.4a Conflict Resolution: Time Adjustment Suggestions",
+    "description": "1. **Arrange:** Use a trip with detected conflicts.\n2. **Act:** View the conflict detection result.\n3. **Assert:** Check whether the system provides specific time adjustment suggestions (such as changing train/flight).",
+    "expected_output": "2 points: Provides specific and feasible time adjustment suggestions with clear train/flight replacement plan. 1 point: Adjustment suggestions provided but content is simple or of limited feasibility. 0 points: No time adjustment suggestions provided."
+  },
+  {
+    "metric": "2.3.4b Conflict Resolution: Trip Split Suggestions",
+    "description": "1. **Arrange:** Use a trip requiring splitting due to conflicts.\n2. **Act:** View the conflict detection result.\n3. **Assert:** Check whether the system provides trip splitting suggestions (such as adding stopover accommodation).",
+    "expected_output": "2 points: Provides specific trip split suggestions with clear split points and accommodation suggestions. 1 point: Split suggestions provided, but not specific. 0 points: No trip split suggestions provided."
+  },
+  {
+    "metric": "2.4.1a Decision Analysis - Multi-attribute Evaluation",
+    "description": "1. **Pre-check (User Path):** Is there a \"5. Decision Analysis\" option in the trip planning menu?\n2. **Arrange:** Create a trip with multiple route plans.\n3. **Act:** Select \"5\" for decision analysis.\n4. **Assert:** Check whether evaluation results are displayed including at least 3 dimensions: time efficiency, economic cost, comfort, reliability, and transfer convenience.",
+    "expected_output": "2 points: Pre-check passes, all 5 dimensions are evaluated and results displayed. 1 point: Pre-check passes, 3-4 dimensions evaluated and displayed. 0 points: Pre-check fails or fewer than 3 dimensions evaluated."
+  },
+  {
+    "metric": "2.4.1b Decision Analysis - Quantitative Scoring",
+    "description": "1. **Arrange:** Use a trip with multiple plans.\n2. **Act:** View the decision analysis result.\n3. **Assert:** Check whether each evaluation dimension provides a quantitative score or percentage.",
+    "expected_output": "2 points: All evaluation dimensions have quantitative scores or percentages. 1 point: Most dimensions have quantitative scores, some have qualitative description. 0 points: Most dimensions have qualitative description, lack quantitative scores."
+  },
+  {
+    "metric": "2.4.2 Plan Priority Sorting",
+    "description": "1. **Arrange:** Ensure more than 3 route plans.\n2. **Act:** View plan sorting in decision analysis.\n3. **Assert:** Check whether the system sorts all plans clearly by overall score.",
+    "expected_output": "2 points: Clear priority sorting for all plans, basis is clear and logic consistent. 1 point: Sorting provided but basis is unclear or logic is problematic. 0 points: Does not provide plan priority sorting."
+  },
+  {
+    "metric": "2.5.1 Export Function - Markdown Format",
+    "description": "1. **Pre-check (User Path):** Is there a \"7. Export Trip\" option in the trip planning menu?\n2. **Arrange:** Create a trip with complete route.\n3. **Act:** Select \"7\", choose Markdown format to export.\n4. **Assert:** Check whether the .md file is generated successfully and contains trip timeline and transport details.",
+    "expected_output": "2 points: Pre-check passes, Markdown file generated successfully, content complete with timeline and transport details, format standard. 1 point: Pre-check passes, file generated but content is incomplete or format problematic. 0 points: Pre-check fails or cannot generate Markdown file."
+  },
+  {
+    "metric": "2.6.1 Input Validation - Menu Selection",
+    "description": "1. **Arrange:** Prepare invalid menu selections: \"9\", \"a\", \"@\" (assuming only options 1-6).\n2. **Act:** Enter prepared invalid selections in main menu.\n3. **Assert:** Check whether the system gives error messages for all 3 invalid selections and redisplays menu.",
+    "expected_output": "2 points: Gives clear error messages for all 3 invalid selections and redisplays menu. 1 point: Gives error messages for 2 invalid selections. 0 points: Gives error messages for less than 2 invalid selections or lacks menu validation."
+  },
+  {
+    "metric": "2.6.2a Date Format - Standard Format Support",
+    "description": "1. **Arrange:** Prepare standard date formats: \"2024-12-01\", \"2024-12-01 14:30\".\n2. **Act:** Enter prepared date formats in time constraint settings.\n3. **Assert:** Check whether the system correctly parses and accepts both standard formats.",
+    "expected_output": "2 points: Correctly parses and accepts both standard date formats. 1 point: Parses one standard format. 0 points: Cannot correctly parse standard date formats."
+  },
+  {
+    "metric": "2.6.2b Date Format - Relative Date Support",
+    "description": "1. **Arrange:** Prepare relative dates: \"Tomorrow\", \"Day after tomorrow\".\n2. **Act:** Enter prepared relative dates during date entry.\n3. **Assert:** Check whether the system correctly parses and converts all 2 relative dates to specific dates.",
+    "expected_output": "2 points: Correctly parses and converts all 3 relative dates to specific dates. 1 point: Parses 2 relative dates. 0 points: Parses less than 2 relative dates or does not support relative dates."
+  },
+  {
+    "metric": "3.1.1 Trip Save - Save Function",
+    "description": "1. **Pre-check (User Path):** Is there a \"Save Trip\" option in trip planning menu?\n2. **Arrange:** Create a complete trip with 2 segments, prepare file name \"Test Save\".\n3. **Act:** Select \"6\", enter prepared file name to save trip.\n4. **Assert:** Check whether success message is displayed.",
+    "expected_output": "2 points: Pre-check passes, trip saved successfully and clear success message displayed. 1 point: Pre-check passes, trip saved but message is unclear or save state is vague. 0 points: Pre-check fails or unable to save trip."
+  },
+  {
+    "metric": "3.1.2 Trip Save - Load Verification",
+    "description": "1. **Pre-check (User Path):** Is there a \"Load Saved Trip\" option in the main menu?\n2. **Arrange:** Use a saved trip file.\n3. **Act:** Select \"2\", choose from the list and load the saved trip.\n4. **Assert:** Check whether the loaded trip content is exactly the same as when saved.",
+    "expected_output": "2 points: Pre-check passes, loaded trip content matches saved trip exactly, including all segments and settings. 1 point: Pre-check passes, trip loaded but content is incomplete with missing information. 0 points: Pre-check fails or cannot properly load trip content."
+  }
+]

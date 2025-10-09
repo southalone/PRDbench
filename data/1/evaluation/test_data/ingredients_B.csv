@@ -1,0 +1,4 @@
+dish_id,ingredient_name,quantity,unit,cost_per_unit,allergen
+1,牛肉,0.5,kg,80,
+3,鸡蛋,0.2,kg,12,蛋
+3,花生油,0.05,L,40,花生

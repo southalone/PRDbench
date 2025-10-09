@@ -1,0 +1,30 @@
+{
+    "name": "CSVImportTest",
+    "city": "北京",
+    "area": "海淀区",
+    "business_circle_type": "大学城",
+    "longitude": 116.3,
+    "latitude": 39.9,
+    "categories": {
+        "主食": 0.6,
+        "小吃": 0.3,
+        "饮品": 0.1
+    },
+    "avg_item_price": 40.0,
+    "daily_customers": 200,
+    "conversion_rate": 0.9,
+    "customer_flow_multiplier": {
+        "weekday": 1.0,
+        "weekend": 1.2,
+        "holiday": 1.5
+    },
+    "ingredient_cost_ratio": 0.35,
+    "packaging_cost_ratio": 0.05,
+    "monthly_rent": 15000.0,
+    "monthly_labor_cost": 25000.0,
+    "monthly_marketing_cost": 3000.0,
+    "monthly_other_cost": 1000.0,
+    "commission_rate": 0.18,
+    "platform_fee_rate": 0.0,
+    "initial_investment": 50000.0
+}

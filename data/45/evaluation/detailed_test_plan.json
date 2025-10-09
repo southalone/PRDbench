@@ -1,0 +1,312 @@
+[
+  {
+    "metric": "0.1 Basic Program Startup",
+    "description": "1. **Act:** Run `python Main.py` or `python src/Main.py` in the command line.\n2. **Assert:** Observe whether the program starts successfully, displays the ASCII art title (CHORD), developer information, and enters the parameter configuration interface, prompting for the m parameter.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/basic_startup.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts normally and displays the welcome interface, entering parameter configuration"
+  },
+  {
+    "metric": "1.1 Network Parameter Configuration - m Parameter Input",
+    "description": "1. **Precondition (User Path):** Does the program prompt the user to input the m parameter after startup?\n2. **Arrange:** Prepare a valid m parameter value (such as 5).\n3. **Act:** Input the m parameter value as prompted.\n4. **Assert:** Observe whether the program accepts the parameter and proceeds to the next step (prompting for the number of nodes).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/m_parameter_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program accepts the m parameter and proceeds to node number configuration"
+  },
+  {
+    "metric": "1.2 Network Parameter Configuration - Node Number Input",
+    "description": "1. **Arrange:** Based on the entered m parameter, prepare a valid number of nodes (less than or equal to 2^m).\n2. **Act:** Input the number of nodes.\n3. **Assert:** Observe whether the program accepts the parameter and proceeds to the next step (prompting for the amount of data).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/nodes_config.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program accepts the number of nodes and proceeds to data amount configuration"
+  },
+  {
+    "metric": "1.3 Network Parameter Configuration - Boundary Condition Validation",
+    "description": "1. **Arrange:** Prepare node numbers that are out of range (values greater than 2^m).\n2. **Act:** Input an out-of-range node count.\n3. **Assert:** Observe whether the program gives an error prompt and asks for re-input.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/boundary_validation.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program detects boundary condition errors and asks for re-input"
+  },
+  {
+    "metric": "2.1 Network Initialization Process Display",
+    "description": "1. **Act:** After parameter configuration, observe the network creation process.\n2. **Assert:** The program should display information about initial node initialization, bulk node joining, and finally display time statistics such as \"Network created in X seconds\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/network_initialization.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays the network initialization process and time statistics"
+  },
+  {
+    "metric": "3.1 Interactive Menu Integrity",
+    "description": "1. **Act:** After the network is created, observe the displayed menu.\n2. **Assert:** The menu should have 7 options: 1. Insert new node into network 2. Search for data in network 3. Insert data into network 4. Print network graph 5. Print network information 6. Remove node from network 7. Exit program.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/menu_display.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays a complete menu with 7 options"
+  },
+  {
+    "metric": "4.1a Dynamic Node Insertion - Success Scenario",
+    "description": "1. **Precondition (User Path):** Is there an \"Insert new node into network\" option (Option 1) in the main menu?\n2. **Arrange:** Prepare a node ID that does not duplicate any existing node.\n3. **Act:** Choose menu option 1 and input the new node ID.\n4. **Assert:** Observe whether the program displays node insertion success information, including node ID and time statistics.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/node_add_success.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays success information for node insertion and time statistics"
+  },
+  {
+    "metric": "4.1b Dynamic Node Insertion - Duplicate ID Handling",
+    "description": "1. **Arrange:** Prepare an already existing node ID.\n2. **Act:** Choose menu option 1 and input the duplicate node ID.\n3. **Assert:** Observe whether the program gives an error message such as \"Node is already in the network\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/node_add_duplicate.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays a duplicate node error message"
+  },
+  {
+    "metric": "4.2 Network Integrity Verification After Node Insertion",
+    "description": "1. **Arrange:** Create a network with multiple nodes and insert multiple data items.\n2. **Act:** Insert a new node into the network, then try to search for all previously inserted data items.\n3. **Assert:** Verify that after node insertion, all original data can still be found successfully, ensuring network integrity and correct updating of finger tables. The newly inserted node should be correctly integrated into the network.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/network_integrity_after_insertion.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "After inserting a new node, all original data can still be found successfully"
+  },
+  {
+    "metric": "5.1a Data Insertion Function - Basic Insertion",
+    "description": "1. **Precondition (User Path):** Is there an \"Insert data into network\" option (Option 3) in the main menu?\n2. **Arrange:** Prepare a test data string (e.g., \"test_data\").\n3. **Act:** Choose menu option 3 and input the data string.\n4. **Assert:** Observe whether the program displays data insertion success information, including hash value, target node ID, and time statistics.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/data_insert.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays success information and time statistics for data insertion"
+  },
+  {
+    "metric": "5.2a Data Search Function - Existing Data",
+    "description": "1. **Precondition (User Path):** Is there a \"Search for data in network\" option (Option 2) in the main menu?\n2. **Arrange:** First insert a data item using option 3 (e.g., \"search_test\").\n3. **Act:** Choose menu option 2 and input the same data string to search.\n4. **Assert:** Observe whether the program can find the data and display information such as \"Found 'search_test' in node X\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/data_search_found.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program first inserts the data, then successfully finds it"
+  },
+  {
+    "metric": "5.2b Data Search Function - Non-existent Data",
+    "description": "1. **Arrange:** Prepare a data string that is definitely not present (e.g., \"nonexistent_data\").\n2. **Act:** Choose menu option 2 and input the non-existent data string.\n3. **Assert:** Observe whether the program gives a clear prompt, such as \"'nonexistent_data' not exist in the network\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/data_search_notfound.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays prompt information about data non-existence"
+  },
+  {
+    "metric": "6.1 Network Status Information Display",
+    "description": "1. **Precondition (User Path):** Is there a \"Print network information\" option (Option 5) in the main menu?\n2. **Act:** Choose menu option 5.\n3. **Assert:** Observe whether the program displays network statistics including the following four items: number of active nodes, total network capacity, parameter m value, and first node ID.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/network_info.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays network statistics information"
+  },
+  {
+    "metric": "7.1 Node Deletion Function - Successful Deletion",
+    "description": "1. **Precondition (User Path):** Is there a \"Remove node from network\" option (Option 6) in the main menu?\n2. **Arrange:** Make sure there is a node in the network that can be deleted (not the first node).\n3. **Act:** Choose menu option 6 and input an existing node ID.\n4. **Assert:** Observe whether the program shows deletion success information and time statistics.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/node_delete_success.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays node deletion success information and time statistics"
+  },
+  {
+    "metric": "7.2 Network Connectivity Verification After Node Deletion",
+    "description": "1. **Arrange:** Create a network with multiple nodes and insert multiple data items into different nodes.\n2. **Act:** Delete a node in the network, then try to search for all previously inserted data items.\n3. **Assert:** Verify that after a node is deleted, the remaining nodes can still find all the data successfully, ensuring network connectivity and data integrity. Data should be correctly migrated to the successor node.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/network_connectivity_after_deletion.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "After deleting a node, all original data can still be found successfully"
+  },
+  {
+    "metric": "8.1 Network Topology Visualization - DOT File Generation",
+    "description": "1. **Precondition (User Path):** Is there a \"Print network graph\" option (Option 4) in the main menu?\n2. **Act:** Choose menu option 4.\n3. **Assert:** Check whether a graph.dot file is generated in the current working directory, and whether its content includes Graphviz format identifiers such as \"digraph G\".",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/network_visualization.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": [
+      "evaluation/expected_outputs/expected_graph.dot"
+    ],
+    "expected_output": "A valid graph.dot file is generated"
+  },
+  {
+    "metric": "9.1 Operation Time Statistics Function",
+    "description": "1. **Act:** Perform various operations (node insertion, data insertion, search, deletion, etc.).\n2. **Assert:** Observe whether the program displays time statistics after each operation, such as \"operation completed in X seconds\" or \"insert node in: X seconds\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/time_statistics.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Time statistics are displayed for all major operations"
+  },
+  {
+    "metric": "10.1a Input Validation - Menu Selection Validation",
+    "description": "1. **Act:** At the main menu prompt, input invalid selections (such as letter 'a' or an out-of-range number '9').\n2. **Assert:** Observe whether the program gives an error prompt and re-displays the menu, instead of crashing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/menu_validation.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts normally and displays the welcome interface, entering parameter configuration"
+  },
+  {
+    "metric": "10.1b Input Validation - Node ID Verification",
+    "description": "1. **Act:** When prompted to enter a node ID (such as adding or deleting a node), input a non-integer value (e.g., 'abc').\n2. **Assert:** Observe whether the program gives an error prompt and asks for re-input, instead of crashing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/node_id_validation.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts normally and displays the welcome interface, entering parameter configuration"
+  },
+  {
+    "metric": "11.1 Batch Data Generation Function",
+    "description": "1. **Arrange:** Set the simulated data amount to greater than 0 (e.g., 10) during network initialization.\n2. **Act:** Complete network creation and observe the batch data insertion process.\n3. **Assert:** The program should display batch data insertion progress and average time statistics, such as \"X seconds per item\".",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/batch_data_generation.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program accepts the m parameter and proceeds to node number configuration"
+  },
+  {
+    "metric": "12.1 Menu Loop Execution",
+    "description": "1. **Act:** Perform several different operations in sequence (such as insert data, search data, view network information).\n2. **Assert:** Observe after each operation whether the program automatically returns to the main menu and waits for the next user choice.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/menu_loop.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays the network initialization process and time statistics"
+  },
+  {
+    "metric": "13.1 Graceful Program Exit",
+    "description": "1. **Precondition (User Path):** Is there an \"Exit program\" option (Option 7) in the main menu?\n2. **Act:** Choose menu option 7.\n3. **Assert:** Observe whether the program exits cleanly without any exceptions or error messages.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/Main.py",
+        "test_input": "evaluation/inputs/graceful_exit.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program displays a complete menu with 7 options"
+  }
+]

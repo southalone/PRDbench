@@ -1,0 +1,290 @@
+[
+  {
+    "metric": "1.1 Program Startup and Help Information",
+    "description": "1. **Act:** In the project root directory, run python src/main.py --help or `python src/main.py -h`.\n2. **Assert:** Check whether the program executes successfully and outputs help information, and that the help clearly lists how to launch core functions such as data processing, model training, and link prediction evaluation.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py --help",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/main.py -h",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program should display help information, including explanations of subcommands such as preprocess, train, and evaluate."
+  },
+  {
+    "metric": "2.1.1 Data Loading - Mapping File Generation",
+    "description": "1. **Pre-check (User Path):** Run python src/main.py --help and verify whether there is a clear data processing subcommand (such as process_data or `preprocess`).\n2. **Arrange:** Make sure the FB15K-237 dataset files exist in the specified directory (e.g. ./data/FB15K-237/).\n3. **Act:** Run the data processing command, such as python src/main.py process_data --input ./data/FB15K-237/ --output ./output/.\n4. **Assert:** Check whether entity2id.txt and relation2id.txt files are generated in the output directory, and verify that the file format is \"entity name\\tID\" and \"relation name\\tID\" for each line respectively.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py preprocess --input ./src/data --output ./test_output",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt",
+      "src/data/train.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_entity2id.txt",
+      "evaluation/expected_relation2id.txt"
+    ],
+    "expected_output": "entity2id.txt and relation2id.txt files should be generated in the output directory, with formats: each line is 'entity name\\tID' and 'relation name\\tID' respectively"
+  },
+  {
+    "metric": "2.1.2 Data Integrity Verification and Exception Handling",
+    "description": "1. **Arrange:** Create a test dataset containing invalid triples, where the training file contains entity IDs that do not exist in the entity mapping.\n2. **Act:** Run the data processing command with this test dataset.\n3. **Assert:** Observe whether the program detects the exception and outputs a prompt containing specific error information (such as invalid entity name or line number), and exits with a non-zero status code.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py preprocess --input ./evaluation/invalid_data --output ./test_output",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/invalid_data/entity2id.txt",
+      "evaluation/invalid_data/relation2id.txt",
+      "evaluation/invalid_data/train.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The program should detect data exceptions, output error information, and exit with a non-zero status code"
+  },
+  {
+    "metric": "3.1 TransE Model Training Startup and Parameter Configuration",
+    "description": "1. **Pre-check (User Path):** Run python src/main.py --help and verify whether there is a clear model training subcommand (such as train).\n2. **Arrange:** Make sure data preprocessing is complete and the output directory contains the required mapping files.\n3. **Act:** Run the training command, such as python src/main.py train --input ./output/, and test parameter configuration functionality, for example python src/main.py train --input ./output/ --epochs 2.\n4. **Assert:** Observe whether the program begins training and continuously outputs training logs containing epoch and loss values, and can train according to the specified epochs parameter.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 3",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 2",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt",
+      "src/data/train.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "Training should stop after completing epoch 2"
+  },
+  {
+    "metric": "3.2 Vector Initialization Validation",
+    "description": "1. **Act:** Start the training process.\n2. **Assert:** Check the training logs or the generated vector files to verify that the entity and relation vector dimensions are 50, and that the initialization uses a uniform distribution.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_vector_initialization.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Vector dimensions should be 50, initialized with uniform distribution, all tests should pass"
+  },
+  {
+    "metric": "3.3 Loss Value Calculation and Monitoring",
+    "description": "1. **Act:** Run the training process for at least 20 epochs.\n2. **Assert:** Observe whether the loss value is continuously output in the training logs, and whether the values show an overall convergence trend during training (short-term fluctuations allowed, but should stabilize or decrease over the long term).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 20",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt",
+      "src/data/train.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The training log should continuously output loss values, which overall show a convergence trend over the course of 20 epochs"
+  },
+  {
+    "metric": "4.1 Link Prediction Functionality",
+    "description": "1. **Pre-check (User Path):** Run python src/main.py --help and verify whether there is a clear evaluation or prediction subcommand (such as evaluate or `predict`).\n2. **Arrange:** Make sure model training is complete and trained vector files exist.\n3. **Act:** Run the evaluation command, such as python src/main.py evaluate --input ./output/.\n4. **Assert:** Observe whether the program can successfully perform link prediction and output valid numerical results.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./evaluation/golden_data --output ./golden_test_output --epochs 20 --embedding_dim 10",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/main.py evaluate --input ./evaluation/golden_data --model ./golden_test_output",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "evaluation/golden_data/entity2id.txt",
+      "evaluation/golden_data/relation2id.txt",
+      "evaluation/golden_data/train.txt",
+      "evaluation/golden_data/test.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_golden_report.json"
+    ],
+    "expected_output": "The program should successfully perform link prediction and output valid MeanRank and Hit@10 numerical results"
+  },
+  {
+    "metric": "4.2 Evaluation Metric Calculation - MeanRank",
+    "description": "1. **Act:** Run the evaluation command.\n2. **Assert:** Check whether the evaluation output or generated report file contains a MeanRank metric value.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 2",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/main.py evaluate --input ./src/data --model ./test_output",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/test.txt",
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The evaluation output should contain the string 'MeanRank:' and a value, and the generated report.json file should contain the MeanRank field"
+  },
+  {
+    "metric": "4.3 Evaluation Metric Calculation - Hit@10",
+    "description": "1. **Act:** Run the evaluation command.\n2. **Assert:** Check whether the evaluation output or generated report file contains a Hit@10 metric value.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py evaluate --input ./src/data --model ./test_output",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/test.txt",
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The evaluation output should contain the string 'hit@10:' and a value, and the generated report.json file should contain the Hit@10 field"
+  },
+  {
+    "metric": "5.1 Vector File Output",
+    "description": "1. **Act:** Complete model training.\n2. **Assert:** Check whether there are entity vector files (such as entity_vec.txt) and relation vector files (such as relation_vec.txt) in the output directory, and verify the file format: each line contains 1 ID and 50 floating-point numbers (a total of 51 columns).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 2",
+        "test_input": null
+      },
+      {
+        "test_command": "head -n 3 ./test_output/entity_vec.txt",
+        "test_input": null
+      },
+      {
+        "test_command": "wc -l ./test_output/entity_vec.txt",
+        "test_input": null
+      },
+      {
+        "test_command": "head -n 3 ./test_output/relation_vec.txt",
+        "test_input": null
+      },
+      {
+        "test_command": "wc -l ./test_output/relation_vec.txt",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt",
+      "src/data/train.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "entity_vec.txt and relation_vec.txt files should be generated, each line contains 1 ID and 50 floating-point numbers; entity_vec.txt should have 14951 lines, relation_vec.txt should have 1345 lines"
+  },
+  {
+    "metric": "5.2 Loss Curve Visualization",
+    "description": "1. **Act:** Complete model training.\n2. **Assert:** Check whether there is a PNG format loss curve plot file (such as loss_curve.png) in the output directory.",
+    "type": "file_comparison",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./src/data --output ./test_output --epochs 3",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt",
+      "src/data/train.txt"
+    ],
+    "expected_output_files": [
+      "evaluation/expected_loss_curve.png"
+    ],
+    "expected_output": "A loss_curve.png format loss curve plot file should be generated"
+  },
+  {
+    "metric": "5.3a Evaluation Report Generation - File Format",
+    "description": "1. **Act:** Run the evaluation command.\n2. **Assert:** Check whether there is a JSON format evaluation report file (such as report.json) in the output directory, and verify the file content is valid JSON format.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py evaluate --input ./src/data --model ./test_output",
+        "test_input": null
+      },
+      {
+        "test_command": "python -c \"import json; json.load(open('./test_output/report.json')); print('Valid JSON format')\"",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/test.txt",
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "A valid JSON format evaluation report file should be generated, and JSON validation should output 'Valid JSON format'"
+  },
+  {
+    "metric": "5.3b Evaluation Report Content - Contains Key Metrics",
+    "description": "1. **Act:** Run the evaluation command.\n2. **Assert:** Check whether the generated JSON report file contains both MeanRank and Hit@10 key metric fields.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python -c \"import json; data=json.load(open('./test_output/report.json')); assert 'MeanRank' in data and 'Hit@10' in data; print('Contains required fields: MeanRank and Hit@10')\"",
+        "test_input": null
+      }
+    ],
+    "input_files": [
+      "src/data/test.txt",
+      "src/data/entity2id.txt",
+      "src/data/relation2id.txt"
+    ],
+    "expected_output_files": null,
+    "expected_output": "The report file should contain both MeanRank and Hit@10 key metric fields, and validation should output 'Contains required fields: MeanRank and Hit@10'"
+  },
+  {
+    "metric": "6.1 Error Handling and Messaging",
+    "description": "1. **Arrange:** Prepare erroneous input parameters (such as non-existent file paths).\n2. **Act:** Run various commands with erroneous parameters.\n3. **Assert:** Observe whether the program gives meaningful error message prompts rather than crashing.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py train --input ./nonexistent_path --output ./test_output",
+        "test_input": null
+      },
+      {
+        "test_command": "python src/main.py evaluate --input ./nonexistent_path --model ./nonexistent_model",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program should output meaningful error messages containing 'failed' or 'error' keywords (such as 'model training failed', 'model evaluation failed'), and exit with a non-zero status code rather than directly crashing"
+  }
+]

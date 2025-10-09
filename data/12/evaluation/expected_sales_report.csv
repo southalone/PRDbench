@@ -1,0 +1,6 @@
+biz_id,trans_date,store_id,brand_name,org_path,private_domain_type,amount,recency,frequency,monetary,segment,value_tag,detail_link
+BIZ_001,2024-01-15,ST_0001,品牌A,总部/华东区/上海,总部直管,1250.50,45,2.5,3500.25,重要价值客户,增长型高价值,repo://retail-system-east/detail?store_id=ST_0001&date=2024-01-15
+BIZ_002,2024-02-20,ST_0002,品牌B,总部/华南区/深圳,区域重点,980.75,30,1.8,2800.40,重要保持客户,稳定型高价值,repo://retail-system-south/detail?store_id=ST_0002&date=2024-02-20
+BIZ_003,2024-03-10,ST_0003,品牌C,总部/华北区/北京,总部直管,2150.20,15,3.2,4200.60,重要价值客户,增长型高价值,repo://retail-system-north/detail?store_id=ST_0003&date=2024-03-10
+BIZ_001,2024-04-05,ST_0004,品牌A,总部/西南区/成都,总部直管,1800.30,60,2.1,3100.15,重要发展客户,潜力型高价值,repo://retail-system-east/detail?store_id=ST_0004&date=2024-04-05
+BIZ_004,2024-05-12,ST_0005,品牌D,总部/华中区/武汉,区域重点,750.90,90,1.5,2200.80,一般价值客户,观察型高价值,repo://retail-system-west/detail?store_id=ST_0005&date=2024-05-12

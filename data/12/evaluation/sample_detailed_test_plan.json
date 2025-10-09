@@ -1,0 +1,289 @@
+[
+    {
+      "metric": "0.1.1 环境与文档：提供清晰的说明文档（README.md）",
+      "description": "1. **断言**：检查项目根目录下是否存在 `README.md` 文件.\n2. **断言**：若文件存在，读取其内容，验证是否包含至少三个明确的部分：项目介绍、环境配置说明（如何安装依赖）、程序启动指令。",
+      "type": "file_comparison",
+      "testcases": [
+        {
+          "test_command": null,
+          "test_input": null
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "README.md文件存在，读取其内容，验证是否包含至少三个明确的部分：项目介绍、环境配置说明（如何安装依赖）、程序启动指令。"
+    },
+    {
+      "metric": "0.2.1 程序可运行性：程序能够成功启动并显示主菜单",
+      "description": "1. **执行**：根据 `README.md` 中的启动指令（例如 `python main.py`）执行程序.\n2. **断言**：观察程序输出，验证是否成功启动并展示了一个包含多个选项、可交互的主菜单界面。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_0.2.1.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序成功启动并显示包含'创建/编辑需求模板'、'基于模板生成产品PRD'和'退出工具'选项的清晰主菜单"
+    },
+    {
+      "metric": "2.1.1 模板创建 - 基础信息输入",
+      "description": "1. **前置校验 (用户路径):** 在主菜单中选择'1. 创建/编辑需求模板'选项，是否能进入模板创建流程？\n2. **准备 (Arrange):** 准备产品名称\"测试产品\"和目标用户\"年轻用户\"。\n3. **执行 (Act):** 在模板创建流程中，依次输入产品名称和目标用户。\n4. **断言 (Assert):** 程序是否正确接收并保存这些信息？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.1.1.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确接收并保存产品名称和目标用户信息"
+    },
+    {
+      "metric": "2.1.2 模板创建 - 风格关键词输入",
+      "description": "1. **前置校验 (用户路径):** 在模板创建流程中，是否存在输入风格关键词的步骤？\n2. **准备 (Arrange):** 准备风格关键词\"极简主义, 现代\"。\n3. **执行 (Act):** 按提示输入风格关键词。\n4. **断言 (Assert):** 程序是否正确解析并保存了这些关键词？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.1.2.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确解析并保存多个风格关键词"
+    },
+    {
+      "metric": "2.1.3 模板创建 - 色彩情感倾向选择",
+      "description": "1. **前置校验 (用户路径):** 在模板创建流程中，是否存在选择色彩情感倾向的步骤？\n2. **准备 (Arrange):** 准备选择\"冷色调-专业感\"（对应选项1）。\n3. **执行 (Act):** 按提示选择色彩情感倾向。\n4. **断言 (Assert):** 程序是否正确保存了选择的色彩情感倾向？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.1.3.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确保存色彩情感倾向选择"
+    },
+    {
+      "metric": "2.1.4 模板保存 - 命名与覆盖确认",
+      "description": "1. **前置校验 (用户路径):** 在模板创建完成后，是否存在保存模板的步骤？\n2. **准备 (Arrange):** 准备模板名称\"test_template\"。\n3. **执行 (Act):** 输入模板名称，并在模板已存在时选择是否覆盖。\n4. **断言 (Assert):** 程序是否正确保存模板并在文件系统中创建相应文件？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.1.4.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确保存模板并在指定路径创建文件"
+    },
+    {
+      "metric": "2.1.5 模板验证 - 必填字段检查",
+      "description": "1. **准备 (Arrange):** 创建一个缺少必填字段的模板（如不输入产品名称）。\n2. **执行 (Act):** 尝试保存该模板。\n3. **断言 (Assert):** 程序是否拒绝保存并提示相应字段不能为空？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.1.5.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确识别所有必填字段的缺失并给出明确提示"
+    },
+    {
+      "metric": "2.1.6 模板文件格式验证",
+      "description": "1. **准备 (Arrange):** 创建并保存一个模板。\n2. **执行 (Act):** 使用文本编辑器打开保存的模板文件。\n3. **断言 (Assert):** 验证文件是否为有效的JSON格式且包含所有输入的字段信息。",
+      "type": "file_comparison",
+      "testcases": [
+        {
+          "test_command": "python src/main.py\n1\n测试产品\n年轻用户\n极简主义, 现代\n1\ntest_template_json\ny",
+          "test_input": null
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": [
+        "evaluation/expected_template.json"
+      ],
+      "expected_output": "模板文件是有效的JSON格式，包含所有输入信息"
+    },
+    {
+      "metric": "2.2.1 图片路径验证",
+      "description": "1. **前置校验 (用户路径):** 在生成PRD流程中，是否存在输入图片路径的步骤？\n2. **准备 (Arrange):** 准备一个不存在的图片路径。\n3. **执行 (Act):** 输入这个路径。\n4. **断言 (Assert):** 程序是否能正确识别并拒绝无效路径？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.2.1.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确识别有效路径并拒绝无效路径"
+    },
+    {
+      "metric": "2.2.2 图片格式验证",
+      "description": "1. **前置校验 (用户路径):** 在生成PRD流程中，程序是否会验证图片格式？\n2. **准备 (Arrange):** 准备一个TXT文件。\n3. **执行 (Act):** 尝试用这个文件生成PRD。\n4. **断言 (Assert):** 程序是否拒绝TXT文件？",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.2.2.in"
+        }
+      ],
+      "input_files": [
+        "evaluation/Test.txt"
+      ],
+      "expected_output_files": null,
+      "expected_output": "程序能正确验证图片格式并拒绝不符合要求的文件"
+    },
+    {
+      "metric": "2.2.3 图片预处理 - 元数据清理",
+      "description": "1. **准备 (Arrange):** 准备一张带有EXIF信息的图片。\n2. **执行 (Act):** 使用该图片生成PRD。\n3. **断言 (Assert):** 检查处理后的图片是否已清除EXIF信息。",
+      "type": "unit_test",
+      "testcases": [
+        {
+          "test_command": "pytest evaluation/tests/test_image_processor.py::test_exif_removal",
+          "test_input": null
+        }
+      ],
+      "input_files": [
+        "evaluation/EXIF.jpg"
+      ],
+      "expected_output_files": null,
+      "expected_output": "程序能通过此项单元测试"
+    },
+    {
+      "metric": "2.3.1 主色调提取准确性",
+      "description": "1. **准备 (Arrange):** 准备多张不同颜色但主色调明显的图片。\n2. **执行 (Act):** 使用这些图片生成PRD。\n3. **断言 (Assert):** 检查PRD文档中的主色调信息是否准确反映了图片的主要颜色。",
+      "type": "unit_test",
+      "testcases": [
+        {
+          "test_command": "pytest evaluation/tests/test_feature_extractor.py::test_dominant_colors_extraction",
+          "test_input": null
+        }
+      ],
+      "input_files": [
+        "evaluation/Red.jpg",
+        "evaluation/Green.jpg",
+        "evaluation/Yellow.jpg"
+      ],
+      "expected_output_files": null,
+      "expected_output": "程序能通过此项单元测试"
+    },
+    {
+      "metric": "2.3.2 纹理特征识别准确性",
+      "description": "1. **准备 (Arrange):** 准备两张纹理差异明显的图片（一张光滑，一张粗糙）。\n2. **执行 (Act):** 分别使用这两张图片生成PRD。\n3. **断言 (Assert):** 检查PRD文档中的纹理特征标签是否与图片实际纹理相符。",
+      "type": "unit_test",
+      "testcases": [
+        {
+          "test_command": "pytest evaluation/tests/test_feature_extractor.py::test_texture_extraction",
+          "test_input": null
+        }
+      ],
+      "input_files": [
+        "evaluation/Smooth.jpg",
+        "evaluation/Rough.jpg"
+      ],
+      "expected_output_files": null,
+      "expected_output": "程序能通过此项单元测试"
+    },
+    {
+      "metric": "2.3.3 风格描述生成",
+      "description": "1. **前置校验 (用户路径):** 在生成PRD流程中，是否存在输入API密钥的步骤？\n2. **准备 (Arrange):** 准备一个有效的OpenAI API密钥（或使用'skip'跳过）。\n3. **执行 (Act):** 输入API密钥（或'skip'）并完成PRD生成。\n4. **断言 (Assert):** 检查PRD文档中是否包含风格描述（或跳过说明）。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.3.3.in"
+        }
+      ],
+      "input_files": [
+        "evaluation/Test.jpeg"
+      ],
+      "expected_output_files": null,
+      "expected_output": "程序能成功调用API生成风格描述或正确处理跳过操作"
+    },
+    {
+      "metric": "2.4.1 PRD文档结构完整性",
+      "description": "1. **准备 (Arrange):** 生成一个PRD文档。\n2. **执行 (Act):** 使用文本编辑器打开生成的文档。\n3. **断言 (Assert):** 验证文档是否包含以下部分：产品概述、图片资源规范、核心特征描述、开发排期建议。",
+      "type": "file_comparison",
+      "testcases": [
+        {
+          "test_command": "python src/main.py\n2\n1\nevaluation/Test.jpeg\nskip\ntest_prd",
+          "test_input": null
+        }
+      ],
+      "input_files": [
+        "evaluation/Test.jpeg"
+      ],
+      "expected_output_files": [
+        "evaluation/expected_prd.md"
+      ],
+      "expected_output": "文档结构完整，包含以下部分：产品概述、图片资源规范、核心特征描述、开发排期建议。"
+    },
+    {
+      "metric": "2.4.2 文档输出路径与提示",
+      "description": "1. **前置校验 (用户路径):** 在生成PRD流程中，是否存在指定文档名称的步骤？\n2. **准备 (Arrange):** 准备文档名称\"test_prd\"。\n3. **执行 (Act):** 输入文档名称并完成PRD生成。\n4. **断言 (Assert):** 检查文档是否保存在src/output目录下，并验证程序是否显示'文档生成完成'的提示。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.4.3.in"
+        }
+      ],
+      "input_files": [
+        "evaluation/Test.jpeg"
+      ],
+      "expected_output_files": null,
+      "expected_output": "文档保存在正确路径且有生成完成提示"
+    },
+    {
+      "metric": "2.5.1a 用户输入合法性校验 - 菜单选择非法输入",
+      "description": "1. **准备 (Arrange):** 准备负数作为菜单选项。\n2. **执行 (Act):** 在主菜单中输入负数。\n3. **断言 (Assert):** 观察程序是否能正确识别并拒绝非法数值输入。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.5.1a.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确识别并拒绝非法菜单选项输入"
+    },
+    {
+      "metric": "2.5.1b 用户输入合法性校验 - API密钥格式验证",
+      "description": "1. **准备 (Arrange):** 准备格式不正确的API密钥（如包含特殊字符或长度不足）。\n2. **执行 (Act):** 在生成PRD流程中输入非法格式的API密钥。\n3. **断言 (Assert):** 观察程序是否能正确识别并拒绝非法格式的API密钥输入。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.5.1b.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "程序能正确识别并拒绝格式不正确的API密钥输入"
+    },
+    {
+      "metric": "2.5.2 错误处理与用户提示",
+      "description": "1. **准备 (Arrange):** 准备一些会导致错误的输入（如不存在的模板名称）。\n2. **执行 (Act):** 在相应环节输入这些内容。\n3. **断言 (Assert):** 观察程序是否显示中文错误提示并允许用户重新输入。",
+      "type": "shell_interaction",
+      "testcases": [
+        {
+          "test_command": "python src/main.py",
+          "test_input": "evaluation/inputs_for_test_2.5.2.in"
+        }
+      ],
+      "input_files": null,
+      "expected_output_files": null,
+      "expected_output": "所有错误都有中文提示且支持重新输入"
+    }
+  ]

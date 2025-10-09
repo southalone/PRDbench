@@ -1,0 +1,61 @@
+{
+  "name": "大学生注意稳定性量表",
+  "description": "测量大学生注意稳定性的各个维度",
+  "version": "1.0",
+  "config": {
+    "scoring_method": "likert_7",
+    "dimensions": ["注意集中", "注意控制", "注意持续", "注意转换", "注意分配"],
+    "scoring_range": [1, 7],
+    "higher_better": true
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "content": "我能够长时间集中注意力学习",
+      "dimension": "注意持续",
+      "is_reverse": false
+    },
+    {
+      "item_number": 2,
+      "content": "学习时我很容易分心",
+      "dimension": "注意集中",
+      "is_reverse": true
+    },
+    {
+      "item_number": 3,
+      "content": "我能够控制自己的注意力",
+      "dimension": "注意控制",
+      "is_reverse": false
+    },
+    {
+      "item_number": 4,
+      "content": "我的注意力经常游移不定",
+      "dimension": "注意集中",
+      "is_reverse": true
+    },
+    {
+      "item_number": 5,
+      "content": "我能够有意识地调节注意力",
+      "dimension": "注意控制",
+      "is_reverse": false
+    },
+    {
+      "item_number": 6,
+      "content": "我能够在嘈杂环境中保持专注",
+      "dimension": "注意持续",
+      "is_reverse": false
+    },
+    {
+      "item_number": 7,
+      "content": "我很难将注意力从一件事转移到另一件事",
+      "dimension": "注意转换",
+      "is_reverse": true
+    },
+    {
+      "item_number": 8,
+      "content": "我能够同时关注多个重要信息",
+      "dimension": "注意分配",
+      "is_reverse": false
+    }
+  ]
+}

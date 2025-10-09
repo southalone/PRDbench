@@ -1,0 +1,324 @@
+[
+  {
+    "metric": "1.1 Basic Program Running Capability: The system is able to start normally and respond to basic commands",
+    "description": "1. **Execute (Act):** Execute the `python main.py` command in the command line.\n2. **Assert:** Observe whether the program starts normally and displays help information containing at least 5 main command options (such as init, location, login, search, recommend, etc.), without any error messages.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The program starts normally and displays help information containing at least 5 main command options (such as init, recommend, search, nearby, etc.), without any error messages"
+  },
+  {
+    "metric": "1.2 Initialization Command: Support connecting to database and model through init command, init_model to initialize model",
+    "description": "1. **Arrange:** Database file exists\n2. **Act:** Execute init and init_model command features.\n3. **Assert:** Verify that there are indeed merchant records in the database, and the model begins training.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/init_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system indicates that there are merchant records in the database, and the model begins training"
+  },
+  {
+    "metric": "1.3 Location Setting Function: Support setting user location through location command",
+    "description": "1. **Arrange:** Prepare valid latitude and longitude coordinates (such as 27.91,-82.71).\n2. **Act:** Execute the `location 27.91 -82.71` command.\n3. **Assert:** Observe whether the system displays a confirmation message indicating successful location setting, including the coordinate values set.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/location_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays a confirmation message indicating successful location setting, including the coordinate values set"
+  },
+  {
+    "metric": "1.4 User Login Function: Support login to specified user through login command",
+    "description": "1. **Arrange:** Prepare a valid user ID (such as HFECrzYDpgbS5EmTBtj2zQ).\n2. **Act:** Execute the `python main.py login HFECrzYDpgbS5EmTBtj2zQ` command.\n3. **Assert:** Observe whether the system displays login success information, including the user ID or basic user information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/login_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system displays login success information, including the user ID or basic user information"
+  },
+  {
+    "metric": "2.1 Basic Search Function: Support simple keyword search",
+    "description": "1. **Arrange:** Ensure data initialization is complete, prepare search keyword \"CA restaurant\".\n2. **Act:** Execute the `python main.py search \"CA restaurant\"` command.\n3. **Assert:** Observe whether at least 5 restaurant search results are returned, containing merchant names and basic information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "At least 5 restaurant search results are returned, containing merchant names and basic information"
+  },
+  {
+    "metric": "2.2a Advanced Search Parameters: Radius Parameter Function",
+    "description": "1. **Arrange:** Set user location, prepare search term \"coffee\" and radius parameter 3000 meters.\n2. **Act:** Execute the `python main.py search \"coffee\" --radius 3000` command.\n3. **Assert:** Observe whether the distance between all merchants in the returned results and the user location is within 3000 meters.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_radius_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The distance between all merchants in the returned results and the user location is within 3000 meters"
+  },
+  {
+    "metric": "2.2b Advanced Search Parameters: Limit Parameter Function",
+    "description": "1. **Arrange:** Prepare search term \"restaurant\" and limit number 15.\n2. **Act:** Execute the `python main.py search \"restaurant\" --limit 15` command.\n3. **Assert:** Observe whether the number of returned results is exactly 15 (or less than 15 if the total results are insufficient).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_limit_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The number of returned results is exactly 15 (or less than 15 if the total results are insufficient)"
+  },
+  {
+    "metric": "2.2c Advanced Search Parameters: Sort Parameter Function",
+    "description": "1. **Arrange:** Prepare search term \"coffee\" and sort parameter \"rating\".\n2. **Act:** Execute the search and specify sorting by rating.\n3. **Assert:** Observe whether the returned results are sorted by rating from high to low, check if the ratings of the top 5 results show a decreasing trend.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_sort_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The returned results are sorted by rating from high to low, the ratings of the top 5 results show a decreasing trend"
+  },
+  {
+    "metric": "2.3 Category Search Function: Support search by category and subcategory",
+    "description": "1. **Arrange:** Prepare category \"Food\" and subcategory \"Chinese\".\n2. **Act:** Execute the `category \"Food\" --subcategory \"Chinese\"` command.\n3. **Assert:** Observe whether the returned results are all Chinese restaurants, check the category information of the top 5 results.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/category_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The returned results are Chinese restaurants"
+  },
+  {
+    "metric": "3.1 Location Sorting: Search results can be sorted by proximity",
+    "description": "1. **Arrange:** Set user location, prepare search term \"coffee\".\n2. **Act:** Execute the search command and specify sorting by distance.\n3. **Assert:** Check whether the distances of the top 5 merchants in the returned results are sorted from near to far.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_sort_dist_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The distances of the top 5 merchants in the returned results are sorted from near to far"
+  },
+  {
+    "metric": "4.1a Multi-field Matching: Merchant Name Field Matching",
+    "description": "1. **Arrange:** Prepare a known existing merchant name keyword.\n2. **Act:** Search for this merchant name keyword.\n3. **Assert:** Observe whether the returned results include merchants that match the name, ranking in the top 3 positions.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/text_match_name.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Able to search for completely matching results"
+  },
+  {
+    "metric": "4.1b Multi-field Matching: Category Field Matching",
+    "description": "1. **Arrange:** Prepare category keyword \"pizza\".\n2. **Act:** Search \"pizza\".\n3. **Assert:** Observe whether the returned results are mainly merchants related to pizza.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/text_match_cat.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The returned results are mainly merchants related to pizza"
+  },
+  {
+    "metric": "4.1c Multi-field Matching: Address Field Matching",
+    "description": "1. **Arrange:** Prepare address keyword \"Highway 19N\" (address contained in the example data).\n2. **Act:** Search for this address keyword.\n3. **Assert:** Observe whether the addresses of merchants in the returned results contain relevant geographical location information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/text_match_dest.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The addresses of merchants in the returned results contain relevant geographical location information"
+  },
+  {
+    "metric": "4.2 Fuzzy Matching Capability: Support for spelling errors and partial matches",
+    "description": "1. **Arrange:** Prepare a search term with a spelling error \"resturant\" (correct is \"restaurant\").\n2. **Act:** Search \"resturant\".\n3. **Assert:** Observe whether it can return search results related to restaurants.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/text_match_spell_error.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Able to return search results related to restaurants"
+  },
+  {
+    "metric": "6.1 Paging Display Function: Support for paging when a large number of search results are returned",
+    "description": "1. **Pre-validation (User Path):** Is there a paging option or paging prompt when a large number of results are returned by a search?\n2. **Arrange:** Execute a search that can return a large number of results (like \"restaurant\").\n3. **Act:** Observe whether paging is supported and try the paging operation.\n4. **Assert:** Verify whether the paging function works properly.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/pagination_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Supports paging, paging operation works properly"
+  },
+  {
+    "metric": "7.1 View Merchant Details: Support viewing detailed information of a single merchant",
+    "description": "1. **Pre-validation (User Path):** Is there an option to view merchant details or an operation prompt in the search results?\n2. **Act:** Choose to view detailed information of a merchant in the search results.\n3. **Assert:** Observe whether detailed information of the merchant can be displayed, including full address, business hours, contact details, etc., and whether the detail page contains user review content, showing at least 3 reviews and review statistics (such as total reviews, average score).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/business_details_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Able to display merchant's detailed information, including full address, business hours, contact details, user review content, displaying at least 3 reviews and review statistics (such as total review count, average rating)"
+  },
+  {
+    "metric": "8.1 Search History: The system can record and display user's search history",
+    "description": "1. **Pre-validation (User Path):** Is there an option to view search history in the main menu or interaction mode?\n2. **Arrange:** Perform 3 different search operations.\n3. **Act:** Attempt to view search history.\n4. **Assert:** Observe whether it can display the 3 search records previously executed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/search_history_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Able to display previously executed search records"
+  },
+  {
+    "metric": "9.1 Error Handling: The system can gracefully handle various error situations",
+    "description": "1. **Arrange:** Prepare various error inputs: invalid command, incorrect parameter format, non-existent user ID.\n2. **Act:** Input these erroneous commands and parameters successively.\n3. **Assert:** Observe whether the system provides clear error prompt information instead of crashing or displaying technical error information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/error_handling_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system provides clear error prompt information instead of crashing or displaying technical error information"
+  },
+  {
+    "metric": "9.2 Performance: Search response time within acceptable range",
+    "description": "1. **Arrange:** Prepare 5 different search queries.\n2. **Act:** Continuously execute these 5 searches and record the response time for each search.\n3. **Assert:** Observe whether each search is completed within 5 seconds, and whether the average response time is within 3 seconds.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_performance.py::TestPerformance::test_search_response_time",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed. Each search is completed within 5 seconds, the average response time is within 3 seconds"
+  },
+  {
+    "metric": "10.1 Nearby Search Function: Support nearby command to search nearby merchants",
+    "description": "1. **Arrange:** Set user location to 27.91,-82.71, ensure the database is initialized.\n2. **Act:** Execute the `python main.py nearby` command and `python main.py nearby restaurant` command.\n3. **Assert:** Observe whether a list of nearby merchants is returned, observe whether all returned merchants are within 2 kilometers (default search radius), sorted by distance from near to far.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/nearby_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "A list of nearby merchants is returned, all returned merchants are within 2 kilometers (default search radius), sorted by distance from near to far."
+  },
+  {
+    "metric": "12.1 Personalized Recommendation Function: Support recommend command to provide personalized recommendations",
+    "description": "1. **Arrange:** Prepare a user ID with review history.\n2. **Act:** Execute unit test to get recommendations for this user.\n3. **Assert:** Unit test assert that all recommended results are related to the user's historical preference categories.",
+    "type": "unit_test",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_recommendations.py::test_recommendation_relevance",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Test passed, recommended results are related to user preferences"
+  },
+  {
+    "metric": "12.2 Cold Start Recommendation Function: Recommendations based on location for users not logged in",
+    "description": "1. **Arrange:** Ensure user is in a logged-out state, set user location.\n2. **Act:** Execute recommend command.\n3. **Assert:** Observe whether the system provides popular merchant recommendations based on location, and whether the recommended results contain nearby high-rated merchants.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/recommend_no_login_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "The system provides popular merchant recommendations based on location, displaying a list of nearby high-rated merchants"
+  },
+  {
+    "metric": "13.1 System Statistics Function: Support stats command to display system statistics",
+    "description": "1. **Arrange:** Ensure the database is initialized and there is some data and user activity.\n2. **Act:** Execute the `python main.py stats` command.\n3. **Assert:** Observe whether the system statistics information is displayed, including key indicators such as total number of merchants, total number of users, total number of reviews, etc.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py < evaluation/stats_test.in",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "System statistics information is displayed, including key indicators such as total number of merchants, total number of users, total number of reviews, etc."
+  }
+]

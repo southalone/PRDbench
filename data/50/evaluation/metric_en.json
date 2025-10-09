@@ -1,0 +1,77 @@
+[
+  {
+    "metric": "1.1.1 Basic Environment Configuration: The project includes a requirements.txt file",
+    "description": "1. Act: Run the dir command in the project's root directory.\n2. Assert: Check if the output of the command contains the requirements.txt file.",
+    "expected_output": "2 points: The requirements.txt file exists in the project's root directory. 1 point: The file exists but is not in the root directory, or the file name is not standardized (e.g., requirement.txt). 0 points: The project does not provide a requirements.txt file."
+  },
+  {
+    "metric": "1.2.1 System Startup, Main Menu Display, and Exit Mechanism",
+    "description": "1. Act: Run python main.py in the shell.\n2. Assert: Observe if the program starts successfully and, after clearing the screen, clearly displays a command line main menu with a total of 5 visual options (A-E) and a quit command for exiting.\n3. Act: Enter 'quit' at the menu prompt and press Enter.\n4. Assert: Observe if the program terminates normally and returns to the command line prompt state, with no error messages printed in the process.",
+    "expected_output": "2 points: The program starts successfully, fully displays the menu, and exits normally. 1 point: The program starts and exits normally but the menu display is incomplete or has formatting issues. 0 points: The program cannot start, crashes, or cannot exit normally."
+  },
+  {
+    "metric": "2.1.1a Menu Function - Song Popularity Analysis (A)",
+    "description": "1. Arrange: Make sure the music_image/ directory exists and is empty, or be prepared to overwrite files.\n2. Act: After starting the program, enter 'A' at the menu prompt and press Enter.\n3. Assert: Observe whether the console displays a progress bar and confirmation messages, and verify that the image file is created successfully.",
+    "expected_output": "2 points: The program executes without error, complete feedback is shown on the console, and the image file is successfully generated in the specified directory. 1 point: The program executes but the console does not show progress or confirmation messages, or the image is not generated in the specified directory. 0 points: Or if the program crashes or becomes unresponsive after selecting 'A'."
+  },
+  {
+    "metric": "2.1.1b Menu Function - User Contribution Analysis (B)",
+    "description": "1. Arrange: Make sure the music_image/ directory exists.\n2. Act: After starting the program, enter 'B' at the menu prompt and press Enter.\n3. Assert: Observe whether the console displays a progress bar and confirmation messages, and verify that the image file is created successfully.",
+    "expected_output": "2 points: The program executes without error, complete feedback is shown on the console, and the image file is successfully generated in the specified directory. 1 point: The program executes but the console does not show progress or confirmation messages, or the image is not generated in the specified directory. 0 points: Or if the program crashes or becomes unresponsive after selecting 'B'."
+  },
+  {
+    "metric": "2.1.1c Menu Function - European & American Playlist Play Count Analysis (C)",
+    "description": "1. Arrange: Make sure the music_image/ directory exists.\n2. Act: After starting the program, enter 'C' at the menu prompt and press Enter.\n3. Assert: Observe whether the console displays a progress bar and confirmation messages, and verify that the image file is created successfully.",
+    "expected_output": "2 points: The program executes without error, complete feedback is shown on the console, and the image file is successfully generated in the specified directory. 1 point: The program executes but the console does not show progress or confirmation messages, or the image is not generated in the specified directory. 0 points: Or if the program crashes or becomes unresponsive after selecting 'C'."
+  },
+  {
+    "metric": "2.1.1d Menu Function - European & American Playlist Comment Count Analysis (D)",
+    "description": "1. Arrange: Make sure the music_image/ directory exists.\n2. Act: After starting the program, enter 'D' at the menu prompt and press Enter.\n3. Assert: Observe whether the console displays a progress bar and confirmation messages, and verify that the image file is created successfully.",
+    "expected_output": "2 points: The program executes without error, complete feedback is shown on the console, and the image file is successfully generated in the specified directory. 1 point: The program executes but the console does not show progress or confirmation messages, or the image is not generated in the specified directory. 0 points: Or if the program crashes or becomes unresponsive after selecting 'D'."
+  },
+  {
+    "metric": "2.1.1e Menu Function - Play Count Distribution Analysis (E)",
+    "description": "1. Arrange: Make sure the music_image/ directory exists.\n2. Act: After starting the program, enter 'E' at the menu prompt and press Enter.\n3. Assert: Observe whether the console displays a progress bar and confirmation messages, and verify that the image file is created successfully.",
+    "expected_output": "2 points: The program executes without error, complete feedback is shown on the console, and the image file is successfully generated in the specified directory. 1 point: The program executes but the console does not show progress or confirmation messages, or the image is not generated in the specified directory. 0 points: Or if the program crashes or becomes unresponsive after selecting 'E'."
+  },
+  {
+    "metric": "3.1.1 Data Collection and Export - Playlist Data",
+    "description": "1. Arrange: Make sure the music_data/ directory exists.\n2. Act: Execute the command to start the crawler and collect playlist list and detail data.\n3. Assert: After execution, check whether music_list.csv and music_detail.csv files have been generated in the music_data directory and that the files are not empty.",
+    "expected_output": "2 points: After running the crawler, both music_list.csv and music_detail.csv files are generated in the music_data directory and the files are not empty. 1 point: The crawler runs successfully, but only one of the files is generated or the files are empty. 0 points: The crawler fails to execute or no CSV files are generated."
+  },
+  {
+    "metric": "3.1.2 Model File Existence",
+    "description": "1. Act: Run the dir command in the project's root directory.\n2. Assert: Check if the output contains the play_count_prediction_model_detail.pkl file.",
+    "expected_output": "2 points: The model file exists either in the project's root directory or clearly in a models sub-directory. 1 point: The model file exists but is in a confusing location, not in the expected directory. 0 points: The project does not provide the play_count_prediction_model_detail.pkl model file."
+  },
+  {
+    "metric": "3.2.1 Data Cleaning and Preparation Function",
+    "description": "1. Arrange: Make sure the original data files music_list.csv and music_detail.csv exist.\n2. Act: Execute the data cleaning script.\n3. Assert: Observe whether the console prints a success message and check whether cleaned data files have been generated.",
+    "expected_output": "2 points: The program runs successfully and generates cleaned_music_list.csv and cleaned_music_detail.csv files. 1 point: The program runs but only part of the files are generated or there are warnings. 0 points: The data cleaning script fails to run or no cleaned files are generated."
+  },
+  {
+    "metric": "3.2.2 Popularity Score Calculation Function",
+    "description": "1. Arrange: Ensure the cleaned data file cleaned_music_detail.csv exists.\n2. Act: Run the popularity score calculation script.\n3. Assert: Observe whether the console prints a success message and check whether the popularity ranking file is generated.",
+    "expected_output": "2 points: The program runs successfully and generates the popularity_ranking_detail.csv file. 1 point: The program runs but the generated file format is incomplete. 0 points: The popularity score script fails to run or no ranking file is generated."
+  },
+  {
+    "metric": "3.2.3 Machine Learning Model Training Function",
+    "description": "1. Arrange: Ensure the cleaned data file cleaned_music_detail.csv exists.\n2. Act: Run the model training script.\n3. Assert: Observe whether the console outputs model evaluation metrics and whether the model file is generated.",
+    "expected_output": "2 points: The program runs successfully and generates a model file, outputting MSE and R2 evaluation metrics. 1 point: The program runs and generates a model file, but evaluation metrics are abnormal. 0 points: The model training script fails to run or no model file is generated."
+  },
+  {
+    "metric": "3.3.1 Clustering Analysis Function",
+    "description": "1. Arrange: Ensure the original data file music_detail.csv exists and has enough samples.\n2. Act: Run the clustering analysis script.\n3. Assert: Observe whether the program successfully performs clustering analysis and generates a clustering result file.",
+    "expected_output": "2 points: The program runs clustering analysis successfully and generates the clustered_music_detail.csv file. 1 point: The program runs but cannot complete clustering due to insufficient samples. 0 points: The clustering analysis script fails to run."
+  },
+  {
+    "metric": "3.3.2 User Preference Analysis Function",
+    "description": "1. Arrange: Ensure the cleaned data file cleaned_music_detail.csv exists.\n2. Act: Run the user preference analysis script.\n3. Assert: Observe whether the program successfully generates data distribution charts.",
+    "expected_output": "2 points: The program runs successfully and generates data distribution charts with no Chinese character encoding issues. 1 point: The program runs and generates charts but has formatting problems. 0 points: The user preference analysis script fails to run."
+  },
+  {
+    "metric": "3.3.3 Machine Learning Prediction Function",
+    "description": "1. Arrange: Ensure the play_count_prediction_model_detail.pkl model file exists.\n2. Act: Run the machine learning prediction script.\n3. Assert: Observe whether the console prints prediction results, and all predicted values are non-negative.",
+    "expected_output": "2 points: The program runs successfully and outputs prediction results, and all predicted values are processed as non-negative as required by PRD. 1 point: The program runs and outputs results, but result format is non-standard or includes negative values. 0 points: The prediction script fails to run or no prediction results are output."
+  }
+]

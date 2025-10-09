@@ -1,0 +1,6 @@
+1
+help
+summary
+show 10
+export 测试报告.csv
+quit

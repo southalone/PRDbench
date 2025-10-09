@@ -1,0 +1,356 @@
+[
+  {
+    "metric": "0.1.1 环境与文档：提供清晰的说明文档（README.md）",
+    "description": "1. **断言**：检查项目根目录下是否存在 `README.md` 文件.\n2. **断言**：若文件存在，读取其内容，验证是否包含至少三个明确的部分：项目介绍、环境配置说明（如何安装依赖）、程序启动指令。",
+    "type": "file_comparison",
+    "test_command": null,
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "README.md文件存在，读取其内容，验证是否包含至少三个明确的部分：项目介绍、环境配置说明（如何安装依赖）、程序启动指令。",
+    "testcases": [
+      {
+        "test_command": null,
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "0.2.1 程序可运行性：程序能够成功启动并显示主菜单",
+    "description": "1. **执行**：根据 `README.md` 中的启动指令（例如 `python src/main.py`）执行程序.\n2. **断言**：观察程序输出，验证是否成功启动并展示了一个包含多个选项、可交互的主菜单界面。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_0.2.1.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "主菜单相关信息",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_0.2.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "0.3.1 单元测试：提供了可执行的单元测试",
+    "description": "1. **准备**：检查 `tests/` 目录下是否存在测试文件（如 `test_*.py`）。\n2. **执行**：执行测试命令（如 `pytest` 或 `python -m unittest discover tests`）。\n3. **断言**：观察测试结果，验证测试框架是否能运行，并且所有已发现的测试用例是否都显示为“通过”（PASSED）。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "通过所有单元测试",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1a 新建项目 - 流程启动",
+    "description": "1. **前置校验 (用户路径):** 在主菜单中，是否存在一个清晰的选项用于“新建项目”或类似功能？\n2. **执行 (Act):** 在主菜单界面，通过交互选择“新建项目”。\n3. **断言 (Assert):** 观察程序是否响应并开始引导用户输入第一个项目参数（如“请输入城市”）。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.1a.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序提示新项目已创建",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.1a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1b 保存项目",
+    "description": "1. **前置校验 (用户路径):** 在参数输入完成后或在主菜单中，是否存在一个清晰的选项用于“保存项目”？\n2. **准备 (Arrange):** 完成一个新项目的参数输入。\n3. **执行 (Act):** 选择“保存项目”功能。\n4. **断言 (Assert):** 观察程序是否响应并保存了项目信息。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.1b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序提示项目已成功保存",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.1b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.1c 加载项目",
+    "description": "1. **前置校验 (用户路径):** 在主菜单中，是否存在一个清晰的选项用于“加载项目”？\n2. **执行 (Act):** 选择“加载项目”功能，并按提示选择一个现存项目.\n3. **断言 (Assert):** 观察程序是否提示加载成功，并通过后续操作（如查看参数）验证数据已正确读入内存。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.1c.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序成功加载项目并进入项目菜单。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.1c.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2a 基础参数输入 - 位置与类型",
+    "description": "1. **执行 (Act):** 在加载项目流程中，持续输入直到基础信息部分.\n2. **断言 (Assert):** 确认程序会依次提示用户输入“城市”、“区域”、“商圈类型”、“经度”、“纬度”这5个参数。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.2a.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序依次提示输入各项基础参数，输入后提示“参数已更新”。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.2a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2b 基础参数输入 - 品类结构",
+    "description": "1. **执行 (Act):** 在加载项目流程中，持续输入直到品类结构部分.\n2. **断言 (Assert):** 确认程序会提示用户输入3个品类的名称及其销售占比。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.2b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序支持输入3个品类及其占比，并提示“参数已更新”。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.2b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.2c 基础参数输入 - 成本结构",
+    "description": "1. **执行 (Act):** 在加载项目流程中，持续输入直到成本参数部分。\n2. **断言 (Assert):** 确认程序会依次提示用户输入“平均客单价”、“食材成本占比”、“包材成本占比”、“平台佣金率”这4项核心成本参数。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.2c.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序依次提示输入各项成本参数，并提示“参数已更新”。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.2c.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3a 参数范围校验",
+    "description": "1. **准备 (Arrange):** 准备一个无效输入，如负数 `-1000`。\n2. **执行 (Act):** 在新建项目流程中，编辑固定成本与投资参数时，输入准备好的无效值。\n3. **断言 (Assert):** 观察程序是否能捕获无效输入，并给出明确的错误提示，要求用户重新输入。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.3a.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "当输入负数时，程序应提示错误信息（如“输入无效”）并要求重新输入。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.3a.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.3b 关键参数行业基准值参考",
+    "description": "1. **执行 (Act):** 在新建项目流程中，编辑固定成本与投资参数时。\n2. **断言 (Assert):** 观察程序的输入提示信息中，是否包含了相关的行业基准值作为参考（如“（行业参考值：25%-35%）”）。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.3b.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "在输入成本参数时，终端的提示文本中应包含行业参考值。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.3b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4a CSV模板提供",
+    "description": "1. **执行 (Act):** 执行 `ls -l src/data/` 命令.\n2. **断言 (Assert):** 确认目录中存在 `template.csv` 文件，并通过 `read_file` 确认其表头与PRD中要求的输入项（如城市、区域、经纬度、各项成本等）匹配。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_documentation.py::test_csv_template_existence_and_headers",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示src/data/template.csv文件存在且表头正确。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_documentation.py::test_csv_template_existence_and_headers",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.1.4b CSV批量导入",
+    "description": "1. **前置校验 (用户路径):** 在主菜单中，是否存在一个清晰的选项用于“导入CSV”？\n2. **准备 (Arrange):** 复制 `src/data/template.csv` 为 `import_test.csv` 并填入一行完整的、合理的示例数据.\n3. **执行 (Act):** 选择“导入CSV”功能，并按提示输入 `import_test.csv` 的路径.\n4. **断言 (Assert):** 检索这1个项目，验证它是否已成功导入系统中。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.1.4b.in",
+    "input_files": [
+      "evaluation/import_test.csv"
+    ],
+    "expected_output_files": null,
+    "expected_output": "程序提示导入项目成功保存",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.1.4b.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.2.1 补贴参数调整与影响",
+    "description": "1. **前置校验 (用户路径):** 在加载项目后，是否存在一个清晰的菜单选项用于“调整参数”或“策略模拟”？\n2. **准备 (Arrange):** 加载一个项目，执行分析，记录初始的“客单价”和“日均单量”。\n3. **执行 (Act):** 进入参数调整菜单，将“商补率”提高5%。重新执行分析.\n4. **断言 (Assert):** 对比新的“客单价”和“日均单量”与初始值，验证其发生了符合逻辑预期的变化（补贴提高，单量上升，客单价可能下降）。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_subsidy_impact",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示调整补贴率后，核心指标发生符合逻辑的变化。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_subsidy_impact",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.2.2 品类影响因子调节与影响",
+    "description": "1. **前置校验 (用户路径):** 在“调整参数”菜单中，是否存在调整“品类影响因子”的选项？\n2. **准备 (Arrange):** 加载项目，执行分析，记录初始“日均单量”。\n3. **执行 (Act):** 进入参数调整菜单，将某个品类的影响因子提高10%。重新执行分析.\n4. **断言 (Assert):** 对比新的“日均单量”与初始值，验证其发生了符合逻辑的上升。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_category_factor_impact",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示调整品类影响因子后，日均单量发生符合逻辑的变化。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_category_factor_impact",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.1 阶梯式成本设置",
+    "description": "1. **前置校验 (用户路径):** 在加载项目后，是否存在设置“阶梯成本”的菜单选项或引导提示？\n2. **执行 (Act):** 进入该功能，尝试为“食材采购”定义一个成本阶梯（如：采购量超过100件，单价下降5%）。\n3. **断言 (Assert):** 确认系统接受了该阶梯式参数的输入。",
+    "type": "shell_interaction",
+    "test_command": "python src/main.py ",
+    "test_input": "evaluation/inputs_for_test_2.3.1.in",
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "在参数编辑菜单中应存在'阶梯成本'或类似选项，且程序提示新规则已添加。",
+    "testcases": [
+      {
+        "test_command": "python src/main.py ",
+        "test_input": "evaluation/inputs_for_test_2.3.1.in"
+      }
+    ]
+  },
+  {
+    "metric": "2.3.2 本量利分析图生成",
+    "description": "1. **准备 (Arrange):** 加载一个有数据的项目.\n2. **执行 (Act):** 执行核心分析命令.\n3. **断言 (Assert):** 使用 `ls -l` 命令检查 `evaluation/` 或 `reports/` 目录，确认有名为 `break_even_chart.png` 或类似的图片文件被创建，且文件可被正常打开查看。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_break_even_chart_generation",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示图表文件已在指定目录成功生成。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_break_even_chart_generation",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.3.3 关键决策建议生成",
+    "description": "1. **准备 (Arrange):** 加载一个有数据的项目.\n2. **执行 (Act):** 执行核心的“分析”或“预测”命令.\n3. **断言 (Assert):** 查看最终的CLI输出结果，检查是否存在一个明确的“决策建议”或“优化方向”部分，并包含3-5条建议。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_suggestion_generation",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示分析结果中包含了3条或以上的建议。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_suggestion_generation",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.1 核心指标计算与展示 - 5项核心指标",
+    "description": "1. **准备 (Arrange):** 加载一个有数据的项目.\n2. **执行 (Act):** 执行核心的“分析”或“预测”命令.\n3. **断言 (Assert):** 观察最终的CLI输出结果，检查是否包含了“日均单量”、“客单价”、“毛利率”、“净利润”、“投资回收期”这5个指标及其数值。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_core_metrics_calculation",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示分析结果中完整包含了5项核心指标。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_core_metrics_calculation",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.2 动态盈亏平衡与敏感因素排序",
+    "description": "1. **准备 (Arrange):** 加载一个有数据的项目.\n2. **执行 (Act):** 执行核心的“分析”或“预测”命令.\n3. **断言 (Assert):** 查看最终输出（CLI或PDF报告），寻找“敏感性分析”部分，确认其中是否包含一个列表，列出了至少3个影响利润的关键因素（如租金、人力成本等）并按影响大小进行了排序。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_sensitivity_analysis",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示分析结果中包含了已排序的敏感性分析列表。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_sensitivity_analysis",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.3a markdown报告导出 - 文件生成",
+    "description": "1. **前置校验 (用户路径):** 在分析结果展示后，是否存在一个清晰的选项用于“导出markdown报告”？\n2. **准备 (Arrange):** 加载项目并完成分析。\n3. **执行 (Act):** 选择“导出markdown报告”的命令。\n4. **断言 (Assert):** 使用 `ls -l` 命令检查 `reports/` 目录，确认是否有markdown文件被创建且文件大小不为0。",
+    "type": "unit_test",
+    "test_command": "python evaluation/run_report_generation_test.py",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "程序提示markdown报告生成成功，并在 evaluation/ 目录下创建一个名为 XXX分析报告_YYYY-MM-DD.md 的文件。",
+    "testcases": [
+      {
+        "test_command": "python evaluation/run_report_generation_test.py",
+        "test_input": null
+      }
+    ]
+  },
+  {
+    "metric": "2.4.3b markdown报告导出 - 内容校验",
+    "description": "1. **准备 (Arrange):** 生成一份markdown报告。\n2. **执行 (Act):** 使用文件阅读工具打开生成的markdown文件.\n3. **断言 (Assert):** 检查markdown内容，确认其中包含了之前在CLI中看到的全部5项核心指标，并且包含了本量利分析图。",
+    "type": "unit_test",
+    "test_command": "pytest evaluation/tests/test_analysis.py::test_md_report_content_proxy",
+    "test_input": null,
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "测试通过，表示markdown生成函数被调用时，传入了包含核心指标和图表的正确数据。",
+    "testcases": [
+      {
+        "test_command": "pytest evaluation/tests/test_analysis.py::test_md_report_content_proxy",
+        "test_input": null
+      }
+    ]
+  }
+]

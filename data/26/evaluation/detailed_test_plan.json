@@ -1,0 +1,338 @@
+[
+  {
+    "metric": "1.1 System Startup Display",
+    "description": "1. **Act:** In the src directory, execute `python main.py`.\n2. **Assert:** Observe whether the program starts successfully and displays information.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": null
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Program starts normally and displays the complete menu information"
+  },
+  {
+    "metric": "2.1 User Login - Administrator Account",
+    "description": "1. **Pre-check (User Path):** Is there a `login` command to directly access the login function?\n2. **Arrange:** Use the default administrator account (username: admin, password: admin123).\n3. **Act:** Execute `python main.py` and login to the administrator account.\n4. **Assert:** Observe whether the login is successful and information is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_2.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Login successful and information displayed"
+  },
+  {
+    "metric": "3.1 User List - Basic Information Display",
+    "description": "1. **Pre-check (User Path):** Is the user list function accessible through the interactive menu?\n2. **Act:** Start the program, login as administrator, enter the user management menu, and select to view the user list.\n3. **Assert:** Observe whether the user list is displayed, with at least 5 information columns for each user (ID, username, name, email, department).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays user list and user information correctly"
+  },
+  {
+    "metric": "3.2 View User Details",
+    "description": "1. **Pre-check (User Path):** Is the user details viewing function accessible via the interactive menu?\n2. **Arrange:** Select a valid user to view.\n3. **Act:** Start the program, login as administrator, enter the user management menu, select the edit user function to view user details.\n4. **Assert:** Observe whether the detailed information of the specified user is displayed, including at least 8 information items (basic info, organizational info, status info, role info, etc.).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays user details correctly"
+  },
+  {
+    "metric": "3.3.1 User Creation - Interactive Interface",
+    "description": "1. **Pre-check (User Path):** Is the user creation function accessible through the interactive menu?\n2. **Arrange:** Prepare new user information (username: testuser, name: test user, email: test@test.com, password: test123).\n3. **Act:** Start the program, login as administrator, enter the user management menu, select create new user, and enter the prepared user information as prompted.\n4. **Assert:** Observe whether the user is successfully created via the interactive interface, and whether the confirmation message for successful creation is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.3.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "User successfully created via interactive interface, and 'User created successfully' confirmation message is displayed"
+  },
+  {
+    "metric": "3.3.2 User Creation - Field Validation",
+    "description": "1. **Arrange:** Prepare user data with invalid information (e.g., duplicate username, invalid email format).\n2. **Act:** Start the program, login as administrator, enter the user management menu, and attempt to create a user with invalid information.\n3. **Assert:** Observe whether the system performs field validation and provides clear error messages for invalid input.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.3.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Invalid inputs are validated and clear error messages are provided"
+  },
+  {
+    "metric": "3.4.1 Department Information Viewing",
+    "description": "1. **Pre-check (User Path):** Is the department information viewing function accessible via interactive menu?\n2. **Act:** Start the program, login as administrator, enter user management menu, select organization management to view department list.\n3. **Assert:** Observe if the department list is displayed, including at least 4 preset departments, with at least 4 information columns for each department (ID, name, code, description).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.4.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Correct department information is displayed"
+  },
+  {
+    "metric": "3.4.2 Role Information Viewing",
+    "description": "1. **Pre-check (User Path):** Is the role information viewing function accessible via interactive menu?\n2. **Act:** Start the program, login as administrator, enter user management menu, select role permission management to view the role list.\n3. **Assert:** Observe if the role list is displayed, including at least 3 preset roles (administrator, manager, employee), with at least 4 information columns for each role.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_3.4.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Correct role information is displayed"
+  },
+  {
+    "metric": "4.1.1 Workflow Template - List Display",
+    "description": "1. **Pre-check (User Path):** Is the workflow template list function accessible via interactive menu?\n2. **Act:** Start the program, login as administrator, enter workflow management menu, select workflow template management to view the template list.\n3. **Assert:** Observe if the workflow template list is displayed, including at least 2 preset templates, with at least 5 information columns for each template (ID, name, code, category, status).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.1.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Correct template information is displayed"
+  },
+  {
+    "metric": "4.2.1 Workflow Start - Interactive Process",
+    "description": "1. **Pre-check (User Path):** Is the workflow start function accessible via interactive menu?\n2. **Arrange:** Prepare workflow information.\n3. **Act:** Start the program, login as administrator, enter workflow management menu, select to create a new workflow, and enter the prepared information as prompted.\n4. **Assert:** Observe whether the workflow is successfully started via the interactive interface and the created instance information is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.2.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Workflow successfully started via interactive interface"
+  },
+  {
+    "metric": "4.3.1 Workflow Instance - List Display",
+    "description": "1. **Pre-check (User Path):** Is the workflow instance list function accessible via interactive menu?\n2. **Arrange:** Ensure there is at least one workflow instance in the system.\n3. **Act:** Start the program, login as administrator, enter workflow management menu, select My Workflows to view the instance list.\n4. **Assert:** Observe whether the workflow instance list is displayed, with at least 5 information columns for each instance (ID, title, template, initiator, status).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.3.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Instance list displayed correctly"
+  },
+  {
+    "metric": "4.3.2 Workflow Instance - Process Monitoring",
+    "description": "1. **Pre-check (User Path):** Is the process monitoring function accessible via interactive menu?\n2. **Arrange:** Ensure there is at least one workflow instance for monitoring.\n3. **Act:** Start the program, login as administrator, enter workflow management menu, select Process Monitoring to view the process status.\n4. **Assert:** Observe whether the process monitoring interface is displayed, with the ability to view process status in real time, including at least 4 monitoring information columns (Process ID, Process Name, Current Status, Progress).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.3.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Process monitoring interface and information displayed correctly"
+  },
+  {
+    "metric": "4.3.3 Workflow Instance - Process Statistics",
+    "description": "1. **Pre-check (User Path):** Is the process statistics function accessible via interactive menu?\n2. **Arrange:** Ensure there are multiple workflow instances in the system for statistical analysis.\n3. **Act:** Start the program, login as administrator, enter workflow management menu, and select Process Statistics to view statistical reports.\n4. **Assert:** Observe whether the process statistics interface is displayed and statistical data can be viewed, including at least 4 statistical dimensions (total amount, finished amount, in-progress amount, completion rate).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.3.3.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Process statistics interface displayed correctly, including various statistical data and analysis"
+  },
+  {
+    "metric": "4.4.1 To-Do Task Viewing",
+    "description": "1. **Pre-check (User Path):** Is the to-do task viewing function accessible via interactive menu?\n2. **Arrange:** Ensure the current user has to-do tasks (can be created by starting a workflow and switching users).\n3. **Act:** Start the program, login as administrator, enter task management menu, select My Tasks to view the to-do task list.\n4. **Assert:** Observe whether the current user's to-do task list is displayed, with at least 5 information columns for each task (Node ID, Workflow Title, Node Name, Status, Creation Time).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.4.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "To-do task list displayed correctly"
+  },
+  {
+    "metric": "4.4.2 Task Management - Create Task",
+    "description": "1. **Pre-check (User Path):** Is the task creation function accessible via interactive menu?\n2. **Arrange:** Prepare task information (task title, description, responsible person, etc.).\n3. **Act:** Start the program, login as administrator, enter task management menu, select Create New Task, and enter task information as prompted.\n4. **Assert:** Observe whether the task is successfully created via the interactive interface and the confirmation message of successful creation is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.4.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Task created correctly and confirmation message displayed"
+  },
+  {
+    "metric": "4.4.3 Task Management - Task Assignment",
+    "description": "1. **Pre-check (User Path):** Is the task assignment function accessible via interactive menu?\n2. **Arrange:** Ensure there are assignable tasks and users in the system.\n3. **Act:** Start the program, login as administrator, enter task management menu, select the task assignment function to assign tasks.\n4. **Assert:** Observe whether the task is successfully assigned and the assignment confirmation message is displayed, with at least 3 assignment information (Task ID, Assigned To, Assignment Time).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.4.3.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Task assigned correctly and assignment information displayed"
+  },
+  {
+    "metric": "4.4.4 Task Management - Task Tracking",
+    "description": "1. **Pre-check (User Path):** Is the task tracking function accessible via interactive menu?\n2. **Arrange:** Ensure there are ongoing tasks in the system for tracking.\n3. **Act:** Start the program, login as administrator, enter task management menu, select Task Tracking to view task progress.\n4. **Assert:** Observe whether the task tracking interface is displayed and task progress can be viewed, with at least 4 tracking information columns (Task ID, Task Status, Progress Percentage, Update Time).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.4.4.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Task tracking interface and progress information displayed correctly"
+  },
+  {
+    "metric": "4.4.5 Task Management - Task Statistics",
+    "description": "1. **Pre-check (User Path):** Is the task statistics function accessible via interactive menu?\n2. **Arrange:** Ensure there are multiple tasks in the system for statistical analysis.\n3. **Act:** Start the program, login as administrator, enter task management menu, select Task Statistics to view statistics report.\n4. **Assert:** Observe whether the task statistics interface is displayed and statistical data can be viewed, including at least 4 statistical dimensions (Total tasks, Completed, In progress, Completion rate).",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.4.5.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Task statistics interface and data displayed correctly"
+  },
+  {
+    "metric": "4.5.1 Task Processing - Approve Operation",
+    "description": "1. **Pre-check (User Path):** Is the task processing function accessible via interactive menu?\n2. **Arrange:** Ensure there are tasks that can be processed and prepare the approval comment \"approve application\".\n3. **Act:** Start the program, login as administrator, enter task management menu, select My Tasks to process the task.\n4. **Assert:** Observe whether the task is processed successfully and a confirmation message for successful processing is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.5.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Task approved successfully, clear 'Processed successfully' confirmation message displayed"
+  },
+  {
+    "metric": "4.5.2 Task Processing - Reject Operation",
+    "description": "1. **Arrange:** Ensure there are tasks that can be processed and prepare the rejection comment \"application rejected\".\n2. **Act:** Start the program, login as administrator, enter task management menu, select My Tasks to perform the reject operation.\n3. **Assert:** Observe whether the rejection is processed successfully and a confirmation message for successful processing is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_4.5.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Reject operation processed successfully, clear 'Processed successfully' confirmation message displayed"
+  },
+  {
+    "metric": "5.1 Password Change Function",
+    "description": "1. **Pre-check (User Path):** Is the password change function accessible via interactive menu?\n2. **Arrange:** Prepare current password and new password information.\n3. **Act:** Start the program, login as administrator, select Personal Information Management to change the password, and enter the current and new passwords as prompted.\n4. **Assert:** Observe whether the password is successfully changed and a confirmation message for successful modification is displayed.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_5.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Password changed successfully, 'Password changed successfully' confirmation message displayed, including password verification and confirmation steps"
+  },
+  {
+    "metric": "5.2 User Logout Function",
+    "description": "1. **Pre-check (User Path):** Is the user logout function accessible via interactive menu?\n2. **Arrange:** Ensure a user is already logged into the system.\n3. **Act:** Start the program, login as administrator, select logout.\n4. **Assert:** Observe whether logout is successful, displays logout confirmation message, and clears login status.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_5.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Logout displayed successfully"
+  },
+  {
+    "metric": "6.1 Permission Control Verification",
+    "description": "1. **Arrange:** Login to the system with a normal employee account (employee).\n2. **Act:** Start the program, login as employee account, attempt to enter the user management menu and perform administrator actions.\n3. **Assert:** Observe if the system correctly blocks unauthorized actions and displays a clear insufficient permission message.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_6.1.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "User permissions verified correctly, unauthorized actions blocked and clear 'Insufficient permissions' message displayed"
+  },
+  {
+    "metric": "6.2 Error Handling - Invalid Parameter",
+    "description": "1. **Act:** Start the program, login as administrator, enter user management menu, attempt to edit a non-existent user.\n2. **Assert:** Observe whether a friendly error message is displayed, and the program does not crash.",
+    "type": "shell_interaction",
+    "testcases": [
+      {
+        "test_command": "python src/main.py",
+        "test_input": "evaluation/inputs/inputs_for_test_6.2.in"
+      }
+    ],
+    "input_files": null,
+    "expected_output_files": null,
+    "expected_output": "Displays friendly 'User does not exist' error message, program runs normally and does not crash"
+  }
+]

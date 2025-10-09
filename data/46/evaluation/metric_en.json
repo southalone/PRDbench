@@ -1,0 +1,227 @@
+[
+  {
+    "metric": "0.1 Program Startup and Main Menu",
+    "description": "1. **Act:** Execute the program startup command in the shell (such as `python main.py`).\n2. **Assert:** Observe whether the program starts successfully and displays a clear main menu with at least three actionable options (such as \"Data Import\", \"Algorithm Analysis\", \"Model Evaluation\").",
+    "expected_output": "2 points: The program starts successfully and displays a clear main menu with three or more actionable options.\n1 point: The program starts, but the menu options are less than three, unclear, or garbled.\n0 points: The program cannot start or crashes immediately after starting."
+  },
+  {
+    "metric": "2.1.1a Data Import - CSV Format Support",
+    "description": "1. **Pre-check (User Path):** Is there a clear option for \"Data Import\" or similar functionality in the main menu?\n2. **Arrange:** Prepare a CSV file in UCI credit dataset format (containing at least 100 rows of data).\n3. **Act:** Select the data import function, then select CSV format and specify the prepared file path.\n4. **Assert:** Observe whether the program clearly reports \"Import Successful\" and correctly displays the number of imported data rows.",
+    "expected_output": "2 points: Pre-check passed, full support for CSV import, and data loaded successfully.\n1 point: Pre-check passed, but the import process prompts are unclear, or feedback on success/failure is not explicit.\n0 points: Pre-check failed, or CSV files cannot be imported."
+  },
+  {
+    "metric": "2.1.1b Data Import - Excel Format Support",
+    "description": "1. **Pre-check (User Path):** Is there an \"Excel\" or \"xlsx\" option in the data import format selection interface?\n2. **Arrange:** Prepare a valid Excel format data file.\n3. **Act:** Select the \"Excel\" format and enter the file path as prompted.\n4. **Assert:** Observe whether the program clearly reports \"Import Successful\".",
+    "expected_output": "2 points: Pre-check passed and Excel file imported successfully.\n1 point: Pre-check passed, but import failed or process incorrect.\n0 points: Pre-check failed, i.e. Excel format not supported."
+  },
+  {
+    "metric": "2.1.2a Data Validation - Missing Value Detection",
+    "description": "1. **Arrange:** Prepare a test CSV file with missing values (at least two of five fields contain missing values).\n2. **Act:** Import the test file.\n3. **Assert:** Verify whether the program automatically detects and clearly indicates the locations and numbers of missing values.",
+    "expected_output": "2 points: Accurately detects all missing values and provides detailed location and quantity information.\n1 point: Detects missing values but information is not sufficiently detailed.\n0 points: No missing value detection functionality."
+  },
+  {
+    "metric": "2.1.2b Data Validation - Anomalous Data Detection",
+    "description": "1. **Arrange:** Prepare a test file containing anomalous data (such as negative values or values above 150 in the age field).\n2. **Act:** Import the test file.\n3. **Assert:** Verify whether the program detects and prompts anomalous data issues.",
+    "expected_output": "2 points: Accurately detects anomalous data and provides clear prompts.\n1 point: Detects some anomalous data.\n0 points: No anomalous data detection functionality."
+  },
+  {
+    "metric": "2.1.2c Data Validation - Type Mismatch Prompt",
+    "description": "1. **Arrange:** Prepare a test file containing type mismatched data (such as text in numeric fields).\n2. **Act:** Import the test file.\n3. **Assert:** Verify whether the program prompts type mismatch issues.",
+    "expected_output": "2 points: Accurately identifies all type mismatch issues and provides clear prompts.\n1 point: Identifies part of the type issues.\n0 points: No type validation functionality."
+  },
+  {
+    "metric": "2.2.1a Data Preprocessing - Selection of Missing Value Fill Methods",
+    "description": "1. **Pre-check (User Path):** After importing data, is there a clear \"Data Preprocessing\" option?\n2. **Act:** Enter the data preprocessing interface and select missing value handling function.\n3. **Assert:** Observe whether at least three fill method choices are provided (mean, median, mode).",
+    "expected_output": "2 points: Pre-check passed, three or more fill methods provided.\n1 point: Pre-check passed, but only 1-2 fill methods provided.\n0 points: Pre-check failed or no missing value handling functionality."
+  },
+  {
+    "metric": "2.2.1b Data Preprocessing - Execution of Missing Value Handling",
+    "description": "1. **Arrange:** Select a fill method (such as mean fill).\n2. **Act:** Execute missing value treatment operation.\n3. **Assert:** Verify whether missing values are correctly filled in processed data and processing result statistics are displayed.",
+    "expected_output": "2 points: Missing values successfully handled and detailed statistical results displayed.\n1 point: Handled missing values but statistics incomplete.\n0 points: Missing value processing failed."
+  },
+  {
+    "metric": "2.2.2a Field Processing - Numeric Field Recognition",
+    "description": "1. **Act:** View field type recognition results after data import.\n2. **Assert:** Confirm if all numeric fields (such as age, income, etc.) are correctly recognized by the program.",
+    "expected_output": "2 points: All numeric fields correctly recognized.\n1 point: Most numeric fields recognized but some missed.\n0 points: Unable to accurately recognize numeric fields."
+  },
+  {
+    "metric": "2.2.2b Field Processing - Categorical Field Recognition",
+    "description": "1. **Act:** View field type recognition results after data import.\n2. **Assert:** Confirm if all categorical fields (such as gender, occupation, etc.) are correctly recognized by the program.",
+    "expected_output": "2 points: All categorical fields correctly recognized.\n1 point: Most categorical fields recognized but some missed.\n0 points: Unable to accurately recognize categorical fields."
+  },
+  {
+    "metric": "2.2.3a Data Encoding - One-hot Encoding",
+    "description": "1. **Pre-check (User Path):** Is there an encoding method selection option in the field processing interface?\n2. **Act:** Select one-hot encoding for categorical fields.\n3. **Assert:** Verify whether one-hot encoded results are successfully generated.",
+    "expected_output": "2 points: Pre-check passed, one-hot encoding executed successfully and correct results generated.\n1 point: Pre-check passed, but encoding results incomplete.\n0 points: Pre-check failed or one-hot encoding not supported."
+  },
+  {
+    "metric": "2.2.3b Data Encoding - Label Encoding",
+    "description": "1. **Pre-check (User Path):** Is there a \"Label Encoding\" option in the encoding method selection?\n2. **Act:** Select label encoding for categorical fields.\n3. **Assert:** Verify whether label encoded results are successfully generated.",
+    "expected_output": "2 points: Pre-check passed, label encoding executed successfully and correct results generated.\n1 point: Pre-check passed, but encoding results incomplete.\n0 points: Pre-check failed or label encoding not supported."
+  },
+  {
+    "metric": "2.2.4 Feature Selection - Correlation Coefficient Calculation",
+    "description": "1. **Pre-check (User Path):** Is there a \"Feature Selection\" option in the data preprocessing interface?\n2. **Act:** Select the feature selection function and perform Pearson correlation coefficient calculation.\n3. **Assert:** Verify whether the correlation coefficient matrix among features and filtering suggestions are displayed.",
+    "expected_output": "2 points: Pre-check passed, correlation coefficients correctly calculated and selection suggestions provided.\n1 point: Pre-check passed, but correlation calculation incomplete.\n0 points: Pre-check failed or no feature selection functionality."
+  },
+  {
+    "metric": "2.3.1 Algorithm Selection - Logistic Regression",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"Algorithm Analysis\" or \"Model Analysis\" option in the main menu?\n2. **Arrange:** Ensure data preprocessing steps are complete.\n3. **Act:** Enter algorithm selection interface, view and select the Logistic Regression option.\n4. **Assert:** Verify if the Logistic Regression algorithm can be successfully selected and enter configuration interface.",
+    "expected_output": "2 points: Pre-check passed, explicit support for Logistic Regression algorithm selection.\n1 point: Pre-check passed, but algorithm option not clear enough.\n0 points: Pre-check failed or Logistic Regression not supported."
+  },
+  {
+    "metric": "2.3.2 Algorithm Selection - Neural Network",
+    "description": "1. **Pre-check (User Path):** Is there a \"Neural Network\" or \"MLP\" option in the algorithm selection interface?\n2. **Act:** Select the Neural Network algorithm option.\n3. **Assert:** Verify if the Neural Network algorithm can be successfully selected and enter configuration interface.",
+    "expected_output": "2 points: Pre-check passed, explicit support for Neural Network algorithm selection.\n1 point: Pre-check passed, but algorithm option not clear enough.\n0 points: Pre-check failed or Neural Network not supported."
+  },
+  {
+    "metric": "2.3.3a Algorithm Execution - Logistic Regression Analysis Log",
+    "description": "1. **Act:** Select the Logistic Regression algorithm and run analysis.\n2. **Assert:** Observe whether a detailed analysis log is output including at least three key pieces of information (execution time, parameter settings, convergence status).",
+    "expected_output": "2 points: Output includes three or more key pieces of information in a detailed analysis log.\n1 point: Analysis log output but information is not detailed enough (only one or two key pieces).\n0 points: No analysis log output."
+  },
+  {
+    "metric": "2.3.3b Algorithm Execution - Neural Network Analysis Log",
+    "description": "1. **Act:** Select the Neural Network algorithm and run analysis.\n2. **Assert:** Observe whether a detailed analysis log is output including at least three key pieces of information (network structure, execution time, key parameters).",
+    "expected_output": "2 points: Output includes three or more key pieces of information in a detailed analysis log.\n1 point: Analysis log output but information is not detailed enough (only one or two key pieces).\n0 points: No analysis log output."
+  },
+  {
+    "metric": "2.3.4 Algorithm Performance Comparison Feature",
+    "description": "1. **Pre-check (User Path):** After executing both Logistic Regression and Neural Network algorithms, is there a \"Performance Comparison\" or \"Algorithm Comparison\" option?\n2. **Act:** Select the performance comparison function.\n3. **Assert:** Verify whether a performance comparison table of the two algorithms is displayed, including at least four metrics (Accuracy, Precision, Recall, F1 score).",
+    "expected_output": "2 points: Pre-check passed, complete comparison table shown with four or more metrics.\n1 point: Pre-check passed, but comparison table information incomplete (only one to three metrics).\n0 points: Pre-check failed or no performance comparison functionality."
+  },
+  {
+    "metric": "2.4.1a Score Prediction - Single Data Scoring",
+    "description": "1. **Pre-check (User Path):** After completing algorithm analysis, is there a \"Predict Score\" or \"Credit Evaluation\" option?\n2. **Arrange:** Prepare one complete customer credit data entry.\n3. **Act:** Select the single data scoring function, input customer data.\n4. **Assert:** Verify whether the score result and credit rating are output.",
+    "expected_output": "2 points: Pre-check passed, single scoring successful and complete output (score + rating).\n1 point: Pre-check passed, but output information incomplete.\n0 points: Pre-check failed or no single scoring functionality."
+  },
+  {
+    "metric": "2.4.1b Score Prediction - Batch Data Scoring",
+    "description": "1. **Pre-check (User Path):** Is there a \"Batch Scoring\" option in the prediction function?\n2. **Arrange:** Prepare a test set containing more than 10 customer data entries.\n3. **Act:** Select batch scoring function, specify test set file.\n4. **Assert:** Verify whether all data are successfully scored and the output contains complete results including customer ID, score probability, algorithm type.",
+    "expected_output": "2 points: Pre-check passed, batch scoring successful and output includes all four pieces of information.\n1 point: Pre-check passed, but output information incomplete (missing one or two items).\n0 points: Pre-check failed or no batch scoring functionality."
+  },
+  {
+    "metric": "2.5.1a ROC Curve - Image Generation",
+    "description": "1. **Pre-check (User Path):** After algorithm analysis, is there a \"Model Evaluation\" or \"Results Visualization\" option?\n2. **Act:** Select model evaluation function and view ROC curve generation.\n3. **Assert:** Verify whether a clear ROC curve image is automatically generated and saved as a PNG file.",
+    "expected_output": "2 points: Pre-check passed, clear ROC curve image automatically generated and saved in PNG format.\n1 point: Pre-check passed, but generated image quality is problematic or format incorrect.\n0 points: Pre-check failed or no ROC curve generation functionality."
+  },
+  {
+    "metric": "2.5.1b ROC Curve - AUC Value Calculation",
+    "description": "1. **Act:** After generating the ROC curve, view the AUC value displayed.\n2. **Assert:** Verify whether the accurate AUC value (at least three decimal places) is displayed simultaneously.",
+    "expected_output": "2 points: Accurate AUC value calculated and displayed, at least three decimal places.\n1 point: AUC value displayed but insufficient precision (less than three decimal places).\n0 points: No AUC value calculation or display."
+  },
+  {
+    "metric": "2.5.2a K-S Curve - Image Generation",
+    "description": "1. **Act:** In the model evaluation interface, view K-S curve generation function.\n2. **Assert:** Verify whether the K-S curve image is generated.",
+    "expected_output": "2 points: Clear K-S curve image successfully generated.\n1 point: K-S curve generated but image quality is problematic.\n0 points: No K-S curve generation functionality."
+  },
+  {
+    "metric": "2.5.2b K-S Curve - Maximum KS Distance Annotation",
+    "description": "1. **Act:** View the generated K-S curve.\n2. **Assert:** Verify whether the curve clearly marks the value and position of the maximum KS distance.",
+    "expected_output": "2 points: Maximum KS distance value and position clearly marked on K-S curve.\n1 point: KS distance marked but information not clear enough.\n0 points: No maximum KS distance marking."
+  },
+  {
+    "metric": "2.5.3a LIFT Chart - Image Generation",
+    "description": "1. **Act:** In the model evaluation interface, view the LIFT chart generation function.\n2. **Assert:** Verify whether the LIFT chart is generated.",
+    "expected_output": "2 points: Clear LIFT chart successfully generated.\n1 point: LIFT chart generated but image quality is problematic.\n0 points: No LIFT chart generation functionality."
+  },
+  {
+    "metric": "2.5.3b LIFT Chart - Segmented Lift Display",
+    "description": "1. **Act:** View the generated LIFT chart.\n2. **Assert:** Verify whether the chart clearly shows the lift values of different segments.",
+    "expected_output": "2 points: Specific lift values of each segment are clearly shown on the LIFT chart.\n1 point: Lift information is shown but not clear enough.\n0 points: No lift information display on segments."
+  },
+  {
+    "metric": "2.5.4a Basic Indicators - Precision Recall F1 Calculation",
+    "description": "1. **Act:** View evaluation metrics after algorithm execution.\n2. **Assert:** Verify whether precision, recall, and F1 score are all calculated and displayed.",
+    "expected_output": "2 points: All three metrics calculated and clearly shown.\n1 point: Only one or two metrics calculated, not complete.\n0 points: No basic metrics calculation functionality."
+  },
+  {
+    "metric": "2.5.4b Basic Indicators - Confusion Matrix",
+    "description": "1. **Act:** View evaluation metrics after algorithm execution.\n2. **Assert:** Verify whether a confusion matrix is generated and displayed.",
+    "expected_output": "2 points: Complete and clear confusion matrix generated.\n1 point: Confusion matrix generated but format or label unclear.\n0 points: No confusion matrix generation functionality."
+  },
+  {
+    "metric": "2.6.1a Report Generation - HTML Format Output",
+    "description": "1. **Pre-check (User Path):** After model evaluation, is there a \"Generate Report\" or \"Export Report\" option?\n2. **Act:** Select the report generation function and choose HTML format.\n3. **Assert:** Verify whether the HTML format evaluation report file is successfully generated.",
+    "expected_output": "2 points: Pre-check passed, HTML format report file generated successfully.\n1 point: Pre-check passed, but generated HTML has formatting problems.\n0 points: Pre-check failed or no HTML report generation functionality."
+  },
+  {
+    "metric": "2.6.1b Report Content - Statistical Charts Included",
+    "description": "1. **Act:** Open the generated HTML report file.\n2. **Assert:** Verify whether the report contains at least four types of statistical charts (ROC curve, K-S curve, LIFT chart, confusion matrix).",
+    "expected_output": "2 points: Report contains all four or more types of statistical charts.\n1 point: Report contains two or three types of charts.\n0 points: Report contains fewer than two types of charts."
+  },
+  {
+    "metric": "2.6.2 Model Performance Summary",
+    "description": "1. **Act:** View the summary section in the generated evaluation report.\n2. **Assert:** Verify whether the model performance summary is included, explicitly indicating the algorithm with the highest accuracy and relevant suggestions.",
+    "expected_output": "2 points: Clear model performance summary with best algorithm and specific advice.\n1 point: Basic summary included but lacks specific advice.\n0 points: No model performance summary functionality."
+  },
+  {
+    "metric": "2.7.1a Feature Interpretation - Logistic Regression Coefficients Output",
+    "description": "1. **Act:** Run analysis using the Logistic Regression algorithm.\n2. **Assert:** Verify whether coefficient values of all features and their direction of impact are output.",
+    "expected_output": "2 points: All feature coefficient values and impact directions completely output.\n1 point: Coefficient values are output but impact direction information incomplete.\n0 points: No feature coefficient output functionality."
+  },
+  {
+    "metric": "2.7.1b Feature Interpretation - Top-N Importance Visualization",
+    "description": "1. **Act:** View feature importance visualization in Logistic Regression results.\n2. **Assert:** Verify whether a visualization chart of Top-N (at least top five) feature importance is generated.",
+    "expected_output": "2 points: Clear visualization chart of Top-5 or more feature importances generated.\n1 point: Feature importance chart generated but includes fewer than five features.\n0 points: No feature importance visualization functionality."
+  },
+  {
+    "metric": "2.7.2a Neural Network Explanation - Weight Output",
+    "description": "1. **Act:** Run analysis using the Neural Network algorithm.\n2. **Assert:** Verify whether representative network weight information is output.",
+    "expected_output": "2 points: Detailed representative weight information output.\n1 point: Partial weight information output.\n0 points: No weight output functionality."
+  },
+  {
+    "metric": "2.7.2b Neural Network Explanation - Feature Contribution Visualization",
+    "description": "1. **Act:** View feature contribution visualization in Neural Network analysis results.\n2. **Assert:** Verify whether a feature contribution visualization chart is generated.",
+    "expected_output": "2 points: Clear feature contribution visualization chart generated.\n1 point: Feature contribution chart generated but not clear enough.\n0 points: No feature contribution visualization functionality."
+  },
+  {
+    "metric": "2.8.1 Data Export - CSV Format",
+    "description": "1. **Pre-check (User Path):** After data processing, is there an \"Export Data\" or \"Save Results\" option?\n2. **Act:** Select export function, choose CSV format, specify output path.\n3. **Assert:** Use file view command to verify whether CSV format file is successfully generated at specified path.",
+    "expected_output": "2 points: Pre-check passed, correct CSV file generated successfully.\n1 point: Pre-check passed but exported file content is problematic.\n0 points: Pre-check failed or no CSV export functionality."
+  },
+  {
+    "metric": "2.8.2 Data Export - Excel Format",
+    "description": "1. **Pre-check (User Path):** Is there an \"Excel\" or \"xlsx\" option in export format selection?\n2. **Act:** Select Excel format, specify output path and execute export.\n3. **Assert:** Use file view command to verify whether Excel format file is successfully generated at specified path.",
+    "expected_output": "2 points: Pre-check passed, correct Excel file generated successfully.\n1 point: Pre-check passed, but exported file format or content is problematic.\n0 points: Pre-check failed or Excel export not supported."
+  },
+  {
+    "metric": "2.9.1a API Interface - Interface Availability",
+    "description": "1. **Pre-check (User Path):** Does the system provide API functionality or Web service option?\n2. **Arrange:** Start API service.\n3. **Act:** Attempt to access API health check endpoint.\n4. **Assert:** Verify whether API service responds normally.",
+    "expected_output": "2 points: Pre-check passed, API service started and responds normally.\n1 point: Pre-check passed, but there are problems starting API service.\n0 points: Pre-check failed or no API functionality."
+  },
+  {
+    "metric": "2.9.1b API Interface - Prediction Functionality",
+    "description": "1. **Arrange:** Prepare JSON data containing customer information.\n2. **Act:** Send prediction request via API.\n3. **Assert:** Verify whether API returns correct JSON response containing credit score and rating.",
+    "expected_output": "2 points: API works properly and returns complete result with credit score and rating.\n1 point: API works but returned information is incomplete.\n0 points: API does not work properly or does not return expected result."
+  },
+  {
+    "metric": "2.10.1a Logging - Operation Logs",
+    "description": "1. **Act:** Execute three or more key operations such as data import, algorithm analysis, etc. in sequence.\n2. **Assert:** Check log files and verify whether all key operation logs are automatically recorded.",
+    "expected_output": "2 points: All key operations are recorded in detail.\n1 point: Most operations' basic log information is recorded.\n0 points: No operation log recording functionality."
+  },
+  {
+    "metric": "2.10.1b Logging - Timestamps and Parameters",
+    "description": "1. **Act:** View the contents of the generated log file.\n2. **Assert:** Verify whether each log entry contains all three items: timestamp, operation type, and key parameters.",
+    "expected_output": "2 points: Every log contains complete three items (timestamp, type, key parameters).\n1 point: Log contains one or two items but incomplete.\n0 points: Log lacks important information or format is chaotic."
+  },
+  {
+    "metric": "2.10.2 Error Handling - Friendly Exception Messages",
+    "description": "1. **Arrange:** Intentionally prepare an invalid data file (such as malformed CSV).\n2. **Act:** Try to import the invalid file.\n3. **Assert:** Verify whether the program provides a friendly error message instead of directly showing the raw exception stack.",
+    "expected_output": "2 points: Clear, friendly error message and graceful exception handling, no technical stack info displayed.\n1 point: Error message provided but partial technical info still shown.\n0 points: Program crashes or only shows raw exception stack."
+  },
+  {
+    "metric": "3.1a Code Structure - Layered Architecture",
+    "description": "1. **Act:** Check source code directory structure.\n2. **Assert:** Verify whether directories and files are clearly separated by function/service/CLI layers.",
+    "expected_output": "2 points: Code is strictly organized in three-layer architecture with clear directory structure.\n1 point: Code is basically layered but not clear.\n0 points: Code structure is messy, no clear layer design."
+  },
+  {
+    "metric": "3.1b Code Quality - PEP8 Compliance",
+    "description": "1. **Act:** Use code checking tools (such as flake8) to check source code.\n2. **Assert:** Verify whether the code conforms to PEP8 standards without formatting errors.",
+    "expected_output": "2 points: Code fully conforms to PEP8, no formatting errors.\n1 point: Code basically conforms to PEP8 but has minor formatting issues.\n0 points: Code has many formatting issues, not PEP8 compliant."
+  },
+  {
+    "metric": "3.2 Performance Requirements - Processing Speed",
+    "description": "1. **Arrange:** Prepare a standard test dataset with 1000 records.\n2. **Act:** Execute the complete process: data import, preprocessing, algorithm analysis, evaluation, and report generation.\n3. **Assert:** Use a timer to verify whether the whole process completes within 30 seconds.",
+    "expected_output": "2 points: Full analysis of 1000 records completes within 30 seconds.\n1 point: Processing time between 30-60 seconds.\n0 points: Processing time exceeds 60 seconds."
+  }
+]
