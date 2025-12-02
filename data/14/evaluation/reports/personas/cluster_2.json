@@ -1,0 +1,46 @@
+{
+  "cluster_id": 2,
+  "cluster_name": "低频高端消费者",
+  "sample_count": 2,
+  "demographics": {
+    "gender_distribution": {
+      "女": 100.0
+    },
+    "age_group_distribution": {
+      "30-40岁": 50.0,
+      "40-50岁": 50.0
+    },
+    "dominant_age_group": "30-40岁"
+  },
+  "motivations": {
+    "price_sensitivity": {
+      "average_score": 4.0,
+      "description": "对价格较为敏感，倾向于选择性价比高的选项"
+    },
+    "satisfaction_level": {
+      "average_score": 3.0,
+      "description": "满意度中等，对服务有基本要求"
+    },
+    "amenities_importance": {
+      "average_score": 3.0,
+      "description": "较为重视配套设施，但不是最主要考量因素"
+    }
+  },
+  "consumption_patterns": {
+    "frequency_distribution": {
+      "每月一次": 50.0,
+      "每季度一次": 50.0
+    },
+    "dominant_frequency": "每季度一次",
+    "spending_behavior": "中低频消费，追求品质体验"
+  },
+  "venue_preferences": {
+    "preferred_venue_distribution": {
+      "公众场": 50.0,
+      "练习场": 50.0
+    },
+    "dominant_preference": "公众场",
+    "preference_description": "偏好公众场地，注重便利性和性价比"
+  },
+  "persona_summary": "这类用户年龄相对成熟，性别分布均衡。他们消费频次较低，但对每次消费的期望值很高。虽然目前满意度不高，但他们重视配套设施和专业化服务，偏好会员制球场等高端场地。他们是典型的低频高端消费者，需要通过提升服务质量来满足其严格要求。"
+}

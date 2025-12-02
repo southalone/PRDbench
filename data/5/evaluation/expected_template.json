@@ -1,0 +1,22 @@
+{
+  "basic_info": {
+    "product_name": "测试产品",
+    "target_users": "年轻用户"
+  },
+  "image_spec": {
+    "source_type": "local_path",
+    "allowed_formats": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp"
+    ]
+  },
+  "feature_requirements": {
+    "style_keywords": [
+      "极简主义",
+      "现代"
+    ],
+    "color_emotion": "冷色调-专业感"
+  }
+}

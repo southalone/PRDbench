@@ -1,0 +1,118 @@
+```json
+[
+  {
+    "得分点": "0.1 Program Startup and Main Menu",
+    "验证方法": "1. **Act:** Execute the program startup command in the shell (e.g. `python src/main.py`).\n2. **Assert:** Observe whether the program starts successfully and displays a welcome message and enters the personal information entry process.",
+    "得分规范": "2 points: The program starts successfully and correctly displays the welcome message and enters the first interaction section. 1 point: The program starts, but the welcome message is garbled or has format issues. 0 points: The program fails to start or crashes immediately after launch.",
+    "赋分权重": 5.0
+  },
+  {
+    "得分点": "1.1a User Info Entry - Valid Name Input",
+    "验证方法": "1. **Pre-check (User Path):** After starting the program, does it automatically enter or clearly prompt the user to enter the name?\n2. **Arrange:** Prepare the following test input: '张三'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input.",
+    "得分规范": "2 points: Pre-check passes, correctly validates the valid input and continues the process. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or the name format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 2.0
+  },
+  {
+    "得分点": "1.1b User Info Entry - Invalid Name Input",
+    "验证方法": "1. **Pre-check (User Path):** After starting the program, does it automatically enter or clearly prompt the user to enter the name?\n2. **Arrange:** Prepare the following test input: '张三李四王五赵六钱'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input, provides a clear prompt and requires re-entry. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or the name format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 2.0
+  },
+  {
+    "得分点": "1.2a User Info Entry - Valid Birth Date Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful name input, does it automatically or clearly prompt the user to enter the birth date?\n2. **Arrange:** Prepare the following test input: '1990-01-01'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input.",
+    "得分规范": "2 points: Pre-check passes, correctly validates the valid input and continues the process. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or the date format and validity are not checked; any input is accepted or the program crashes.",
+    "赋分权重": 2.0
+  },
+  {
+    "得分点": "1.2b User Info Entry - Invalid Birth Date Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful name input, does it automatically or clearly prompt the user to enter the birth date?\n2. **Arrange:** Prepare the following test input: '1990-13-01'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input, provides clear prompt and requires re-entry. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or the date format and validity are not checked; any input is accepted or the program crashes.",
+    "赋分权重": 2.0
+  },
+  {
+    "得分点": "1.3a User Info Entry - Valid Gender Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful birth date input, does it automatically or clearly prompt the user to enter gender?\n2. **Arrange:** Prepare the following test input: '1'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input.",
+    "得分规范": "2 points: Pre-check passes, correctly validates the valid input and continues the process. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or the gender format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "1.3b User Info Entry - Invalid Gender Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful birth date input, does it automatically or clearly prompt the user to enter gender?\n2. **Arrange:** Prepare the following test input: 'male'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input and provides a clear prompt and requires re-entry. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or the gender format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "1.4 User Info Save and Load",
+    "验证方法": "1. **Arrange:** Run the program for the first time, fully enter personal information (e.g., name: 张三, birthday: 1990-01-01, gender: 男).\n2. **Act:** Complete the full fortune calculation flow. Run the program again.\n3. **Assert:** The program should display \"Welcome back, 张三!\" and ask whether to use the saved information. Check the contents of the `src/data/user_data.json` file for correctness.",
+    "得分规范": "2 points: Can correctly save and load user information, file content format is correct, and the program can properly handle according to the user's choice. 1 point: Can save or load information, but with minor issues (e.g., unclear prompts, slight formatting deviation in the file). 0 points: Cannot save or load user information, or file content is seriously incorrect.",
+    "赋分权重": 4.0
+  },
+  {
+    "得分点": "2.1a Fortune Drawing Game - Mode Selection - Valid Input",
+    "验证方法": "1. **Pre-check (User Path):** After confirming user info, does the program clearly prompt the user to select a game mode (coin spinning wheel / number stick draw)?\n2. **Arrange:** Prepare the following test input: '1'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input and enter the corresponding game.",
+    "得分规范": "2 points: Pre-check passes, correctly responds to valid input and enters the corresponding game. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or cannot properly select the game mode; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "2.1b Fortune Drawing Game - Mode Selection - Invalid Input",
+    "验证方法": "1. **Pre-check (User Path):** After confirming user info, does the program clearly prompt the user to select a game mode (coin spinning wheel / number stick draw)?\n2. **Arrange:** Prepare the following test input: '3'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input and provides a clear prompt. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or cannot properly select the game mode; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "2.2 Fortune Drawing Game - Coin Spinning Wheel - Game Interface",
+    "验证方法": "1. **Pre-check (User Path):** After selecting 'coin spinning wheel' mode, does it prompt the user to press Enter to start the game?\n2. **Act:** Select 'coin spinning wheel' mode and press Enter to start the game.\n3. **Assert:** Observe whether a 3x3 game grid is displayed, with symbols like '吉' (Lucky), '凶' (Unlucky), or '平' (Neutral), and results are shown.",
+    "得分规范": "2 points: Pre-check passes, and correctly displays the 3x3 game grid and symbols. 1 point: Pre-check passes, but there are minor interface display issues (such as symbol garbled). 0 points: Pre-check fails, or cannot display the game grid.",
+    "赋分权重": 3.0
+  },
+  {
+    "得分点": "2.3 Fortune Drawing Game - Number Stick Draw - Game Interface",
+    "验证方法": "1. **Pre-check (User Path):** After selecting 'number stick draw' mode, does it prompt the user to press Enter to start the game?\n2. **Act:** Select 'number stick draw' mode and press Enter to start the game.\n3. **Assert:** Observe whether a number between 1-100 is generated and the result is displayed.",
+    "得分规范": "2 points: Pre-check passes, and can generate a number between 1-100. 1 point: Pre-check passes, but the number range is not correct. 0 points: Pre-check fails, or fails to generate a number.",
+    "赋分权重": 3.0
+  },
+  {
+    "得分点": "3.1a Daily Status Entry - Outfit Color - Valid Input",
+    "验证方法": "1. **Pre-check (User Path):** After the game ends, does it clearly prompt the user to enter the main outfit color?\n2. **Arrange:** Prepare the following test input: '红'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input.",
+    "得分规范": "2 points: Pre-check passes, correctly validates the valid input and continues the process. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or color format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "3.1b Daily Status Entry - Outfit Color - Invalid Input",
+    "验证方法": "1. **Pre-check (User Path):** After the game ends, does it clearly prompt the user to enter the main outfit color?\n2. **Arrange:** Prepare the following test input: '粉'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input and provides a clear prompt and selectable range. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or color format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "3.2a Daily Status Entry - Jewelry Type - Valid Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful color input, does it clearly prompt the user to enter the jewelry type?\n2. **Arrange:** Prepare the following test input: '金属类'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should accept the valid input.",
+    "得分规范": "2 points: Pre-check passes, correctly validates the valid input and continues the process. 1 point: Pre-check passes, but there are minor issues in handling. 0 points: Pre-check fails, or jewelry type format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "3.2b Daily Status Entry - Jewelry Type - Invalid Input",
+    "验证方法": "1. **Pre-check (User Path):** After successful color input, does it clearly prompt the user to enter the jewelry type?\n2. **Arrange:** Prepare the following test input: '项链'.\n3. **Act:** Enter the prepared data.\n4. **Assert:** The program should reject invalid input.",
+    "得分规范": "2 points: Pre-check passes, correctly rejects invalid input and provides a clear prompt and selectable range. 1 point: Pre-check passes, but the prompt is unclear. 0 points: Pre-check fails, or jewelry type format is not validated; any input is accepted or the program crashes.",
+    "赋分权重": 1.5
+  },
+  {
+    "得分点": "3.3 Daily Status Entry - Info Confirmation and Edit",
+    "验证方法": "1. **Pre-check (User Path):** After entering outfit and jewelry, does it clearly ask the user to confirm the information?\n2. **Arrange:** Prepare inputs 'n' (re-enter) and 'y' (confirm).\n3. **Act:** First, input 'n', then input 'y'.\n4. **Assert:** Entering 'n' should return to the input section, entering 'y' should proceed to the next step.",
+    "得分规范": "2 points: Pre-check passes, correctly responds to user's confirmation or re-entry request and executes the corresponding process. 1 point: Pre-check passes, but the operation may be incomplete or minor issues exist. 0 points: Pre-check fails, or cannot correctly handle user's confirmation or re-entry request.",
+    "赋分权重": 3.0
+  },
+  {
+    "得分点": "4.1 Overall Fortune Calculation - Report Generation",
+    "验证方法": "1. **Act:** Run a complete calculation process.\n2. **Assert:** Check whether the generated report contains complete information.",
+    "得分规范": "2 points: Can correctly calculate and display the Eight Characters and Five Elements distribution, format is clear. 1 point: Can display partial information or format has minor issues. 0 points: Cannot calculate or display Eight Characters and Five Elements information.",
+    "赋分权重": 2.0
+  },
+  {
+    "得分点": "5.1 Fortune Report Saving",
+    "验证方法": "1. **Pre-check (User Path):** After the report is generated, does it clearly ask the user whether to save the report?\n2. **Arrange:** Prepare to input 'y'.\n3. **Act:** After the report is generated, input 'y' to choose save.\n4. **Assert:** Check whether a new txt file is created in the `reports` directory, whether the file name contains the date, and whether the content matches the screen display.",
+    "得分规范": "2 points: Pre-check passes, and the report can be correctly saved as a txt file; file naming is standard and content is complete. 1 point: Pre-check passes, but file naming or content has minor issues. 0 points: Pre-check fails, or cannot save the report or file has serious errors.",
+    "赋分权重": 3.0
+  }
+]
+```

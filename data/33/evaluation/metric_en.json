@@ -1,0 +1,182 @@
+[
+  {
+    "metric": "1.1 Program Startup and Main Menu Display",
+    "description": "1. **Act:** Run the program startup command in the command line (e.g. `python main.py` or `python -m federated_learning.main`).\n2. **Assert:** Observe whether the program starts successfully and displays a main menu with 6 functional options: [1] Offline Federated Learning [2] Online Federated Learning [3] Parameter Scan Experiment [4] View Training Logs [5] Model Evaluation [6] Exit.",
+    "expected_output": "2 points: The program starts normally, displays the complete 6 menu options, and the interface is clear and easy to read. 1 point: The program starts, displays 4-5 menu options or the format is slightly messy. 0 points: The program cannot start, crashes directly, or displays fewer than 4 menu options."
+  },
+  {
+    "metric": "1.2a Menu Input Validation - Handling Invalid Numbers",
+    "description": "1. **Arrange:** Program displays main menu.\n2. **Act:** Input invalid numeric options (such as 7, 8, 0, -1).\n3. **Assert:** Observe whether a Chinese error message is displayed, and whether the program continues to wait for valid input without crashing.",
+    "expected_output": "2 points: Clearly displays Chinese error messages and the program runs stably. 1 point: Error message is present but not in Chinese or not clear. 0 points: No error message or the program crashes."
+  },
+  {
+    "metric": "1.2b Menu Input Validation - Handling Non-numeric Characters",
+    "description": "1. **Arrange:** Program displays main menu.\n2. **Act:** Input non-numeric characters (such as letter a, special character @, empty input).\n3. **Assert:** Observe whether a Chinese error message is displayed and the program continues to wait for valid input.",
+    "expected_output": "2 points: Clearly displays Chinese error messages and the program runs stably. 1 point: Error message is present but not in Chinese or not clear. 0 points: No error message or the program crashes."
+  },
+  {
+    "metric": "2.1a Offline Federated Learning - Menu Accessibility",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[1] Offline Federated Learning\" option in the main menu?\n2. **Act:** Input the number 1.\n3. **Assert:** Observe whether you successfully enter the Offline Federated Learning function interface and see the parameter configuration options.",
+    "expected_output": "2 points: Pre-check passes and you can successfully enter the Offline Federated Learning interface. 1 point: Pre-check passes, but the interface is incomplete after entering. 0 points: Pre-check fails or cannot enter this function."
+  },
+  {
+    "metric": "2.1b Offline Federated Learning - Client Number Configuration",
+    "description": "1. **Pre-check (User Path):** After entering the Offline Federated Learning interface, is there a client number configuration option?\n2. **Arrange:** Prepare to test different client numbers: 5, 10, 15, 20.\n3. **Act:** Try setting these 4 client numbers one by one.\n4. **Assert:** Observe whether all can be set successfully and the system accepts these values.",
+    "expected_output": "2 points: Pre-check passes, supports setting all 4 client numbers (5/10/15/20). 1 point: Pre-check passes, supports setting 2-3 client numbers. 0 points: Pre-check fails or supports fewer than 2 client numbers."
+  },
+  {
+    "metric": "2.1c Offline Federated Learning - Training Rounds Configuration",
+    "description": "1. **Pre-check (User Path):** Is there a training rounds setting option in Offline Federated Learning parameter configuration?\n2. **Arrange:** Prepare to test training rounds: 5, 10, 20.\n3. **Act:** Try setting these training rounds values.\n4. **Assert:** Observe whether the system accepts these reasonable training rounds values.",
+    "expected_output": "2 points: Pre-check passes, can set training rounds within a reasonable range (1-50). 1 point: Pre-check passes, but training rounds range is too limited. 0 points: Pre-check fails or cannot set training rounds."
+  },
+  {
+    "metric": "2.1d Offline Federated Learning - Local Training Rounds Configuration",
+    "description": "1. **Pre-check (User Path):** Is there a local training rounds setting option in Offline Federated Learning parameter configuration?\n2. **Arrange:** Prepare to test local training rounds: 1, 5, 10.\n3. **Act:** Try setting these local training rounds values.\n4. **Assert:** Observe whether the system accepts these values.",
+    "expected_output": "2 points: Pre-check passes, can set reasonable local training rounds (1-20). 1 point: Pre-check passes, but the setting range is limited. 0 points: Pre-check fails or cannot set local training rounds."
+  },
+  {
+    "metric": "2.1e Offline Federated Learning - Learning Rate Configuration",
+    "description": "1. **Pre-check (User Path):** Is there a learning rate setting option in Offline Federated Learning parameter configuration?\n2. **Arrange:** Prepare to test learning rates: 0.01, 0.1, 0.001.\n3. **Act:** Try setting these learning rate values.\n4. **Assert:** Observe whether the system accepts these reasonable learning rate values.",
+    "expected_output": "2 points: Pre-check passes, can set reasonable learning rate values (0.0001-1.0). 1 point: Pre-check passes, but the learning rate range is too limited. 0 points: Pre-check fails or cannot set learning rate."
+  },
+  {
+    "metric": "2.2a Offline Federated Learning - Full Client Participation Mode",
+    "description": "1. **Pre-check (User Path):** Is there a training mode selection option in Offline Federated Learning configuration?\n2. **Act:** Choose full client participation mode (20 clients).\n3. **Assert:** Observe whether the configuration interface clearly shows options like \"Full Client Participation\" or \"20 Clients\".",
+    "expected_output": "2 points: Pre-check passes, explicit full client participation mode option provided. 1 point: Pre-check passes, but the option description is not clear enough. 0 points: Pre-check fails or no full client participation mode."
+  },
+  {
+    "metric": "2.2b Offline Federated Learning - Partial Client Participation Mode",
+    "description": "1. **Pre-check (User Path):** Is there a partial client participation option in training mode selection?\n2. **Arrange:** Prepare to test partial client numbers: 5, 10, 15.\n3. **Act:** Try selecting these 3 partial client participation modes.\n4. **Assert:** Observe whether all can be selected successfully.",
+    "expected_output": "2 points: Pre-check passes, supports all 3 partial client participation modes (5/10/15). 1 point: Pre-check passes, supports 1-2 partial client participation modes. 0 points: Pre-check fails or no partial client participation mode."
+  },
+  {
+    "metric": "2.3a Offline Federated Learning - Training Rounds Progress Display",
+    "description": "1. **Arrange:** Configure a short training task (e.g. 2 rounds, 5 clients).\n2. **Act:** Start Offline Federated Learning training.\n3. **Assert:** Observe whether progress information such as \"Round 1/2\", \"Round 2/2\" is displayed.",
+    "expected_output": "2 points: Accurately displays current round and total rounds information (e.g. \"Round X/Y\"). 1 point: Displays round information but format is not standardized. 0 points: No round progress display."
+  },
+  {
+    "metric": "2.3b Offline Federated Learning - Client Training Progress Display",
+    "description": "1. **Arrange:** Configure a training task with multiple clients.\n2. **Act:** Start training and observe the progress display.\n3. **Assert:** Observe whether client training status information like \"Client 3/10 training\" is displayed.",
+    "expected_output": "2 points: Accurately displays current client and total client count information (e.g. \"Client X/Y training\"). 1 point: Displays client information but format is not standardized. 0 points: No client progress display."
+  },
+  {
+    "metric": "2.4 Offline Federated Learning - Ctrl+C Interrupt Support",
+    "description": "1. **Arrange:** Start a long-running Offline Federated Learning training task.\n2. **Act:** Press Ctrl+C during training.\n3. **Assert:** Observe whether the program gracefully terminates training, displays interrupt information, and returns to the main menu or exits normally.",
+    "expected_output": "2 points: Ctrl+C gracefully interrupts training, displays interruption prompt, program exits normally or returns to the menu. 1 point: Can interrupt but handling is not elegant, and there is a warning. 0 points: Cannot interrupt or program crashes after interruption."
+  },
+  {
+    "metric": "2.5a Offline Federated Learning - Success State Return",
+    "description": "1. **Arrange:** Configure a simple training task (e.g. 1 round, 2 clients).\n2. **Act:** Complete the entire training process.\n3. **Assert:** Observe whether a clear success status message such as \"训练完成\" or \"Training completed successfully\" is displayed after training ends.",
+    "expected_output": "2 points: Clear training success status message is displayed. 1 point: Success message is present but not clear enough. 0 points: No success status message."
+  },
+  {
+    "metric": "2.5b Offline Federated Learning - Failure Reason Output",
+    "description": "1. **Arrange:** Create a training failure scenario by deleting data files or modifying configuration.\n2. **Act:** Try to start training.\n3. **Assert:** Observe whether specific failure reasons are outputted (such as \"数据加载失败\" \"model save error\", \"out of memory\", etc.).",
+    "expected_output": "2 points: Explicit and specific failure reason output to help users understand the problem. 1 point: Error message is present but not specific enough. 0 points: No error message or the message is not clear."
+  },
+  {
+    "metric": "2.6a Offline Federated Learning - Automatic Log File Generation",
+    "description": "1. **Arrange:** Complete an Offline Federated Learning training.\n2. **Act:** Check the working directory or the specified log directory.\n3. **Assert:** Observe whether a training log file is generated automatically.",
+    "expected_output": "2 points: Training log files are generated automatically. 1 point: Log is generated but requires manual trigger. 0 points: No training log files generated."
+  },
+  {
+    "metric": "2.6b Offline Federated Learning - Log Content Integrity",
+    "description": "1. **Arrange:** Retrieve training log files generated in the previous step.\n2. **Act:** Open and check the log file content.\n3. **Assert:** Verify whether the log contains three key types of information for each round: test loss, accuracy, best model save status.",
+    "expected_output": "2 points: Logs contain all three key pieces of information (test loss, accuracy, model save status). 1 point: Logs contain two key pieces of information. 0 points: Logs contain fewer than two key pieces or content is incorrect."
+  },
+  {
+    "metric": "3.1a Online Federated Learning - Menu Accessibility",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[2] Online Federated Learning\" option in the main menu?\n2. **Act:** Input the number 2.\n3. **Assert:** Observe whether you successfully enter the Online Federated Learning function interface.",
+    "expected_output": "2 points: Pre-check passes, can successfully enter Online Federated Learning interface. 1 point: Pre-check passes, but the interface is incomplete after entering. 0 points: Pre-check fails or cannot enter this function."
+  },
+  {
+    "metric": "3.1b Online Federated Learning - Network Port Configuration",
+    "description": "1. **Pre-check (User Path):** After entering the Online Federated Learning interface, is there a port configuration option?\n2. **Arrange:** Prepare to test port numbers: 8080, 9000, 5000.\n3. **Act:** Attempt to configure receiving and sending port numbers.\n4. **Assert:** Observe whether these port numbers can be set successfully.",
+    "expected_output": "2 points: Pre-check passes, can configure both receiving and sending ports. 1 point: Pre-check passes, but can only configure one type of port. 0 points: Pre-check fails or cannot configure ports."
+  },
+  {
+    "metric": "3.1c Online Federated Learning - Client Number Configuration",
+    "description": "1. **Pre-check (User Path):** In Online Federated Learning configuration, is there a client number setting?\n2. **Arrange:** Prepare to test client numbers: 2, 5, 10.\n3. **Act:** Try setting these client numbers.\n4. **Assert:** Observe whether the system accepts these values.",
+    "expected_output": "2 points: Pre-check passes, can set a reasonable client number (2-20). 1 point: Pre-check passes, but the range is too limited. 0 points: Pre-check fails or cannot set client number."
+  },
+  {
+    "metric": "3.2a Online Federated Learning - Client Connection Count Display",
+    "description": "1. **Arrange:** Start Online Federated Learning server.\n2. **Act:** Observe the server interface display.\n3. **Assert:** Verify whether information like \"Client 3 connected\" showing connected client count is displayed.",
+    "expected_output": "2 points: Real-time and accurate display of connected client count. 1 point: Connection information is displayed but not accurate or updates are not timely. 0 points: No client connection count display."
+  },
+  {
+    "metric": "3.2b Online Federated Learning - Client Ready State Display",
+    "description": "1. **Arrange:** While the server is waiting for client connections.\n2. **Act:** Observe the status display.\n3. **Assert:** Verify whether information like \"5/10 clients ready\" is displayed.",
+    "expected_output": "2 points: Accurate display of ready client count and total required client count. 1 point: Ready state is displayed but information is incomplete. 0 points: No client ready state display."
+  },
+  {
+    "metric": "4.1a Parameter Scan Experiment - Menu Accessibility",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[3] Parameter Scan Experiment\" option in the main menu?\n2. **Act:** Input the number 3.\n3. **Assert:** Observe whether you successfully enter the Parameter Scan Experiment function interface.",
+    "expected_output": "2 points: Pre-check passes, can successfully enter Parameter Scan Experiment interface. 1 point: Pre-check passes, but the interface is incomplete after entering. 0 points: Pre-check fails or cannot enter this function."
+  },
+  {
+    "metric": "4.1b Parameter Scan Experiment - One-click Execution Feature",
+    "description": "1. **Pre-check (User Path):** Is there a one-click execution or batch execution option in the Parameter Scan Experiment interface?\n2. **Act:** Select the one-click execution function.\n3. **Assert:** Observe whether experiments with multiple parameter combinations start to run automatically.",
+    "expected_output": "2 points: Pre-check passes, one-click execution feature is provided and experiments run automatically. 1 point: Pre-check passes, but extra configuration is needed for batch execution. 0 points: Pre-check fails or no one-click execution feature."
+  },
+  {
+    "metric": "4.2a Parameter Scan Experiment - Independent Log File Generation",
+    "description": "1. **Arrange:** Complete execution of parameter scan experiment.\n2. **Act:** Check the experiment result directory.\n3. **Assert:** Verify whether independent log files are generated for each parameter combination.",
+    "expected_output": "2 points: Independent log files are generated for each experiment. 1 point: Log files are generated but not independent for every experiment. 0 points: No independent experiment log files generated."
+  },
+  {
+    "metric": "4.2b Parameter Scan Experiment - Log File Naming Convention",
+    "description": "1. **Arrange:** Get the list of log files generated in the previous step.\n2. **Act:** Check the file naming format.\n3. **Assert:** Verify whether the file name follows a format like \"result_10_10_10.log\" that includes parameter info.",
+    "expected_output": "2 points: File naming fully follows the standard format and includes parameter info. 1 point: File naming is basically standard but the format has slight deviations. 0 points: File naming is not standard or cannot identify parameters from the file name."
+  },
+  {
+    "metric": "4.3 Parameter Scan Experiment - Status Query Feature",
+    "description": "1. **Pre-check (User Path):** Is there an experiment status query option in the Parameter Scan Experiment function?\n2. **Act:** Select the status query feature.\n3. **Assert:** Observe whether a list of running and completed experiments can be displayed, and whether the two states can be clearly distinguished.",
+    "expected_output": "2 points: Pre-check passes, can clearly display and distinguish running and completed experiments. 1 point: Pre-check passes, but status information is not detailed enough. 0 points: Pre-check fails or no experiment status query feature."
+  },
+  {
+    "metric": "5.1a View Training Logs - Menu Accessibility",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[4] View Training Logs\" option in the main menu?\n2. **Act:** Input the number 4.\n3. **Assert:** Observe whether you successfully enter the View Training Logs function interface.",
+    "expected_output": "2 points: Pre-check passes, can successfully enter View Training Logs interface. 1 point: Pre-check passes, but the interface is incomplete after entering. 0 points: Pre-check fails or cannot enter this function."
+  },
+  {
+    "metric": "5.1b View Training Logs - History Log Viewing",
+    "description": "1. **Pre-check (User Path):** Is there a history log viewing option in the View Training Logs interface?\n2. **Arrange:** Ensure historical training logs exist in the system.\n3. **Act:** Select to view history logs.\n4. **Assert:** Observe whether a list of historical training logs can be displayed.",
+    "expected_output": "2 points: Pre-check passes, complete history training log list can be displayed. 1 point: Pre-check passes, but the log list is incomplete. 0 points: Pre-check fails or cannot view history logs."
+  },
+  {
+    "metric": "5.1c View Training Logs - Filtering Feature",
+    "description": "1. **Pre-check (User Path):** Is there an option to filter by time or parameter combination in the log viewing interface?\n2. **Arrange:** Prepare historical logs with different times and parameters.\n3. **Act:** Try using the filtering function.\n4. **Assert:** Observe whether the filtering results are accurate.",
+    "expected_output": "2 points: Pre-check passes, supports filtering by time and parameter combination, results are accurate. 1 point: Pre-check passes, supports partial filtering features. 0 points: Pre-check fails or no filtering feature."
+  },
+  {
+    "metric": "5.2a Model Evaluation - Menu Accessibility",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[5] Model Evaluation\" option in the main menu?\n2. **Act:** Input the number 5.\n3. **Assert:** Observe whether you successfully enter the Model Evaluation function interface.",
+    "expected_output": "2 points: Pre-check passes, can successfully enter Model Evaluation interface. 1 point: Pre-check passes, but the interface is incomplete after entering. 0 points: Pre-check fails or cannot enter this function."
+  },
+  {
+    "metric": "5.2b Model Evaluation - Performance Metric Display",
+    "description": "1. **Pre-check (User Path):** Is there a model performance evaluation option in the Model Evaluation interface?\n2. **Arrange:** Ensure trained model files exist.\n3. **Act:** Select the model evaluation feature.\n4. **Assert:** Observe whether the two key performance metrics, accuracy and loss, are displayed.",
+    "expected_output": "2 points: Pre-check passes, displays two key metrics: accuracy and loss. 1 point: Pre-check passes, displays one key metric. 0 points: Pre-check fails or no performance metrics displayed."
+  },
+  {
+    "metric": "6.1a Result File Saving - Provide Save Option",
+    "description": "1. **Pre-check (User Path):** After any training or evaluation function completes, is there a result saving option?\n2. **Act:** Look for and select the result saving feature.\n3. **Assert:** Observe whether there is an option to save the result as a TXT file.",
+    "expected_output": "2 points: Pre-check passes, clearly provides TXT file saving option. 1 point: Pre-check passes, file saving is provided but format options are limited. 0 points: Pre-check fails or no result saving feature."
+  },
+  {
+    "metric": "6.1b Result File Saving - File Content Integrity",
+    "description": "1. **Arrange:** Use the save feature from the previous step to save a result file.\n2. **Act:** Open the saved TXT file.\n3. **Assert:** Verify whether the file contains three key contents: training parameters, performance metrics, model information.",
+    "expected_output": "2 points: The saved file contains all three key contents. 1 point: The saved file contains two key contents. 0 points: The saved file contains fewer than two key contents."
+  },
+  {
+    "metric": "6.2 Text Table Display Feature",
+    "description": "1. **Pre-check (User Path):** When viewing training results, is there an option to display in text table format?\n2. **Act:** Select the text table display feature.\n3. **Assert:** Observe whether the table format is clear and readable, data arranged neatly, and columns aligned correctly.",
+    "expected_output": "2 points: Pre-check passes, table format is clear, data is neatly arranged, columns are correctly aligned. 1 point: Pre-check passes, table is basically readable but has some format issues. 0 points: Pre-check fails or table format is messy."
+  },
+  {
+    "metric": "7.1 Program Normal Exit Function",
+    "description": "1. **Pre-check (User Path):** Is there a clear \"[6] Exit\" option in the main menu?\n2. **Act:** Input the number 6 to select exit.\n3. **Assert:** Observe whether the program exits normally, returns to the command line prompt, has no error messages, and no zombie processes.",
+    "expected_output": "2 points: Pre-check passes, program exits normally and cleans up all resources. 1 point: Pre-check passes, can exit but there are warning messages. 0 points: Pre-check fails or errors occur on exit."
+  }
+]

@@ -1,0 +1,15 @@
+{
+    "decision_flow_analysis": {
+        "total_steps": 5,
+        "total_time_ms": 1250,
+        "steps": [
+            {"step": "数据加载", "time_ms": 200},
+            {"step": "用户偏好分析", "time_ms": 300},
+            {"step": "推荐算法计算", "time_ms": 450},
+            {"step": "结果排序", "time_ms": 150},
+            {"step": "输出生成", "time_ms": 150}
+        ],
+        "complexity_score": 3.2,
+        "efficiency_rating": "良好"
+    }
+}

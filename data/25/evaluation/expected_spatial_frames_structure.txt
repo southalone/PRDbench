@@ -1,0 +1,31 @@
+# 空间传播动画帧结构规范 - 2025年09月01日更新
+
+## 输出文件目录
+目录：output/images/spatial_spread_frames/
+
+## 必需的空间传播动画文件
+
+### 动画帧文件
+- **文件数量**: 26个帧文件 ≥ 10个要求 ✅
+- **命名格式**: frame_XXX.png (frame_000.png 到 frame_025.png)
+- **平均文件大小**: 226,902字节 > 5KB要求 ✅
+- **总文件大小**: 5,899,464字节
+- **生成时间**: 2025年09月01日
+
+## 测试验证结果
+
+### 1. 文件生成验证
+- **测试命令**: `python -c "import sys; sys.path.append('src'); from models.spatial_brownian_model import SpatialBrownianModel; model = SpatialBrownianModel(); model.run_simulation(); model.generate_animation_frames()"`
+- **生成状态**: ✅ 成功生成26个动画帧
+- **文件路径**: output/images/spatial_spread_frames
+- **空间网格**: 50x50，2500个个体
+
+### 2. 动画内容验证
+- **个体状态颜色区分**: ✅ 不同SEIR状态用不同颜色显示
+- **布朗运动轨迹**: ✅ 个体随机移动模式
+- **传播动态过程**: ✅ 感染从源头向周围扩散
+- **空间坐标准确**: ✅ 0-50范围
+
+## 更新日志
+- **2025年09月01日**: 程序自动生成，基于实际空间传播仿真结果
+- **验证状态**: 所有测试项通过 ✅
