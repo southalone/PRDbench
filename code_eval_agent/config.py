@@ -7,20 +7,17 @@ from lite_llm_wrapper import LiteLlmWithSleep
 # 基础模型配置
 BASIC_MODEL =LiteLlmWithSleep(
         model="openai/gemini-2.5-pro",
-        api_base='https://aigc.sankuai.com/v1/openai/native',
-        api_key='1873925539543834701',
+        api_base='xxxx',
+        api_key='xxxx',
         max_tokens=32768,
         temperature=0.1
     )
 
 friday_model_dict = {
     "claude_3_7_sonnet": LiteLlmWithSleep(
-        # model="openai/anthropic.claude-3.7-sonnet",
-        # api_base='https://aigc.sankuai.com/v1/openai/native',
-        # api_key='1873925539543834701',
         model="openai/claude-3-7-sonnet-20250219",
-        api_base='https://api.toiotech.com/v1',
-        api_key='sk-nw5G71pE0RgR4ew85fdYUDWTYxdFma0M4aQoUTuxNrXNXFqP',
+        api_base='xxxx',
+        api_key='xxxx',
         # max_completion_tokens=32000,
         max_tokens_threshold=131072-32000-1000,
         enable_compression=True,
@@ -28,23 +25,23 @@ friday_model_dict = {
     ),
     "gemini": LiteLlmWithSleep(
         model="openai/gemini-2.5-pro",
-        api_base='https://aigc.sankuai.com/v1/openai/native',
-        api_key='1873925539543834701',
+        api_base='xxxx',
+        api_key='xxxx',
         max_tokens=32768,
         temperature=0.1
     ),
     'gpt_5':LiteLlmWithSleep(
     model="openai/gpt-5",
-    api_base='https://api.toiotech.com/v1',
-    api_key='sk-LfUBAupPQCgffAEkCb61278d4c734225A7533778B123CbBa',
+    api_base='xxxx',
+    api_key='xxxx',
     # max_completion_tokens=32000,
     max_tokens_threshold=256_000-32000,
     enable_compression=True
 ),
 "qwen3_coder": LiteLlmWithSleep(
     model="openai/qwen3-coder-480b-a35b-instruct",
-    api_base='https://api.toiotech.com/v1',
-    api_key='sk-nw5G71pE0RgR4ew85fdYUDWTYxdFma0M4aQoUTuxNrXNXFqP',
+    api_base='xxxx',
+    api_key='xxxx',
     # max_completio[n_tokens=32000,
     max_tokens_threshold=256_000-32000,
     enable_compression=True,
@@ -52,6 +49,7 @@ friday_model_dict = {
     presence_penalty=1.2
 )
 }
+
 
 
 
