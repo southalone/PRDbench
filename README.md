@@ -6,7 +6,7 @@ PRDbench is a benchmark dataset containing 50 test cases designed to evaluate co
 
 - The dataset was released as part of [Automatically Benchmarking LLM Code Agents through Agent-Driven Annotation and Evaluation](https://arxiv.org/abs/2510.24358)
 
-- You can also find the dataset at [PRDbench](https://github.com/southalone/PRDbench/tree/main)
+- You can also find the dataset at [PRDbench](https://huggingface.co/datasets/AGI-Eval/PRDbench)
 
 ## Dataset Structure
 
