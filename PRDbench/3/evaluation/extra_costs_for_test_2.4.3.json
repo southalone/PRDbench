@@ -1,0 +1,4 @@
+[
+  {"name": "打包盒", "cost": 1.5, "type": "fixed"},
+  {"name": "一次性餐具", "cost": 0.8, "type": "optional"}
+]

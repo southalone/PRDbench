@@ -1,0 +1,7 @@
+dish_id,ingredient_name,quantity,unit,cost_per_unit,allergen
+1,牛肉,0.5,kg,80,
+1,辣椒,0.05,kg,15,
+1,香料,0.02,kg,50,
+2,豆腐,0.4,kg,8,大豆
+2,牛肉末,0.05,kg,80,
+2,豆瓣酱,0.03,kg,25,大豆

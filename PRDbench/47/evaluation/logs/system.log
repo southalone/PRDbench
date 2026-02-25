@@ -1,0 +1,36 @@
+2025-09-05 15:22:29,014 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:22:29,038 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:35:24,127 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:35:24,128 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:35:28,253 - library_system - ERROR - 错误类型: 数据库连接错误, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:35:28,254 - library_system - ERROR - 错误类型: 数据库查询错误, 错误信息: SQL: SELECT COUNT(*) as count FROM user WHERE StudentId = %s, Error: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:35:28,254 - library_system - ERROR - 错误类型: 检查用户存在异常, 用户: TESTPWD001, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:35:32,314 - library_system - ERROR - 错误类型: 数据库连接错误, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:35:32,314 - library_system - ERROR - 错误类型: 数据库更新错误, 错误信息: SQL: 
+                INSERT INTO user 
+                (StudentId, Name, Password, IsAdmin, tel, CreateTime, UpdateTime)
+                VALUES (%s, %s, %s, %s, %s, NOW(), NOW())
+            , Error: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:35:32,315 - library_system - ERROR - 错误类型: 用户注册异常, 用户: TESTPWD001, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:49,361 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:39:49,362 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:39:53,466 - library_system - ERROR - 错误类型: 数据库连接错误, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:53,466 - library_system - ERROR - 错误类型: 数据库查询错误, 错误信息: SQL: SELECT COUNT(*) as count FROM user WHERE StudentId = %s, Error: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:53,467 - library_system - ERROR - 错误类型: 检查用户存在异常, 用户: TESTPWD001, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:57,561 - library_system - ERROR - 错误类型: 数据库连接错误, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:57,561 - library_system - ERROR - 错误类型: 数据库更新错误, 错误信息: SQL: 
+                INSERT INTO user 
+                (StudentId, Name, Password, IsAdmin, tel, CreateTime, UpdateTime)
+                VALUES (%s, %s, %s, %s, %s, NOW(), NOW())
+            , Error: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:39:57,561 - library_system - ERROR - 错误类型: 用户注册异常, 用户: TESTPWD001, 错误信息: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2025-09-05 15:49:07,628 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:49:07,629 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:49:07,639 - library_system - INFO - 操作类型: 用户注册, 用户: TESTPWD001, 详情: 用户注册成功: 测试用户
+2025-09-05 15:49:38,280 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:49:38,281 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:50:52,405 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:50:52,407 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功
+2025-09-05 15:50:52,433 - library_system - INFO - 操作类型: 添加图书, 用户: system, 详情: 图书添加成功: 测试图书 (TESTBOOK001)
+2025-09-05 15:51:23,784 - library_system - INFO - 系统事件: 数据库模式切换, 详情: 成功切换到SQLite模式
+2025-09-05 15:51:23,785 - library_system - INFO - 系统事件: SQLite数据库初始化, 详情: 数据库和表结构创建成功

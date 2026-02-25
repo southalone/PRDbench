@@ -1,0 +1,51 @@
+{
+  "cluster_id": 0,
+  "cluster_name": "价格敏感型度假爱好者",
+  "sample_count": 5,
+  "demographics": {
+    "gender_distribution": {
+      "男": 60.0,
+      "女": 40.0
+    },
+    "age_group_distribution": {
+      "30-40岁": 60.0,
+      "40-50岁": 20.0,
+      "20-30岁": 20.0
+    },
+    "dominant_age_group": "30-40岁"
+  },
+  "motivations": {
+    "price_sensitivity": {
+      "average_score": 2.8,
+      "description": "对价格敏感度中等，更注重价值匹配"
+    },
+    "satisfaction_level": {
+      "average_score": 3.6,
+      "description": "整体满意度较高，对服务质量有一定要求"
+    },
+    "amenities_importance": {
+      "average_score": 3.6,
+      "description": "重视配套设施，期望获得完整的服务体验"
+    }
+  },
+  "consumption_patterns": {
+    "frequency_distribution": {
+      "每月一次": 40.0,
+      "每年一次": 40.0,
+      "每季度一次": 20.0
+    },
+    "dominant_frequency": "每年一次",
+    "spending_behavior": "消费频次较低，但单次消费期望值高"
+  },
+  "venue_preferences": {
+    "preferred_venue_distribution": {
+      "会员制球场": 40.0,
+      "度假村": 20.0,
+      "公众场": 20.0,
+      "练习场": 20.0
+    },
+    "dominant_preference": "会员制球场",
+    "preference_description": "偏好会员制球场等专业化场地，追求专业和私密的体验"
+  },
+  "persona_summary": "这类用户主要是30-40岁的中青年群体，男性占多数。他们对价格相对敏感，但同时非常重视配套设施的完善程度。消费频次以每月一次为主，偏好选择度假村类型的高尔夫场地，追求休闲度假的综合体验。他们是理性消费者，在追求品质的同时也会考虑性价比。"
+}

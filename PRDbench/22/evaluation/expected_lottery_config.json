@@ -1,0 +1,22 @@
+[
+  {
+    "round_id": "round_1",
+    "name": "季度之星",
+    "draw_count": 2,
+    "scope_type": "all",
+    "scope_value": "",
+    "allow_repeat": false,
+    "participant_weights": {
+      "张三": 2.0
+    }
+  },
+  {
+    "round_id": "round_2",
+    "name": "幸运奖",
+    "draw_count": 3,
+    "scope_type": "department",
+    "scope_value": "技术部",
+    "allow_repeat": true,
+    "participant_weights": {}
+  }
+]

@@ -1,0 +1,10 @@
+1
+help
+summary
+segments
+show
+filter segment 重要价值客户
+show
+reset
+export test_report.csv
+quit

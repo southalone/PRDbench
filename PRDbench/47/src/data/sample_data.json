@@ -1,0 +1,117 @@
+{
+  "users": [
+    {
+      "student_id": "2021001",
+      "name": "张三",
+      "password": "123456",
+      "is_admin": 0,
+      "tel": "13800138001"
+    },
+    {
+      "student_id": "2021002", 
+      "name": "李四",
+      "password": "123456",
+      "is_admin": 0,
+      "tel": "13800138002"
+    },
+    {
+      "student_id": "2021003",
+      "name": "王五",
+      "password": "123456",
+      "is_admin": 0,
+      "tel": "wangwu@example.com"
+    }
+  ],
+  "books": [
+    {
+      "book_id": "978-7-111-54742-6",
+      "book_name": "Python编程：从入门到实践",
+      "auth": "埃里克·马瑟斯",
+      "category": "计算机",
+      "publisher": "机械工业出版社",
+      "publish_time": "2016-07-01",
+      "num_storage": 5
+    },
+    {
+      "book_id": "978-7-115-42884-6",
+      "book_name": "流畅的Python",
+      "auth": "Luciano Ramalho",
+      "category": "计算机",
+      "publisher": "人民邮电出版社",
+      "publish_time": "2017-05-01",
+      "num_storage": 3
+    },
+    {
+      "book_id": "978-7-302-50713-5",
+      "book_name": "数据结构与算法分析",
+      "auth": "Mark Allen Weiss",
+      "category": "计算机",
+      "publisher": "清华大学出版社",
+      "publish_time": "2018-09-01",
+      "num_storage": 4
+    },
+    {
+      "book_id": "978-7-111-55842-2",
+      "book_name": "深入理解计算机系统",
+      "auth": "Randal E. Bryant",
+      "category": "计算机",
+      "publisher": "机械工业出版社",
+      "publish_time": "2016-11-01",
+      "num_storage": 2
+    },
+    {
+      "book_id": "978-7-115-48474-4",
+      "book_name": "JavaScript高级程序设计",
+      "auth": "Nicholas C. Zakas",
+      "category": "计算机",
+      "publisher": "人民邮电出版社",
+      "publish_time": "2019-01-01",
+      "num_storage": 6
+    },
+    {
+      "book_id": "978-7-5086-9924-8",
+      "book_name": "活着",
+      "auth": "余华",
+      "category": "文学",
+      "publisher": "作家出版社",
+      "publish_time": "2012-08-01",
+      "num_storage": 8
+    },
+    {
+      "book_id": "978-7-5086-6578-6",
+      "book_name": "平凡的世界",
+      "auth": "路遥",
+      "category": "文学",
+      "publisher": "作家出版社",
+      "publish_time": "2013-05-01",
+      "num_storage": 10
+    },
+    {
+      "book_id": "978-7-201-13932-0",
+      "book_name": "围城",
+      "auth": "钱钟书",
+      "category": "文学",
+      "publisher": "天津人民出版社",
+      "publish_time": "2018-03-01",
+      "num_storage": 5
+    },
+    {
+      "book_id": "978-7-108-06982-5",
+      "book_name": "史记",
+      "auth": "司马迁",
+      "category": "历史",
+      "publisher": "生活·读书·新知三联书店",
+      "publish_time": "2019-06-01",
+      "num_storage": 3
+    },
+    {
+      "book_id": "978-7-5327-7892-3",
+      "book_name": "资治通鉴",
+      "auth": "司马光",
+      "category": "历史",
+      "publisher": "上海古籍出版社",
+      "publish_time": "2017-12-01",
+      "num_storage": 2
+    }
+  ]
+}

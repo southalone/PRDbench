@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学生注意稳定性量表 - 分析报告</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+        .section { margin-bottom: 30px; }
+        .section h2 { color: #2c3e50; border-left: 4px solid #3498db; padding-left: 10px; }
+        .section h3 { color: #34495e; margin-top: 20px; }
+        .stats-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .stats-table th, .stats-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .stats-table th { background-color: #f2f2f2; }
+        .highlight { background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+        .error { background-color: #f8d7da; padding: 10px; border-left: 4px solid #dc3545; margin: 10px 0; }
+        .success { background-color: #d4edda; padding: 10px; border-left: 4px solid #28a745; margin: 10px 0; }
+        .footer { margin-top: 50px; text-align: center; color: #666; font-size: 12px; }
+        .metric { display: inline-block; margin: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; text-align: center; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #2c3e50; }
+        .metric-label { font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>大学生注意稳定性量表</h1>
+        <p>心理量表分析报告</p>
+        <p>生成时间: 2025-08-25 14:00:00</p>
+    </div>
+
+    <div class="section">
+        <h2>1. 量表基本信息</h2>
+        <table class="stats-table">
+            <tr><td><strong>量表名称</strong></td><td>大学生注意稳定性量表</td></tr>
+            <tr><td><strong>量表描述</strong></td><td>测量大学生注意稳定性的各个维度</td></tr>
+            <tr><td><strong>版本号</strong></td><td>1.0</td></tr>
+            <tr><td><strong>条目数量</strong></td><td>8</td></tr>
+            <tr><td><strong>维度数量</strong></td><td>5</td></tr>
+            <tr><td><strong>包含维度</strong></td><td>注意集中, 注意控制, 注意持续, 注意转换, 注意分配</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>2. 数据概况</h2>
+        <div class="metric">
+            <div class="metric-value">30</div>
+            <div class="metric-label">总参与人数</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">30</div>
+            <div class="metric-label">有效回答数</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">100.0%</div>
+            <div class="metric-label">完成率</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. 描述统计</h2>
+        <h3>总体统计</h3>
+        <table class="stats-table">
+            <tr>
+                <th>指标</th>
+                <th>样本量</th>
+                <th>均值</th>
+                <th>标准差</th>
+                <th>最小值</th>
+                <th>最大值</th>
+                <th>中位数</th>
+            </tr>
+            <tr>
+                <td>total_score</td>
+                <td>30</td>
+                <td>4.500</td>
+                <td>1.200</td>
+                <td>2.000</td>
+                <td>7.000</td>
+                <td>4.500</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>4. 信度分析</h2>
+        <div class="highlight">
+            <strong>Cronbach's α系数: 0.850</strong>
+            <span style="color: blue;">(良好)</span>
+        </div>
+        <p><strong>分半信度:</strong> 0.820</p>
+    </div>
+
+    <div class="section">
+        <h2>5. 因子分析</h2>
+        <p><strong>KMO检验:</strong> 0.750
+        <span style="color: orange;">(一般适合)</span>
+        </p>
+        <p><strong>Bartlett球形检验:</strong> 
+        χ² = 45.230, 
+        p = 0.001
+        <span style="color: green;">(显著，适合因子分析)</span>
+        </p>
+        <p><strong>建议因子数:</strong> 3</p>
+    </div>
+
+    <div class="section">
+        <h2>6. 分组比较</h2>
+        
+        <h3>性别差异分析</h3>
+        <p><strong>检验结果:</strong> 
+        T_TEST, 
+        p = 0.0450
+        <span style="color: red;">(显著差异)</span>
+        </p>
+        
+        <h3>年级差异分析</h3>
+        <p><strong>检验结果:</strong> 
+        ANOVA, 
+        p = 0.1200
+        <span style="color: green;">(无显著差异)</span>
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>报告由 1.0.0 自动生成</p>
+        <p>生成时间: 2025-08-25 14:00:00</p>
+    </div>
+</body>
+</html>
