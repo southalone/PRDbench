@@ -232,18 +232,11 @@ if __name__ == '__main__':
     output = {
         "scores": results,
         "valid_count": valid_count,
-        "average_score": average_score,
-        "missing_metrics": missing_metrics_info,
-        "error_reasons": reasons_info
+        "average_score": average_score
     }
     output_path = os.path.join(args.base_path, 'results.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-
-    print(f"计算完成！")
-    print(f"有效项目数: {valid_count}")
-    print(f"总体平均分: {average_score:.4f}")
-    print(f"结果已保存到: {output_path}")
 
     # 打印缺失metric的统计信息
     total_missing = sum(len(v) for v in missing_metrics_info.values() if isinstance(v, list))
@@ -264,10 +257,3 @@ if __name__ == '__main__':
                     print(f"    - {metric}")
     else:
         print(f"\n✓ 所有项目的metric都已完成！")
-
-    # 打印异常原因统计
-    print("\n异常原因统计（可用于后续分析）：")
-    for subdir, reasons in reasons_info.items():
-        print(f"\n项目: {subdir}")
-        for reason_type, details in reasons.items():
-            print(f"  {reason_type}: {len(details)}")
